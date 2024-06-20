@@ -6,5 +6,17 @@ import DetailsForm from "./DetailsForm";
 
 export default function LoginForm() {
   const [formStep, setFormStep] = useState<LoginStepsType>("details");
-  return <>{formStep === "details" ? <DetailsForm /> : <></>}</>;
+  return (
+    <>
+      {formStep === "details" ? (
+        <DetailsForm
+          goToVerification={() => {
+            setFormStep("verification");
+          }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }

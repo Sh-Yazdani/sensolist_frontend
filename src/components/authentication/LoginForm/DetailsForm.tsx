@@ -9,7 +9,11 @@ import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 import { TextInput } from "../TextInput";
 
-export default function DetailsForm() {
+interface DetailsFormProps {
+  goToVerification: () => void;
+}
+
+export default function DetailsForm({ goToVerification }: DetailsFormProps) {
   const {
     register,
     handleSubmit,
@@ -18,7 +22,10 @@ export default function DetailsForm() {
     formState: { errors },
   } = useForm<LoginInputs>();
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    console.log(data);
+    goToVerification();
+  };
 
   // console.log(watch("phoneNumber"));
 
@@ -31,8 +38,8 @@ export default function DetailsForm() {
         name="phoneNumber"
         control={control}
         rules={{ required: true }}
-        render={({ field }) => (
-          <CustomPhoneInput label="Phone number" {...field} />
+        render={({ field: { ref, ...field } }) => (
+          <CustomPhoneInput ref={ref} label="Phone number" {...field} />
         )}
       />
       <TextInput
