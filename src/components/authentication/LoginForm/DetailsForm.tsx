@@ -3,7 +3,7 @@
 import { LoginInputs } from "@/app/types/general";
 import Link from "next/link";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../PhoneInput";
 import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
@@ -20,17 +20,20 @@ export default function DetailsForm() {
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
 
-  console.log(watch("phoneNumber"));
+  // console.log(watch("phoneNumber"));
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="w-full mt-10 md:mt-14 lg:mt-20"
     >
-      <CustomPhoneInput
-        register={register}
+      <Controller
         name="phoneNumber"
-        label="Phone number"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <CustomPhoneInput label="Phone number" {...field} />
+        )}
       />
       <TextInput
         register={register}
