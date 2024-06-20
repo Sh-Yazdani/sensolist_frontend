@@ -19,7 +19,6 @@ export function CustomPhoneInput({
   ref,
   ...rest
 }: InputProps) {
-  console.log("rest", rest);
   return (
     <label className="w-full">
       <span className="mb-4 md:text-xl">{label}</span>

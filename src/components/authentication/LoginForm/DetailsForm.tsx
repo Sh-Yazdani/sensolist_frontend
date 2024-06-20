@@ -11,9 +11,13 @@ import { TextInput } from "../TextInput";
 
 interface DetailsFormProps {
   goToVerification: () => void;
+  changePhoneNumber: (num: string) => void;
 }
 
-export default function DetailsForm({ goToVerification }: DetailsFormProps) {
+export default function DetailsForm({
+  goToVerification,
+  changePhoneNumber,
+}: DetailsFormProps) {
   const {
     register,
     handleSubmit,
@@ -23,11 +27,9 @@ export default function DetailsForm({ goToVerification }: DetailsFormProps) {
   } = useForm<LoginInputs>();
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    console.log(data);
+    changePhoneNumber(data.phoneNumber);
     goToVerification();
   };
-
-  // console.log(watch("phoneNumber"));
 
   return (
     <form
