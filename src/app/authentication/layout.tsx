@@ -4,11 +4,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      {/* Include shared UI here e.g. a header or sidebar */}
-      <nav></nav>
-
+    <div className="relative h-[100vh] bg-[url('/assets/auth-bg.jpeg')] bg-cover">
       {children}
-    </section>
+    </div>
   );
 }
