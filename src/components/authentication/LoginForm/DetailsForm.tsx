@@ -1,4 +1,5 @@
 import { LoginInputs } from "@/app/types/general";
+import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../PhoneInput";
 import { TextInput } from "../TextInput";
@@ -34,6 +35,12 @@ export default function DetailsForm() {
         type="password"
         placeholder="Enter your password"
       />
+      <Link
+        href="/authentication/forgetPassword"
+        className="flex mt-2 text-white-opacity-900 ml-auto w-fit"
+      >
+        Forgot password?
+      </Link>
     </form>
   );
 }
