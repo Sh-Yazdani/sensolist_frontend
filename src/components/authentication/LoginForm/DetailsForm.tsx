@@ -1,7 +1,11 @@
+"useClient";
+
 import { LoginInputs } from "@/app/types/general";
 import Link from "next/link";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../PhoneInput";
+import TermsAgreement from "../TermsAgreement";
 import { TextInput } from "../TextInput";
 
 export default function DetailsForm() {
@@ -12,7 +16,7 @@ export default function DetailsForm() {
     control,
     formState: { errors },
   } = useForm<LoginInputs>();
-
+  const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
 
   console.log(watch("phoneNumber"));
@@ -41,6 +45,7 @@ export default function DetailsForm() {
       >
         Forgot password?
       </Link>
+      <TermsAgreement setIsChecked={setTermsChecked} isChecked={termsChecked} />
     </form>
   );
 }

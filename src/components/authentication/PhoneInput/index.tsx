@@ -17,11 +17,11 @@ export function CustomPhoneInput({
 }: InputProps) {
   return (
     <label className="w-full">
-      <span className="mb-2 md:text-xl">{label}</span>
+      <span className="mb-4 md:text-xl">{label}</span>
       <PhoneInput
         placeholder=""
         inputProps={{ ...register(name, { required: true }) }}
-        inputClass="!h-[45px] lg:!h-[60px] !w-full"
+        inputClass="!h-[45px] lg:!h-[60px] !w-full mt-2 flex"
       />
     </label>
   );
