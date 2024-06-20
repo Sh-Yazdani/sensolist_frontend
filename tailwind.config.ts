@@ -10,6 +10,7 @@ const config: Config = {
     colors: {
       "white-opacity-900": "rgba(255, 255, 255, 0.90)",
       "white-opacity-800": "rgba(255, 255, 255, 0.80)",
+      "white-opacity-700": "rgba(255, 255, 255, 0.70)",
       transparent: "transparent",
     },
     extend: {

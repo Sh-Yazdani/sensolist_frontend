@@ -20,7 +20,7 @@ export function CustomPhoneInput({
       <span className="mb-2 md:text-xl">{label}</span>
       <PhoneInput
         placeholder=""
-        inputProps={{ ...register(name) }}
+        inputProps={{ ...register(name, { required: true }) }}
         inputClass="!h-[45px] lg:!h-[60px] !w-full"
       />
     </label>

@@ -1,6 +1,7 @@
 import { LoginInputs } from "@/app/types/general";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CustomPhoneInput } from "../PhoneInput/PhoneInput";
+import { CustomPhoneInput } from "../PhoneInput";
+import { TextInput } from "../TextInput";
 
 export default function DetailsForm() {
   const {
@@ -25,7 +26,14 @@ export default function DetailsForm() {
         name="phoneNumber"
         label="Phone number"
       />
-      {/* <TextInput defaultValue="" {...register("password", { required: true })} /> */}
+      <TextInput
+        register={register}
+        name="password"
+        label="Password"
+        className="mt-8"
+        type="password"
+        placeholder="Enter your password"
+      />
     </form>
   );
 }
