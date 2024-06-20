@@ -1,3 +1,9 @@
+import FormHeader from "@/components/authentication/FormHeader";
+
 export default function Page() {
-  return <div>login</div>;
+  return (
+    <>
+      <FormHeader title="Login" description="Please enter your details." />
+    </>
+  );
 }
