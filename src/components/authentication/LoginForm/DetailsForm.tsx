@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../PhoneInput";
+import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 import { TextInput } from "../TextInput";
 
@@ -46,6 +47,7 @@ export default function DetailsForm() {
         Forgot password?
       </Link>
       <TermsAgreement setIsChecked={setTermsChecked} isChecked={termsChecked} />
+      <SubmitButton className="mt-10 lg:mt-[56px]" />
     </form>
   );
 }
