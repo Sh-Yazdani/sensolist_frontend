@@ -4,8 +4,9 @@ export default function SensolistTag() {
   return (
     <div
       className="absolute bg-gradient-opacity w-[383px] rounded-2xl p-4 
-  border border-white-opacity-900 flex items-center
-  bottom-[160px] left-[120px] backdrop-blur-xl"
+  border border-white-opacity-900 items-center
+  bottom-[160px] left-[120px] backdrop-blur-xl z-10
+  hidden lg:flex"
     >
       <Image
         width={56}
