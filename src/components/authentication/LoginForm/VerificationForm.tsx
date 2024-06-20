@@ -1,4 +1,5 @@
 import VerificationInput from "react-verification-input";
+import SubmitButton from "../SubmitButton";
 import TimerCountDown from "./TimerCountDown";
 
 export default function VerificationForm() {
@@ -8,10 +9,11 @@ export default function VerificationForm() {
         length={5}
         placeholder=""
         classNames={{
-          container: "w-[528px] h-[80px] justify-between",
+          container: "lg:w-[528px] h-[80px] justify-between",
         }}
       />
       <TimerCountDown />
+      <SubmitButton className="mt-20 lg:mb-[142px]">Login</SubmitButton>
     </div>
   );
 }

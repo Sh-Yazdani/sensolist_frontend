@@ -1,6 +1,7 @@
 "useClient";
 
 import { LoginInputs } from "@/app/types/general";
+import { ArrowRight } from "iconsax-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -59,7 +60,10 @@ export default function DetailsForm({
         Forgot password?
       </Link>
       <TermsAgreement setIsChecked={setTermsChecked} isChecked={termsChecked} />
-      <SubmitButton className="mt-10 lg:mt-[56px]" />
+      <SubmitButton className="mt-10 lg:mt-[56px]">
+        Continue
+        <ArrowRight className="ml-2" />
+      </SubmitButton>
     </form>
   );
 }
