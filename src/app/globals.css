@@ -3,5 +3,14 @@
 @tailwind utilities;
 
 body {
+  color: white;
   min-height: 100vh;
+}
+
+.bg-gradient-opacity {
+  background: linear-gradient(
+    109deg,
+    rgba(201, 201, 201, 0.4) 1.57%,
+    rgba(196, 196, 196, 0.05) 100%
+  );
 }
