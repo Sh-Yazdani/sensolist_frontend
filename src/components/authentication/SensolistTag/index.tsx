@@ -15,7 +15,9 @@ export default function SensolistTag() {
       />
       <div className="flex flex-col ml-6">
         <span className=" uppercase text-2xl font-medium">Sensolist</span>
-        <span>Your IOT AI-boosted R&D Sandbox</span>
+        <span className=" whitespace-nowrap">
+          Your IOT AI-boosted R&D Sandbox
+        </span>
       </div>
     </div>
   );
