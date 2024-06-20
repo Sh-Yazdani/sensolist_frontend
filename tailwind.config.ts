@@ -8,7 +8,9 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      "white-opacity-900": "rgba(255, 255, 255, 0.90);",
+      "white-opacity-900": "rgba(255, 255, 255, 0.90)",
+      "white-opacity-800": "rgba(255, 255, 255, 0.80)",
+      transparent: "transparent",
     },
     extend: {
       backgroundImage: {
