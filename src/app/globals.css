@@ -17,3 +17,33 @@ body {
     rgba(196, 196, 196, 0.05) 100%
   );
 }
+
+/* phone number input */
+
+.react-tel-input {
+  background: linear-gradient(
+    109deg,
+    rgba(201, 201, 201, 0.4) 1.57%,
+    rgba(196, 196, 196, 0.05) 100%
+  ) !important;
+}
+
+.react-tel-input .form-control {
+  background-color: transparent !important;
+}
+
+.react-tel-input .flag-dropdown {
+  background-color: transparent !important;
+}
+.flag-dropdown .country-list {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(30px) !important;
+}
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background: linear-gradient(
+    109deg,
+    rgba(201, 201, 201, 0.4) 1.57%,
+    rgba(196, 196, 196, 0.05) 100%
+  ) !important;
+}
