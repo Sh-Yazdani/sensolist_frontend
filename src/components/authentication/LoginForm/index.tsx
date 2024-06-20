@@ -4,6 +4,7 @@ import { LoginStepsType } from "@/app/types/general";
 import { useState } from "react";
 import FormHeader from "../FormHeader";
 import DetailsForm from "./DetailsForm";
+import VerificationForm from "./VerificationForm";
 
 export default function LoginForm() {
   const [formStep, setFormStep] = useState<LoginStepsType>("details");
@@ -26,7 +27,7 @@ export default function LoginForm() {
           }}
         />
       ) : (
-        <></>
+        <VerificationForm />
       )}
     </>
   );

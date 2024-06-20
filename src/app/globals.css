@@ -119,3 +119,21 @@ body {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+/* verification inputs */
+
+.vi__character {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:where(.vi__character) {
+  flex-grow: 0 !important;
+  flex-basis: auto !important;
+  width: 80px !important;
+}
