@@ -175,3 +175,11 @@ body {
   flex-basis: auto !important;
   width: 80px !important;
 }
+:where(.vi__character--selected) {
+  outline: none !important;
+  border: 2px solid !important;
+}
+
+.vi__character:focus-visible {
+  outline: none;
+}
