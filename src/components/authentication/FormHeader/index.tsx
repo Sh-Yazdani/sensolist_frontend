@@ -12,7 +12,9 @@ export default function FormHeader({ title, description }: FormHeaderProps) {
       >
         {title}
       </div>
-      <div className="mt-2 text-xl md:text-[32px] md:mt-3">{description}</div>
+      <div className="mt-2 text-xl md:text-[32px] md:mt-3 leading-tight">
+        {description}
+      </div>
     </div>
   );
 }
