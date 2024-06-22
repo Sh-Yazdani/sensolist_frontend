@@ -1,19 +1,32 @@
 import { Warning2 } from "iconsax-react";
+import { FormEvent, useState } from "react";
 import VerificationInput from "react-verification-input";
 import SubmitButton from "../SubmitButton";
 import TimerCountDown from "../TimerCountdown/index.tsx";
 
-interface VerificationFormProps {
-  error?: string;
-}
-
-export default function VerificationForm({ error }: VerificationFormProps) {
+export default function VerificationForm() {
+  const [error, setError] = useState<string>();
+  const [verificationValue, setVerificationValue] = useState<string>();
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!verificationValue) {
+      setError("This field is required");
+    }
+  };
   return (
-    <div className=" flex flex-col items-center justify-center mt-20">
+    <form
+      onSubmit={submitHandler}
+      className=" flex flex-col items-center justify-center mt-20"
+    >
       <div className="relative">
         <VerificationInput
           length={5}
           placeholder=""
+          onComplete={(val) => {
+            setError("");
+            setVerificationValue(val);
+            console.log(val);
+          }}
           classNames={{
             container: "lg:w-[528px] h-[80px] justify-between",
           }}
@@ -32,6 +45,6 @@ export default function VerificationForm({ error }: VerificationFormProps) {
       </div>
       <TimerCountDown />
       <SubmitButton className="mt-20 lg:mb-[120px]">Login</SubmitButton>
-    </div>
+    </form>
   );
 }
