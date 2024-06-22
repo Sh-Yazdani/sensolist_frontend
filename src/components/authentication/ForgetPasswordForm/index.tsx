@@ -4,6 +4,8 @@ import { ForgetPasswordStepsType } from "@/app/types/general";
 import { useState } from "react";
 import FormHeader from "../FormHeader";
 import DetailsForm from "./DetailsForm";
+import ResetPasswordForm from "./ResetPasswordForm";
+import VerificationForm from "./VerificationForm";
 
 export default function ForgetPasswordForm() {
   const [formStep, setFormStep] =
@@ -33,9 +35,13 @@ export default function ForgetPasswordForm() {
           }}
         />
       ) : formStep === "verification" ? (
-        <></>
+        <VerificationForm
+          goToResetPassword={() => {
+            setFormStep("reset");
+          }}
+        />
       ) : (
-        <></>
+        <ResetPasswordForm />
       )}
     </>
   );

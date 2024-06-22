@@ -1,9 +1,8 @@
-import { LoginInputs } from "@/app/types/general";
 import { UseFormRegister } from "react-hook-form";
 
 interface InputProps {
-  register: UseFormRegister<LoginInputs>;
-  name: keyof LoginInputs;
+  register: UseFormRegister<any>;
+  name: string;
   label: string;
   type?: string;
   className?: string;
