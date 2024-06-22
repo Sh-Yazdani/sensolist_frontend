@@ -26,6 +26,8 @@ export default function DetailsForm({
     formState: { errors },
   } = useForm<LoginInputs>();
 
+  console.log("errors", errors);
+
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
@@ -43,7 +45,16 @@ export default function DetailsForm({
         control={control}
         rules={{ required: true }}
         render={({ field: { ref, ...field } }) => (
-          <CustomPhoneInput ref={ref} label="Phone number" {...field} />
+          <CustomPhoneInput
+            ref={ref}
+            label="Phone number"
+            {...field}
+            error={
+              errors.phoneNumber?.type === "required"
+                ? "This field is required"
+                : ""
+            }
+          />
         )}
       />
       <PasswordInput
@@ -52,6 +63,9 @@ export default function DetailsForm({
         label="Password"
         className="mt-8"
         placeholder="Enter your password"
+        error={
+          errors.password?.type === "required" ? "This field is required" : ""
+        }
       />
       <Link
         href="/authentication/forgetPassword"
