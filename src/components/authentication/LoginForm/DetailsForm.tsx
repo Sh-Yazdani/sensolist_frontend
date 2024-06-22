@@ -5,10 +5,10 @@ import { ArrowRight } from "iconsax-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { PasswordInput } from "../PasswordInput";
 import { CustomPhoneInput } from "../PhoneInput";
 import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
-import { TextInput } from "../TextInput";
 
 interface DetailsFormProps {
   goToVerification: () => void;
@@ -46,12 +46,11 @@ export default function DetailsForm({
           <CustomPhoneInput ref={ref} label="Phone number" {...field} />
         )}
       />
-      <TextInput
+      <PasswordInput
         register={register}
         name="password"
         label="Password"
         className="mt-8"
-        type="password"
         placeholder="Enter your password"
       />
       <Link
