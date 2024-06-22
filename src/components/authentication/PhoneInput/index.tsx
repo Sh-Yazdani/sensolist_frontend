@@ -23,6 +23,7 @@ export function CustomPhoneInput({
     <label className="w-full">
       <span className="mb-4 md:text-xl">{label}</span>
       <ReactPhoneInput
+        placeholder=""
         inputClass="!h-[45px] lg:!h-[60px] !w-full mt-2 flex"
         {...rest}
       />

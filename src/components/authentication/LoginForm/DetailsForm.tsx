@@ -22,11 +22,12 @@ export default function DetailsForm({
   const {
     register,
     handleSubmit,
-    watch,
     control,
     formState: { errors },
   } = useForm<LoginInputs>();
+
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
+
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     changePhoneNumber(data.phoneNumber);
     goToVerification();

@@ -3,6 +3,7 @@
 import { ForgetPasswordStepsType } from "@/app/types/general";
 import { useState } from "react";
 import FormHeader from "../FormHeader";
+import DetailsForm from "./DetailsForm";
 
 export default function ForgetPasswordForm() {
   const [formStep, setFormStep] =
@@ -25,6 +26,13 @@ export default function ForgetPasswordForm() {
             : "Please enter a new password"
         }
       />
+      {formStep === "phoneNumber" ? (
+        <DetailsForm />
+      ) : formStep === "verification" ? (
+        <></>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
