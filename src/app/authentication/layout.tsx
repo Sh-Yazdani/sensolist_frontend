@@ -12,7 +12,7 @@ export default function AuthLayout({
        px-4 md:px-[72px] lg:pr-[120px]"
     >
       <div
-        className="max-w-[800px] flex w-full h-fit
+        className="max-w-[800px] lg:w-[45%] lg:min-w-[560px] flex w-full h-fit
         border border-white-opacity-900 rounded-3xl
       bg-gradient-opacity backdrop-blur-xl
       px-4 py-8 md:px-20 lg:py-10 flex-col z-20"
