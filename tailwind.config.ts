@@ -8,8 +8,10 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      "Primary-Shade-1": "#000911",
-      "Primary-tint-2": "#334759",
+      error: "#DF2040",
+      "primary-Shade-1": "#000911",
+      "primary-tint-2": "#334759",
+      white: "#ffffff",
       "white-opacity-900": "rgba(255, 255, 255, 0.90)",
       "white-opacity-800": "rgba(255, 255, 255, 0.80)",
       "white-opacity-700": "rgba(255, 255, 255, 0.70)",
