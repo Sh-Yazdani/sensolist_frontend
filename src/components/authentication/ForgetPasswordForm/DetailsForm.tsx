@@ -4,7 +4,11 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../PhoneInput";
 import SubmitButton from "../SubmitButton";
 
-export default function DetailsForm() {
+interface DetailsFormProps {
+  goToVerification: () => void;
+}
+
+export default function DetailsForm({ goToVerification }: DetailsFormProps) {
   const {
     register,
     handleSubmit,
@@ -14,7 +18,7 @@ export default function DetailsForm() {
 
   const onSubmit: SubmitHandler<{ phoneNumber: string }> = (data) => {
     console.log(data);
-    // goToVerification();
+    goToVerification();
   };
 
   return (

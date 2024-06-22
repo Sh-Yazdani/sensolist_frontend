@@ -27,7 +27,11 @@ export default function ForgetPasswordForm() {
         }
       />
       {formStep === "phoneNumber" ? (
-        <DetailsForm />
+        <DetailsForm
+          goToVerification={() => {
+            setFormStep("verification");
+          }}
+        />
       ) : formStep === "verification" ? (
         <></>
       ) : (
