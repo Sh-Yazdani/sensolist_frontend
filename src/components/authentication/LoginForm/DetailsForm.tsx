@@ -26,13 +26,13 @@ export default function DetailsForm({
     formState: { errors },
   } = useForm<LoginInputs>();
 
-  console.log("errors", errors);
-
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    changePhoneNumber(data.phoneNumber);
-    goToVerification();
+    if (termsChecked) {
+      changePhoneNumber(data.phoneNumber);
+      goToVerification();
+    }
   };
 
   return (
@@ -74,7 +74,7 @@ export default function DetailsForm({
         Forgot password?
       </Link>
       <TermsAgreement setIsChecked={setTermsChecked} isChecked={termsChecked} />
-      <SubmitButton className="mt-10 lg:mt-[56px]">
+      <SubmitButton disabled={!termsChecked} className="mt-10 lg:mt-[56px]">
         Continue
         <ArrowRight className="ml-2" />
       </SubmitButton>

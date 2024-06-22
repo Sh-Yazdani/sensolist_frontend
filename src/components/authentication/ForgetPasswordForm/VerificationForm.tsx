@@ -32,7 +32,7 @@ export default function VerificationForm({
         }}
       />
       <TimerCountDown />
-      <SubmitButton className="mt-20 lg:mb-[142px]">Submit</SubmitButton>
+      <SubmitButton className="mt-20 lg:mb-[120px]">Submit</SubmitButton>
     </form>
   );
 }

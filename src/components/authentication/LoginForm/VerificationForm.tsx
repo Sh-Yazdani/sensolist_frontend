@@ -31,7 +31,7 @@ export default function VerificationForm({ error }: VerificationFormProps) {
         )}
       </div>
       <TimerCountDown />
-      <SubmitButton className="mt-20 lg:mb-[142px]">Login</SubmitButton>
+      <SubmitButton className="mt-20 lg:mb-[120px]">Login</SubmitButton>
     </div>
   );
 }

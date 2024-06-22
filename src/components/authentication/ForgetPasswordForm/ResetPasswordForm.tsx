@@ -34,7 +34,7 @@ export default function ResetPasswordForm() {
         className="mt-8"
         placeholder="Enter new password again"
       />
-      <SubmitButton className="mt-10 lg:mb-[142px]">
+      <SubmitButton className="mt-10 lg:mb-[120px]">
         reset password
       </SubmitButton>
     </form>

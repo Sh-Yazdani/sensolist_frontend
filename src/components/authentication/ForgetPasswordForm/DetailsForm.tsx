@@ -34,7 +34,7 @@ export default function DetailsForm({ goToVerification }: DetailsFormProps) {
           <CustomPhoneInput ref={ref} label="Phone number" {...field} />
         )}
       />
-      <SubmitButton className="mt-20 lg:mb-[142px]">Submit</SubmitButton>
+      <SubmitButton className="mt-20 lg:mb-[120px]">Submit</SubmitButton>
     </form>
   );
 }
