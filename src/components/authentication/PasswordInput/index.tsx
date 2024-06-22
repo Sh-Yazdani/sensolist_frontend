@@ -43,7 +43,8 @@ export function PasswordInput({
         </div>
       )}
       <button
-        onClick={() => {
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
+          event.preventDefault();
           setType((prev) => (prev === "password" ? "text" : "password"));
         }}
         className=" absolute bottom-[18px] right-4"
