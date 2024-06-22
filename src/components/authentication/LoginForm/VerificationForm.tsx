@@ -1,7 +1,6 @@
 import VerificationInput from "react-verification-input";
 import SubmitButton from "../SubmitButton";
-import TimerCountDown from "./TimerCountDown";
-
+import TimerCountDown from "../TimerCountdown/index.tsx";
 export default function VerificationForm() {
   return (
     <div className="flex flex-col items-center justify-center mt-20">
