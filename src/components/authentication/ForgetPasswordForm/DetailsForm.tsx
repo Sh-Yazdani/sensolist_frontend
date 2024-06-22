@@ -31,7 +31,16 @@ export default function DetailsForm({ goToVerification }: DetailsFormProps) {
         control={control}
         rules={{ required: true }}
         render={({ field: { ref, ...field } }) => (
-          <CustomPhoneInput ref={ref} label="Phone number" {...field} />
+          <CustomPhoneInput
+            ref={ref}
+            label="Phone number"
+            {...field}
+            error={
+              errors.phoneNumber?.type === "required"
+                ? "This field is required"
+                : ""
+            }
+          />
         )}
       />
       <SubmitButton className="mt-20 lg:mb-[120px]">Submit</SubmitButton>

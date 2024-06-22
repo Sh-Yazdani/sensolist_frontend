@@ -26,6 +26,9 @@ export default function ResetPasswordForm() {
         label="New password"
         className="mt-8"
         placeholder="Enter a new password"
+        error={
+          errors.password?.type === "required" ? "This field is required" : ""
+        }
       />
       <PasswordInput
         register={register}
@@ -33,6 +36,11 @@ export default function ResetPasswordForm() {
         label="Confirm new password"
         className="mt-8"
         placeholder="Enter new password again"
+        error={
+          errors.confirmPassword?.type === "required"
+            ? "This field is required"
+            : ""
+        }
       />
       <SubmitButton className="mt-10 lg:mb-[120px]">
         reset password
