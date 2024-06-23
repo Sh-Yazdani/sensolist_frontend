@@ -11,14 +11,23 @@ export default function Notification() {
     (state: RootState) => state.notificationReducer
   );
 
-  console.log("alert", alerts);
-
   const [alert, setAlert] = useState<INotificationAlert>({
     type: "success",
     message: "",
   });
   const [show, setShow] = useState<boolean>(false);
+  const [percent, setPercent] = useState(0);
 
+  useEffect(() => {
+    setPercent(0);
+    if (show) {
+      if (percent >= 100) return;
+      const interval = setInterval(() => {
+        setPercent((prev) => prev + 1);
+      }, 30);
+      return () => clearInterval(interval);
+    }
+  }, [show]);
   useEffect(() => {
     if (alerts.length > 0) {
       setAlert(alerts[alerts.length - 1]);
@@ -33,13 +42,12 @@ export default function Notification() {
     setShow(false);
   };
 
-  console.log("state", alerts);
   return (
     <div
       className={`fixed transition-all left-8 top-8
-      rounded-lg flex shadow pl-[42px] 
+      rounded-lg overflow-hidden flex shadow pl-[42px] 
       ${show ? "ml-0" : " ml-[-480px] "}
-    w-[440px] min-h-[90px] bg-green-success`}
+    w-[440px] min-h-[90px] bg-bg-success`}
     >
       <div className="flex flex-row items-center">
         <TickCircle color="#343434" />
@@ -48,6 +56,10 @@ export default function Notification() {
           <div>{alert.message}</div>
         </div>
       </div>
+      <div
+        className="h-[6px] bg-success absolute left-0 bottom-0"
+        style={{ width: `${percent}%` }}
+      ></div>
     </div>
   );
 }
