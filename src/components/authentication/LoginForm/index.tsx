@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginStepsType } from "@/app/types/general";
+import { LoginStepsType } from "@/types/general";
 import { useState } from "react";
 import FormHeader from "../FormHeader";
 import DetailsForm from "./DetailsForm";

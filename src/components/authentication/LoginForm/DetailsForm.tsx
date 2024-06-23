@@ -1,6 +1,6 @@
 "useClient";
 
-import { LoginInputs } from "@/app/types/general";
+import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
 import Link from "next/link";
 import { useState } from "react";

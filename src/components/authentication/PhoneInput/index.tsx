@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginInputs } from "@/app/types/general";
+import { LoginInputs } from "@/types/general";
 import { Warning2 } from "iconsax-react";
 import { RefCallBack, UseFormRegister } from "react-hook-form";
 import ReactPhoneInput from "react-phone-input-2";
