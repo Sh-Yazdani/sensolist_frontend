@@ -27,11 +27,14 @@ export default function DetailsForm({
   } = useForm<LoginInputs>();
 
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
+  const [termsError, setTermsError] = useState<string>();
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
       goToVerification();
+    } else {
+      setTermsError("Please agree with terms and policies.");
     }
   };
 
@@ -73,8 +76,12 @@ export default function DetailsForm({
       >
         Forgot password?
       </Link>
-      <TermsAgreement setIsChecked={setTermsChecked} isChecked={termsChecked} />
-      <SubmitButton disabled={!termsChecked} className="mt-10 lg:mt-[56px]">
+      <TermsAgreement
+        error={termsError}
+        setIsChecked={setTermsChecked}
+        isChecked={termsChecked}
+      />
+      <SubmitButton className="mt-10 lg:mt-[56px]">
         Continue
         <ArrowRight className="ml-2" />
       </SubmitButton>
