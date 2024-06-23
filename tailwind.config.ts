@@ -11,6 +11,7 @@ const config: Config = {
       error: "#DF2040",
       "primary-Shade-1": "#000911",
       "primary-tint-2": "#334759",
+      "natural-8": "#343434",
       white: "#ffffff",
       "white-opacity-900": "rgba(255, 255, 255, 0.90)",
       "white-opacity-800": "rgba(255, 255, 255, 0.80)",
