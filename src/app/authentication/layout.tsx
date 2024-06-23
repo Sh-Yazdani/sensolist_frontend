@@ -1,4 +1,5 @@
 import SensolistTag from "@/components/authentication/SensolistTag";
+import Notification from "@/components/Notification";
 
 export default function AuthLayout({
   children, // will be a page or nested layout
@@ -7,11 +8,12 @@ export default function AuthLayout({
 }) {
   return (
     <div
-      className="relative h-[100vh] flex justify-end overflow-y-auto
+      className=" h-[100vh] flex justify-end overflow-y-auto
       pt-20 md:pt-[120px] lg:pt-40
        px-4 md:px-[72px] lg:pr-[120px]
        bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center"
     >
+      <Notification />
       <div
         className="max-w-[800px] lg:w-[45%] lg:min-w-[560px] flex w-full h-fit
         border border-white-opacity-900 rounded-3xl

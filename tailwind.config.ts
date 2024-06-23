@@ -16,6 +16,7 @@ const config: Config = {
       "white-opacity-800": "rgba(255, 255, 255, 0.80)",
       "white-opacity-700": "rgba(255, 255, 255, 0.70)",
       orange: "#E67F3A",
+      "green-success": "#dcf5cf",
       transparent: "transparent",
     },
     extend: {
