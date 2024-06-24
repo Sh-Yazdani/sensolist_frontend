@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     colors: {
       error: "#DF2040",
+      primary: "#0F172A",
       "primary-Shade-1": "#000911",
       "primary-Shade-2": "#001426",
       "primary-tint-2": "#334759",

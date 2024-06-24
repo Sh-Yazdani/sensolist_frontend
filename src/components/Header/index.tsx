@@ -9,7 +9,9 @@ export default function Header() {
     bg-primary-Shade-2 md:bg-transparent"
     >
       <Logo />
-      <ThemeSwitch />
+      <div className="ml-auto">
+        <ThemeSwitch />
+      </div>
     </div>
   );
 }
