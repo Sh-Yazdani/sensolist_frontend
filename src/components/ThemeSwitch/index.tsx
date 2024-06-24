@@ -16,7 +16,7 @@ export default function ThemeSwitch() {
   }
   return (
     <div
-      className="flex w-[112px] h-[40px] lg:h-[56px] shadow rounded-full relative gap-2 justify-around
+      className="hidden md:flex w-[112px] h-[40px] lg:h-[56px] shadow rounded-full relative gap-2 justify-around
      dark:bg-white-opacity-100 bg-neutral-3 py-1 lg:py-2.5 px-3"
     >
       <button
