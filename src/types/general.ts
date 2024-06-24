@@ -11,3 +11,8 @@ export interface ResetPasswordInputs {
   confirmPassword: string;
   password: string;
 }
+
+export interface INotificationAlert {
+  message: string;
+  type: "success" | "warning" | "error";
+}

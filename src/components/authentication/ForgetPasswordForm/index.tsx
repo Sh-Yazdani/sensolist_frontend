@@ -1,6 +1,6 @@
 "use client";
 
-import { ForgetPasswordStepsType } from "@/app/types/general";
+import { ForgetPasswordStepsType } from "@/types/general";
 import { useState } from "react";
 import FormHeader from "../FormHeader";
 import DetailsForm from "./DetailsForm";
