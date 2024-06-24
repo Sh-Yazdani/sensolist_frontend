@@ -6,7 +6,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col h-[100vh]">
+    <div className="flex flex-col h-[100vh] dark:bg-dark-background-color">
       <Header />
       {children}
     </div>

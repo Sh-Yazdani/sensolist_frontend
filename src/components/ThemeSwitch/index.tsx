@@ -16,7 +16,7 @@ export default function ThemeSwitch() {
   }
   return (
     <div
-      className="flex w-[112px] shadow rounded-full relative gap-2 justify-around
+      className="flex w-[112px] h-[40px] lg:h-[56px] shadow rounded-full relative gap-2 justify-around
      dark:bg-white-opacity-100 bg-neutral-3 py-1 lg:py-2.5 px-3"
     >
       <button
@@ -37,7 +37,7 @@ export default function ThemeSwitch() {
       </button>
       <div
         className={`absolute dark:bg-white-opacity-200 bg-primary-tint-3
-        rounded-full w-[56px] h-[24px] lg:h-[36px] lg:top-1 transition-all
+        rounded-full w-[56px] h-[32px] lg:h-[36px] lg:top-2.5 transition-all
       left-0 ${resolvedTheme === "dark" ? "ml-12" : " ml-1"}`}
       ></div>
     </div>
