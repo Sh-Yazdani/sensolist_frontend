@@ -2,12 +2,16 @@
 
 import { ArrowDown2, Global } from "iconsax-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { i18nConfig } from "../../../i18nConfig";
 
 export default function LanguageSwitch() {
   const [isOpen, setIsOpen] = useState(false);
   const { locale } = useParams<{ locale: string }>();
+  const pathname = usePathname();
+  const router = useRouter();
+  // console.log(pathname);
   const locales = [
     { value: "en", title: "English", flag: "/assets/flags/english.svg" },
     { value: "fr", title: "French", flag: "/assets/flags/french.svg" },
@@ -33,7 +37,19 @@ export default function LanguageSwitch() {
        top-[50px] lg:top-[66px] right-0"
         >
           {locales.map((loc, i) => (
-            <div
+            <button
+              onClick={() => {
+                if (locale === i18nConfig.defaultLocale) {
+                  router.push("/" + loc.value + pathname);
+                } else {
+                  const newPath = pathname.replace(
+                    `/${locale}`,
+                    `/${loc.value}`
+                  );
+                  router.push(newPath);
+                }
+                // router.replace(`/${loc.value}${pathname}`);
+              }}
               className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center 
             text-neutral-7 dark:text-neutral-2 ${
               i !== 0 && "border-t border-neutral-4 dark:border-primary-tint-1"
@@ -44,7 +60,7 @@ export default function LanguageSwitch() {
                 <Image src={loc.flag} alt="flag" layout="fill" />
               </div>
               {loc.title}
-            </div>
+            </button>
           ))}
         </div>
       )}
