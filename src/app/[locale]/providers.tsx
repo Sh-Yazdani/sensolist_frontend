@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { Provider } from "react-redux";
-import { AppStore, makeStore } from "../lib/store";
+import { AppStore, makeStore } from "../../lib/store";
 
 import { ThemeProvider } from "next-themes";
 
