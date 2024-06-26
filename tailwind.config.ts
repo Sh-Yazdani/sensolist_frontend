@@ -21,7 +21,7 @@ const config: Config = {
       "neutral-4": "#CACACA",
       "neutral-5": "#B4B4B4",
       "neutral-7": "#6B6B6B",
-      "natural-8": "#343434",
+      "neutral-8": "#343434",
       white: "#ffffff",
       black: "#000000",
       "dark-background-color": "#070B15",
