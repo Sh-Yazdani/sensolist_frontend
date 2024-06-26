@@ -1,12 +1,13 @@
 "use client";
 
 import { Cpu, Element3, Home2, Profile, Setting4 } from "iconsax-react";
-import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 export default function Menu() {
   const pathname = usePathname();
   const { locale } = useParams<{ locale: string }>();
+
+  const router = useRouter();
   console.log("locale", locale);
   return (
     <div
@@ -15,8 +16,10 @@ export default function Menu() {
      bottom-0 w-full h-[62px] lg:w-[116px] lg:h-full lg:bg-transparent dark:lg:bg-transparent 
      px-9 pt-2 items-center justify-between lg:justify-start lg:gap-8"
     >
-      <Link
-        href="/profile"
+      <button
+        onClick={() => {
+          router.push(`/${locale}/profile`);
+        }}
         className={`flex flex-col items-center lg:bg-black-opacity-50
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${pathname.includes("/profile") && "dark:bg-white-opacity-200"}`}
@@ -35,9 +38,11 @@ export default function Menu() {
         >
           profile
         </div>
-      </Link>
-      <Link
-        href="/myThings"
+      </button>
+      <button
+        onClick={() => {
+          router.push(`/${locale}/myThings`);
+        }}
         className={`flex flex-col items-center  lg:bg-black-opacity-50
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${pathname.includes("/myThings") && "dark:bg-white-opacity-200"}`}
@@ -56,30 +61,45 @@ export default function Menu() {
         >
           my things
         </div>
-      </Link>
-      <Link
-        href="/"
+      </button>
+      <button
+        onClick={() => {
+          router.push(`/${locale}`);
+        }}
         className={`flex flex-col items-center lg:bg-black-opacity-50
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname === `/${locale}` && "dark:bg-white-opacity-200"}`}
+        ${
+          pathname === `/${locale === "en" ? "" : locale}` &&
+          "dark:bg-white-opacity-200"
+        }`}
       >
         <Home2
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === `/${locale}` ? "Bold" : undefined}
-          color={pathname === `/${locale}` ? "#E67F3A" : undefined}
+          variant={
+            pathname === `/${locale === "en" ? "" : locale}`
+              ? "Bold"
+              : undefined
+          }
+          color={
+            pathname === `/${locale === "en" ? "" : locale}`
+              ? "#E67F3A"
+              : undefined
+          }
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === `/${locale}` &&
+              pathname === `/${locale === "en" ? "" : locale}` &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           home
         </div>
-      </Link>
-      <Link
-        href="/dashboard"
+      </button>
+      <button
+        onClick={() => {
+          router.push(`/${locale}/dashboard`);
+        }}
         className={`flex flex-col items-center lg:bg-black-opacity-50
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${pathname.includes("/dashboard") && "dark:bg-white-opacity-200"}`}
@@ -98,9 +118,11 @@ export default function Menu() {
         >
           dashboard
         </div>
-      </Link>
-      <Link
-        href="/settings"
+      </button>
+      <button
+        onClick={() => {
+          router.push(`/${locale}/settings`);
+        }}
         className={`flex flex-col items-center lg:bg-black-opacity-50
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${pathname.includes("/settings") && "dark:bg-white-opacity-200"}`}
@@ -119,7 +141,7 @@ export default function Menu() {
         >
           Applets
         </div>
-      </Link>
+      </button>
     </div>
   );
 }
