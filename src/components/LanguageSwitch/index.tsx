@@ -25,7 +25,7 @@ export default function LanguageSwitch() {
       onClick={() => {
         setIsOpen((prev) => !prev);
       }}
-      className=" relative flex items-center h-[40px] w-[89px] lg:h-[56px] lg:w-[115px] rounded-full md:ml-4
+      className="relative flex items-center h-[40px] w-[89px] lg:h-[56px] lg:w-[115px] rounded-full md:ml-4
        dark:text-white md:text-primary-tint-3
    bg-primary-tint-3 dark:bg-white-opacity-100 md:bg-neutral-3 px-3"
     >

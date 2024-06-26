@@ -29,6 +29,7 @@ const config: Config = {
       "white-opacity-700": "rgba(255, 255, 255, 0.70)",
       "white-opacity-200": "rgba(255, 255, 255, 0.20)",
       "white-opacity-100": "rgba(255, 255, 255, 0.10)",
+      "white-opacity-30": "rgba(255, 255, 255, 0.03)",
       "black-opacity-50": "rgba(0, 0, 0, 0.05)",
       orange: "#E67F3A",
       "bg-success": "#dcf5cf",

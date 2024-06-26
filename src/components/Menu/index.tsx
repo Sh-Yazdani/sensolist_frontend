@@ -1,6 +1,13 @@
 "use client";
 
-import { Cpu, Element3, Home2, Profile, Setting4 } from "iconsax-react";
+import {
+  Cpu,
+  Element3,
+  Home2,
+  LogoutCurve,
+  Profile,
+  Setting4,
+} from "iconsax-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
 export default function Menu() {
@@ -20,9 +27,13 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/profile`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50 order-1 lg:order-5
+        className={` flex flex-col items-center lg:bg-black-opacity-50 order-1 lg:order-5
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/profile") && "dark:lg:bg-white-opacity-200"}`}
+        ${
+          pathname.includes("/profile")
+            ? "dark:lg:bg-white-opacity-200"
+            : "dark:lg:bg-white-opacity-30"
+        }`}
       >
         <Profile
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -44,9 +55,13 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/myThings`);
         }}
-        className={`flex flex-col items-center  lg:bg-black-opacity-50 order-2
+        className={` flex flex-col items-center  lg:bg-black-opacity-50 order-2
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/myThings") && "dark:lg:bg-white-opacity-200"}`}
+        ${
+          pathname.includes("/myThings")
+            ? "dark:lg:bg-white-opacity-200"
+            : "dark:lg:bg-white-opacity-30"
+        }`}
       >
         <Cpu
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -68,11 +83,12 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50 order-3 lg:order-1
+        className={` flex flex-col items-center lg:bg-black-opacity-50 order-3 lg:order-1
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${
-          pathname === `/${locale === "en" ? "" : locale}` &&
-          "dark:lg:bg-white-opacity-200"
+          pathname === `/${locale === "en" ? "" : locale}`
+            ? "dark:lg:bg-white-opacity-200"
+            : "dark:lg:bg-white-opacity-30"
         }`}
       >
         <Home2
@@ -103,9 +119,13 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/dashboard`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50 order-4 lg:order-3
+        className={` flex flex-col items-center lg:bg-black-opacity-50 order-4 lg:order-3
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/dashboard") && "dark:lg:bg-white-opacity-200"}`}
+        ${
+          pathname.includes("/dashboard")
+            ? "dark:lg:bg-white-opacity-200"
+            : "dark:lg:bg-white-opacity-30"
+        }`}
       >
         <Element3
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -127,9 +147,13 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/settings`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50 order-5 lg:order-3
+        className={` flex flex-col items-center lg:bg-black-opacity-50 order-5 lg:order-3
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/settings") && "dark:lg:bg-white-opacity-200"}`}
+        ${
+          pathname.includes("/settings")
+            ? "dark:lg:bg-white-opacity-200"
+            : "dark:lg:bg-white-opacity-30"
+        }`}
       >
         <Setting4
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -145,6 +169,12 @@ export default function Menu() {
             }`}
         >
           Applets
+        </div>
+      </button>
+      <button className="hidden lg:flex flex-col items-center order-6">
+        <LogoutCurve size={40} color="#DF2040" />
+        <div className=" capitalize dark:text-neutral-4 text-neutral-7 whitespace-nowrap">
+          log out
         </div>
       </button>
     </div>
