@@ -1,4 +1,5 @@
 import LanguageSwitch from "../LanguageSwitch";
+import Notifications from "../Notifications";
 import ThemeSwitch from "../ThemeSwitch";
 import Logo from "./Logo";
 
@@ -13,6 +14,7 @@ export default function Header() {
       <div className="ml-auto flex">
         <ThemeSwitch />
         <LanguageSwitch />
+        <Notifications />
       </div>
     </div>
   );
