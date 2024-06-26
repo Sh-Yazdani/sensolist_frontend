@@ -20,9 +20,9 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/profile`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50
+        className={`flex flex-col items-center lg:bg-black-opacity-50 order-1 lg:order-5
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/profile") && "dark:bg-white-opacity-200"}`}
+        ${pathname.includes("/profile") && "dark:lg:bg-white-opacity-200"}`}
       >
         <Profile
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -31,10 +31,11 @@ export default function Menu() {
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname.includes("/profile") &&
-              "flex lg:text-secondary-main dark:lg:text-secondary-main"
-            }`}
+             lg:text-neutral-7 dark:text-white ${
+               pathname.includes("/profile")
+                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
+                 : "hidden lg:flex"
+             }`}
         >
           profile
         </div>
@@ -43,9 +44,9 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/myThings`);
         }}
-        className={`flex flex-col items-center  lg:bg-black-opacity-50
+        className={`flex flex-col items-center  lg:bg-black-opacity-50 order-2
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/myThings") && "dark:bg-white-opacity-200"}`}
+        ${pathname.includes("/myThings") && "dark:lg:bg-white-opacity-200"}`}
       >
         <Cpu
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -54,10 +55,11 @@ export default function Menu() {
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname.includes("/myThings") &&
-              "flex lg:text-secondary-main dark:lg:text-secondary-main"
-            }`}
+             lg:text-neutral-7 dark:text-white ${
+               pathname.includes("/myThings")
+                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
+                 : "hidden lg:flex"
+             }`}
         >
           my things
         </div>
@@ -66,11 +68,11 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50
+        className={`flex flex-col items-center lg:bg-black-opacity-50 order-3 lg:order-1
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
         ${
           pathname === `/${locale === "en" ? "" : locale}` &&
-          "dark:bg-white-opacity-200"
+          "dark:lg:bg-white-opacity-200"
         }`}
       >
         <Home2
@@ -88,10 +90,11 @@ export default function Menu() {
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === `/${locale === "en" ? "" : locale}` &&
-              "flex lg:text-secondary-main dark:lg:text-secondary-main"
-            }`}
+             lg:text-neutral-7 dark:text-white ${
+               pathname === `/${locale === "en" ? "" : locale}`
+                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
+                 : "hidden lg:flex"
+             }`}
         >
           home
         </div>
@@ -100,9 +103,9 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/dashboard`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50
+        className={`flex flex-col items-center lg:bg-black-opacity-50 order-4 lg:order-3
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/dashboard") && "dark:bg-white-opacity-200"}`}
+        ${pathname.includes("/dashboard") && "dark:lg:bg-white-opacity-200"}`}
       >
         <Element3
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -111,10 +114,11 @@ export default function Menu() {
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname.includes("/dashboard") &&
-              "flex lg:text-secondary-main dark:lg:text-secondary-main"
-            }`}
+             lg:text-neutral-7 dark:text-white ${
+               pathname.includes("/dashboard")
+                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
+                 : "hidden lg:flex"
+             }`}
         >
           dashboard
         </div>
@@ -123,9 +127,9 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/settings`);
         }}
-        className={`flex flex-col items-center lg:bg-black-opacity-50
+        className={`flex flex-col items-center lg:bg-black-opacity-50 order-5 lg:order-3
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
-        ${pathname.includes("/settings") && "dark:bg-white-opacity-200"}`}
+        ${pathname.includes("/settings") && "dark:lg:bg-white-opacity-200"}`}
       >
         <Setting4
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
@@ -134,9 +138,10 @@ export default function Menu() {
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname.includes("/settings") &&
-              "flex lg:text-secondary-main dark:lg:text-secondary-main"
+            lg:text-neutral-7 dark:text-white ${
+              pathname.includes("/settings")
+                ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
+                : " hidden lg:flex"
             }`}
         >
           Applets
