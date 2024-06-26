@@ -9,10 +9,12 @@ import {
   Setting4,
 } from "iconsax-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function Menu() {
   const pathname = usePathname();
   const { locale } = useParams<{ locale: string }>();
+  const { t } = useTranslation();
 
   const router = useRouter();
   console.log("locale", locale);
@@ -48,7 +50,7 @@ export default function Menu() {
                  : "hidden lg:flex"
              }`}
         >
-          profile
+          {t("profile")}
         </div>
       </button>
       <button
@@ -76,7 +78,7 @@ export default function Menu() {
                  : "hidden lg:flex"
              }`}
         >
-          my things
+          {t("my-things")}
         </div>
       </button>
       <button
@@ -112,7 +114,7 @@ export default function Menu() {
                  : "hidden lg:flex"
              }`}
         >
-          home
+          {t("home")}
         </div>
       </button>
       <button
@@ -140,7 +142,7 @@ export default function Menu() {
                  : "hidden lg:flex"
              }`}
         >
-          dashboard
+          {t("dashboard")}
         </div>
       </button>
       <button
@@ -168,7 +170,7 @@ export default function Menu() {
                 : " hidden lg:flex"
             }`}
         >
-          Applets
+          {t("applets")}
         </div>
       </button>
       <button className="hidden lg:flex flex-col items-center order-6">
