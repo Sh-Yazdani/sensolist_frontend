@@ -2,11 +2,12 @@
 
 import { Cpu, Element3, Home2, Profile, Setting4 } from "iconsax-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function Menu() {
   const pathname = usePathname();
-
+  const { locale } = useParams<{ locale: string }>();
+  console.log("locale", locale);
   return (
     <div
       className=" absolute rounded-t-2xl flex flex-row lg:flex-col
@@ -16,18 +17,19 @@ export default function Menu() {
     >
       <Link
         href="/profile"
-        className="flex flex-col items-center lg:bg-black-opacity-50
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
+        className={`flex flex-col items-center lg:bg-black-opacity-50
+        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        ${pathname.includes("/profile") && "dark:bg-white-opacity-200"}`}
       >
         <Profile
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === "/profile" ? "Bold" : undefined}
-          color={pathname === "/profile" ? "#E67F3A" : undefined}
+          variant={pathname.includes("/profile") ? "Bold" : undefined}
+          color={pathname.includes("/profile") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === "/profile" &&
+              pathname.includes("/profile") &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
@@ -36,18 +38,19 @@ export default function Menu() {
       </Link>
       <Link
         href="/myThings"
-        className="flex flex-col items-center  lg:bg-black-opacity-50
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
+        className={`flex flex-col items-center  lg:bg-black-opacity-50
+        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        ${pathname.includes("/myThings") && "dark:bg-white-opacity-200"}`}
       >
         <Cpu
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === "/myThings" ? "Bold" : undefined}
-          color={pathname === "/myThings" ? "#E67F3A" : undefined}
+          variant={pathname.includes("/myThings") ? "Bold" : undefined}
+          color={pathname.includes("/myThings") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === "/myThings" &&
+              pathname.includes("/myThings") &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
@@ -56,18 +59,19 @@ export default function Menu() {
       </Link>
       <Link
         href="/"
-        className="flex flex-col items-center lg:bg-black-opacity-50
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
+        className={`flex flex-col items-center lg:bg-black-opacity-50
+        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        ${pathname === `/${locale}` && "dark:bg-white-opacity-200"}`}
       >
         <Home2
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === "/" ? "Bold" : undefined}
-          color={pathname === "/" ? "#E67F3A" : undefined}
+          variant={pathname === `/${locale}` ? "Bold" : undefined}
+          color={pathname === `/${locale}` ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === "/" &&
+              pathname === `/${locale}` &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
@@ -76,18 +80,19 @@ export default function Menu() {
       </Link>
       <Link
         href="/dashboard"
-        className="flex flex-col items-center lg:bg-black-opacity-50
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
+        className={`flex flex-col items-center lg:bg-black-opacity-50
+        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        ${pathname.includes("/dashboard") && "dark:bg-white-opacity-200"}`}
       >
         <Element3
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === "/dashboard" ? "Bold" : undefined}
-          color={pathname === "/dashboard" ? "#E67F3A" : undefined}
+          variant={pathname.includes("/dashboard") ? "Bold" : undefined}
+          color={pathname.includes("/dashboard") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === "/dashboard" &&
+              pathname.includes("/dashboard") &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
@@ -96,22 +101,23 @@ export default function Menu() {
       </Link>
       <Link
         href="/settings"
-        className="flex flex-col items-center lg:bg-black-opacity-50
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
+        className={`flex flex-col items-center lg:bg-black-opacity-50
+        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        ${pathname.includes("/settings") && "dark:bg-white-opacity-200"}`}
       >
         <Setting4
           className="lg:text-neutral-7 lg:size-10 dark:text-white"
-          variant={pathname === "/settings" ? "Bold" : undefined}
-          color={pathname === "/settings" ? "#E67F3A" : undefined}
+          variant={pathname.includes("/settings") ? "Bold" : undefined}
+          color={pathname.includes("/settings") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
             hidden lg:flex lg:text-neutral-7 dark:text-white ${
-              pathname === "/settings" &&
+              pathname.includes("/settings") &&
               "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
-          settings
+          Applets
         </div>
       </Link>
     </div>
