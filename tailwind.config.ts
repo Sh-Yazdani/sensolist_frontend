@@ -20,6 +20,7 @@ const config: Config = {
       "neutral-3": "#DCDCDC",
       "neutral-4": "#CACACA",
       "neutral-5": "#B4B4B4",
+      "neutral-6": "#9B9B9B",
       "neutral-7": "#6B6B6B",
       "neutral-8": "#343434",
       white: "#ffffff",

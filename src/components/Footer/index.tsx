@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex flex-col w-full h-[70px] md:h-[88px] lg:h-[116px] dark:text-neutral-5 text-neutral-8">
+    <div className="hidden lg:flex flex-col w-full h-[70px] md:h-[88px] lg:h-[116px] dark:text-neutral-5 text-neutral-8">
       <div
         className="w-full h-[4px] bg-gradient-to-r to-[#C2CBD4] from-[#3F76AA]
         dark:to-[#192F44] dark:from-[#11406C]
