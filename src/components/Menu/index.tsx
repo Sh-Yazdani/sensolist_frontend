@@ -20,14 +20,15 @@ export default function Menu() {
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
       >
         <Profile
-          className="lg:text-neutral-7 lg:size-10"
+          className="lg:text-neutral-7 lg:size-10 dark:text-white"
           variant={pathname === "/profile" ? "Bold" : undefined}
           color={pathname === "/profile" ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 ${
-              pathname === "/profile" && "flex lg:text-secondary-main"
+            hidden lg:flex lg:text-neutral-7 dark:text-white ${
+              pathname === "/profile" &&
+              "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           profile
@@ -39,14 +40,15 @@ export default function Menu() {
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
       >
         <Cpu
-          className="lg:text-neutral-7 lg:size-10"
+          className="lg:text-neutral-7 lg:size-10 dark:text-white"
           variant={pathname === "/myThings" ? "Bold" : undefined}
           color={pathname === "/myThings" ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 ${
-              pathname === "/myThings" && "flex lg:text-secondary-main"
+            hidden lg:flex lg:text-neutral-7 dark:text-white ${
+              pathname === "/myThings" &&
+              "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           my things
@@ -58,14 +60,15 @@ export default function Menu() {
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
       >
         <Home2
-          className="lg:text-neutral-7 lg:size-10"
+          className="lg:text-neutral-7 lg:size-10 dark:text-white"
           variant={pathname === "/" ? "Bold" : undefined}
           color={pathname === "/" ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 ${
-              pathname === "/" && "flex lg:text-secondary-main"
+            hidden lg:flex lg:text-neutral-7 dark:text-white ${
+              pathname === "/" &&
+              "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           home
@@ -77,14 +80,15 @@ export default function Menu() {
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
       >
         <Element3
-          className="lg:text-neutral-7 lg:size-10"
+          className="lg:text-neutral-7 lg:size-10 dark:text-white"
           variant={pathname === "/dashboard" ? "Bold" : undefined}
           color={pathname === "/dashboard" ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 ${
-              pathname === "/dashboard" && "flex lg:text-secondary-main"
+            hidden lg:flex lg:text-neutral-7 dark:text-white ${
+              pathname === "/dashboard" &&
+              "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           dashboard
@@ -96,14 +100,15 @@ export default function Menu() {
         w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center"
       >
         <Setting4
-          className="lg:text-neutral-7 lg:size-10"
+          className="lg:text-neutral-7 lg:size-10 dark:text-white"
           variant={pathname === "/settings" ? "Bold" : undefined}
           color={pathname === "/settings" ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize text-secondary-main lg:text-sm
-            hidden lg:flex lg:text-neutral-7 ${
-              pathname === "/settings" && "flex lg:text-secondary-main"
+            hidden lg:flex lg:text-neutral-7 dark:text-white ${
+              pathname === "/settings" &&
+              "flex lg:text-secondary-main dark:lg:text-secondary-main"
             }`}
         >
           settings
