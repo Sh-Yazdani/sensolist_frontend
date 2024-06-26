@@ -4,19 +4,21 @@ import { ArrowDown2, Global } from "iconsax-react";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { i18nConfig } from "../../../i18nConfig";
 
 export default function LanguageSwitch() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { locale } = useParams<{ locale: string }>();
   const pathname = usePathname();
   const router = useRouter();
   // console.log(pathname);
   const locales = [
-    { value: "en", title: "English", flag: "/assets/flags/english.svg" },
-    { value: "fr", title: "French", flag: "/assets/flags/french.svg" },
-    { value: "ru", title: "Russian", flag: "/assets/flags/russian.svg" },
-    { value: "es", title: "Spanish", flag: "/assets/flags/spanish.svg" },
+    { value: "en", title: t("english"), flag: "/assets/flags/english.svg" },
+    { value: "fr", title: t("french"), flag: "/assets/flags/french.svg" },
+    { value: "ru", title: t("russian"), flag: "/assets/flags/russian.svg" },
+    { value: "es", title: t("spanish"), flag: "/assets/flags/spanish.svg" },
   ];
   return (
     <button
@@ -50,7 +52,7 @@ export default function LanguageSwitch() {
                 }
                 // router.replace(`/${loc.value}${pathname}`);
               }}
-              className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center 
+              className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center w-full
             text-neutral-7 dark:text-neutral-2 ${
               i !== 0 && "border-t border-neutral-4 dark:border-primary-tint-1"
             }`}
