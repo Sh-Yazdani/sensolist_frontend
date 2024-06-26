@@ -1,5 +1,6 @@
 import initTranslations from "@/app/i18n";
 import Header from "@/components/Header";
+import Menu from "@/components/Menu";
 import TranslationsProvider from "@/components/TranslationsProvider";
 
 const i18nNamespaces = ["default"];
@@ -20,7 +21,12 @@ export default async function AuthLayout({
     >
       <div className="flex flex-col h-[100vh] dark:bg-dark-background-color">
         <Header />
-        {children}
+        <div className=" relative h-full ">
+          <Menu />
+          <div className=" h-full lg:ml-[212px] text-primary-Shade-1">
+            {children}
+          </div>
+        </div>
       </div>
     </TranslationsProvider>
   );

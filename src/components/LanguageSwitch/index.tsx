@@ -34,7 +34,7 @@ export default function LanguageSwitch() {
       <ArrowDown2 />
       {isOpen && (
         <div
-          className=" absolute w-[126px] lg:w-[216px] lg:rounded-lg rounded p-2 lg:py-4
+          className=" absolute w-[126px] lg:w-[216px] lg:rounded-lg rounded p-2 lg:py-4 z-10
        bg-neutral-2 dark:bg-primary-Shade-1
        top-[50px] lg:top-[66px] right-0"
         >
