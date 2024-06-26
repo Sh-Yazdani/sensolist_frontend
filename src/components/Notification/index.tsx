@@ -51,7 +51,7 @@ export default function Notification() {
     >
       <div className="flex flex-row items-center">
         <TickCircle color="#343434" />
-        <div className="flex flex-col text-natural-8 ml-2">
+        <div className="flex flex-col text-neutral-8 ml-2">
           <div className=" text-2xl">succes</div>
           <div>{alert.message}</div>
         </div>
