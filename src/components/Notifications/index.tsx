@@ -32,17 +32,22 @@ export default function Notifications() {
     },
   ];
   return (
-    <button
-      className="relative flex w-[40px] h-[40px] lg:w-[56px] lg:h-[56px] mx-4 rounded-full
+    <div className="relative">
+      <button
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+        }}
+        className="relative flex w-[40px] h-[40px] lg:w-[56px] lg:h-[56px] mx-4 rounded-full
      dark:bg-white-opacity-100 shadow bg-neutral-3"
-    >
-      <Notification className="m-auto lg:size-8 size-6 dark:text-white text-primary-tint-3" />
-      {newNotification && (
-        <div
-          className="absolute w-[8px] h-[8px] lg:w-2.5 lg:h-2.5 top-0 right-1
+      >
+        <Notification className="m-auto lg:size-8 size-6 dark:text-white text-primary-tint-3" />
+        {newNotification && (
+          <div
+            className="absolute w-[8px] h-[8px] lg:w-2.5 lg:h-2.5 top-0 right-1
       bg-secondary-main rounded-full"
-        ></div>
-      )}
+          ></div>
+        )}
+      </button>
       {isOpen && (
         <div
           className=" overflow-hidden absolute z-10 lg:w-[400px] lg:h-[554px] w-[80vw] max-w-[400px] h-[460px] mx-4
@@ -78,6 +83,6 @@ export default function Notifications() {
           </div>
         </div>
       )}
-    </button>
+    </div>
   );
 }
