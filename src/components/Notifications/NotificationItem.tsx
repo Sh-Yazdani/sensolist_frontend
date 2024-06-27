@@ -26,7 +26,7 @@ export default function NotificationItem(props: NotificationItemProps) {
       : "now";
   return (
     <div className="w-full border-b border-neutral-6 dark:border-neutral-8 py-4 flex flex-col">
-      <div className="flex flex-rowr">
+      <div className="flex flex-row items-center">
         <div className="w-10 h-10">
           {props.new ? (
             <MessageNotif className=" size-8 lg:size-10 text-secondary-main" />
