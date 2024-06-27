@@ -6,7 +6,7 @@ import NotificationItem from "./NotificationItem";
 
 export default function Notifications() {
   const [newNotification, setNewNotification] = useState<boolean>(true);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const fakeNotifications: {
     content: string;
     date: string;

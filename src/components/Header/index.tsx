@@ -2,6 +2,7 @@ import LanguageSwitch from "../LanguageSwitch";
 import Notifications from "../Notifications";
 import ThemeSwitch from "../ThemeSwitch";
 import Logo from "./Logo";
+import ProfileButton from "./ProfileButton";
 
 export default function Header() {
   return (
@@ -15,6 +16,7 @@ export default function Header() {
         <ThemeSwitch />
         <LanguageSwitch />
         <Notifications />
+        <ProfileButton />
       </div>
     </div>
   );
