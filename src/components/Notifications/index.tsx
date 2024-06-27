@@ -2,10 +2,35 @@
 
 import { Notification } from "iconsax-react";
 import { useState } from "react";
+import NotificationItem from "./NotificationItem";
 
 export default function Notifications() {
   const [newNotification, setNewNotification] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const fakeNotifications: {
+    content: string;
+    date: string;
+    new: boolean;
+  }[] = [
+    {
+      content:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      date: "Wed Jun 26 2024 19:56:01 GMT+0300 (GMT+03:00)",
+      new: true,
+    },
+    {
+      content:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      date: "Wed Jun 26 2024 19:56:01 GMT+0300 (GMT+03:00)",
+      new: false,
+    },
+    {
+      content:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      date: "Wed Jun 26 2024 19:56:01 GMT+0300 (GMT+03:00)",
+      new: false,
+    },
+  ];
   return (
     <button
       className="relative flex w-[40px] h-[40px] lg:w-[56px] lg:h-[56px] mx-4 rounded-full
@@ -20,7 +45,7 @@ export default function Notifications() {
       )}
       {isOpen && (
         <div
-          className="absolute z-10 lg:w-[400px] lg:h-[554px] w-[100vw] max-w-[400px] h-[460px] mx-4
+          className="absolute z-10 lg:w-[400px] lg:h-[554px] w-[80vw] max-w-[400px] h-[460px] mx-4
       border border-primary-tint-3 rounded-2xl rounded-tr-none
        right-0 top-11 lg:top-16 px-2 py-4 lg:px-4
        bg-white dark:bg-primary-Shade-1"
@@ -31,6 +56,14 @@ export default function Notifications() {
           >
             Notification center
           </div>
+          {fakeNotifications.map((notification) => (
+            <NotificationItem
+              key={notification.content}
+              content={notification.content}
+              new={notification.new}
+              date={notification.date}
+            />
+          ))}
         </div>
       )}
     </button>
