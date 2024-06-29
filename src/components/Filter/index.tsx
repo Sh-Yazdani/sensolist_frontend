@@ -57,7 +57,7 @@ export default function FilterComponent() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="flex lg:hidden items-center gap-2 ml-4
+        className="flex xl:hidden items-center gap-2 ml-4
   border-2 border-neutral-3 rounded-full p-2 text-neutral-7
   dark:border-0 dark:bg-white-opacity-100 dark:text-neutral-3"
       >
@@ -68,13 +68,14 @@ export default function FilterComponent() {
       <div
         className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[800px]
         w-[96%] mr-[2%] right-0 z-10 bg-white mt-12 md:mt-16 px-4
-         lg:max-w-[320px] lg:h-[550px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
-        ${isOpen ? "flex " : "hidden lg:flex"}`}
+         xl:max-w-[320px] xl:h-[650px] xl:!shadow-none xl:rounded-xl xl:border xl:border-primary-tint-3 xl:mt-0
+         dark:bg-black
+        ${isOpen ? "flex " : "hidden xl:flex"}`}
       >
-        <div className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] bg-neutral-6 lg:hidden"></div>
-        <div className="hidden lg:flex pt-6 justify-between items-center">
-          <div className="flex gap-2 items-center text-[32px] text-black">
-            <Filter className=" size-8" />
+        <div className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] bg-neutral-6 xl:hidden dark:bg-neutral-8"></div>
+        <div className="hidden xl:flex pt-6 justify-between items-center">
+          <div className="flex gap-2 items-center text-[24px] text-black dark:text-white">
+            <Filter className=" size-6" />
             <span>Filters</span>
           </div>
           <button
@@ -98,11 +99,12 @@ export default function FilterComponent() {
                         : filterOption
                     );
                   }}
-                  className={`py-4 text-xl capitalize flex items-center justify-between  text-neutral-8
+                  className={`py-4 md: xl:py-8 text-xl capitalize flex items-center justify-between 
+                     text-neutral-8 dark:text-neutral-2
                     ${
                       visibleOptions?.title !== filterOption.title
                         ? i !== filterOptions.length - 1 &&
-                          "border-b border-neutral-6"
+                          "border-b border-neutral-6 dark:border-neutral-7"
                         : ""
                     }`}
                   key={filterOption.title}
@@ -110,7 +112,6 @@ export default function FilterComponent() {
                   <span>{filterOption.title}</span>
                   <ArrowDown2 />
                 </button>
-                {/* {visibleOptions?.title === filterOption.title && ( */}
                 <div
                   className={`flex flex-col transition-all
                     ${
@@ -122,11 +123,11 @@ export default function FilterComponent() {
                   {filterOption.options.map((option, i) => (
                     <div
                       key={option.value}
-                      className={` capitalize pb-2 flex py-3
+                      className={` capitalize pb-2 flex py-3 dark:text-neutral-3
                         ${
                           visibleOptions
                             ? i !== visibleOptions?.options.length - 1 &&
-                              " border-b border-neutral-5"
+                              " border-b border-neutral-5 dark:border-neutral-8"
                             : ""
                         }`}
                     >

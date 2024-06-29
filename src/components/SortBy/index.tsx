@@ -45,7 +45,7 @@ export default function SortBy() {
         }}
         className=" lg:text-xl text-neutral-7 rounded-full p-2 lg:px-4 lg:py-3
       border-2 border-neutral-3 dark:border-none
-      dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[140px]"
+      dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[140px]"
       >
         <span className=" capitalize">{value}</span>
         <ArrowDown2 className="ml-auto" />
