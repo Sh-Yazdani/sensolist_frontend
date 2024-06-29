@@ -9,6 +9,8 @@ import VerificationForm from "./VerificationForm";
 export default function LoginForm() {
   const [formStep, setFormStep] = useState<LoginStepsType>("details");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+
+  // const {t}=useTranslation()
   return (
     <>
       <FormHeader

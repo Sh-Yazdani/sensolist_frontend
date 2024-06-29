@@ -6,7 +6,7 @@ import { TickCircle } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Notification() {
+export default function Alert() {
   const { alerts } = useSelector(
     (state: RootState) => state.notificationReducer
   );
@@ -27,6 +27,7 @@ export default function Notification() {
       }, 30);
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
   useEffect(() => {
     if (alerts.length > 0) {
@@ -51,7 +52,7 @@ export default function Notification() {
     >
       <div className="flex flex-row items-center">
         <TickCircle color="#343434" />
-        <div className="flex flex-col text-natural-8 ml-2">
+        <div className="flex flex-col text-neutral-8 ml-2">
           <div className=" text-2xl">succes</div>
           <div>{alert.message}</div>
         </div>
