@@ -25,13 +25,11 @@ export default function SortBy() {
 
   useEffect(() => {
     const sortParam = searchParams.get("sort");
-    console.log("search params", sortParam);
     if (!value) setValue(sortParam ? sortParam : values[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   useEffect(() => {
-    console.log("value", value);
     router.push(pathname + "?" + createQueryString("sort", value));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);

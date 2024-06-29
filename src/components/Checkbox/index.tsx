@@ -2,7 +2,6 @@
 
 interface CheckboxProps {
   isChecked: boolean;
-  //   setIsChecked: Dispatch<SetStateAction<boolean>>;
   onChange: (a: boolean) => void;
   title: string;
 }
@@ -12,7 +11,6 @@ export default function Checkbox({
   onChange,
   title,
 }: CheckboxProps) {
-  // const [checked, setChecked] = useState<boolean>(isChecked)
   return (
     <label className="relative checkbox-container flex items-center !mb-0">
       <input
