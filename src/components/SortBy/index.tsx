@@ -61,10 +61,12 @@ export default function SortBy() {
                 setIsOpen(false);
               }}
               key={val}
-              className={`py-2 lg:py-4 capitalize text-center text-neutral-7 dark:text-neutral-3 ${
-                i !== values.length - 1 &&
-                "border-b border-neutral-4 dark:border-neutral-7"
-              }`}
+              className={`py-2 lg:py-4 capitalize text-center text-neutral-7 dark:text-neutral-3
+                hover:bg-neutral-3 dark:hover:text-neutral-7
+                 ${
+                   i !== values.length - 1 &&
+                   "border-b border-neutral-4 dark:border-neutral-7"
+                 }`}
             >
               {val}
             </button>
