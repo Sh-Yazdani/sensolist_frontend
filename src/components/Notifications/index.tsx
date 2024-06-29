@@ -38,9 +38,9 @@ export default function Notifications() {
           setIsOpen((prev) => !prev);
         }}
         className="relative flex w-[40px] h-[40px] lg:w-[56px] lg:h-[56px] mx-4 rounded-full
-     dark:bg-white-opacity-100 shadow bg-neutral-3"
+     dark:bg-white-opacity-100 shadow bg-primary-tint-3 md:bg-neutral-3"
       >
-        <Notification className="m-auto lg:size-8 size-6 dark:text-white text-primary-tint-3" />
+        <Notification className="m-auto lg:size-8 size-6 dark:text-white md:text-primary-tint-3" />
         {newNotification && (
           <div
             className="absolute w-[8px] h-[8px] lg:w-2.5 lg:h-2.5 top-0 right-1
