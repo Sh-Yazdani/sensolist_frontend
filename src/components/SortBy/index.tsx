@@ -1,12 +1,41 @@
 "use client";
 
 import { ArrowDown2 } from "iconsax-react";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 export default function SortBy() {
   const values: string[] = ["newest", "oldest", "name"];
   const [value, setValue] = useState<string>(values[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  useEffect(() => {
+    const sortParam = searchParams.get("sort");
+    console.log("search params", sortParam);
+    if (!value) setValue(sortParam ? sortParam : values[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  useEffect(() => {
+    console.log("value", value);
+    router.push(pathname + "?" + createQueryString("sort", value));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
   return (
     <div className="flex items-center relative">
       <span className="hidden lg:flex text-xl mr-2 text-neutral-7 dark:text-neutral-3">
@@ -24,9 +53,13 @@ export default function SortBy() {
         <ArrowDown2 />
       </button>
       {isOpen && (
-        <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16">
+        <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16 flex flex-col">
           {values.map((val: string, i: number) => (
-            <div
+            <button
+              onClick={() => {
+                setValue(val);
+                setIsOpen(false);
+              }}
               key={val}
               className={`py-2 lg:py-4 capitalize text-center text-neutral-7 dark:text-neutral-3 ${
                 i !== values.length - 1 &&
@@ -34,7 +67,7 @@ export default function SortBy() {
               }`}
             >
               {val}
-            </div>
+            </button>
           ))}
         </div>
       )}
