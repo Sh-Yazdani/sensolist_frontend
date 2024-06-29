@@ -24,7 +24,7 @@ const config: Config = {
       "neutral-7": "#6B6B6B",
       "neutral-8": "#343434",
       white: "#ffffff",
-      black: "#000000",
+      black: "#090909",
       "dark-background-color": "#070B15",
       "white-opacity-900": "rgba(255, 255, 255, 0.90)",
       "white-opacity-800": "rgba(255, 255, 255, 0.80)",
