@@ -16,3 +16,11 @@ export interface INotificationAlert {
   message: string;
   type: "success" | "warning" | "error";
 }
+
+export interface IThings {
+  id: string;
+  name: string;
+  model: string;
+  type: string;
+  images: string[];
+}
