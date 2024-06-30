@@ -1,3 +1,4 @@
+import ProductDetailsContent from "@/components/ProductDetailsContent";
 import ProductDetailsHeader from "@/components/ProductDetailsHeader";
 
 const fakeThing = {
@@ -27,7 +28,18 @@ export default function ProducDetailsPage({
   return (
     <div className=" h-full">
       <ProductDetailsHeader />
-      <span>details : {params.slug}</span>
+      <div className="flex flex-col px-4">
+        <ProductDetailsContent
+          name={fakeThing.name}
+          brand={fakeThing.brand}
+          model={fakeThing.model}
+          type={fakeThing.type}
+          actions={fakeThing.actions}
+          charactristics={fakeThing.charactristics}
+          activitionDate={fakeThing.activationDate}
+          description={fakeThing.description}
+        />
+      </div>
     </div>
   );
 }
