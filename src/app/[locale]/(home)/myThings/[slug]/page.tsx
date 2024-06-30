@@ -1,3 +1,5 @@
+import ProductDetailsHeader from "@/components/ProductDetailsHeader";
+
 const fakeThing = {
   id: "1",
   name: "product’s name",
@@ -22,5 +24,10 @@ export default function ProducDetailsPage({
 }: {
   params: { slug: string };
 }) {
-  return <div>details : {params.slug}</div>;
+  return (
+    <div className=" h-full">
+      <ProductDetailsHeader />
+      <span>details : {params.slug}</span>
+    </div>
+  );
 }
