@@ -1,5 +1,6 @@
 import ProductDetailsContent from "@/components/ProductDetailsContent";
 import ProductDetailsHeader from "@/components/ProductDetailsHeader";
+import ProductDetailsGallery from "@/components/ProductDtailsGallery";
 
 const fakeThing = {
   id: "1",
@@ -26,9 +27,12 @@ export default function ProducDetailsPage({
   params: { slug: string };
 }) {
   return (
-    <div className=" h-full">
+    <div className=" h-full overflow-auto">
       <ProductDetailsHeader />
-      <div className="flex flex-col px-4">
+      <div className="flex flex-col px-4 xl:flex-row">
+        {/* <div className="xl:w-1/2 bg-error"> */}
+        <ProductDetailsGallery images={fakeThing.images} />
+        {/* </div> */}
         <ProductDetailsContent
           name={fakeThing.name}
           brand={fakeThing.brand}

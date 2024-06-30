@@ -20,7 +20,7 @@ export default function ProductDetailsContent({
   description,
 }: ProductDetailsContentProps) {
   return (
-    <div className=" flex flex-col gap-8">
+    <div className=" flex flex-col gap-8 xl:pl-10">
       <div className="text-lg text-black font-medium capitalize dark:text-white">
         {name}
       </div>
