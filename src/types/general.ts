@@ -23,4 +23,9 @@ export interface IThings {
   model: string;
   type: string;
   images: string[];
+  brand: string;
+  actions: string;
+  charactristics: string;
+  activationDate: string;
+  description: string;
 }

@@ -1,5 +1,6 @@
 import { IThings } from "@/types/general";
 import Image from "next/image";
+import Link from "next/link";
 
 interface MyThingCardProps {
   thing: IThings;
@@ -7,7 +8,10 @@ interface MyThingCardProps {
 
 export default function MyThingCard({ thing }: MyThingCardProps) {
   return (
-    <div className="w-[calc(50%-8px)] lg:w-[calc(33%-8px)] shadow-300 shadow-white-150 rounded-2xl overflow-hidden flex flex-col mb-4">
+    <Link
+      href={`/myThings/${thing.id}`}
+      className="w-[calc(50%-8px)] lg:w-[calc(33%-8px)] shadow-300 shadow-white-150 rounded-2xl overflow-hidden flex flex-col mb-4"
+    >
       <div className="w-full aspect-[3/2] relative">
         <Image
           src={thing.images[0] || "/assets"}
@@ -26,6 +30,6 @@ export default function MyThingCard({ thing }: MyThingCardProps) {
           {thing.type}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -16,6 +16,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
   {
     id: "2",
@@ -28,6 +34,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
   {
     id: "3",
@@ -40,6 +52,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
   {
     id: "4",
@@ -52,6 +70,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
   {
     id: "5",
@@ -64,6 +88,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
   {
     id: "6",
@@ -76,6 +106,12 @@ const fakeThings: IThings[] = [
       "/assets/thing.jpeg",
       "/assets/thing.jpeg",
     ],
+    brand: "brand name",
+    actions: "product action",
+    charactristics: "product characteristics",
+    activationDate: "2023 dec 08",
+    description:
+      "a short description about the sensor it could be a bit longer like this.  ",
   },
 ];
 
