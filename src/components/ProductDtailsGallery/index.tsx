@@ -28,7 +28,7 @@ export default function ProductDetailsGallery({
     [AdaptiveHeight]
   );
   return (
-    <div className="w-[60%] flex">
+    <div className="xl:w-[60%] w-full flex mx-auto">
       <div className="w-[25%] h-full xl:flex flex-col gap-2 pr-4 hidden">
         {images.map((img, i) => (
           <div
