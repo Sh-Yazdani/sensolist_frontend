@@ -20,9 +20,9 @@ export default async function AuthLayout({
       resources={resources}
       namespaces={i18nNamespaces}
     >
-      <div className="flex flex-col dark:bg-dark-background-color ">
+      <div className="flex flex-col dark:bg-dark-background-color min-h-[100vh]">
         <Header />
-        <div className=" relative h-full lg:mb-4 ">
+        <div className=" relative h-full lg:mb-4">
           <Menu />
           <div className=" h-full lg:ml-[212px] text-primary-Shade-1 overflow-auto">
             {children}
