@@ -47,7 +47,7 @@ export default function SortBy() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className=" text-neutral-7 rounded-full py-2 px-4 lg:py-[11px] text-sm z-10
+        className=" text-neutral-7 rounded-full py-2 px-4 lg:py-[11px] text-sm
       border-2 border-neutral-3 dark:border-none
       dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[120px]"
       >
@@ -61,7 +61,7 @@ export default function SortBy() {
               setIsOpen(false);
             }}
           />
-          <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-30">
+          <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-10">
             {values.map((val: string, i: number) => (
               <button
                 onClick={() => {
