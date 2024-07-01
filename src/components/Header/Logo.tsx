@@ -6,7 +6,7 @@ export default function Logo() {
     bg-cover bg-[url('/assets/sensolist-logo.svg')]"
       ></div>
       <span
-        className="hidden md:flex ml-2 lg:ml-6 lg:text-[24px] 
+        className="hidden md:flex ml-2 lg:text-[24px] 
       text-primary dark:text-neutral-2 capitalize"
       >
         sensolist

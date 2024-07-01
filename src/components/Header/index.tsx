@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div
       className="flex items-center w-full rounded-b-2xl
-    p-4 md:pt-10
+    p-4 md:pt-6 md:pb-6
     bg-primary-Shade-2 md:bg-transparent"
     >
       <Logo />
