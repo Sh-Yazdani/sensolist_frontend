@@ -1,3 +1,4 @@
+import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -21,6 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeModeScript />
+      </head>
       <body className={poppins.className}>
         <Providers>{children}</Providers>
       </body>

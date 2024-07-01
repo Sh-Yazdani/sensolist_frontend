@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
+    "flowbite-react": "^0.10.1",
     "i18next": "^23.11.5",
     "i18next-resources-to-backend": "^1.2.1",
     "i18nexus-cli": "^3.4.0",
     "iconsax-react": "^0.0.8",
-    "keen-slider": "^6.8.6",
     "next": "14.2.4",
     "next-i18n-router": "^5.5.0",
     "next-themes": "^0.3.0",
