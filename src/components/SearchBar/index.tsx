@@ -10,7 +10,7 @@ export default function SearchBar() {
       <div className="w-full relative lg:h-full">
         <input
           placeholder="search"
-          className="w-full rounded-full bg-white-opacity-100 h-[40px] pl-16
+          className="w-full rounded-full bg-white-opacity-100 h-[40px] pl-10
          placeholder:text-sm placeholder:text-neutral-4 placeholder:capitalize
           focus-visible:outline-none text-neutral-2
            md:border-2 md:border-neutral-3
@@ -19,7 +19,7 @@ export default function SearchBar() {
            dark:md:border-0 dark:md:placeholder:text-neutral-6"
         />
         <SearchNormal
-          className="absolute text-neutral-4 top-2 lg:top-3 left-8 md:text-neutral-7
+          className="absolute text-neutral-4 top-3 lg:top-4 left-4 md:text-neutral-7 size-4
         dark:md:text-neutral-6"
         />
       </div>

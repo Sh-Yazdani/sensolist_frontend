@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <div
-      className="hidden lg:flex flex-col w-full h-[70px] md:h-[88px] lg:h-[116px] mt-auto 
+      className="hidden md:flex flex-col w-full h-[70px] mt-auto 
     dark:text-neutral-5 text-neutral-8"
     >
       <div
@@ -9,7 +9,7 @@ export default function Footer() {
         dark:to-[#192F44] dark:from-[#11406C]
       "
       ></div>
-      <div className="m-auto text-sm md:text-base lg:text-xl">
+      <div className="m-auto text-sm">
         {" "}
         © 2024 sensolist.com ,all rights reserved
       </div>

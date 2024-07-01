@@ -21,9 +21,10 @@ export default function Menu() {
   return (
     <div
       className=" absolute rounded-t-2xl flex flex-row md:flex-col
-     bg-primary-tint-1 dark:bg-primary-Shade-2 md:ml-8 lg:ml-10
-     bottom-0 w-full h-[62px] md:w-[64px] lg:w-[80px] md:h-full md:bg-transparent dark:md:bg-transparent 
-     px-9 pt-2 items-center justify-between md:justify-start md:gap-8"
+     bg-primary-tint-1 dark:bg-primary-Shade-2 md:ml-4
+     bottom-0 w-full h-[62px] md:w-[64px] lg:w-[80px] md:h-full 
+     md:bg-transparent dark:md:bg-transparent 
+     px-9 pt-2 items-center justify-between md:justify-start md:gap-2"
     >
       <button
         onClick={() => {
@@ -38,7 +39,7 @@ export default function Menu() {
         }`}
       >
         <Profile
-          className="md:text-neutral-7 md:size-8 dark:text-white"
+          className="md:text-neutral-7 md:size-6 dark:text-white"
           variant={pathname.includes("/profile") ? "Bold" : undefined}
           color={pathname.includes("/profile") ? "#E67F3A" : undefined}
         />
@@ -57,7 +58,7 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/myThings`);
         }}
-        className={` flex flex-col items-center  md:bg-black-opacity-50 order-2
+        className={` flex flex-col items-center md:bg-black-opacity-50 order-2
         w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname.includes("/myThings")
@@ -66,7 +67,7 @@ export default function Menu() {
         }`}
       >
         <Cpu
-          className="md:text-neutral-7 md:size-8 dark:text-white"
+          className="md:text-neutral-7 md:size-6 dark:text-white"
           variant={pathname.includes("/myThings") ? "Bold" : undefined}
           color={pathname.includes("/myThings") ? "#E67F3A" : undefined}
         />
@@ -94,7 +95,7 @@ export default function Menu() {
         }`}
       >
         <Home2
-          className="md:text-neutral-7 md:size-8 dark:text-white"
+          className="md:text-neutral-7 md:size-6 dark:text-white"
           variant={
             pathname === `/${locale === "en" ? "" : locale}`
               ? "Bold"
@@ -130,7 +131,7 @@ export default function Menu() {
         }`}
       >
         <Element3
-          className="md:text-neutral-7 md:size-8 dark:text-white"
+          className="md:text-neutral-7 md:size-6 dark:text-white"
           variant={pathname.includes("/dashboard") ? "Bold" : undefined}
           color={pathname.includes("/dashboard") ? "#E67F3A" : undefined}
         />
@@ -158,7 +159,7 @@ export default function Menu() {
         }`}
       >
         <Setting4
-          className="md:text-neutral-7 md:size-8 dark:text-white"
+          className="md:text-neutral-7 md:size-6 dark:text-white"
           variant={pathname.includes("/settings") ? "Bold" : undefined}
           color={pathname.includes("/settings") ? "#E67F3A" : undefined}
         />

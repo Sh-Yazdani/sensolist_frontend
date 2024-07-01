@@ -12,7 +12,7 @@ export default function Checkbox({
   title,
 }: CheckboxProps) {
   return (
-    <label className="relative checkbox-container flex items-center !mb-0">
+    <label className="relative checkbox-container flex items-center !mb-0 text-xs">
       <input
         className={isChecked ? "checked" : ""}
         type="checkbox"

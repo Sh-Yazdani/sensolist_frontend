@@ -3,6 +3,7 @@
 import { ArrowDown2, Filter } from "iconsax-react";
 import { useState } from "react";
 import Checkbox from "../Checkbox";
+import DropDownModal from "../UI/DropDownModal";
 
 export default function FilterComponent() {
   const filterOptions: {
@@ -59,29 +60,36 @@ export default function FilterComponent() {
         }}
         className="flex lg:hidden items-center gap-2 ml-4
   border-2 border-neutral-3 rounded-full p-2 text-neutral-7
-  dark:border-0 dark:bg-white-opacity-100 dark:text-neutral-3"
+  dark:border-0 dark:bg-white-opacity-100 dark:text-neutral-3 text-sm"
       >
-        <Filter />
+        <Filter className="size-4" />
         <span className=" capitalize ">Filters</span>
       </button>
       <div
-        className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[800px]
-        w-[96%] right-0 z-10 bg-white mt-12 md:mt-16 px-4
+        className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
+        w-[96%] z-10 bg-white mt-12 md:mt-12 px-4 lg:right-0
          lg:w-[264px] lg:h-[650px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
          dark:bg-black
         ${isOpen ? "flex " : "hidden lg:flex"}`}
       >
+        {isOpen && (
+          <DropDownModal
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          />
+        )}
         <div className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] bg-neutral-6 lg:hidden dark:bg-neutral-8"></div>
         <div className="hidden lg:flex pt-6 justify-between items-center">
-          <div className="flex gap-2 items-center text-[24px] text-black dark:text-white">
-            <Filter className=" size-6" />
+          <div className="flex gap-2 items-center text-lg text-black dark:text-white">
+            <Filter className=" size-5" />
             <span>Filters</span>
           </div>
           <button
             onClick={() => {
               setSelectedOptions([]);
             }}
-            className=" capitalize text-neutral-6"
+            className=" capitalize text-neutral-6 text-sm"
           >
             remove all
           </button>
@@ -98,7 +106,7 @@ export default function FilterComponent() {
                         : filterOption
                     );
                   }}
-                  className={`py-4 md: lg:py-8 text-xl capitalize flex items-center justify-between 
+                  className={`py-4 md: lg:4 capitalize flex items-center justify-between 
                      text-neutral-8 dark:text-neutral-2
                     ${
                       visibleOptions?.title !== filterOption.title
@@ -109,13 +117,13 @@ export default function FilterComponent() {
                   key={filterOption.title}
                 >
                   <span>{filterOption.title}</span>
-                  <ArrowDown2 />
+                  <ArrowDown2 className=" size-4" />
                 </button>
                 <div
                   className={`flex flex-col transition-all
                     ${
                       visibleOptions?.title === filterOption.title
-                        ? " mt-6 visible"
+                        ? " mt-0 visible"
                         : " invisible h-0 m-0"
                     }`}
                 >
