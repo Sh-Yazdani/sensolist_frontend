@@ -22,9 +22,9 @@ export default async function AuthLayout({
     >
       <div className="flex flex-col dark:bg-dark-background-color min-h-[100vh]">
         <Header />
-        <div className=" relative h-full lg:mb-4">
+        <div className=" relative h-full lg:mb-4 flex-1 min-h-[800px]">
           <Menu />
-          <div className=" h-full lg:ml-[212px] text-primary-Shade-1 overflow-auto">
+          <div className=" h-full lg:ml-[212px] text-primary-Shade-1 overflow-auto pb-[62px] lg:pb-0">
             {children}
           </div>
         </div>
