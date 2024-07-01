@@ -2,6 +2,7 @@
 
 import { Notification } from "iconsax-react";
 import { useState } from "react";
+import DropDownModal from "../UI/DropDownModal";
 import NotificationItem from "./NotificationItem";
 
 export default function Notifications() {
@@ -49,39 +50,47 @@ export default function Notifications() {
         )}
       </button>
       {isOpen && (
-        <div
-          className=" overflow-hidden absolute z-10 lg:w-[400px] lg:h-[554px] w-[80vw] max-w-[400px] h-[460px] mx-4
+        <>
+          <DropDownModal
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          />
+          <div
+            className=" overflow-hidden absolute z-20 
+          lg:w-[400px] lg:h-[554px] w-[80vw] max-w-[400px] h-[460px] mx-4
       border border-primary-tint-3 rounded-2xl rounded-tr-none
        right-0 top-11 lg:top-16 px-2 py-4 lg:px-4
        bg-white dark:bg-primary-Shade-1"
-        >
-          <div
-            className=" w-full border-b text-black border-neutral-6 text-xl text-start pb-2
+          >
+            <div
+              className=" w-full border-b text-black border-neutral-6 text-xl text-start pb-2
           lg:text-2xl dark:text-neutral-2 dark:border-neutral-3"
-          >
-            Notification center
-          </div>
-          {fakeNotifications.map((notification) => (
-            <NotificationItem
-              key={notification.content}
-              content={notification.content}
-              new={notification.new}
-              date={notification.date}
-            />
-          ))}
+            >
+              Notification center
+            </div>
+            {fakeNotifications.map((notification) => (
+              <NotificationItem
+                key={notification.content}
+                content={notification.content}
+                new={notification.new}
+                date={notification.date}
+              />
+            ))}
 
-          <div
-            className="absolute h-14 w-full bg-white dark:bg-primary-Shade-1 left-0 bottom-0
+            <div
+              className="absolute h-14 w-full bg-white dark:bg-primary-Shade-1 left-0 bottom-0
           flex items-center gap-2 px-4"
-          >
-            <button className="w-1/2 bg-secondary-main rounded-lg text-white py-1.5 border-2 border-secondary-main">
-              view all
-            </button>
-            <button className="w-1/2 rounded-lg border-2 border-secondary-main text-secondary-main py-1.5 whitespace-nowrap">
-              mark all as read
-            </button>
+            >
+              <button className="w-1/2 bg-secondary-main rounded-lg text-white py-1.5 border-2 border-secondary-main">
+                view all
+              </button>
+              <button className="w-1/2 rounded-lg border-2 border-secondary-main text-secondary-main py-1.5 whitespace-nowrap">
+                mark all as read
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

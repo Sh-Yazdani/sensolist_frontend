@@ -6,6 +6,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { i18nConfig } from "../../../i18nConfig";
+import DropDownModal from "../UI/DropDownModal";
 
 export default function LanguageSwitch() {
   const { t } = useTranslation();
@@ -33,38 +34,47 @@ export default function LanguageSwitch() {
       <span className="mx-1 uppercase text-sm lg:text-base">{locale}</span>
       <ArrowDown2 />
       {isOpen && (
-        <div
-          className=" absolute w-[126px] lg:w-[216px] lg:rounded-lg rounded p-2 lg:py-4 z-10
+        <>
+          <DropDownModal
+            onClick={() => {
+              () => {
+                setIsOpen(false);
+              };
+            }}
+          />
+          <div
+            className=" absolute w-[126px] lg:w-[216px] lg:rounded-lg rounded p-2 lg:py-4 z-20
        bg-neutral-2 dark:bg-primary-Shade-1
        top-[50px] lg:top-[66px] right-0"
-        >
-          {locales.map((loc, i) => (
-            <button
-              onClick={() => {
-                if (locale === i18nConfig.defaultLocale) {
-                  router.push("/" + loc.value + pathname);
-                } else {
-                  const newPath = pathname.replace(
-                    `/${locale}`,
-                    `/${loc.value}`
-                  );
-                  router.push(newPath);
-                }
-                // router.replace(`/${loc.value}${pathname}`);
-              }}
-              className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center w-full
+          >
+            {locales.map((loc, i) => (
+              <button
+                onClick={() => {
+                  if (locale === i18nConfig.defaultLocale) {
+                    router.push("/" + loc.value + pathname);
+                  } else {
+                    const newPath = pathname.replace(
+                      `/${locale}`,
+                      `/${loc.value}`
+                    );
+                    router.push(newPath);
+                  }
+                  // router.replace(`/${loc.value}${pathname}`);
+                }}
+                className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center w-full
             text-neutral-7 dark:text-neutral-2 ${
               i !== 0 && "border-t border-neutral-4 dark:border-primary-tint-1"
             }`}
-              key={loc.value}
-            >
-              <div className="w-5 h-4 lg:w-7 lg:h-5 relative mr-4 lg:mr-2">
-                <Image src={loc.flag} alt="flag" layout="fill" />
-              </div>
-              {loc.title}
-            </button>
-          ))}
-        </div>
+                key={loc.value}
+              >
+                <div className="w-5 h-4 lg:w-7 lg:h-5 relative mr-4 lg:mr-2">
+                  <Image src={loc.flag} alt="flag" layout="fill" />
+                </div>
+                {loc.title}
+              </button>
+            ))}
+          </div>
+        </>
       )}
     </button>
   );

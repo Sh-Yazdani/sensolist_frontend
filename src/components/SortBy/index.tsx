@@ -3,6 +3,7 @@
 import { ArrowDown2 } from "iconsax-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import DropDownModal from "../UI/DropDownModal";
 
 export default function SortBy() {
   const values: string[] = ["newest", "oldest", "name"];
@@ -51,25 +52,32 @@ export default function SortBy() {
         <ArrowDown2 className="ml-auto" />
       </button>
       {isOpen && (
-        <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16 flex flex-col z-20">
-          {values.map((val: string, i: number) => (
-            <button
-              onClick={() => {
-                setValue(val);
-                setIsOpen(false);
-              }}
-              key={val}
-              className={`py-2 lg:py-4 capitalize text-center text-neutral-7 dark:text-neutral-3
+        <>
+          <DropDownModal
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          />
+          <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16 flex flex-col z-30">
+            {values.map((val: string, i: number) => (
+              <button
+                onClick={() => {
+                  setValue(val);
+                  setIsOpen(false);
+                }}
+                key={val}
+                className={`py-2 lg:py-4 capitalize text-center text-neutral-7 dark:text-neutral-3
                 hover:bg-neutral-3 dark:hover:text-neutral-7
                  ${
                    i !== values.length - 1 &&
                    "border-b border-neutral-4 dark:border-neutral-7"
                  }`}
-            >
-              {val}
-            </button>
-          ))}
-        </div>
+              >
+                {val}
+              </button>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
