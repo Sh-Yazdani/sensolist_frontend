@@ -24,7 +24,7 @@ export function CustomPhoneInput({
 }: InputProps) {
   return (
     <label className="w-full relative">
-      <span className="mb-4 md:text-xl">{label}</span>
+      <span className="mb-4 text-sm lg:text-base">{label}</span>
       <ReactPhoneInput
         disableSearchIcon
         enableSearch={true}

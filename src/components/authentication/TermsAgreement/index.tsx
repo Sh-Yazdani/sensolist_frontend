@@ -13,7 +13,10 @@ export default function TermsAgreement({
   error,
 }: TermsAgreementProps) {
   return (
-    <label className="relative checkbox-container flex items-center mt-[33px] md:mt-11 text-sm lg:text-xl">
+    <label
+      className="relative checkbox-container flex items-center 
+    mt-[33px] md:mt-9 text-sm lg:text-base"
+    >
       <input
         className={isChecked ? "checked" : ""}
         type="checkbox"
