@@ -8,7 +8,7 @@ export default function AuthLayout({
 }) {
   return (
     <div
-      className=" h-[100vh] flex overflow-y-auto
+      className=" h-[100vh] flex overflow-y-auto flex-col
        bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center px-4"
     >
       <Alert />
