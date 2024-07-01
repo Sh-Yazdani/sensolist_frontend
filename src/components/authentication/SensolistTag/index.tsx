@@ -6,7 +6,7 @@ export default function SensolistTag() {
       className=" bg-gradient-opacity rounded-2xl p-4 
   border border-white-opacity-900 items-center
   bottom-[160px] left-[120px] backdrop-blur-xl z-10
-  flex mt-6 max-w-[300px] mx-auto
+  flex mt-6 md:max-w-[300px] mx-auto
   lg:absolute"
     >
       <Image
