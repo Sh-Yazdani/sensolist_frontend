@@ -51,7 +51,7 @@ export default function SortBy() {
         <ArrowDown2 className="ml-auto" />
       </button>
       {isOpen && (
-        <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16 flex flex-col">
+        <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[153px] lg:w-[200px] overflow-hidden left-0 top-12 lg:top-16 flex flex-col z-20">
           {values.map((val: string, i: number) => (
             <button
               onClick={() => {
