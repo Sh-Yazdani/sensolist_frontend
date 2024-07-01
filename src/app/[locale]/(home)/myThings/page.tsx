@@ -123,7 +123,7 @@ export default function Page() {
         <FilterComponent />
         <SortBy />
       </div>
-      <div className="mt-4 flex flex-wrap justify-between xl:mr-[360px]">
+      <div className="mt-4 flex flex-wrap justify-between xl:mr-[380px]">
         {fakeThings.map((thing) => (
           <MyThingCard key={thing.id} thing={thing} />
         ))}
