@@ -10,7 +10,7 @@ export default function MyThingCard({ thing }: MyThingCardProps) {
   return (
     <Link
       href={`/myThings/${thing.id}`}
-      className="w-full md:w-[calc(50%-8px)] shadow-300 shadow-white-150 rounded-2xl overflow-hidden flex flex-col mb-4"
+      className="w-full md:w-[calc(50%-8px)] xl:w-[calc(33%-8px)] shadow-300 shadow-white-150 rounded-2xl overflow-hidden flex flex-col mb-4"
     >
       <div className="w-full aspect-[3/2] relative">
         <Image
@@ -19,7 +19,7 @@ export default function MyThingCard({ thing }: MyThingCardProps) {
           alt={thing.name}
         />
       </div>
-      <div className="flex flex-col p-2">
+      <div className="flex flex-col p-5">
         <div className=" text-neutral-8 text-sm capitalize text-start font-medium dark:text-neutral-3">
           {thing.name}
         </div>

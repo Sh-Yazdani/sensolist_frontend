@@ -43,7 +43,7 @@ export default function LanguageSwitch() {
             }}
           />
           <div
-            className=" absolute w-[126px] lg:rounded-lg rounded p-2 z-20
+            className=" absolute w-[200px] lg:rounded-lg rounded p-2 z-20
        bg-neutral-2 dark:bg-primary-Shade-1
        top-[50px] right-0"
           >
