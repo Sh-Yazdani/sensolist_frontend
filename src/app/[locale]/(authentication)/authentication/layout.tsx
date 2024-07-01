@@ -8,17 +8,18 @@ export default function AuthLayout({
 }) {
   return (
     <div
-      className=" h-[100vh] flex justify-end overflow-y-auto
-      pt-20 md:pt-[120px] lg:pt-40
-       px-4 md:px-[72px] lg:pr-[120px]
-       bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center"
+      className=" h-[100vh] flex overflow-y-auto flex-col
+       bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center px-4"
     >
       <Alert />
       <div
-        className="max-w-[800px] lg:w-[45%] lg:min-w-[560px] flex w-full h-fit
+        className=" flex w-full h-fit flex-col z-20
+        max-w-[480px]
+        mt-10 mx-auto lg:ml-auto lg:mr-24
+        py-4 px-2 md:py-8 md:px-6 lg:px-8
         border border-white-opacity-900 rounded-3xl
       bg-gradient-opacity backdrop-blur-xl
-      px-4 py-8 md:px-20 lg:py-10 flex-col z-20"
+      "
       >
         {children}
       </div>

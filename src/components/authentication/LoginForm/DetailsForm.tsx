@@ -41,7 +41,7 @@ export default function DetailsForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full mt-10 md:mt-14 lg:mt-20"
+      className="w-full mt-6 md:mt-8 lg:mt-10"
     >
       <Controller
         name="phoneNumber"
@@ -72,7 +72,7 @@ export default function DetailsForm({
       />
       <Link
         href="/authentication/forgetPassword"
-        className="flex mt-2 text-white-opacity-900 ml-auto w-fit"
+        className="flex mt-2 text-white-opacity-900 ml-auto w-fit text-xs md:text-base"
       >
         Forgot password?
       </Link>

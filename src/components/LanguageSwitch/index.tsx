@@ -26,7 +26,7 @@ export default function LanguageSwitch() {
       onClick={() => {
         setIsOpen((prev) => !prev);
       }}
-      className="relative flex items-center h-[40px] w-[89px] lg:h-[56px] lg:w-[115px] rounded-full md:ml-4
+      className="relative flex items-center h-[40px] w-[89px] rounded-full md:ml-4
        dark:text-white md:text-primary-tint-3
    bg-primary-tint-3 dark:bg-white-opacity-100 md:bg-neutral-3 px-3"
     >
@@ -43,9 +43,9 @@ export default function LanguageSwitch() {
             }}
           />
           <div
-            className=" absolute w-[126px] lg:w-[216px] lg:rounded-lg rounded p-2 lg:py-4 z-20
+            className=" absolute w-[126px] lg:rounded-lg rounded p-2 z-20
        bg-neutral-2 dark:bg-primary-Shade-1
-       top-[50px] lg:top-[66px] right-0"
+       top-[50px] right-0"
           >
             {locales.map((loc, i) => (
               <button
@@ -61,13 +61,13 @@ export default function LanguageSwitch() {
                   }
                   // router.replace(`/${loc.value}${pathname}`);
                 }}
-                className={`py-1 px-2 lg:py-3 lg:px-4 lg:text-xl flex items-center w-full
+                className={`py-1 px-2 flex items-center w-full
             text-neutral-7 dark:text-neutral-2 ${
               i !== 0 && "border-t border-neutral-4 dark:border-primary-tint-1"
             }`}
                 key={loc.value}
               >
-                <div className="w-5 h-4 lg:w-7 lg:h-5 relative mr-4 lg:mr-2">
+                <div className="w-5 h-4 relative mr-4 lg:mr-2">
                   <Image src={loc.flag} alt="flag" layout="fill" />
                 </div>
                 {loc.title}

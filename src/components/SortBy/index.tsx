@@ -37,16 +37,19 @@ export default function SortBy() {
 
   return (
     <div className="flex items-center relative">
-      <span className="hidden lg:flex text-xl mr-2 text-neutral-7 dark:text-neutral-3 whitespace-nowrap">
+      <span
+        className="hidden lg:flex text-xl mr-2 
+      text-neutral-7 dark:text-neutral-3 whitespace-nowrap"
+      >
         Sort By:
       </span>
       <button
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className=" lg:text-xl text-neutral-7 rounded-full p-2 lg:px-4 lg:py-3
+        className=" text-neutral-7 rounded-full p-2 lg:px-4 lg:py-[11px]
       border-2 border-neutral-3 dark:border-none
-      dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[140px]"
+      dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[120px]"
       >
         <span className=" capitalize">{value}</span>
         <ArrowDown2 className="ml-auto" />

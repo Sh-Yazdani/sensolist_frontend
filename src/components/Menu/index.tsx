@@ -20,34 +20,34 @@ export default function Menu() {
   console.log("locale", locale);
   return (
     <div
-      className=" absolute rounded-t-2xl flex flex-row lg:flex-col
-     bg-primary-tint-1 dark:bg-primary-Shade-2 lg:ml-16
-     bottom-0 w-full h-[62px] lg:w-[116px] lg:h-full lg:bg-transparent dark:lg:bg-transparent 
-     px-9 pt-2 items-center justify-between lg:justify-start lg:gap-8"
+      className=" absolute rounded-t-2xl flex flex-row md:flex-col
+     bg-primary-tint-1 dark:bg-primary-Shade-2 md:ml-8 lg:ml-10
+     bottom-0 w-full h-[62px] md:w-[64px] lg:w-[80px] md:h-full md:bg-transparent dark:md:bg-transparent 
+     px-9 pt-2 items-center justify-between md:justify-start md:gap-8"
     >
       <button
         onClick={() => {
           router.push(`/${locale}/profile`);
         }}
-        className={` flex flex-col items-center lg:bg-black-opacity-50 order-1 lg:order-5
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        className={` flex flex-col items-center md:bg-black-opacity-50 order-1 md:order-5
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname.includes("/profile")
-            ? "dark:lg:bg-white-opacity-200"
-            : "dark:lg:bg-white-opacity-30"
+            ? "dark:md:bg-white-opacity-200"
+            : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Profile
-          className="lg:text-neutral-7 lg:size-10 dark:text-white"
+          className="md:text-neutral-7 md:size-8 dark:text-white"
           variant={pathname.includes("/profile") ? "Bold" : undefined}
           color={pathname.includes("/profile") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize text-secondary-main lg:text-sm
-             lg:text-neutral-7 dark:text-white ${
+          className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs 
+             md:text-neutral-7 dark:text-white ${
                pathname.includes("/profile")
-                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
-                 : "hidden lg:flex"
+                 ? "flex md:text-secondary-main dark:md:text-secondary-main"
+                 : "hidden md:flex"
              }`}
         >
           {t("profile")}
@@ -57,25 +57,25 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/myThings`);
         }}
-        className={` flex flex-col items-center  lg:bg-black-opacity-50 order-2
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        className={` flex flex-col items-center  md:bg-black-opacity-50 order-2
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname.includes("/myThings")
-            ? "dark:lg:bg-white-opacity-200"
-            : "dark:lg:bg-white-opacity-30"
+            ? "dark:md:bg-white-opacity-200"
+            : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Cpu
-          className="lg:text-neutral-7 lg:size-10 dark:text-white"
+          className="md:text-neutral-7 md:size-8 dark:text-white"
           variant={pathname.includes("/myThings") ? "Bold" : undefined}
           color={pathname.includes("/myThings") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize text-secondary-main lg:text-sm
-             lg:text-neutral-7 dark:text-white ${
+          className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs
+             md:text-neutral-7 dark:text-white ${
                pathname.includes("/myThings")
-                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
-                 : "hidden lg:flex"
+                 ? "flex md:text-secondary-main dark:md:text-secondary-main"
+                 : "hidden md:flex"
              }`}
         >
           {t("my-things")}
@@ -85,16 +85,16 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}`);
         }}
-        className={` flex flex-col items-center lg:bg-black-opacity-50 order-3 lg:order-1
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        className={` flex flex-col items-center md:bg-black-opacity-50 order-3 md:order-1
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname === `/${locale === "en" ? "" : locale}`
-            ? "dark:lg:bg-white-opacity-200"
-            : "dark:lg:bg-white-opacity-30"
+            ? "dark:md:bg-white-opacity-200"
+            : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Home2
-          className="lg:text-neutral-7 lg:size-10 dark:text-white"
+          className="md:text-neutral-7 md:size-8 dark:text-white"
           variant={
             pathname === `/${locale === "en" ? "" : locale}`
               ? "Bold"
@@ -107,11 +107,11 @@ export default function Menu() {
           }
         />
         <div
-          className={`text-xs capitalize text-secondary-main lg:text-sm
-             lg:text-neutral-7 dark:text-white ${
+          className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs
+             md:text-neutral-7 dark:text-white ${
                pathname === `/${locale === "en" ? "" : locale}`
-                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
-                 : "hidden lg:flex"
+                 ? "flex md:text-secondary-main dark:md:text-secondary-main"
+                 : "hidden md:flex"
              }`}
         >
           {t("home")}
@@ -121,25 +121,25 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/dashboard`);
         }}
-        className={` flex flex-col items-center lg:bg-black-opacity-50 order-4 lg:order-3
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        className={` flex flex-col items-center md:bg-black-opacity-50 order-4 md:order-3
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname.includes("/dashboard")
-            ? "dark:lg:bg-white-opacity-200"
-            : "dark:lg:bg-white-opacity-30"
+            ? "dark:md:bg-white-opacity-200"
+            : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Element3
-          className="lg:text-neutral-7 lg:size-10 dark:text-white"
+          className="md:text-neutral-7 md:size-8 dark:text-white"
           variant={pathname.includes("/dashboard") ? "Bold" : undefined}
           color={pathname.includes("/dashboard") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize text-secondary-main lg:text-sm
-             lg:text-neutral-7 dark:text-white ${
+          className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs
+             md:text-neutral-7 dark:text-white ${
                pathname.includes("/dashboard")
-                 ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
-                 : "hidden lg:flex"
+                 ? "flex md:text-secondary-main dark:md:text-secondary-main"
+                 : "hidden md:flex"
              }`}
         >
           {t("dashboard")}
@@ -149,33 +149,33 @@ export default function Menu() {
         onClick={() => {
           router.push(`/${locale}/settings`);
         }}
-        className={` flex flex-col items-center lg:bg-black-opacity-50 order-5 lg:order-3
-        w-[74px] lg:w-[100px] lg:h-[100px] rounded-lg lg:justify-center
+        className={` flex flex-col items-center md:bg-black-opacity-50 order-5 md:order-3
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
         ${
           pathname.includes("/settings")
-            ? "dark:lg:bg-white-opacity-200"
-            : "dark:lg:bg-white-opacity-30"
+            ? "dark:md:bg-white-opacity-200"
+            : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Setting4
-          className="lg:text-neutral-7 lg:size-10 dark:text-white"
+          className="md:text-neutral-7 md:size-8 dark:text-white"
           variant={pathname.includes("/settings") ? "Bold" : undefined}
           color={pathname.includes("/settings") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize text-secondary-main lg:text-sm
-            lg:text-neutral-7 dark:text-white ${
+          className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs
+            md:text-neutral-7 dark:text-white ${
               pathname.includes("/settings")
-                ? "flex lg:text-secondary-main dark:lg:text-secondary-main"
-                : " hidden lg:flex"
+                ? "flex md:text-secondary-main dark:md:text-secondary-main"
+                : " hidden md:flex"
             }`}
         >
           {t("applets")}
         </div>
       </button>
-      <button className="hidden lg:flex flex-col items-center order-6">
+      <button className="hidden md:flex flex-col items-center order-6">
         <LogoutCurve size={40} color="#DF2040" />
-        <div className=" capitalize dark:text-neutral-4 text-neutral-7 whitespace-nowrap">
+        <div className=" capitalize dark:text-neutral-4 text-neutral-7 whitespace-nowrap md:text-[10px] lg:text-xs">
           log out
         </div>
       </button>

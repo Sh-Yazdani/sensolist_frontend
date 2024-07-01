@@ -34,7 +34,7 @@ export default function VerificationForm() {
               console.log(val);
             }}
             classNames={{
-              container: "lg:w-[528px] h-[80px] justify-between",
+              container: "justify-between max-w-[280px] lg:max-w-[340px]",
             }}
             inputProps={{
               className: "bg-error",

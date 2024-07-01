@@ -24,7 +24,7 @@ export function PasswordInput({
   const [type, setType] = useState<"password" | "text">("password");
   return (
     <label className={`w-full flex flex-col relative ${className}`}>
-      <span className="mb-2 md:text-xl">{label}</span>
+      <span className="mb-2 text-sm lg:text-base">{label}</span>
       <input
         placeholder={placeholder}
         type={type}
@@ -47,7 +47,7 @@ export function PasswordInput({
           event.preventDefault();
           setType((prev) => (prev === "password" ? "text" : "password"));
         }}
-        className=" absolute bottom-[18px] right-4"
+        className=" absolute bottom-[9px] lg:bottom-4 right-4"
       >
         {type === "password" ? <Eye /> : <EyeSlash />}
       </button>

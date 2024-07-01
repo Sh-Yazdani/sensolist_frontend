@@ -19,7 +19,7 @@ export default function SearchBar() {
            dark:md:border-0 dark:md:placeholder:text-neutral-6"
         />
         <SearchNormal
-          className="absolute text-neutral-4 top-2 lg:top-4 left-8 md:text-neutral-7
+          className="absolute text-neutral-4 top-2 lg:top-3 left-8 md:text-neutral-7
         dark:md:text-neutral-6"
         />
       </div>

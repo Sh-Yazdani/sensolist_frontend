@@ -13,7 +13,7 @@ export default function SubmitButton({
     <button
       disabled={disabled}
       type="submit"
-      className={`bg-orange w-full rounded-lg py-2.5 text-xl 
+      className={`bg-secondary-main w-full rounded-lg py-2.5 text-sm md:text-base 
       font-medium flex items-center justify-center ${className}`}
     >
       {children}
