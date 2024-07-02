@@ -31,7 +31,7 @@ export default function Menu() {
           router.push(`/${locale}/profile`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-1 md:order-5
-        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
           pathname.includes("/profile")
             ? "dark:md:bg-white-opacity-200"
@@ -59,7 +59,7 @@ export default function Menu() {
           router.push(`/${locale}/myThings`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-2
-        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
           pathname.includes("/myThings")
             ? "dark:md:bg-white-opacity-200"
@@ -87,7 +87,7 @@ export default function Menu() {
           router.push(`/${locale}`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-3 md:order-1
-        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
           pathname === `/${locale === "en" ? "" : locale}`
             ? "dark:md:bg-white-opacity-200"
@@ -123,7 +123,7 @@ export default function Menu() {
           router.push(`/${locale}/dashboard`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-4 md:order-3
-        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
           pathname.includes("/dashboard")
             ? "dark:md:bg-white-opacity-200"
@@ -151,7 +151,7 @@ export default function Menu() {
           router.push(`/${locale}/settings`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-5 md:order-3
-        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center
+        w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
           pathname.includes("/settings")
             ? "dark:md:bg-white-opacity-200"

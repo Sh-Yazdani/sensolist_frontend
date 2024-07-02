@@ -13,8 +13,8 @@ export default function ProductDetailsGallery({
 }: ProductDetailsGalleryProps) {
   const [currenSlide, setCurrentSlide] = useState(0);
   return (
-    <div className="xl:w-[50%] w-full flex mx-auto">
-      <div className="w-full aspect-square max-w-[576px] mx-auto md:mx-0 mt-6 mb-9 flex">
+    <div className="lg:w-fit w-full flex mx-auto lg:mx-[unset]">
+      <div className="w-full aspect-square lg:min-w-[480px] max-w-[576px] mx-auto md:mx-0 mt-6 mb-9 flex">
         <div className="w-[160px] h-full hidden md:flex flex-col justify-between mr-4">
           {images.map((img, i) => (
             <div

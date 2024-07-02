@@ -16,30 +16,32 @@ export default function ThemeSwitch() {
   }
   return (
     <div
-      className="hidden md:flex w-[112px] h-[40px]  
-      shadow rounded-full relative gap-2 justify-around
-     dark:bg-white-opacity-100 bg-neutral-3 py-1 px-3"
+      className="flex w-[32px] md:w-[80px] h-[32px] mr-4  
+      shadow rounded-full relative gap-2 justify-around items-center
+     dark:bg-white-opacity-100 bg-white-opacity-100 md:bg-neutral-3 py-0.5 md:px-3"
     >
       <button
-        className="z-10"
+        className={`z-10 ${resolvedTheme === "dark" ? "hidden md:flex" : ""}`}
         onClick={() => {
-          setTheme("light");
+          setTheme(resolvedTheme === "light" ? "dark" : "light");
         }}
       >
-        <Sun1 />
+        <Sun1 className=" size-5" />
       </button>
       <button
-        className="z-10"
+        className={`z-10 ${resolvedTheme === "light" ? "hidden md:flex" : ""}`}
         onClick={() => {
-          setTheme("dark");
+          setTheme(resolvedTheme === "light" ? "dark" : "light");
         }}
       >
-        <Moon className={`${resolvedTheme === "light" && " text-black"}`} />
+        <Moon
+          className={`${resolvedTheme === "light" && " text-black"} size-5`}
+        />
       </button>
       <div
-        className={`absolute dark:bg-white-opacity-200 bg-primary-tint-3
-        rounded-full w-[56px] h-[32px] transition-all
-      left-0 ${resolvedTheme === "dark" ? "ml-12" : " ml-1"}`}
+        className={`absolute dark:bg-white-opacity-200 bg-primary-tint-3 hidden md:flex
+        rounded-full w-[36px] h-[26px] transition-all
+      left-0 ${resolvedTheme === "dark" ? "ml-9" : " ml-1.5"}`}
       ></div>
     </div>
   );

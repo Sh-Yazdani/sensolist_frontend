@@ -52,36 +52,42 @@ export default function SortBy() {
       dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[120px]"
       >
         <span className=" capitalize m-auto">{value}</span>
-        <ArrowDown2 className="ml-auto size-5" />
+        <ArrowDown2 className="ml-auto my-auto size-4" />
       </button>
-      {isOpen && (
-        <>
-          <DropDownModal
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          />
-          <div className=" absolute shadow rounded-lg bg-neutral-2 dark:bg-primary w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-10">
-            {values.map((val: string, i: number) => (
-              <button
-                onClick={() => {
-                  setValue(val);
-                  setIsOpen(false);
-                }}
-                key={val}
-                className={`py-2 lg:py-2 capitalize text-sm text-center text-neutral-7 dark:text-neutral-3
+      {/* {isOpen && ( */}
+      <>
+        <DropDownModal
+          visible={isOpen}
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        />
+        <div
+          className={` absolute shadow rounded-lg bg-neutral-2 dark:bg-primary 
+        w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col
+        transition-all duration-500
+           ${isOpen ? "visible opacity-100 z-30" : " invisible h-0 opacity-0"}`}
+        >
+          {values.map((val: string, i: number) => (
+            <button
+              onClick={() => {
+                setValue(val);
+                setIsOpen(false);
+              }}
+              key={val}
+              className={`py-2 lg:py-2 capitalize text-sm text-center text-neutral-7 dark:text-neutral-3
                 hover:bg-neutral-3 dark:hover:text-neutral-7
                  ${
                    i !== values.length - 1 &&
                    "border-b border-neutral-4 dark:border-neutral-7"
                  }`}
-              >
-                {val}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
+            >
+              {val}
+            </button>
+          ))}
+        </div>
+      </>
+      {/* )} */}
     </div>
   );
 }
