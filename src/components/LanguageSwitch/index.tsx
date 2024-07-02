@@ -26,12 +26,12 @@ export default function LanguageSwitch() {
       onClick={() => {
         setIsOpen((prev) => !prev);
       }}
-      className="relative flex items-center h-[40px] w-[89px] rounded-full md:ml-4
+      className="relative flex items-center h-[32px] w-[89px] rounded-full md:ml-4
        dark:text-white md:text-primary-tint-3
    bg-primary-tint-3 dark:bg-white-opacity-100 md:bg-neutral-3 px-3"
     >
-      <Global className="w-6 h-6 lg:w-8 lg:h-8" />
-      <span className="mx-1 uppercase text-sm lg:text-base">{locale}</span>
+      <Global className="w-6 h-6 lg:w-8 lg:h-8 size-5" />
+      <span className="mx-1 uppercase text-xs lg:text-sm">{locale}</span>
       <ArrowDown2 />
       {/* {isOpen && ( */}
       <>
