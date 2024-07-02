@@ -58,28 +58,30 @@ export default function FilterComponent() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="flex lg:hidden items-center gap-2 ml-4
+        className="flex lg:hidden items-center gap-2 ml-4 relative
   border-2 border-neutral-3 rounded-full p-2 text-neutral-7
   dark:border-0 dark:bg-white-opacity-100 dark:text-neutral-3 text-sm"
       >
         <Filter className="size-4" />
         <span className=" capitalize ">Filters</span>
       </button>
+      <DropDownModal
+        visible={isOpen}
+        onClick={() => {
+          setIsOpen(false);
+        }}
+      />
       <div
         className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
-        w-[96%] z-10 bg-white mt-12 md:mt-12 px-4 lg:right-0
+        w-[96%] z-40 bg-white mt-12 md:mt-12 px-4 lg:right-0
          lg:w-[264px] lg:h-[650px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
-         dark:bg-black
-        ${isOpen ? "flex " : "hidden lg:flex"}`}
+         dark:bg-black flex transition-all duration-500
+        ${isOpen ? "visible opacity-100" : " invisible h-0 opacity-0"}`}
       >
-        {isOpen && (
-          <DropDownModal
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          />
-        )}
-        <div className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] bg-neutral-6 lg:hidden dark:bg-neutral-8"></div>
+        <div
+          className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] 
+        bg-neutral-6 lg:hidden dark:bg-neutral-8"
+        ></div>
         <div className="hidden lg:flex pt-6 justify-between items-center">
           <div className="flex gap-2 items-center text-lg text-black dark:text-white">
             <Filter className=" size-5" />
