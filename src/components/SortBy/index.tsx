@@ -64,9 +64,9 @@ export default function SortBy() {
         />
         <div
           className={` absolute shadow rounded-lg bg-neutral-2 dark:bg-primary 
-        w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-30
+        w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col
         transition-all duration-500
-           ${isOpen ? "visible opacity-100" : " invisible h-0 opacity-0"}`}
+           ${isOpen ? "visible opacity-100 z-30" : " invisible h-0 opacity-0"}`}
         >
           {values.map((val: string, i: number) => (
             <button

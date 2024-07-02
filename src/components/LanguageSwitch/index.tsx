@@ -32,7 +32,7 @@ export default function LanguageSwitch() {
     >
       <Global className="size-5" />
       <span className="mx-1 uppercase text-xs lg:text-sm">{locale}</span>
-      <ArrowDown2 className="hidden lg:flex" />
+      <ArrowDown2 className="hidden lg:flex size-5" />
       {/* {isOpen && ( */}
       <>
         <DropDownModal
@@ -44,12 +44,12 @@ export default function LanguageSwitch() {
           }}
         />
         <div
-          className={` absolute w-[200px] lg:rounded-lg rounded z-50
+          className={` absolute w-[200px] lg:rounded-lg rounded
        bg-neutral-2 dark:bg-primary-Shade-1
        top-[50px] right-0 transition-all duration-500
         ${
           isOpen
-            ? "visible opacity-100 p-2"
+            ? "visible opacity-100 p-2 z-50"
             : " invisible h-0 opacity-0 lg:visible lg:opacity-100"
         }`}
         >

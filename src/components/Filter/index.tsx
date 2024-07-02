@@ -73,12 +73,12 @@ export default function FilterComponent() {
       />
       <div
         className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
-        w-[96%] z-30 bg-white mt-12 md:mt-12 px-4 lg:right-0
+        w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0
          lg:w-[264px] lg:h-[650px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
          dark:bg-black flex transition-all duration-500
         ${
           isOpen
-            ? "visible opacity-100"
+            ? "visible opacity-100 z-30"
             : " invisible h-0 opacity-0 lg:visible lg:opacity-100"
         }`}
       >

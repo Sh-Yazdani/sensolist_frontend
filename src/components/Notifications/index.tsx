@@ -38,10 +38,10 @@ export default function Notifications() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="relative flex w-[40px] h-[40px] mx-4 rounded-full
+        className="relative flex w-[32px] h-[32px] mx-4 rounded-full
      dark:bg-white-opacity-100 shadow bg-primary-tint-3 md:bg-neutral-3"
       >
-        <Notification className="m-auto size-6 dark:text-white md:text-primary-tint-3" />
+        <Notification className="m-auto size-5 dark:text-white md:text-primary-tint-3" />
         {newNotification && (
           <div
             className="absolute w-[8px] h-[8px] lg:w-2.5 lg:h-2.5 top-0 right-1
@@ -58,12 +58,12 @@ export default function Notifications() {
           }}
         />
         <div
-          className={` overflow-hidden absolute z-30 
+          className={` overflow-hidden absolute
           w-[80vw] max-w-[360px] h-[400px] mx-4
       border border-primary-tint-3 rounded-2xl rounded-tr-none
        right-0 top-11 lg:top-16 px-2 py-4 lg:px-4
        bg-white dark:bg-primary-Shade-1  transition-all duration-500
-        ${isOpen ? "visible opacity-100" : " invisible h-0 opacity-0"}`}
+        ${isOpen ? "visible opacity-100 z-40 " : " invisible h-0 opacity-0"}`}
         >
           <div
             className=" w-full border-b text-black border-neutral-6 text-base text-start pb-2
