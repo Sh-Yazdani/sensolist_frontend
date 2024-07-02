@@ -64,7 +64,7 @@ export default function SortBy() {
         />
         <div
           className={` absolute shadow rounded-lg bg-neutral-2 dark:bg-primary 
-        w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-20
+        w-[130px] lg:w-[150px] overflow-hidden right-0 top-12 lg:top-12 flex flex-col z-30
         transition-all duration-500
            ${isOpen ? "visible opacity-100" : " invisible h-0 opacity-0"}`}
         >
