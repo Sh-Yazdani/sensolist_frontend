@@ -113,7 +113,7 @@ export default function FilterComponent() {
                     );
                   }}
                   className={`py-4 md: lg:4 capitalize flex items-center justify-between 
-                     text-neutral-8 dark:text-neutral-2
+                     text-neutral-8 dark:text-neutral-2 text-sm
                     ${
                       visibleOptions?.title !== filterOption.title
                         ? i !== filterOptions.length - 1 &&

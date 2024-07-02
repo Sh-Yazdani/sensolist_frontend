@@ -52,7 +52,7 @@ export default function SortBy() {
       dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 min-w-[100px] lg:min-w-[120px]"
       >
         <span className=" capitalize m-auto">{value}</span>
-        <ArrowDown2 className="ml-auto size-5" />
+        <ArrowDown2 className="ml-auto my-auto size-4" />
       </button>
       {/* {isOpen && ( */}
       <>
