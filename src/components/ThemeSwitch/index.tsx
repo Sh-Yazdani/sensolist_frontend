@@ -16,9 +16,9 @@ export default function ThemeSwitch() {
   }
   return (
     <div
-      className="hidden md:flex w-[112px] h-[40px]  
+      className="hidden md:flex w-[80px] h-[32px]  
       shadow rounded-full relative gap-2 justify-around
-     dark:bg-white-opacity-100 bg-neutral-3 py-1 px-3"
+     dark:bg-white-opacity-100 bg-neutral-3 py-0.5 px-3"
     >
       <button
         className="z-10"
@@ -26,7 +26,7 @@ export default function ThemeSwitch() {
           setTheme("light");
         }}
       >
-        <Sun1 />
+        <Sun1 className=" size-5" />
       </button>
       <button
         className="z-10"
@@ -34,12 +34,14 @@ export default function ThemeSwitch() {
           setTheme("dark");
         }}
       >
-        <Moon className={`${resolvedTheme === "light" && " text-black"}`} />
+        <Moon
+          className={`${resolvedTheme === "light" && " text-black"} size-5`}
+        />
       </button>
       <div
         className={`absolute dark:bg-white-opacity-200 bg-primary-tint-3
-        rounded-full w-[56px] h-[32px] transition-all
-      left-0 ${resolvedTheme === "dark" ? "ml-12" : " ml-1"}`}
+        rounded-full w-[36px] h-[26px] transition-all
+      left-0 ${resolvedTheme === "dark" ? "ml-9" : " ml-1.5"}`}
       ></div>
     </div>
   );
