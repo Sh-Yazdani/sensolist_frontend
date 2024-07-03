@@ -31,3 +31,8 @@ export interface IThings {
 }
 
 export interface IDashboard {}
+
+export interface ICreateDashboardInputs {
+  name: string;
+  description: string;
+}

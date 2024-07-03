@@ -2,6 +2,7 @@
 
 import { IDashboard } from "@/types/general";
 import { useState } from "react";
+import DashboardCreateForm from "../DashboardCreateForm";
 import DashboardEmptyState from "../DashboardEmptyState";
 import Modal from "../UI/Modal";
 
@@ -30,7 +31,7 @@ export default function DashboardContent({
           setIsCreateModalOpen(false);
         }}
       >
-        <div>modal test</div>
+        <DashboardCreateForm />
       </Modal>
     </>
   );
