@@ -1,33 +1,29 @@
 "use client";
 
 import { IDashboard } from "@/types/general";
+import { Add } from "iconsax-react";
 import { useState } from "react";
 import DashboardCreateModal from "../DashboardCreateModal";
-import DashboardEmptyState from "../DashboardEmptyState";
+import Button from "../UI/Button";
 
-interface DashboardContentProps {
+interface DashboardCreateButtonProps {
   dashboards: IDashboard[];
   setDashboards: (d: IDashboard[]) => void;
 }
 
-export default function DashboardContent({
+export default function DashboardCreateButton({
   dashboards,
   setDashboards,
-}: DashboardContentProps) {
-  // const [dashboards, setDashboards] = useState<IDashboard[]>([]);
+}: DashboardCreateButtonProps) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
-  console.log(dashboards);
+  if (!dashboards.length) return;
   return (
     <>
-      {dashboards.length ? (
-        <div></div>
-      ) : (
-        <DashboardEmptyState
-          setCreateOpen={() => {
-            setIsCreateModalOpen(true);
-          }}
-        />
-      )}
+      <Button className="w-10 h-10 ml-auto">
+        <span className="flex md:hidden">
+          <Add />
+        </span>
+      </Button>
       <DashboardCreateModal
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
