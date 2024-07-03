@@ -1,3 +1,4 @@
+import Alert from "@/components/Alert";
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -26,7 +27,10 @@ export default function RootLayout({
         <ThemeModeScript />
       </head>
       <body className={poppins.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Alert />
+          {children}
+        </Providers>
       </body>
     </html>
   );

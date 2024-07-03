@@ -74,9 +74,9 @@ export default function Notifications() {
               mark all as read
             </button>
           </div>
-          {fakeNotifications.map((notification) => (
+          {fakeNotifications.map((notification, i) => (
             <NotificationItem
-              key={notification.content}
+              key={i}
               content={notification.content}
               new={notification.new}
               date={notification.date}

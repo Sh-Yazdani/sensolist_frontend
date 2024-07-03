@@ -3,12 +3,13 @@
 import { ArrowDown2, Global } from "iconsax-react";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { i18nConfig } from "../../../i18nConfig";
 import DropDownModal from "../UI/DropDownModal";
 
 export default function LanguageSwitch() {
+  const [mounted, setMounted] = useState<boolean>(false);
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { locale } = useParams<{ locale: string }>();
@@ -21,6 +22,14 @@ export default function LanguageSwitch() {
     { value: "ru", title: t("russian"), flag: "/assets/flags/russian.svg" },
     { value: "es", title: t("spanish"), flag: "/assets/flags/spanish.svg" },
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="w-[112px] h-[40px]"></div>;
+  }
   return (
     <button
       onClick={() => {
