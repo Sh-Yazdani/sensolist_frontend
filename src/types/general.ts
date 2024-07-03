@@ -29,3 +29,5 @@ export interface IThings {
   activationDate: string;
   description: string;
 }
+
+export interface IDashboard {}

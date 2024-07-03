@@ -1,5 +1,9 @@
+import DashboardEmptyState from "@/components/DashboardEmptyState";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
+import { IDashboard } from "@/types/general";
+
+let dashboards: IDashboard[] = [];
 
 export default function Page() {
   return (
@@ -8,6 +12,7 @@ export default function Page() {
         <SearchBar />
         <SortBy />
       </div>
+      {dashboards.length ? <div></div> : <DashboardEmptyState />}
     </div>
   );
 }
