@@ -39,6 +39,7 @@ const config: Config = {
       "black-opacity-400": "rgba(0, 0, 0, 0.4)",
       "black-opacity-200": "rgba(0, 0, 0, 0.2)",
       "black-opacity-50": "rgba(0, 0, 0, 0.05)",
+      "exteremly-light-blue": "#F1F5F8",
       orange: "#E67F3A",
       "bg-success": "#dcf5cf",
       success: "#50CB0E",

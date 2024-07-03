@@ -2,6 +2,7 @@
 
 import { IDashboard } from "@/types/general";
 import { useState } from "react";
+import DashboardCard from "../DashboardCard";
 import DashboardCreateModal from "../DashboardCreateModal";
 import DashboardEmptyState from "../DashboardEmptyState";
 
@@ -20,7 +21,11 @@ export default function DashboardContent({
   return (
     <>
       {dashboards.length ? (
-        <div></div>
+        <div className="w-full pt-4 gap-4 flex flex-wrap">
+          {dashboards.map((dashboard: IDashboard) => (
+            <DashboardCard key={dashboard.name} dashboard={dashboard} />
+          ))}
+        </div>
       ) : (
         <DashboardEmptyState
           setCreateOpen={() => {
