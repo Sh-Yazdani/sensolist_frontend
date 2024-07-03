@@ -12,7 +12,7 @@ export default function Button({ variant, className, children }: ButtonProps) {
           ? ""
           : variant === "stroke"
           ? ""
-          : " text-white bg-secondary-main hover:shadow-orange"
+          : " text-white bg-secondary-main shadow-orange"
       } ${className}`}
     >
       {children}
