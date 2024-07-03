@@ -34,6 +34,7 @@ export interface IDashboard {
   name: string;
   description: string;
   image?: string;
+  pin?: boolean;
 }
 
 export interface ICreateDashboardInputs {

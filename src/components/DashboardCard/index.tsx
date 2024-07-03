@@ -10,15 +10,17 @@ import { MoreHorizontalIcon, PinIcon } from "../UI/Icons";
 interface DashboardCardProps {
   dashboard: IDashboard;
   removeDashboard: (d: IDashboard) => void;
+  pinDashboard: (d: IDashboard) => void;
 }
 
 export default function DashboardCard({
   dashboard,
   removeDashboard,
+  pinDashboard,
 }: DashboardCardProps) {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const pinHandler = () => {
-    console.log("pin");
+    pinDashboard(dashboard);
     setIsPopupOpen(false);
   };
 
@@ -29,8 +31,8 @@ export default function DashboardCard({
 
   return (
     <div
-      className="flex bg-exteremly-light-blue dark:bg-primary w-full lg:w-[calc(50%-8px)]
-    items-center p-2 rounded-2xl mb-4"
+      className={`flex bg-exteremly-light-blue dark:bg-primary w-full lg:w-[calc(50%-8px)]
+    items-center p-2 rounded-2xl mb-4 ${dashboard.pin && "order-1"}`}
     >
       <div className="h-[84px] w-[84px] relative">
         <Image
