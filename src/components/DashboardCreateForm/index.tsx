@@ -52,7 +52,9 @@ export default function DashboardCreateForm({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          error={errors.name?.message}
+          error={
+            errors.name?.type === "required" ? "This field is required" : ""
+          }
           placeholder="Title of the dashboard"
           label="Dashboard name"
           register={register}
@@ -60,7 +62,11 @@ export default function DashboardCreateForm({
           className="mt-6"
         />
         <Input
-          error={errors.description?.message}
+          error={
+            errors.description?.type === "required"
+              ? "This field is required"
+              : ""
+          }
           placeholder="Description of the dashboard"
           label="Description"
           register={register}
@@ -68,7 +74,7 @@ export default function DashboardCreateForm({
           className="mt-6"
         />
         <div className="mt-6">Choose an image:</div>
-        <div className=" flex flex-wrap gap-4 mt-3">
+        <div className="relative flex flex-wrap gap-4 mt-3">
           {imagesForSelect.map((img) => (
             <div
               onClick={() => {
@@ -85,7 +91,9 @@ export default function DashboardCreateForm({
           ))}
           <ImagePicker
             selectedImage={selectedImage}
-            error={errors.image?.message}
+            // error={
+            //   errors.image?.type === "required" ? "This field is required" : ""
+            // }
             register={register}
             name="image"
             label="Image"

@@ -1,8 +1,9 @@
 import DashboardContent from "@/components/DashboardContent";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
+import { IDashboard } from "@/types/general";
 
-// let dashboards: IDashboard[] = [];
+let dashboards: IDashboard[] = [];
 
 export default function Page() {
   // console.log(dashboards);
@@ -12,7 +13,7 @@ export default function Page() {
         <SearchBar />
         <SortBy />
       </div>
-      <DashboardContent />
+      <DashboardContent dashboards={dashboards} />
     </div>
   );
 }
