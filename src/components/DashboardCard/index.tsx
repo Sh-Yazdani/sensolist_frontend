@@ -9,9 +9,13 @@ import { MoreHorizontalIcon, PinIcon } from "../UI/Icons";
 
 interface DashboardCardProps {
   dashboard: IDashboard;
+  removeDashboard: (d: IDashboard) => void;
 }
 
-export default function DashboardCard({ dashboard }: DashboardCardProps) {
+export default function DashboardCard({
+  dashboard,
+  removeDashboard,
+}: DashboardCardProps) {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const pinHandler = () => {
     console.log("pin");
@@ -20,7 +24,7 @@ export default function DashboardCard({ dashboard }: DashboardCardProps) {
 
   const removeHandler = () => {
     console.log("remove");
-    setIsPopupOpen(false);
+    removeDashboard(dashboard);
   };
 
   return (

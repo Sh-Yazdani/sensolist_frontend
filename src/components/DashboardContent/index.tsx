@@ -9,11 +9,13 @@ import DashboardEmptyState from "../DashboardEmptyState";
 interface DashboardContentProps {
   dashboards: IDashboard[];
   setDashboards: (d: IDashboard[]) => void;
+  removeDashboard: (d: IDashboard) => void;
 }
 
 export default function DashboardContent({
   dashboards,
   setDashboards,
+  removeDashboard,
 }: DashboardContentProps) {
   // const [dashboards, setDashboards] = useState<IDashboard[]>([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
@@ -23,7 +25,11 @@ export default function DashboardContent({
       {dashboards.length ? (
         <div className="w-full pt-4 gap-4 flex flex-wrap">
           {dashboards.map((dashboard: IDashboard) => (
-            <DashboardCard key={dashboard.name} dashboard={dashboard} />
+            <DashboardCard
+              removeDashboard={removeDashboard}
+              key={dashboard.name}
+              dashboard={dashboard}
+            />
           ))}
         </div>
       ) : (

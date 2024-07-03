@@ -13,7 +13,11 @@ import { useState } from "react";
 
 export default function Page() {
   const [dashboards, setDashbaords] = useState<IDashboard[]>([]);
-  // console.log(dashboards);
+  const removeFromDashboards = (dashboard: IDashboard) => {
+    setDashbaords((prev) => [
+      ...prev.filter((dash) => dash.name !== dashboard.name),
+    ]);
+  };
   return (
     <div className=" flex flex-col pt-20 md:pt-0 md:pr-4 px-4">
       <div className="md:relative flex flex-row-reverse justify-end">
@@ -24,7 +28,11 @@ export default function Page() {
         <SearchBar />
         <SortBy />
       </div>
-      <DashboardContent setDashboards={setDashbaords} dashboards={dashboards} />
+      <DashboardContent
+        removeDashboard={removeFromDashboards}
+        setDashboards={setDashbaords}
+        dashboards={dashboards}
+      />
     </div>
   );
 }
