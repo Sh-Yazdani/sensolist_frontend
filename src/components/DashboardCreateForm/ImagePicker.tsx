@@ -62,10 +62,7 @@ export default function ImagePicker({
       <div className="flex flex-col">
         <button
           onClick={handlePickClick}
-          className={`relative w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] ${
-            selectedImage === pickedImage &&
-            "border-2 border-secondary-main rounded-lg"
-          }`}
+          className={`relative w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] `}
         >
           {pickedImage ? (
             <div className="relative w-[57px] h-[57px] bg-neutral-2 rounded-md">

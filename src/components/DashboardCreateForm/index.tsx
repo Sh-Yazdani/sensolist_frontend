@@ -91,9 +91,6 @@ export default function DashboardCreateForm({
           ))}
           <ImagePicker
             selectedImage={selectedImage}
-            // error={
-            //   errors.image?.type === "required" ? "This field is required" : ""
-            // }
             register={register}
             name="image"
             label="Image"
