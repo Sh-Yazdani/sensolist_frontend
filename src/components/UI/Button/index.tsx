@@ -1,5 +1,5 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "fill" | "stroke" | "text";
+  variant?: "fill" | "stroke" | "text" | "secondary";
   className?: string;
   children: React.ReactNode;
 }
@@ -17,6 +17,8 @@ export default function Button({
           ? ""
           : variant === "stroke"
           ? ""
+          : variant === "secondary"
+          ? " border-2 border-neutral-6 text-neutral-6"
           : " text-white bg-secondary-main shadow-orange"
       } ${className}`}
       {...rest}

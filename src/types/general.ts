@@ -30,9 +30,14 @@ export interface IThings {
   description: string;
 }
 
-export interface IDashboard {}
+export interface IDashboard {
+  name: string;
+  description: string;
+  image?: string;
+}
 
 export interface ICreateDashboardInputs {
   name: string;
   description: string;
+  image: string;
 }

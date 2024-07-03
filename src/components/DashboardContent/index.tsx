@@ -31,7 +31,14 @@ export default function DashboardContent({
           setIsCreateModalOpen(false);
         }}
       >
-        <DashboardCreateForm />
+        <DashboardCreateForm
+          onCancel={() => {
+            setIsCreateModalOpen(false);
+          }}
+          dashboardAdd={(dashboard: IDashboard) => {
+            dashboards.concat(dashboard);
+          }}
+        />
       </Modal>
     </>
   );

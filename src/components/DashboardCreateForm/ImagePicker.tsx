@@ -2,22 +2,31 @@
 
 import { GalleryAdd } from "iconsax-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface ImagePickerProps {
   label: string;
   name: string;
   register: UseFormRegister<any>;
+  error?: string;
+  setImage: (img: string) => void;
 }
 
 export default function ImagePicker({
   label,
   name,
   register,
+  error,
+  setImage,
 }: ImagePickerProps) {
   const [pickedImage, setPickedImage] = useState<any>();
   const imageInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setImage(pickedImage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pickedImage]);
 
   const handlePickClick = () => {
     imageInput.current?.click();
