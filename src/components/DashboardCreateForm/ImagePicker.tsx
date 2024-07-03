@@ -11,6 +11,7 @@ interface ImagePickerProps {
   register: UseFormRegister<any>;
   error?: string;
   setImage: (img: string) => void;
+  selectedImage?: string;
 }
 
 export default function ImagePicker({
@@ -19,6 +20,7 @@ export default function ImagePicker({
   register,
   error,
   setImage,
+  selectedImage,
 }: ImagePickerProps) {
   const [pickedImage, setPickedImage] = useState<any>();
   const imageInput = useRef<HTMLInputElement>(null);
@@ -60,7 +62,10 @@ export default function ImagePicker({
       <div className="flex flex-col">
         <button
           onClick={handlePickClick}
-          className="relative w-[56px] h-[56px] lg:w-[72px] lg:h-[72px]"
+          className={`relative w-[56px] h-[56px] lg:w-[72px] lg:h-[72px] ${
+            selectedImage === pickedImage &&
+            "border-2 border-secondary-main rounded-lg"
+          }`}
         >
           {pickedImage ? (
             <div className="relative w-[57px] h-[57px] bg-neutral-2 rounded-md">

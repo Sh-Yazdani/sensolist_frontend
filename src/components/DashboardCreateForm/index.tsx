@@ -74,14 +74,17 @@ export default function DashboardCreateForm({
               onClick={() => {
                 setSelectedImage(img);
               }}
-              className="relative w-[57px] h-[57px] lg:w-[72px] lg:h-[72px] cursor-pointer 
-              bg-neutral-2 rounded-md"
+              className={`relative w-[57px] h-[57px] lg:w-[72px] lg:h-[72px] cursor-pointer 
+              bg-neutral-2 rounded-md ${
+                selectedImage === img && "border-2 border-secondary-main"
+              }`}
               key={img}
             >
               <Image alt="image" fill src={img} />
             </div>
           ))}
           <ImagePicker
+            selectedImage={selectedImage}
             error={errors.image?.message}
             register={register}
             name="image"
