@@ -26,9 +26,9 @@ export default function Modal({ children, onClose, open }: ModalProps) {
   };
   return (
     <>
-      {isOpen && <Backdrop onClick={onClose} />}
+      {isOpen && <Backdrop onClick={closeHandler} />}
       <div
-        className={` bg-white z-30 fixed w-[calc(100%-2rem)] mx-auto flex flex-col
+        className={` bg-white fixed w-[calc(100%-2rem)] mx-auto flex flex-col
            text-black dark:text-white dark:bg-black shadow-300 shadow-white-150
            rounded-t-3xl pt-4 px-4 pb-8 top-10
            md:w-[480px] md:rounded-2xl md:py-10 md:px-6 md:top-20 md:left-0 md:right-0 md:mx-auto
@@ -39,7 +39,7 @@ export default function Modal({ children, onClose, open }: ModalProps) {
       >
         <div className="flex md:hidden w-[120px] h-2 bg-neutral-6 rounded-full mx-auto mb-6"></div>
         <button
-          onClick={onClose}
+          onClick={closeHandler}
           className="absolute top-6 right-6 hidden md:flex text-neutral-5"
         >
           <CloseCircle />
