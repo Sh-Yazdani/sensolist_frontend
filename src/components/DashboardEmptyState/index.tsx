@@ -2,7 +2,11 @@ import { AddSquare } from "iconsax-react";
 import Button from "../UI/Button";
 import { SimplificationIcon } from "../UI/Icons";
 
-export default function DashboardEmptyState() {
+export default function DashboardEmptyState({
+  setCreateOpen,
+}: {
+  setCreateOpen: () => void;
+}) {
   return (
     <div className=" h-full mt-[200px] flex flex-col items-center">
       <SimplificationIcon className="w-[56px] h-[47px] md:w-[80px] md:h-[67px] lg:w-[112px] lg:h-[94px]" />
@@ -12,7 +16,10 @@ export default function DashboardEmptyState() {
       >
         You haven’t created any dashboard yet!
       </div>
-      <Button className="w-[200px] mt-4 md:w-[240px] md:mt-6">
+      <Button
+        onClick={setCreateOpen}
+        className="w-[200px] mt-4 md:w-[240px] md:mt-6"
+      >
         <AddSquare className="mr-2" />
         Create Dashboard
       </Button>

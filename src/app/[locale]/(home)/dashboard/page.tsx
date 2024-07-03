@@ -1,4 +1,4 @@
-import DashboardEmptyState from "@/components/DashboardEmptyState";
+import DashboardContent from "@/components/DashboardContent";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
 import { IDashboard } from "@/types/general";
@@ -12,7 +12,7 @@ export default function Page() {
         <SearchBar />
         <SortBy />
       </div>
-      {dashboards.length ? <div></div> : <DashboardEmptyState />}
+      <DashboardContent dashboards={dashboards} />
     </div>
   );
 }
