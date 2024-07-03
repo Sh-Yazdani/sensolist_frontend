@@ -45,7 +45,7 @@ export default function Alert() {
 
   return (
     <div
-      className={`fixed transition-all left-8 top-8
+      className={`fixed transition-all left-8 top-8 z-50
       rounded-lg overflow-hidden flex shadow pl-[42px] 
       ${show ? "ml-0" : " ml-[-480px] "}
     w-[440px] min-h-[90px] bg-bg-success`}

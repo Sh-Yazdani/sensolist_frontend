@@ -7,13 +7,14 @@ import DashboardEmptyState from "../DashboardEmptyState";
 import Modal from "../UI/Modal";
 
 interface DashboardContentProps {
-  dashboards: IDashboard[];
+  // dashboards: IDashboard[];
 }
 
-export default function DashboardContent({
-  dashboards,
-}: DashboardContentProps) {
+export default function DashboardContent({}: // dashboards,
+DashboardContentProps) {
+  const [dashboards, setDashboards] = useState<IDashboard[]>([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
+  console.log(dashboards);
   return (
     <>
       {dashboards.length ? (
@@ -36,7 +37,7 @@ export default function DashboardContent({
             setIsCreateModalOpen(false);
           }}
           dashboardAdd={(dashboard: IDashboard) => {
-            dashboards.concat(dashboard);
+            setDashboards([...dashboards, dashboard]);
           }}
         />
       </Modal>

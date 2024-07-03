@@ -1,9 +1,11 @@
 "use client";
 
+import { createAlert } from "@/lib/features/notification/notificatioSlice";
 import { ICreateDashboardInputs, IDashboard } from "@/types/general";
 import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import ImagePicker from "./ImagePicker";
@@ -29,6 +31,7 @@ export default function DashboardCreateForm({
     control,
     formState: { errors },
   } = useForm<ICreateDashboardInputs>();
+  const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState<string>();
 
@@ -39,6 +42,8 @@ export default function DashboardCreateForm({
       description: data.description,
       image: selectedImage,
     });
+    dispatch(createAlert({ message: "dashboard added.", type: "success" }));
+    onCancel();
   };
   return (
     <>
