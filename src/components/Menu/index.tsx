@@ -148,25 +148,25 @@ export default function Menu() {
       </button>
       <button
         onClick={() => {
-          router.push(`/${locale}/settings`);
+          router.push(`/${locale}/applets`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-5 md:order-3
         w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
-          pathname.includes("/settings")
+          pathname.includes("/applets")
             ? "dark:md:bg-white-opacity-200"
             : "dark:md:bg-white-opacity-30"
         }`}
       >
         <Setting4
           className="md:text-neutral-7 md:size-6 dark:text-white"
-          variant={pathname.includes("/settings") ? "Bold" : undefined}
-          color={pathname.includes("/settings") ? "#E67F3A" : undefined}
+          variant={pathname.includes("/applets") ? "Bold" : undefined}
+          color={pathname.includes("/applets") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize whitespace-nowrap text-secondary-main md:text-[10px] lg:text-xs
             md:text-neutral-7 dark:text-white ${
-              pathname.includes("/settings")
+              pathname.includes("/applets")
                 ? "flex md:text-secondary-main dark:md:text-secondary-main"
                 : " hidden md:flex"
             }`}
