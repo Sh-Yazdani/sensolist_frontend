@@ -42,3 +42,16 @@ export interface ICreateDashboardInputs {
   description: string;
   image: string;
 }
+
+export interface IApplet {
+  name: string;
+  description: string;
+  image?: string;
+  pin?: boolean;
+}
+
+export interface ICreateAppletInputs {
+  name: string;
+  description: string;
+  image: string;
+}
