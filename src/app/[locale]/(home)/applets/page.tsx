@@ -1,5 +1,6 @@
 "use client";
 
+import AppletContent from "@/components/AppletContent";
 import AppletCreateButton from "@/components/AppletCreateButton";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
@@ -27,6 +28,12 @@ export default function Page() {
         <SearchBar />
         <SortBy />
       </div>
+      <AppletContent
+        pinApplet={pinApplet}
+        removeApplet={removeFromApplets}
+        setApplets={setApplets}
+        applets={applets}
+      />
     </div>
   );
 }
