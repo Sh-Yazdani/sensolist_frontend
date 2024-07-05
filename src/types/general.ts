@@ -55,3 +55,10 @@ export interface ICreateAppletInputs {
   description: string;
   image: string;
 }
+
+export interface IProfileMenuItem {
+  name: string;
+  title: string;
+  link: string;
+  icon: React.ReactNode;
+}

@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>edit</div>;
+  return <div>notifications</div>;
 }
