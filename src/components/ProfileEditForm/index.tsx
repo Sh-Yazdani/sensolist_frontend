@@ -7,6 +7,7 @@ import Input from "../UI/Input";
 interface IEditProfileInputs {
   photo?: string;
   firstName: string;
+  lastName: string;
 }
 
 export default function ProfileEditForm() {
@@ -24,6 +25,15 @@ export default function ProfileEditForm() {
         name="firstName"
         label="First name"
         className="mt-8"
+        error={
+          errors.firstName?.type === "required" ? "This field is required" : ""
+        }
+      />
+      <Input
+        register={register}
+        name="lastName"
+        label="Last name"
+        className="mt-6"
         error={
           errors.firstName?.type === "required" ? "This field is required" : ""
         }
