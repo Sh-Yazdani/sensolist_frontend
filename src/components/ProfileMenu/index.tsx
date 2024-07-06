@@ -10,7 +10,7 @@ import {
 } from "iconsax-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface ProfileMenuProps {
   isOpen: boolean;
@@ -18,14 +18,13 @@ interface ProfileMenuProps {
 }
 
 export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
-  useEffect(() => {
-    console.log("useeffect");
-  }, []);
+  const pathname = usePathname();
+  console.log("pathname", pathname);
   const menuItems: IProfileMenuItem[] = [
     {
       name: "edit",
       title: "edit profile",
-      link: "/",
+      link: "",
       icon: <Edit2 className=" text-neutral-7" />,
     },
     {
@@ -61,13 +60,24 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
             onClick={onClose}
             href={`/profile${item.link}`}
             key={item.name}
-            className={`flex items-center w-full ${i !== 0 && "mt-10"}`}
+            className={`flex items-center w-full md:p-2 md:rounded-lg ${
+              i !== 0 && "mt-10"
+            }
+               ${
+                 pathname === `/profile${item.link}`
+                   ? "md:bg-grey md:text-neutral-8"
+                   : "md:text-neutral-7"
+               }`}
           >
             {item.icon}
-            <span className=" text-neutral-7 ml-2 capitalize">
-              {item.title}
-            </span>
-            <ArrowRight2 className=" text-neutral-6 ml-auto md:hidden" />
+            <span className="ml-2 capitalize">{item.title}</span>
+            <ArrowRight2
+              className={` ml-auto md:hidden ${
+                pathname === `/profile${item.link}`
+                  ? " md:text-neutral-8"
+                  : "text-neutral-7"
+              }`}
+            />
           </Link>
         ))}
       </div>
