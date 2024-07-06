@@ -20,7 +20,7 @@ export default function ProfileContainer({ children }: ProfileContainerProps) {
           setIsMenuOpen(false);
         }}
       />
-      <div className="flex-1 md:mr-[52px] lg:mr-10 rounded-r-2xl shadow-right-300 shadow-right-white-150 ">
+      <div className="flex-1 md:mr-[52px] lg:mr-10 rounded-r-2xl shadow-md-right-300 shadow-md-right-white-150 ">
         {!isMenuOpen && (
           <ProfileMobileHeader
             onGoBack={() => {
