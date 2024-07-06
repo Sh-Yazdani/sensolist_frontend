@@ -21,7 +21,7 @@ export default function Input({
 }: InputProps) {
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
-      <span>{label}</span>
+      <span className=" text-sm md:text-base">{label}</span>
       <input
         placeholder={placeholder}
         {...register(name, { required: true })}

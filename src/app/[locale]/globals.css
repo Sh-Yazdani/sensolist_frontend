@@ -31,7 +31,9 @@ body {
   border-radius: 8px;
   margin-top: 8px;
 }
-
+.react-tel-input.simple {
+  background: transparent !important;
+}
 .react-tel-input .form-control {
   background-color: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.7);
@@ -42,6 +44,10 @@ body {
   border: none !important;
   border-right: 1px solid rgba(255, 255, 255, 0.7) !important;
 }
+.simple .flag-dropdown {
+  border-right: 1px solid #9b9b9b !important;
+}
+
 .react-tel-input .flag-dropdown.open .selected-flag {
   background: none !important;
 }

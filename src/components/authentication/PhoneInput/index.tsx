@@ -12,6 +12,8 @@ interface InputProps {
   label?: string;
   ref: RefCallBack;
   error?: string;
+  className?: string;
+  variant?: "simple";
 }
 
 export function CustomPhoneInput({
@@ -20,19 +22,22 @@ export function CustomPhoneInput({
   name,
   ref,
   error,
+  className,
+  variant,
   ...rest
 }: InputProps) {
   return (
-    <label className="w-full relative">
-      <span className="mb-4 text-sm lg:text-base">{label}</span>
+    <label className={`w-full relative flex flex-col ${className}`}>
+      <span className="mb-1 text-sm lg:text-base">{label}</span>
       <ReactPhoneInput
         disableSearchIcon
         enableSearch={true}
+        containerClass="simple"
         placeholder=""
         searchPlaceholder="Search for country"
         inputClass={`!h-[45px] lg:!h-[60px] !w-full mt-2 flex ${
           error && "border !border-error"
-        }`}
+        } ${variant === "simple" && "simple  !border-neutral-6"}`}
         {...rest}
       />
       {error && (

@@ -1,13 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import ProfileUploadPhoto from "../ProfileUploadPhoto";
 import Input from "../UI/Input";
+import { CustomPhoneInput } from "../authentication/PhoneInput";
 
 interface IEditProfileInputs {
   photo?: string;
   firstName: string;
   lastName: string;
+  phoneNumber: string;
 }
 
 export default function ProfileEditForm() {
@@ -37,6 +39,25 @@ export default function ProfileEditForm() {
         error={
           errors.firstName?.type === "required" ? "This field is required" : ""
         }
+      />
+      <Controller
+        name="phoneNumber"
+        control={control}
+        rules={{ required: true }}
+        render={({ field: { ref, ...field } }) => (
+          <CustomPhoneInput
+            ref={ref}
+            label="Phone number"
+            className="mt-6"
+            variant="simple"
+            {...field}
+            error={
+              errors.phoneNumber?.type === "required"
+                ? "This field is required"
+                : ""
+            }
+          />
+        )}
       />
     </form>
   );
