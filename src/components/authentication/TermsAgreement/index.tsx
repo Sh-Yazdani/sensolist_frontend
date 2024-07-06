@@ -1,4 +1,4 @@
-import { Warning2 } from "iconsax-react";
+import FormError from "@/components/UI/FormError";
 import { Dispatch, SetStateAction } from "react";
 
 interface TermsAgreementProps {
@@ -25,14 +25,7 @@ export default function TermsAgreement({
       />
       <span className="checkmark"></span>I agree to{" "}
       <span className=" underline ml-2"> terms and policies.</span>
-      {error && (
-        <div
-          className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-        absolute bottom-[-2.25rem] left-0"
-        >
-          <Warning2 /> {error}
-        </div>
-      )}
+      {error && <FormError error={error} />}
     </label>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
+import FormError from "@/components/UI/FormError";
 import { LoginInputs } from "@/types/general";
-import { Warning2 } from "iconsax-react";
 import { RefCallBack, UseFormRegister } from "react-hook-form";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -40,14 +40,7 @@ export function CustomPhoneInput({
         } ${variant === "simple" && "simple  !border-neutral-6"}`}
         {...rest}
       />
-      {error && (
-        <div
-          className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-        absolute bottom-[-2.25rem]"
-        >
-          <Warning2 /> {error}
-        </div>
-      )}
+      {error && <FormError error={error} />}
     </label>
   );
 }

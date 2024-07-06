@@ -60,6 +60,9 @@ body {
   max-height: 280px !important;
   background-color: #000911 !important;
 }
+.react-tel-input.simple .country-list {
+  max-height: 180px !important;
+}
 .react-tel-input .country-list .search {
   background-color: #000911 !important;
   border-bottom: 1px solid #334759 !important;

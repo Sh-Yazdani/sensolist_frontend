@@ -1,5 +1,5 @@
+import FormError from "@/components/UI/FormError";
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
-import { Warning2 } from "iconsax-react";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import VerificationInput from "react-verification-input";
@@ -40,14 +40,7 @@ export default function VerificationForm() {
               className: "bg-error",
             }}
           />
-          {error && (
-            <div
-              className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-        absolute bottom-[-2.25rem]"
-            >
-              <Warning2 /> {error}
-            </div>
-          )}
+          {error && <FormError error="error" />}
         </div>
         <TimerCountDown />
         <SubmitButton className="mt-20 lg:mb-[120px]">Login</SubmitButton>

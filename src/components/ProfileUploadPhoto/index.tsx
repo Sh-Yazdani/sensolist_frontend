@@ -33,7 +33,7 @@ export default function ProfileUploadPhoto({
   };
 
   return (
-    <div className="flex items-center mb-8">
+    <div className="flex items-center">
       <input
         type="file"
         id={name}

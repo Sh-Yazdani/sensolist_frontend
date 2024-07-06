@@ -1,9 +1,10 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
-import ProfileUploadPhoto from "../ProfileUploadPhoto";
-import Input from "../UI/Input";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../authentication/PhoneInput";
+import ProfileUploadPhoto from "../ProfileUploadPhoto";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 interface IEditProfileInputs {
   photo?: string;
@@ -19,8 +20,16 @@ export default function ProfileEditForm() {
     control,
     formState: { errors },
   } = useForm<IEditProfileInputs>();
+
+  const onSubmit: SubmitHandler<IEditProfileInputs> = (data) => {
+    console.log(data);
+  };
+
   return (
-    <form>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="min-h-[calc(100vh-164px)] md:h-full flex flex-col"
+    >
       <ProfileUploadPhoto register={register} name="photo" />
       <Input
         register={register}
@@ -59,6 +68,12 @@ export default function ProfileEditForm() {
           />
         )}
       />
+      <div className="mt-auto flex flex-col">
+        <Button type="submit">Submit</Button>
+        <Button variant="secondary" className="mt-4 md:mt-0">
+          Discard
+        </Button>
+      </div>
     </form>
   );
 }
