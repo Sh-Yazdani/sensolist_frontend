@@ -13,7 +13,7 @@ export default function ProfileContainer({ children }: ProfileContainerProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const router = useRouter();
   return (
-    <>
+    <div className="flex md:h-[544px] lg:h-[630px]">
       <ProfileMenu
         isOpen={isMenuOpen}
         onClose={() => {
@@ -31,6 +31,6 @@ export default function ProfileContainer({ children }: ProfileContainerProps) {
         )}
         {children}
       </div>
-    </>
+    </div>
   );
 }

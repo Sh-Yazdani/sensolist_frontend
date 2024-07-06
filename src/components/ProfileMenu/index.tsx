@@ -43,18 +43,19 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   ];
   return (
     <div
-      className={` p-4 flex flex-col flex-1 absolute bg-white 
+      className={` p-4 flex flex-col flex-1 absolute bg-white md:ml-6 
     w-full h-[calc(100%-62px)] z-20 transition-all ${
-      !isOpen && "translate-x-full"
-    }`}
+      !isOpen && "translate-x-full md:translate-x-0"
+    } md:static md:max-w-[232px] lg:[256px] md:rounded-l-2xl shadow-300 md:h-full`}
     >
-      <div className="flex items-center">
+      <div className="hidden md:flex text-xl lg:text-[1.37rem]">Profile</div>
+      <div className="flex items-center md:hidden">
         <div className="w-[56px] h-[56px] relative rounded-full overflow-hidden">
           <Image alt="profile" src="/assets/profile.jpeg" fill />
         </div>
         <div className="ml-4 text-lg font-medium">Yas Izadi</div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 md:mt-10">
         {menuItems.map((item, i) => (
           <Link
             onClick={onClose}
@@ -66,11 +67,11 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
             <span className=" text-neutral-7 ml-2 capitalize">
               {item.title}
             </span>
-            <ArrowRight2 className=" text-neutral-6 ml-auto" />
+            <ArrowRight2 className=" text-neutral-6 ml-auto md:hidden" />
           </Link>
         ))}
       </div>
-      <div className="mt-auto flex items-center">
+      <div className="mt-auto flex items-center md:hidden">
         <LogoutCurve className=" text-error mr-2" />
         <span className=" text-neutral-7">Log Out</span>
       </div>
