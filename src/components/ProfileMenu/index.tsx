@@ -19,7 +19,6 @@ interface ProfileMenuProps {
 
 export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   const pathname = usePathname();
-  console.log("pathname", pathname);
   const menuItems: IProfileMenuItem[] = [
     {
       name: "edit",
