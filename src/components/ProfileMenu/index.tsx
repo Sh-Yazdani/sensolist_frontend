@@ -25,30 +25,38 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
       name: "edit",
       title: "edit profile",
       link: "",
-      icon: <Edit2 className=" text-neutral-7" />,
+      icon: (
+        <Edit2 className=" text-neutral-7 dark:text-neutral-4  dark:md:text-white" />
+      ),
     },
     {
       name: "changePassword",
       title: "change password",
       link: "/changePassword",
-      icon: <Key className=" text-neutral-7" />,
+      icon: (
+        <Key className=" text-neutral-7 dark:text-neutral-4  dark:md:text-white" />
+      ),
     },
     {
       name: "notifications",
       title: "notification center",
       link: "/notifications",
-      icon: <Notification className=" text-neutral-7" />,
+      icon: (
+        <Notification className=" text-neutral-7 dark:text-neutral-4  dark:md:text-white" />
+      ),
     },
   ];
   return (
     <div
-      className={` p-4 flex flex-col flex-1 absolute bg-white md:ml-6 
+      className={` p-4 flex flex-col flex-1 absolute  md:bg-transparent dark:md:bg-transparent md:ml-6 
     w-full h-[calc(100%-62px)] z-20 transition-all ${
       !isOpen && "translate-x-full md:translate-x-0"
-    } md:static md:max-w-[232px] lg:[256px] md:rounded-l-2xl shadow-300 md:h-full`}
+    } md:static md:max-w-[232px] lg:[256px] md:rounded-l-2xl shadow-300 shadow-white-150 md:h-full`}
     >
-      <div className="hidden md:flex text-xl lg:text-[1.37rem]">Profile</div>
-      <div className="flex items-center md:hidden">
+      <div className="hidden md:flex text-xl lg:text-[1.37rem] dark:text-white">
+        Profile
+      </div>
+      <div className="flex items-center md:hidden dark:text-white">
         <div className="w-[56px] h-[56px] relative rounded-full overflow-hidden">
           <Image alt="profile" src="/assets/profile.jpeg" fill />
         </div>
@@ -60,12 +68,12 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
             onClick={onClose}
             href={`/profile${item.link}`}
             key={item.name}
-            className={`flex items-center w-full md:p-2 md:rounded-lg ${
+            className={`flex items-center w-full md:p-2 md:rounded-lg dark:text-neutral-4 ${
               i !== 0 && "mt-10"
             }
                ${
                  pathname === `/profile${item.link}`
-                   ? "md:bg-grey md:text-neutral-8"
+                   ? "md:bg-grey md:text-neutral-8 dark:md:bg-primary-tint-1 dark:md:text-white"
                    : "md:text-neutral-7"
                }`}
           >
@@ -75,7 +83,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
               className={` ml-auto md:hidden ${
                 pathname === `/profile${item.link}`
                   ? " md:text-neutral-8"
-                  : "text-neutral-7"
+                  : "md:text-neutral-7"
               }`}
             />
           </Link>
@@ -83,7 +91,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
       </div>
       <div className="mt-auto flex items-center md:hidden">
         <LogoutCurve className=" text-error mr-2" />
-        <span className=" text-neutral-7">Log Out</span>
+        <span className=" text-neutral-7 dark:text-neutral-4 ">Log Out</span>
       </div>
     </div>
   );
