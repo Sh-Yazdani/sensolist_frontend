@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import notificationReducer from "./features/notification/notificatioSlice";
+import profileSlice from "./features/profile/profileSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { notificationReducer },
+    reducer: { notificationReducer, profileSlice },
   });
 };
 

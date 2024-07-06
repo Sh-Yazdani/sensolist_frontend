@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../authentication/PhoneInput";
 import ProfileUploadPhoto from "../ProfileUploadPhoto";
@@ -24,7 +25,7 @@ export default function ProfileEditForm() {
   const onSubmit: SubmitHandler<IEditProfileInputs> = (data) => {
     console.log(data);
   };
-
+  const router = useRouter();
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -70,7 +71,14 @@ export default function ProfileEditForm() {
       />
       <div className="mt-auto flex flex-col">
         <Button type="submit">Submit</Button>
-        <Button variant="secondary" className="mt-4 md:mt-0">
+        <Button
+          onClick={(event: React.MouseEvent<HTMLElement>) => {
+            event.preventDefault();
+            router.push("/profile");
+          }}
+          variant="secondary"
+          className="mt-4 md:mt-0"
+        >
           Discard
         </Button>
       </div>
