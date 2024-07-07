@@ -244,3 +244,10 @@ body {
   -ms-transition: background-color 1000ms linear;
   transition: background-color 1000ms linear;
 }
+
+/* verification */
+
+.profile .vi__character {
+  border: 1px solid black;
+  color: black;
+}
