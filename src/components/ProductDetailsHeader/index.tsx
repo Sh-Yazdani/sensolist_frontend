@@ -7,7 +7,7 @@ export default function ProductDetailsHeader() {
   const router = useRouter();
   return (
     <div className="w-full rounded-b-2xl bg-primary-tint-1 h-[80px] absolute top-[-80px] flex md:hidden">
-      <div className=" capitalize mx-auto text-white font-medium mt-6">
+      <div className=" capitalize mx-auto text-white font-medium mt-6 z-20">
         Product’s details
       </div>
       <button
