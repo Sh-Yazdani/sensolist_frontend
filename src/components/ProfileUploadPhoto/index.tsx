@@ -44,12 +44,12 @@ export default function ProfileUploadPhoto({
         onChange={handleImageChange}
         {...register}
       />
-      <div className="relative w-[56px] h-[56px] rounded-full overflow-hidden">
+      <div className="relative w-[56px] h-[56px] lg:w-[64px] lg:h-[64px] rounded-full overflow-hidden">
         {pickedImage ? (
           <Image alt={"photo"} src={pickedImage} fill />
         ) : (
-          <div className="w-full h-full bg-neutral-3 flex">
-            <Profile className=" size-10 text-neutral-7 m-auto" />
+          <div className="w-full h-full bg-neutral-3 dark:bg-neutral-7 flex">
+            <Profile className=" size-10 text-neutral-7 dark:text-neutral-2 m-auto" />
           </div>
         )}
       </div>
@@ -62,6 +62,14 @@ export default function ProfileUploadPhoto({
       >
         Upload photo
       </button>
+      {pickedImage && (
+        <button
+          onClick={() => setPickedImage(null)}
+          className="ml-8 text-sm text-neutral-7 dark:text-neutral-3"
+        >
+          Remove photo
+        </button>
+      )}
     </div>
   );
 }

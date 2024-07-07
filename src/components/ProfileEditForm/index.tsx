@@ -1,7 +1,9 @@
 "use client";
 
+import { toggleMenu } from "@/lib/features/profile/profileSlice";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { CustomPhoneInput } from "../authentication/PhoneInput";
 import ProfileUploadPhoto from "../ProfileUploadPhoto";
 import Button from "../UI/Button";
@@ -21,6 +23,7 @@ export default function ProfileEditForm() {
     control,
     formState: { errors },
   } = useForm<IEditProfileInputs>();
+  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<IEditProfileInputs> = (data) => {
     console.log(data);
@@ -29,7 +32,7 @@ export default function ProfileEditForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="min-h-[calc(100vh-164px)] md:h-full flex flex-col"
+      className="min-h-[calc(100vh-164px)] md:min-h-full flex flex-col"
     >
       <ProfileUploadPhoto register={register} name="photo" />
       <Input
@@ -69,15 +72,18 @@ export default function ProfileEditForm() {
           />
         )}
       />
-      <div className="mt-auto flex flex-col">
-        <Button type="submit">Submit</Button>
+      <div className="mt-auto flex flex-col lg:flex-row-reverse lg:gap-8">
+        <Button type="submit" className="lg:flex-1">
+          Submit
+        </Button>
         <Button
           onClick={(event: React.MouseEvent<HTMLElement>) => {
             event.preventDefault();
+            dispatch(toggleMenu({ menuOpen: true }));
             router.push("/profile");
           }}
           variant="secondary"
-          className="mt-4 md:mt-0"
+          className="mt-4 lg:mt-0 lg:w-1/3"
         >
           Discard
         </Button>

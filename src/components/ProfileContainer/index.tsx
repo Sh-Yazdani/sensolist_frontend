@@ -12,7 +12,6 @@ interface ProfileContainerProps {
 }
 
 export default function ProfileContainer({ children }: ProfileContainerProps) {
-  // const [isMenuOpen, setIsMenuOpen] = useState(true);
   const dispatch = useDispatch();
   const { menuOpen } = useSelector((state: RootState) => state.profileSlice);
   const router = useRouter();
