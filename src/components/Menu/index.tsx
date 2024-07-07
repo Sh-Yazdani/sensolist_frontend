@@ -44,7 +44,7 @@ export default function Menu() {
           color={pathname.includes("/profile") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize line-clamp-2 text-secondary-main md:text-[10px] lg:text-xs 
+          className={`text-xs capitalize  text-secondary-main md:text-[10px] lg:text-xs 
             lg:max-w-[80px] lg:truncate
              md:text-neutral-7 dark:text-white ${
                pathname.includes("/profile")
@@ -73,7 +73,7 @@ export default function Menu() {
           color={pathname.includes("/myThings") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize line-clamp-2 text-secondary-main md:text-[10px] lg:text-xs
+          className={`text-xs capitalize text-secondary-main md:text-[10px] lg:text-xs
             lg:max-w-[80px] lg:truncate
              md:text-neutral-7 dark:text-white ${
                pathname.includes("/myThings")
@@ -110,7 +110,7 @@ export default function Menu() {
           }
         />
         <div
-          className={`text-xs capitalize line-clamp-2 text-secondary-main md:text-[10px] lg:text-xs
+          className={`text-xs capitalize text-secondary-main md:text-[10px] lg:text-xs
             lg:max-w-[80px] lg:truncate
              md:text-neutral-7 dark:text-white ${
                pathname === `/${locale === "en" ? "" : locale}`
@@ -139,7 +139,7 @@ export default function Menu() {
           color={pathname.includes("/dashboard") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize line-clamp-2 text-secondary-main md:text-[10px] lg:text-xs
+          className={`text-xs capitalize text-secondary-main md:text-[10px] lg:text-xs
             lg:max-w-[80px]
              md:text-neutral-7 dark:text-white ${
                pathname.includes("/dashboard")
@@ -168,7 +168,7 @@ export default function Menu() {
           color={pathname.includes("/applets") ? "#E67F3A" : undefined}
         />
         <div
-          className={`text-xs capitalize line-clamp-2 text-secondary-main md:text-[10px] lg:text-xs
+          className={`text-xs capitalize text-secondary-main md:text-[10px] lg:text-xs
             lg:max-w-[80px] lg:truncate
             md:text-neutral-7 dark:text-white ${
               pathname.includes("/applets")
