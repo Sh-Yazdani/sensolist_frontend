@@ -13,7 +13,7 @@ export default function MyThingCard({ thing }: MyThingCardProps) {
       className="w-full md:w-[calc(50%-8px)] xl:w-[calc(33%-8px)] 2xl:w-[calc(25%-8px)] mx-auto md:mx-1 max-w-[280px]
       shadow-300 shadow-white-150 dark:bg-primary-Shade-2 rounded-2xl 
       overflow-hidden flex flex-col mb-4 
-      hover:border-2 hover:border-secondary-main hover:animate-pulse hover:scale-105"
+      hover:border-2 hover:border-secondary-main hover:animate-pulse"
     >
       <div className="w-full aspect-[3/2] relative">
         <Image
