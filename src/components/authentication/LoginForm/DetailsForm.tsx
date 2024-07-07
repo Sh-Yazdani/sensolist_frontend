@@ -5,8 +5,8 @@ import { ArrowRight } from "iconsax-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { CustomPhoneInput } from "../../PhoneInput";
 import { PasswordInput } from "../PasswordInput";
-import { CustomPhoneInput } from "../PhoneInput";
 import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 

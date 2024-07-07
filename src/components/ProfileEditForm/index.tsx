@@ -4,7 +4,7 @@ import { toggleMenu } from "@/lib/features/profile/profileSlice";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { CustomPhoneInput } from "../authentication/PhoneInput";
+import { CustomPhoneInput } from "../PhoneInput";
 import ProfileUploadPhoto from "../ProfileUploadPhoto";
 import Button from "../UI/Button";
 import Input from "../UI/Input";

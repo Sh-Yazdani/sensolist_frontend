@@ -1,30 +1,25 @@
-"use client";
-
+import { ArrowRight } from "iconsax-react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { CustomPhoneInput } from "../../PhoneInput";
-import SubmitButton from "../SubmitButton";
+import { CustomPhoneInput } from "../PhoneInput";
+import Button from "../UI/Button";
 
-interface DetailsFormProps {
-  goToVerification: () => void;
+interface PhoneNumberInputs {
+  phoneNumber: string;
 }
 
-export default function DetailsForm({ goToVerification }: DetailsFormProps) {
+export default function PhoneNumberForm() {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<{ phoneNumber: string }>();
+  } = useForm<PhoneNumberInputs>();
 
-  const onSubmit: SubmitHandler<{ phoneNumber: string }> = (data) => {
-    console.log(data);
-    goToVerification();
-  };
-
+  const onSubmit: SubmitHandler<PhoneNumberInputs> = (data) => {};
   return (
     <form
+      className="mt-8 flex flex-1 flex-col"
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full mt-10 md:mt-14 lg:mt-20"
     >
       <Controller
         name="phoneNumber"
@@ -32,6 +27,7 @@ export default function DetailsForm({ goToVerification }: DetailsFormProps) {
         rules={{ required: true }}
         render={({ field: { ref, ...field } }) => (
           <CustomPhoneInput
+            placeholder="Enter your phone number"
             ref={ref}
             label="Phone number"
             {...field}
@@ -43,7 +39,9 @@ export default function DetailsForm({ goToVerification }: DetailsFormProps) {
           />
         )}
       />
-      <SubmitButton className="mt-20 lg:mb-[120px]">Submit</SubmitButton>
+      <Button type="submit" className="mt-auto w-full">
+        continue <ArrowRight />
+      </Button>
     </form>
   );
 }
