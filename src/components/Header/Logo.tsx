@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function Logo() {
   return (
-    <div className="flex items-center">
+    <Link href="/" className="flex items-center">
       <div
         className="lg:w-[48px] lg:h-[48px] w-[40px] h-[40px] 
     bg-cover bg-[url('/assets/sensolist-logo.svg')]"
@@ -11,6 +13,6 @@ export default function Logo() {
       >
         sensolist
       </span>
-    </div>
+    </Link>
   );
 }

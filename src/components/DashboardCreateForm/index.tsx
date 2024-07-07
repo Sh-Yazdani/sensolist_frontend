@@ -29,6 +29,7 @@ export default function DashboardCreateForm({
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<ICreateDashboardInputs>();
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function DashboardCreateForm({
       image: selectedImage,
     });
     dispatch(createAlert({ message: "dashboard added.", type: "success" }));
+    reset();
     onCancel();
   };
   return (
@@ -103,6 +105,7 @@ export default function DashboardCreateForm({
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();
+              reset();
               onCancel();
             }}
             className="w-[36%]"

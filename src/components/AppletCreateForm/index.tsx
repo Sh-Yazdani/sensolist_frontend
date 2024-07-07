@@ -29,6 +29,7 @@ export default function AppletCreateForm({
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<ICreateAppletInputs>();
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function AppletCreateForm({
       image: selectedImage,
     });
     dispatch(createAlert({ message: "applet added.", type: "success" }));
+    reset();
     onCancel();
   };
   return (
@@ -103,6 +105,7 @@ export default function AppletCreateForm({
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();
+              reset();
               onCancel();
             }}
             className="w-[36%]"

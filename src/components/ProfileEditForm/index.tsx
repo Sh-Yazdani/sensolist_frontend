@@ -61,7 +61,7 @@ export default function ProfileEditForm() {
           <CustomPhoneInput
             ref={ref}
             label="Phone number"
-            className="mt-6"
+            className="mt-6 mb-8"
             variant="simple"
             {...field}
             error={

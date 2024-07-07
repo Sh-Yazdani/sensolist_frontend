@@ -48,12 +48,12 @@ export default function Alert() {
       className={`fixed transition-all left-8 top-8 z-50
       rounded-lg overflow-hidden flex shadow pl-[42px] 
       ${show ? "ml-0" : " ml-[-480px] "}
-    w-[440px] min-h-[90px] bg-bg-success`}
+      w-[300px] md:w-[440px] min-h-[70px] md:min-h-[90px] bg-bg-success`}
     >
       <div className="flex flex-row items-center">
         <TickCircle color="#343434" />
         <div className="flex flex-col text-neutral-8 ml-2">
-          <div className=" text-2xl">succes</div>
+          <div className=" text-lg md:text-2xl">succes</div>
           <div>{alert.message}</div>
         </div>
       </div>
