@@ -28,7 +28,7 @@ export default function Modal({ children, onClose, open }: ModalProps) {
     <>
       {isOpen && <Backdrop onClick={closeHandler} />}
       <div
-        className={` bg-white fixed w-[calc(100%-2rem)] mx-auto flex flex-col
+        className={` bg-white fixed w-[calc(100%-2rem)] mx-auto flex flex-col max-h-[calc(100%-4rem)] overflow-auto
            text-black dark:text-white dark:bg-black shadow-300 shadow-white-150
            rounded-t-3xl pt-4 px-4 pb-8 top-10
            md:w-[480px] md:rounded-2xl md:py-10 md:px-6 md:top-20 md:left-0 md:right-0 md:mx-auto
