@@ -7,7 +7,13 @@ interface PhoneNumberInputs {
   phoneNumber: string;
 }
 
-export default function PhoneNumberForm() {
+interface PhoneNumberFormProps {
+  goToNextStep: () => void;
+}
+
+export default function PhoneNumberForm({
+  goToNextStep,
+}: PhoneNumberFormProps) {
   const {
     register,
     handleSubmit,
@@ -15,7 +21,10 @@ export default function PhoneNumberForm() {
     formState: { errors },
   } = useForm<PhoneNumberInputs>();
 
-  const onSubmit: SubmitHandler<PhoneNumberInputs> = (data) => {};
+  const onSubmit: SubmitHandler<PhoneNumberInputs> = (data) => {
+    console.log("phone number form data:", data);
+    goToNextStep();
+  };
   return (
     <form
       className="mt-8 flex flex-1 flex-col"

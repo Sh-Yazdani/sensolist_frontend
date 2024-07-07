@@ -15,7 +15,15 @@ export default function ChangePasswordForm() {
         description="Enter the phone number related to this account. We will send you a
         verification code"
       />
-      {formStep === "phoneNumber" ? <PhoneNumberForm /> : <></>}
+      {formStep === "phoneNumber" ? (
+        <PhoneNumberForm
+          goToNextStep={() => {
+            setFormStep("verification");
+          }}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 }
