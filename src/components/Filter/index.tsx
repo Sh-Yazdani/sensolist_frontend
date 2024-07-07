@@ -76,6 +76,7 @@ export default function FilterComponent() {
         w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0
          lg:w-[264px] lg:h-[650px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
          dark:bg-black flex transition-all duration-500
+         left-0 right-0 mx-auto md:left-[unset] md:right-[unset] md:mx-0
         ${
           isOpen
             ? "visible opacity-100 z-30"
