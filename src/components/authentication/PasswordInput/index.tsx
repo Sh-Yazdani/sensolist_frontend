@@ -1,6 +1,7 @@
 "use client";
 
-import { Eye, EyeSlash, Warning2 } from "iconsax-react";
+import FormError from "@/components/UI/FormError";
+import { Eye, EyeSlash } from "iconsax-react";
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
@@ -34,14 +35,7 @@ export function PasswordInput({
         border ${error ? "border-error" : "border-white-opacity-900"} 
         placeholder:text-white-opacity-700 placeholder:text-sm`}
       />
-      {error && (
-        <div
-          className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-        absolute bottom-[-2.25rem]"
-        >
-          <Warning2 /> {error}
-        </div>
-      )}
+      {error && <FormError error={error} />}
       <button
         onClick={(event: React.MouseEvent<HTMLElement>) => {
           event.preventDefault();

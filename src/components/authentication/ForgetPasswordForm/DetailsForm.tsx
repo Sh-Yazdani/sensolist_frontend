@@ -1,7 +1,7 @@
 "use client";
 
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { CustomPhoneInput } from "../PhoneInput";
+import { CustomPhoneInput } from "../../PhoneInput";
 import SubmitButton from "../SubmitButton";
 
 interface DetailsFormProps {

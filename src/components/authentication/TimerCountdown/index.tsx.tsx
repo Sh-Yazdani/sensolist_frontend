@@ -14,7 +14,7 @@ export default function TimerCountDown() {
     return () => clearInterval(interval);
   }, [seconds]);
   return (
-    <div className="mt-10">
+    <div className="mt-10 dark:text-white">
       {seconds !== 0 ? (
         displayTime
       ) : (

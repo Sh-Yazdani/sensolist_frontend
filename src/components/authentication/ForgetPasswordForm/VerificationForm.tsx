@@ -1,4 +1,4 @@
-import { Warning2 } from "iconsax-react";
+import FormError from "@/components/UI/FormError";
 import { FormEvent, useState } from "react";
 import VerificationInput from "react-verification-input";
 import SubmitButton from "../SubmitButton";
@@ -37,14 +37,7 @@ export default function VerificationForm({
             container: "lg:w-[528px] h-[80px] justify-between",
           }}
         />
-        {error && (
-          <div
-            className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-      absolute bottom-[-2.25rem]"
-          >
-            <Warning2 /> {error}
-          </div>
-        )}
+        {error && <FormError error={error} />}
       </div>
       <TimerCountDown />
       <SubmitButton className="mt-20 lg:mb-[120px]">Submit</SubmitButton>

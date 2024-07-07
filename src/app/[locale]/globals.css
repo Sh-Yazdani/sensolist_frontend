@@ -31,7 +31,9 @@ body {
   border-radius: 8px;
   margin-top: 8px;
 }
-
+.react-tel-input.simple {
+  background: transparent !important;
+}
 .react-tel-input .form-control {
   background-color: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.7);
@@ -42,6 +44,10 @@ body {
   border: none !important;
   border-right: 1px solid rgba(255, 255, 255, 0.7) !important;
 }
+.simple .flag-dropdown {
+  border-right: 1px solid #9b9b9b !important;
+}
+
 .react-tel-input .flag-dropdown.open .selected-flag {
   background: none !important;
 }
@@ -53,6 +59,9 @@ body {
   border-radius: 12px !important;
   max-height: 280px !important;
   background-color: #000911 !important;
+}
+.react-tel-input.simple .country-list {
+  max-height: 180px !important;
 }
 .react-tel-input .country-list .search {
   background-color: #000911 !important;
@@ -198,16 +207,52 @@ body {
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
+.shadow-right-300 {
+  box-shadow: 4px 0px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
 .dark .shadow-white-150 {
   box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.3);
 }
 
+.dark .shadow-right-white-150 {
+  box-shadow: 4px 0px 7px 0px rgba(255, 255, 255, 0.3);
+}
 .shadow-orange:hover {
   box-shadow: 0px 0px 8px 0px #e67f3a;
+}
+@media not all and (max-width: 768px) {
+  .shadow-md-300 {
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow-md-right-300 {
+    box-shadow: 4px 0px 8px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .dark .shadow-md-white-150 {
+    box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .shadow-md-right-white-150 {
+    box-shadow: 2px 0px 8px 0px rgba(255, 255, 255, 0.3);
+  }
 }
 
 .menu-animation:hover {
   -webkit-transition: background-color 1000ms linear;
   -ms-transition: background-color 1000ms linear;
   transition: background-color 1000ms linear;
+}
+
+/* verification */
+
+.profile .vi__character {
+  border: 1px solid black;
+  color: black;
+}
+
+.dark .profile .vi__character {
+  border: 1px solid white;
+  color: white;
 }
