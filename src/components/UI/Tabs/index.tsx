@@ -5,7 +5,6 @@ interface TabsProps {
 }
 
 export default function Tabs({ items, currentIndex, onTabChange }: TabsProps) {
-  console.log(`calc((100% / ${items.length}) * ${currentIndex})`);
   return (
     <div className="relative flex items-center border-b-2 border-neutral-3 w-full">
       {items.map((item, i) => (

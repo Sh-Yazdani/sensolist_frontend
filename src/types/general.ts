@@ -64,3 +64,9 @@ export interface IProfileMenuItem {
   link: string;
   icon: React.ReactNode;
 }
+
+export interface INotification {
+  content: string;
+  date: string;
+  new: boolean;
+}
