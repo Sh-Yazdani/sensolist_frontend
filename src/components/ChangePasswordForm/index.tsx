@@ -4,6 +4,7 @@ import { ChangePasswordStepsType } from "@/types/general";
 import { useEffect, useState } from "react";
 import FormHeader from "./FormHeader";
 import PhoneNumberForm from "./PhoneNumberForm";
+import SetPasswordForm from "./SetPasswordForm";
 import VerificationForm from "./VerificationForm";
 
 export default function ChangePasswordForm() {
@@ -27,13 +28,25 @@ export default function ChangePasswordForm() {
             }}
           />
         </>
-      ) : (
+      ) : formStep === "verification" ? (
         <>
           <FormHeader
             title="You received a code!"
             description="Enter the code which has been sent to you."
           />
           <VerificationForm
+            goToNextStep={() => {
+              setFormStep("setPassword");
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <FormHeader
+            title="Set a new password"
+            description="Choose a new password which is different from the previous one."
+          />
+          <SetPasswordForm
             resetForm={() => {
               setFormStep("phoneNumber");
             }}
