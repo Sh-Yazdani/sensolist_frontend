@@ -251,3 +251,8 @@ body {
   border: 1px solid black;
   color: black;
 }
+
+.dark .profile .vi__character {
+  border: 1px solid white;
+  color: white;
+}
