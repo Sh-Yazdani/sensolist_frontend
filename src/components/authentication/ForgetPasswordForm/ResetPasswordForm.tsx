@@ -1,6 +1,6 @@
 import { ResetPasswordInputs } from "@/types/general";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PasswordInput } from "../PasswordInput";
+import { PasswordInput } from "../../UI/PasswordInput";
 import SubmitButton from "../SubmitButton";
 
 export default function ResetPasswordForm() {
