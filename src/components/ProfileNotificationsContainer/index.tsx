@@ -2,6 +2,7 @@
 
 import { INotification } from "@/types/general";
 import { useEffect, useState } from "react";
+import NotificationItem from "../NotificationItem/NotificationItem";
 import Tabs from "../UI/Tabs";
 import EmptyState from "./EmptyState";
 
@@ -32,7 +33,21 @@ export default function ProfileNotificationsContainer({
           setCurrentTabIndex(i);
         }}
       />
-      {displayNotifications.length === 0 ? <EmptyState /> : <></>}
+      {displayNotifications.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <div className="flex flex-col">
+          {displayNotifications.map((notif, i) => (
+            <NotificationItem
+              key={i}
+              content={notif.content}
+              new={notif.new}
+              date={notif.date}
+              isFullContent={true}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

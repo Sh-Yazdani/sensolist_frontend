@@ -2,8 +2,8 @@
 
 import { Notification } from "iconsax-react";
 import { useState } from "react";
+import NotificationItem from "../NotificationItem/NotificationItem";
 import DropDownModal from "../UI/DropDownModal";
-import NotificationItem from "./NotificationItem";
 
 export default function Notifications() {
   const [newNotification, setNewNotification] = useState<boolean>(true);
