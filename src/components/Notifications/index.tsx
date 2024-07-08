@@ -1,13 +1,18 @@
 "use client";
 
+import { toggleMenu } from "@/lib/features/profile/profileSlice";
 import { Notification } from "iconsax-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import DropDownModal from "../UI/DropDownModal";
 
 export default function Notifications() {
   const [newNotification, setNewNotification] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
   const fakeNotifications: {
     content: string;
     date: string;
@@ -49,7 +54,6 @@ export default function Notifications() {
           ></div>
         )}
       </button>
-      {/* {isOpen && ( */}
       <>
         <DropDownModal
           visible={isOpen}
@@ -87,7 +91,14 @@ export default function Notifications() {
             className="absolute h-14 w-full bg-white dark:bg-primary-Shade-1 left-0 bottom-0
           flex items-center gap-2 px-4"
           >
-            <button className="w-full bg-secondary-main rounded-lg text-white text-sm py-1.5 border-2 border-secondary-main mx-auto">
+            <button
+              onClick={() => {
+                router.push("/profile/notifications");
+                setIsOpen(false);
+                dispatch(toggleMenu({ menuOpen: false }));
+              }}
+              className="w-full bg-secondary-main rounded-lg text-white text-sm py-1.5 border-2 border-secondary-main mx-auto"
+            >
               view all
             </button>
             {/* <button className="w-1/2 rounded-lg border-2 border-secondary-main text-secondary-main py-1.5 whitespace-nowrap">
