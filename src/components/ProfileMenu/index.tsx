@@ -48,8 +48,8 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   return (
     <div
       className={` p-4 flex flex-col flex-1 absolute bg-neutral-2 dark:bg-primary-Shade-2 
-         md:bg-transparent md:ml-6 
-    h-[calc(100%-62px)] z-20 transition-all ${
+         md:bg-transparent md:ml-6 h-[calc(100vh-134px)] 
+    z-20 transition-all ${
       !isOpen
         ? "translate-x-full invisible w-0 md:translate-x-0 md:visible"
         : "w-full"
