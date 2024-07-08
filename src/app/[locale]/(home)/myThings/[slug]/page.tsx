@@ -27,12 +27,17 @@ export default function ProducDetailsPage({
   params: { slug: string };
 }) {
   return (
-    <div className=" h-full overflow-auto">
+    <div className=" h-full overflow-auto md:overflow-visible">
       <ProductDetailsHeader />
-      <div className="flex flex-col px-4 xl:flex-row">
-        {/* <div className="xl:w-1/2 bg-error"> */}
+      <div className="flex flex-col px-4 lg:flex-row md:w-fit md:mx-auto shadow-300 shadow-white-150 lg:p-4 md:rounded-2xl">
+        <div className=" text-lg lg:hidden mt-4 capitalize dark:text-white">
+          {fakeThing.name}
+        </div>
+        <div className="lg:hidden text-xs text-neutral-7 dark:text-neutral-4 flex mt-2">
+          <span className="mr-2">Activated in:</span>
+          <span>{fakeThing.activationDate}</span>
+        </div>
         <ProductDetailsGallery images={fakeThing.images} />
-        {/* </div> */}
         <ProductDetailsContent
           name={fakeThing.name}
           brand={fakeThing.brand}

@@ -47,7 +47,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   ];
   return (
     <div
-      className={` p-4 flex flex-col flex-1 absolute bg-neutral-2 dark:bg-primary-Shade-2 
+      className={` p-4 flex flex-col flex-1 absolute bg-neutral-2 dark:bg-primary-Shade-1 md:dark:bg-primary-Shade-2 
          md:bg-transparent md:ml-6 h-[calc(100vh-134px)] 
     z-20 transition-all ${
       !isOpen

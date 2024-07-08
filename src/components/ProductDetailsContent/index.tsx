@@ -20,8 +20,8 @@ export default function ProductDetailsContent({
   description,
 }: ProductDetailsContentProps) {
   return (
-    <div className=" flex flex-col gap-6 xl:pl-10 text-sm flex-1 max-w-[500px] mr-auto">
-      <div className="text-lg text-black font-medium capitalize dark:text-white">
+    <div className=" flex flex-col gap-6 lg:pl-10 text-sm flex-1 max-w-[500px] mr-auto">
+      <div className="text-lg text-black font-medium capitalize dark:text-white hidden lg:flex">
         {name}
       </div>
       <div className="flex items-baseline w-full">
@@ -69,7 +69,7 @@ export default function ProductDetailsContent({
         </div>
       </div>
 
-      <div className="flex items-baseline w-full">
+      <div className="flex items-baseline w-full hidden lg:flex">
         <div className="w-1/2 whitespace-nowrap pr-2 font-bold text-black capitalize dark:text-white">
           activation date:
         </div>
@@ -78,11 +78,11 @@ export default function ProductDetailsContent({
         </div>
       </div>
 
-      <div className="flex items-baseline w-full">
-        <div className="w-1/2 whitespace-nowrap pr-2 font-bold text-black capitalize dark:text-white">
+      <div className="flex items-baseline w-full flex-col">
+        <div className=" w-full whitespace-nowrap pr-2 font-bold text-black capitalize dark:text-white">
           description:
         </div>
-        <div className="w-1/2 capitalize text-neutral-8 dark:text-neutral-3">
+        <div className="w-full mt-2 mb-4 capitalize text-neutral-8 dark:text-neutral-3">
           {description}
         </div>
       </div>
