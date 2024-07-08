@@ -8,25 +8,25 @@ export default function Home() {
       name: "applet's name",
       description: "Applets's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-5.png",
     },
     {
       name: "applet's name",
       description: "Applets's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-6.png",
     },
     {
       name: "applet's name",
       description: "Applets's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-1.png",
     },
     {
       name: "applet's name",
       description: "Applets's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-2.png",
     },
   ];
   const pinnedDashboards: IDashboard[] = [
@@ -34,25 +34,25 @@ export default function Home() {
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-1.png",
     },
     {
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-2.png",
     },
     {
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-3.png",
     },
     {
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
-      image: "/assets/thing.jpeg",
+      image: "/assets/dashboard/img-4.png",
     },
   ];
   return (
