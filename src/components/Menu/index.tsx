@@ -8,6 +8,7 @@ import {
   Profile,
   Setting4,
 } from "iconsax-react";
+import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -179,12 +180,15 @@ export default function Menu() {
           {t("applets")}
         </div>
       </button>
-      <button className="hidden md:flex flex-col items-center order-6">
+      <Link
+        href={"/authentication/login"}
+        className="hidden md:flex flex-col items-center order-6"
+      >
         <LogoutCurve size={40} color="#DF2040" />
         <div className=" capitalize dark:text-neutral-4 text-neutral-7 whitespace-nowrap md:text-[10px] lg:text-xs">
           log out
         </div>
-      </button>
+      </Link>
     </div>
   );
 }

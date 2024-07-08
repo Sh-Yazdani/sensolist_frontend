@@ -91,10 +91,13 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
           </Link>
         ))}
       </div>
-      <div className="mt-auto flex items-center md:hidden">
+      <Link
+        href={"/authentication/login"}
+        className="mt-auto flex items-center md:hidden"
+      >
         <LogoutCurve className=" text-error mr-2" />
         <span className=" text-neutral-7 dark:text-neutral-4 ">Log Out</span>
-      </div>
+      </Link>
     </div>
   );
 }
