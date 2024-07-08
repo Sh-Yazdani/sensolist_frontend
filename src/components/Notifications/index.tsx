@@ -73,7 +73,7 @@ export default function Notifications() {
             className=" w-full border-b text-black border-neutral-6 text-base text-start pb-2
           lg:text-lg dark:text-neutral-2 dark:border-neutral-3 flex items-center"
           >
-            Notification
+            Notifications
             <button className=" text-secondary-main font-medium ml-auto text-xs capitalize">
               mark all as read
             </button>

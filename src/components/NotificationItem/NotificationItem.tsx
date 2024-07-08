@@ -38,7 +38,7 @@ export default function NotificationItem(props: NotificationItemProps) {
         <div
           className={`${
             !props.isFullContent && "line-clamp-2"
-          } text-left ml-2 text-sm ${
+          } text-left ml-2 text-xs ${
             props.new
               ? " text-neutral-8 dark:text-neutral-3"
               : "text-neutral-6 dark:text-neutral-7"
