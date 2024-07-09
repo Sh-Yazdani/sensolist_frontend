@@ -27,7 +27,18 @@ export const appletSlice = createSlice({
         { ...action.payload, pin: true },
       ];
     },
+    unPinApplet: (state, action: PayloadAction<IApplet>) => {
+      state.applets = [
+        ...state.applets.filter((app) => app.id !== action.payload.id),
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          description: action.payload.description,
+        },
+      ];
+    },
   },
 });
-export const { addApplet, removeApplet, pinApplet } = appletSlice.actions;
+export const { addApplet, removeApplet, pinApplet, unPinApplet } =
+  appletSlice.actions;
 export default appletSlice.reducer;

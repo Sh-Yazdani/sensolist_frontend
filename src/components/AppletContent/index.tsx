@@ -12,12 +12,14 @@ interface AppletContentProps {
   applets: IApplet[];
   removeApplet: (d: IApplet) => void;
   pinApplet: (d: IApplet) => void;
+  unPinApplet: (d: IApplet) => void;
 }
 
 export default function AppletContent({
   applets,
   removeApplet,
   pinApplet,
+  unPinApplet,
 }: AppletContentProps) {
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
@@ -28,6 +30,7 @@ export default function AppletContent({
         <div className="w-full pt-4 gap-4 flex flex-wrap">
           {applets.map((applet: IApplet) => (
             <AppletCard
+              unPinApplet={unPinApplet}
               pinApplet={pinApplet}
               removeApplet={removeApplet}
               key={applet.name}

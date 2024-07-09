@@ -4,23 +4,29 @@ import AppletContent from "@/components/AppletContent";
 import AppletCreateButton from "@/components/AppletCreateButton";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
+import {
+  pinApplet as pinAppletAction,
+  removeApplet,
+  unPinApplet as unPinAppletAction,
+} from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { IApplet } from "@/types/general";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Page() {
   const { applets } = useSelector((state: RootState) => state.appletSlice);
+  const dispatch = useDispatch();
   const removeFromApplets = (applet: IApplet) => {
-    // setApplets((prev) => prev.filter((app) => app.id !== applet.id));
+    dispatch(removeApplet(applet));
   };
 
   const pinApplet = (applet: IApplet) => {
-    // setApplets((prev) => [
-    //   ...prev.filter((app) => app.id !== applet.id),
-    //   { ...applet, pin: true },
-    // ]);
+    dispatch(pinAppletAction(applet));
   };
 
+  const unPinApplet = (applet: IApplet) => {
+    dispatch(unPinAppletAction(applet));
+  };
   return (
     <div className=" flex flex-col pt-20 md:pt-0 md:pr-4 px-4">
       <div className="md:relative flex flex-row-reverse justify-end">
@@ -29,6 +35,7 @@ export default function Page() {
         <SortBy />
       </div>
       <AppletContent
+        unPinApplet={unPinApplet}
         pinApplet={pinApplet}
         removeApplet={removeFromApplets}
         applets={applets}

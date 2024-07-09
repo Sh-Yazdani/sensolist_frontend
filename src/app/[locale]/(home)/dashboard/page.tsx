@@ -4,30 +4,30 @@ import DashboardContent from "@/components/DashboardContent";
 import DashboardCreateButton from "@/components/DashboardCreateButton";
 import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
+import {
+  pinDashboard as pinDashboardAction,
+  removeDashboard,
+  unPinDashboard as unPinDashboardAction,
+} from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
 import { IDashboard } from "@/types/general";
-import { useSelector } from "react-redux";
-
-// let dashboards:  = [];
-
-// after connecting to server this component must be a server side component
-
+import { useDispatch, useSelector } from "react-redux";
 export default function Page() {
-  // const [dashboards, setDashbaords] = useState<IDashboard[]>([]);
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
-  // console.log(state);
+  const dispatch = useDispatch();
+
   const removeFromDashboards = (dashboard: IDashboard) => {
-    console.log("removeFromDashboards", dashboard);
-    // setDashbaords((prev) => prev.filter((dash) => dash.id !== dashboard.id));
+    dispatch(removeDashboard(dashboard));
   };
 
   const pinDashboard = (dashboard: IDashboard) => {
-    // setDashbaords((prev) => [
-    //   ...prev.filter((dash) => dash.id !== dashboard.id),
-    //   { ...dashboard, pin: true },
-    // ]);
+    dispatch(pinDashboardAction(dashboard));
+  };
+
+  const unPinDashboard = (dashboard: IDashboard) => {
+    dispatch(unPinDashboardAction(dashboard));
   };
 
   return (

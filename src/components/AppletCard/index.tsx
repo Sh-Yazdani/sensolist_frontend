@@ -11,16 +11,23 @@ interface AppletCardProps {
   applet: IApplet;
   removeApplet: (d: IApplet) => void;
   pinApplet: (d: IApplet) => void;
+  unPinApplet: (d: IApplet) => void;
 }
 
 export default function AppletCard({
   applet,
   removeApplet,
   pinApplet,
+  unPinApplet,
 }: AppletCardProps) {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const pinHandler = () => {
     pinApplet(applet);
+    setIsPopupOpen(false);
+  };
+
+  const unPinHandler = () => {
+    unPinApplet(applet);
     setIsPopupOpen(false);
   };
 
@@ -53,7 +60,7 @@ export default function AppletCard({
       </div>
       <div className="relative w-6 mb-auto md:w-16">
         <div className="w-full hidden md:flex gap-4">
-          <button onClick={pinHandler}>
+          <button onClick={applet.pin ? unPinHandler : pinHandler}>
             {applet.pin ? <PinnedIcon /> : <PinIcon />}
           </button>
           <button onClick={removeHandler}>
@@ -76,7 +83,7 @@ export default function AppletCard({
             />
             <div className="w-[153px] bg-neutral-2 dark:bg-primary-tint-1 absolute right-0 shadow-300 rounded-lg overflow-hidden z-50">
               <button
-                onClick={pinHandler}
+                onClick={applet.pin ? unPinHandler : pinHandler}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm border-b border-neutral-5"
               >
                 {applet.pin ? (
