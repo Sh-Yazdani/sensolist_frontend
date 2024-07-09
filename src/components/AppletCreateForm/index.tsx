@@ -13,9 +13,11 @@ import Input from "../UI/Input";
 export default function AppletCreateForm({
   onCancel,
   appletAdd,
+  applets,
 }: {
   appletAdd: (d: IApplet) => void;
   onCancel: () => void;
+  applets: IApplet[];
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",
@@ -39,6 +41,7 @@ export default function AppletCreateForm({
   const onSubmit: SubmitHandler<ICreateAppletInputs> = (data) => {
     console.log("submit", data, selectedImage);
     appletAdd({
+      id: applets?.length ? applets[applets.length - 1].id + 1 : 0,
       name: data.name,
       description: data.description,
       image: selectedImage,

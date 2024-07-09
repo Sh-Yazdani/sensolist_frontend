@@ -42,6 +42,7 @@ export default function AppletContent({
         />
       )}
       <AppletCreateModal
+        applets={applets}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addApplet={(d: IApplet) => {

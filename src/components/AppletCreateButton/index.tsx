@@ -34,6 +34,7 @@ export default function AppletCreateButton({
         </div>
       </Button>
       <AppletCreateModal
+        applets={applets}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addApplet={(d: IApplet) => {

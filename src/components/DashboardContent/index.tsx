@@ -43,6 +43,7 @@ export default function DashboardContent({
         />
       )}
       <DashboardCreateModal
+        dashboards={dashboards}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addDashboard={(d: IDashboard) => {

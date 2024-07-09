@@ -50,6 +50,7 @@ export interface ICreateDashboardInputs {
 }
 
 export interface IApplet {
+  id: number;
   name: string;
   description: string;
   image?: string;
