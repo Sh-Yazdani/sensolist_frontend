@@ -5,7 +5,7 @@ import { Trash } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
 import DropDownModal from "../UI/DropDownModal";
-import { MoreHorizontalIcon, PinIcon } from "../UI/Icons";
+import { MoreHorizontalIcon, PinIcon, PinnedIcon } from "../UI/Icons";
 
 interface AppletCardProps {
   applet: IApplet;
@@ -34,7 +34,7 @@ export default function AppletCard({
       className={`flex bg-exteremly-light-blue dark:bg-primary 
         w-full md:w-[calc(50%-10px)] lg:w-[calc(33%-10px)] xl:w-[calc(25%-20px)] 2xl:w-[calc(20%-20px)]
         max-w-[420px] mx-auto md:mx-[unset]
-    items-center p-2 rounded-2xl mb-4 ${applet.pin && "order-1"}`}
+    items-center p-2 rounded-2xl mb-4 ${applet.pin ? "order-0" : "order-2"}`}
     >
       <div className="h-[84px] w-[84px] relative">
         <Image
@@ -54,7 +54,7 @@ export default function AppletCard({
       <div className="relative w-6 mb-auto md:w-16">
         <div className="w-full hidden md:flex gap-4">
           <button onClick={pinHandler}>
-            <PinIcon />
+            {applet.pin ? <PinnedIcon /> : <PinIcon />}
           </button>
           <button onClick={removeHandler}>
             <Trash className=" text-neutral-5" />
@@ -79,7 +79,15 @@ export default function AppletCard({
                 onClick={pinHandler}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm border-b border-neutral-5"
               >
-                <PinIcon className="pr-2" /> Pin
+                {applet.pin ? (
+                  <>
+                    <PinnedIcon /> Pinned
+                  </>
+                ) : (
+                  <>
+                    <PinIcon /> Pin
+                  </>
+                )}
               </button>
               <button
                 onClick={removeHandler}
