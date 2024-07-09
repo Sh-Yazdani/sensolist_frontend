@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface AppletState {
   applets: IApplet[];
+  pinnedApplets: IApplet[];
 }
 
 const initialState: AppletState = {
   applets: [],
+  pinnedApplets: [],
 };
 
 export const appletSlice = createSlice({
@@ -26,6 +28,10 @@ export const appletSlice = createSlice({
         ...state.applets.filter((app) => app.id !== action.payload.id),
         { ...action.payload, pin: true },
       ];
+      state.pinnedApplets = [
+        ...state.pinnedApplets,
+        { ...action.payload, pin: true },
+      ];
     },
     unPinApplet: (state, action: PayloadAction<IApplet>) => {
       state.applets = [
@@ -37,6 +43,9 @@ export const appletSlice = createSlice({
           image: action.payload.image,
         },
       ];
+      state.pinnedApplets = state.pinnedApplets.filter(
+        (app) => app.id !== action.payload.id
+      );
     },
   },
 });

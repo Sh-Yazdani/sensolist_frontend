@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DashboardState {
   dashboards: IDashboard[];
+  pinedDashboards: IDashboard[];
 }
 
 const initialState: DashboardState = {
   dashboards: [],
+  pinedDashboards: [],
 };
 
 export const dashboardSlice = createSlice({
@@ -26,6 +28,10 @@ export const dashboardSlice = createSlice({
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
         { ...action.payload, pin: true },
       ];
+      state.pinedDashboards = [
+        ...state.pinedDashboards,
+        { ...action.payload, pin: true },
+      ];
     },
     unPinDashboard: (state, action: PayloadAction<IDashboard>) => {
       state.dashboards = [
@@ -37,6 +43,9 @@ export const dashboardSlice = createSlice({
           image: action.payload.image,
         },
       ];
+      state.pinedDashboards = state.pinedDashboards.filter(
+        (dash) => dash.id !== action.payload.id
+      );
     },
   },
 });
