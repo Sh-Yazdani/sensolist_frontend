@@ -16,7 +16,7 @@ export default function ProfileContainer({ children }: ProfileContainerProps) {
   const { menuOpen } = useSelector((state: RootState) => state.profileSlice);
   const router = useRouter();
   return (
-    <div className="flex h-[calc(100vh-134px)] overflow-auto md:overflow-visible  md:h-[544px] lg:h-[630px]">
+    <div className="flex h-[calc(100vh-134px)] overflow-auto md:overflow-visible  md:h-[544px] md:mx-auto">
       <ProfileMenu
         isOpen={menuOpen}
         onClose={() => {
@@ -24,8 +24,8 @@ export default function ProfileContainer({ children }: ProfileContainerProps) {
         }}
       />
       <div
-        className="flex-1 md:mr-[52px] lg:mr-10 rounded-r-2xl shadow-md-right-300 shadow-md-right-white-150
-       max-w-[576px] dark:bg-primary-Shade-2"
+        className="flex-1 rounded-r-2xl md:min-w-[400px] lg:w-[500px]
+       md:max-w-[576px] md:mr-4 md:bg-black-opacity-50 md:dark:bg-white-opacity-50 border-l dark:border-l-neutral-7"
       >
         {!menuOpen && (
           <ProfileMobileHeader
