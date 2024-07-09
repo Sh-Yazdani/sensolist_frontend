@@ -43,7 +43,7 @@ export default function Notifications() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="relative flex w-[32px] h-[32px] mx-4 rounded-full
+        className="relative flex w-[32px] h-[32px] mx-4 rounded-full order-2
      dark:bg-white-opacity-100 shadow bg-primary-tint-3 md:bg-neutral-3"
       >
         <Notification className="m-auto size-5 dark:text-white md:text-primary-tint-3" />

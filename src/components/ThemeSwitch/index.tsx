@@ -16,7 +16,7 @@ export default function ThemeSwitch() {
   }
   return (
     <div
-      className="flex w-[32px] md:w-[80px] h-[32px] mr-4 md:mr-0
+      className="flex w-[32px] md:w-[80px] h-[32px] mr-4 md:mr-0 order-1 md:order-none
       shadow rounded-full relative gap-2 justify-around items-center
      dark:bg-white-opacity-100 bg-white-opacity-100 md:bg-neutral-3 py-0.5 md:px-3"
     >
