@@ -37,7 +37,7 @@ export function CustomPhoneInput({
         containerClass="simple"
         placeholder={placeholder ? placeholder : ""}
         searchPlaceholder="Search for country"
-        inputClass={`!h-[45px] lg:!h-[60px] !w-full mt-2 flex dark:text-neutral-2
+        inputClass={`!h-[45px] !w-full mt-2 flex dark:text-neutral-2
            placeholder:text-xs placeholder:text-neutral-7 ${
              error && "border !border-error"
            } ${variant === "simple" && "simple  !border-neutral-6"}`}

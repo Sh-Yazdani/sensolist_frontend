@@ -43,7 +43,7 @@ export default function Notifications() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="relative flex w-[32px] h-[32px] mx-4 rounded-full
+        className="relative flex w-[32px] h-[32px] mx-4 rounded-full order-2 md:order-none
      dark:bg-white-opacity-100 shadow bg-primary-tint-3 md:bg-neutral-3"
       >
         <Notification className="m-auto size-5 dark:text-white md:text-primary-tint-3" />
@@ -73,7 +73,7 @@ export default function Notifications() {
             className=" w-full border-b text-black border-neutral-6 text-base text-start pb-2
           lg:text-lg dark:text-neutral-2 dark:border-neutral-3 flex items-center"
           >
-            Notification
+            Notifications
             <button className=" text-secondary-main font-medium ml-auto text-xs capitalize">
               mark all as read
             </button>

@@ -1,20 +1,21 @@
 "use client";
 
+import { addApplet } from "@/lib/features/applet/appletSlice";
 import { IApplet } from "@/types/general";
 import { Add, AddSquare } from "iconsax-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import AppletCreateModal from "../AppletCreateModal";
 import Button from "../UI/Button";
 
 interface AppletCreateButtonProps {
   applets: IApplet[];
-  setApplets: (d: IApplet[]) => void;
 }
 
 export default function AppletCreateButton({
   applets,
-  setApplets,
 }: AppletCreateButtonProps) {
+  const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   if (!applets.length) return;
   return (
@@ -34,10 +35,11 @@ export default function AppletCreateButton({
         </div>
       </Button>
       <AppletCreateModal
+        applets={applets}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addApplet={(d: IApplet) => {
-          setApplets([...applets, d]);
+          dispatch(addApplet(d));
         }}
       />
     </>

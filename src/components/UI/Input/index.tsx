@@ -26,7 +26,7 @@ export default function Input({
       <input
         placeholder={placeholder}
         {...register(name, { required: true })}
-        className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent lg:h-[60px]
+        className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
              placeholder:text-neutral-6 placeholder:text-sm focus-visible:outline-none dark:text-neutral-2`}
       />
       {error && <FormError error={error} />}

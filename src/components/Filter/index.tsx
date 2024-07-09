@@ -58,12 +58,12 @@ export default function FilterComponent() {
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className="flex lg:hidden items-center gap-2 ml-4 relative
-  border-2 border-neutral-3 rounded-full p-2 text-neutral-7
+        className="flex lg:hidden items-center gap-2 mx-2 relative h-[36px]
+  border-2 border-neutral-3 rounded-xl lg:rounded-full p-2 text-neutral-7 min-w-[36px] justify-center
   dark:border-0 dark:bg-white-opacity-100 dark:text-neutral-3 text-sm"
       >
         <Filter className="size-4" />
-        <span className=" capitalize ">Filters</span>
+        <span className=" capitalize hidden lg:flex">Filters</span>
       </button>
       <DropDownModal
         visible={isOpen}
@@ -73,8 +73,8 @@ export default function FilterComponent() {
       />
       <div
         className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
-        w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0
-         lg:w-[264px] lg:h-[650px] lg:!shadow-none lg:rounded-xl lg:border lg:border-primary-tint-3 lg:mt-0
+        w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0 top-2
+         lg:w-[264px] lg:h-[650px] lg:rounded-xl lg:dark:shadow-white-opacity-200 lg:shadow lg:mt-0
          dark:bg-black flex transition-all duration-500
          left-0 right-0 mx-auto md:left-[unset] md:right-[unset] md:mx-0
         ${
