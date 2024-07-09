@@ -16,14 +16,12 @@ export default function Page() {
 
   const removeFromDashboards = (dashboard: IDashboard) => {
     console.log("removeFromDashboards", dashboard);
-    setDashbaords((prev) =>
-      prev.filter((dash) => dash.name !== dashboard.name)
-    );
+    setDashbaords((prev) => prev.filter((dash) => dash.id !== dashboard.id));
   };
 
   const pinDashboard = (dashboard: IDashboard) => {
     setDashbaords((prev) => [
-      ...prev.filter((dash) => dash.name !== dashboard.name),
+      ...prev.filter((dash) => dash.id !== dashboard.id),
       { ...dashboard, pin: true },
     ]);
   };

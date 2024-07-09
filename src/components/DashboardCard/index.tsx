@@ -76,18 +76,13 @@ export default function DashboardCard({
             />
             <div className="w-[153px] bg-neutral-2 dark:bg-primary-tint-1 absolute right-0 shadow-300 rounded-lg overflow-hidden z-50">
               <button
-                onClick={() => {
-                  console.log("pin");
-                  setIsPopupOpen(false);
-                }}
+                onClick={pinHandler}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm border-b border-neutral-5"
               >
                 <PinIcon className="pr-2" /> Pin
               </button>
               <button
-                onClick={() => {
-                  setIsPopupOpen(false);
-                }}
+                onClick={removeHandler}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm"
               >
                 <Trash className="pr-2 text-neutral-5" /> Remove

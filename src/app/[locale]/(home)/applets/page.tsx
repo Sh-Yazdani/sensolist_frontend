@@ -11,12 +11,12 @@ export default function Page() {
   const [applets, setApplets] = useState<IApplet[]>([]);
 
   const removeFromApplets = (applet: IApplet) => {
-    setApplets((prev) => prev.filter((app) => app.name !== applet.name));
+    setApplets((prev) => prev.filter((app) => app.id !== applet.id));
   };
 
   const pinApplet = (applet: IApplet) => {
     setApplets((prev) => [
-      ...prev.filter((app) => app.name !== applet.name),
+      ...prev.filter((app) => app.id !== applet.id),
       { ...applet, pin: true },
     ]);
   };
