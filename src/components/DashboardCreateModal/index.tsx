@@ -6,12 +6,14 @@ interface DashboardCreateModalProps {
   isCreateModalOpen: boolean;
   setIsCreateModalOpen: (a: boolean) => void;
   addDashboard: (d: IDashboard) => void;
+  dashboards: IDashboard[];
 }
 
 export default function DashboardCreateModal({
   isCreateModalOpen,
   setIsCreateModalOpen,
   addDashboard,
+  dashboards,
 }: DashboardCreateModalProps) {
   return (
     <Modal
@@ -21,6 +23,7 @@ export default function DashboardCreateModal({
       }}
     >
       <DashboardCreateForm
+        dashboards={dashboards}
         onCancel={() => {
           setIsCreateModalOpen(false);
         }}

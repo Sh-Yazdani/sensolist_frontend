@@ -15,9 +15,10 @@ export default function Page() {
   const [dashboards, setDashbaords] = useState<IDashboard[]>([]);
 
   const removeFromDashboards = (dashboard: IDashboard) => {
-    setDashbaords((prev) => [
-      ...prev.filter((dash) => dash.name !== dashboard.name),
-    ]);
+    console.log("removeFromDashboards", dashboard);
+    setDashbaords((prev) =>
+      prev.filter((dash) => dash.name !== dashboard.name)
+    );
   };
 
   const pinDashboard = (dashboard: IDashboard) => {

@@ -13,9 +13,11 @@ import ImagePicker from "./ImagePicker";
 export default function DashboardCreateForm({
   onCancel,
   dashboardAdd,
+  dashboards,
 }: {
   dashboardAdd: (d: IDashboard) => void;
   onCancel: () => void;
+  dashboards: IDashboard[];
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",
@@ -39,6 +41,7 @@ export default function DashboardCreateForm({
   const onSubmit: SubmitHandler<ICreateDashboardInputs> = (data) => {
     console.log("submit", data, selectedImage);
     dashboardAdd({
+      id: dashboards?.length ? dashboards[dashboards.length - 1].id + 1 : 0,
       name: data.name,
       description: data.description,
       image: selectedImage,

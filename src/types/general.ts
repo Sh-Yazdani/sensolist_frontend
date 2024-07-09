@@ -36,6 +36,7 @@ export interface IThings {
 }
 
 export interface IDashboard {
+  id: number;
   name: string;
   description: string;
   image?: string;

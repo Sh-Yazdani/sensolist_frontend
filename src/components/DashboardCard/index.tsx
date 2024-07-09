@@ -86,7 +86,6 @@ export default function DashboardCard({
               </button>
               <button
                 onClick={() => {
-                  console.log("remove");
                   setIsPopupOpen(false);
                 }}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm"

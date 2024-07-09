@@ -34,6 +34,7 @@ export default function DashboardCreateButton({
         </div>
       </Button>
       <DashboardCreateModal
+        dashboards={dashboards}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addDashboard={(d: IDashboard) => {
