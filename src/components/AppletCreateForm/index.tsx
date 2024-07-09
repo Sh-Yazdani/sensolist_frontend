@@ -82,7 +82,7 @@ export default function AppletCreateForm({
               onClick={() => {
                 setSelectedImage(img);
               }}
-              className={`relative w-[57px] h-[57px] lg:w-[72px] lg:h-[72px] cursor-pointer 
+              className={`relative w-[57px] h-[57px] cursor-pointer 
               bg-neutral-2 rounded-md ${
                 selectedImage === img && "border-2 border-secondary-main"
               }`}
