@@ -9,20 +9,24 @@ export default function Home() {
       description: "Applets's description",
       pin: true,
       image: "/assets/dashboard/img-5.png",
+      id: 0,
     },
     {
+      id: 0,
       name: "applet's name",
       description: "Applets's description",
       pin: true,
       image: "/assets/dashboard/img-6.png",
     },
     {
+      id: 0,
       name: "applet's name",
       description: "Applets's description",
       pin: true,
       image: "/assets/dashboard/img-1.png",
     },
     {
+      id: 0,
       name: "applet's name",
       description: "Applets's description",
       pin: true,
@@ -31,24 +35,28 @@ export default function Home() {
   ];
   const pinnedDashboards: IDashboard[] = [
     {
+      id: 0,
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
       image: "/assets/dashboard/img-1.png",
     },
     {
+      id: 0,
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
       image: "/assets/dashboard/img-2.png",
     },
     {
+      id: 0,
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,
       image: "/assets/dashboard/img-3.png",
     },
     {
+      id: 0,
       name: "Dashboard's name",
       description: "Dashboard's description",
       pin: true,

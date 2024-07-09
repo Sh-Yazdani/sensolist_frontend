@@ -1,5 +1,5 @@
 import { IDashboard } from "@/types/general";
-import { Setting4 } from "iconsax-react";
+import { Element3 } from "iconsax-react";
 import PinnedDashboardCard from "./PinnedDashboardCard";
 
 interface HomePinnedDashboardsProps {
@@ -12,8 +12,8 @@ export default function HomePinnedDashboardes({
   return (
     <div className="flex flex-col w-full rounded-2xl border border-neutral-4 dark:border-primary-tint-2 p-4 overflow-x-auto md:w-[calc(50%-8px)] lg:w-[calc(50%-20px)]">
       <div className="flex items-center">
-        <Setting4 className=" text-secondary-main size-6 mr-2 lg:size-10" />
-        <span className=" text-neutral-8 capitalize dark:text-neutral-2 lg:text-xl">
+        <Element3 className=" text-secondary-main size-6 mr-2" />
+        <span className=" text-neutral-8 capitalize dark:text-neutral-2 lg:text-lg">
           Pinned Dashboards
         </span>
       </div>
