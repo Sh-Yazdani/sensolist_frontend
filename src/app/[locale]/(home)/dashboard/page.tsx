@@ -38,6 +38,7 @@ export default function Page() {
         <SortBy />
       </div>
       <DashboardContent
+        unPinDashboard={unPinDashboard}
         pinDashboard={pinDashboard}
         removeDashboard={removeFromDashboards}
         dashboards={dashboards}

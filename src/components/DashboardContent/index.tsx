@@ -12,12 +12,14 @@ interface DashboardContentProps {
   dashboards: IDashboard[];
   removeDashboard: (d: IDashboard) => void;
   pinDashboard: (d: IDashboard) => void;
+  unPinDashboard: (d: IDashboard) => void;
 }
 
 export default function DashboardContent({
   dashboards,
   removeDashboard,
   pinDashboard,
+  unPinDashboard,
 }: DashboardContentProps) {
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
@@ -28,6 +30,7 @@ export default function DashboardContent({
         <div className="w-full pt-4 gap-4 flex flex-wrap">
           {dashboards.map((dashboard: IDashboard) => (
             <DashboardCard
+              unPinDashboard={unPinDashboard}
               pinDashboard={pinDashboard}
               removeDashboard={removeDashboard}
               key={dashboard.name}

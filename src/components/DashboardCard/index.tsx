@@ -11,16 +11,23 @@ interface DashboardCardProps {
   dashboard: IDashboard;
   removeDashboard: (d: IDashboard) => void;
   pinDashboard: (d: IDashboard) => void;
+  unPinDashboard: (d: IDashboard) => void;
 }
 
 export default function DashboardCard({
   dashboard,
   removeDashboard,
   pinDashboard,
+  unPinDashboard,
 }: DashboardCardProps) {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const pinHandler = () => {
     pinDashboard(dashboard);
+    setIsPopupOpen(false);
+  };
+
+  const unPinHandler = () => {
+    unPinDashboard(dashboard);
     setIsPopupOpen(false);
   };
 
@@ -53,7 +60,7 @@ export default function DashboardCard({
       </div>
       <div className="relative w-6 mb-auto md:w-16">
         <div className="w-full hidden md:flex gap-4">
-          <button onClick={pinHandler}>
+          <button onClick={dashboard.pin ? unPinHandler : pinHandler}>
             {dashboard.pin ? <PinnedIcon /> : <PinIcon />}
           </button>
           <button onClick={removeHandler}>
@@ -76,7 +83,7 @@ export default function DashboardCard({
             />
             <div className="w-[153px] bg-neutral-2 dark:bg-primary-tint-1 absolute right-0 shadow-300 rounded-lg overflow-hidden z-50">
               <button
-                onClick={pinHandler}
+                onClick={dashboard.pin ? unPinHandler : pinHandler}
                 className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm border-b border-neutral-5"
               >
                 {dashboard.pin ? (
