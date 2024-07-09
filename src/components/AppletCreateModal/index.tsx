@@ -6,12 +6,14 @@ interface AppletCreateModalProps {
   isCreateModalOpen: boolean;
   setIsCreateModalOpen: (a: boolean) => void;
   addApplet: (d: IApplet) => void;
+  applets: IApplet[];
 }
 
 export default function AppletCreateModal({
   isCreateModalOpen,
   setIsCreateModalOpen,
   addApplet,
+  applets,
 }: AppletCreateModalProps) {
   return (
     <Modal
@@ -21,6 +23,7 @@ export default function AppletCreateModal({
       }}
     >
       <AppletCreateForm
+        applets={applets}
         onCancel={() => {
           setIsCreateModalOpen(false);
         }}

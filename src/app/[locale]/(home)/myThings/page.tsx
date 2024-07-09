@@ -117,13 +117,13 @@ const fakeThings: IThings[] = [
 
 export default function Page() {
   return (
-    <div className=" flex flex-col pt-20 md:pt-0 md:pr-4 px-4">
-      <div className="md:relative flex flex-row-reverse justify-end">
+    <div className=" flex flex-col pt-4 md:pt-0 md:pr-4 px-4 md:mt-[100px] lg:mt-[120px]">
+      <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8">
         <SearchBar />
         <FilterComponent />
         <SortBy />
       </div>
-      <div className="mt-4 flex flex-col md:flex-row flex-wrap lg:mr-[292px]">
+      <div className="mt-4 flex flex-col md:flex-row flex-wrap lg:mr-[252px]">
         {fakeThings.map((thing) => (
           <MyThingCard key={thing.id} thing={thing} />
         ))}

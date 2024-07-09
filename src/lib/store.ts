@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import appletSlice from "./features/applet/appletSlice";
+import dashboardSlice from "./features/dashboard/dashboardSlice";
 import notificationReducer from "./features/notification/notificatioSlice";
 import profileSlice from "./features/profile/profileSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { notificationReducer, profileSlice },
+    reducer: { notificationReducer, profileSlice, appletSlice, dashboardSlice },
   });
 };
 
