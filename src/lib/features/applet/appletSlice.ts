@@ -34,6 +34,7 @@ export const appletSlice = createSlice({
           id: action.payload.id,
           name: action.payload.name,
           description: action.payload.description,
+          image: action.payload.image,
         },
       ];
     },
