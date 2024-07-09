@@ -1,24 +1,25 @@
 "use client";
 
+import { addApplet } from "@/lib/features/applet/appletSlice";
 import { IApplet } from "@/types/general";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import AppletCard from "../AppletCard";
 import AppletCreateModal from "../AppletCreateModal";
 import AppletEmptyState from "../AppletEmptyState";
 
 interface AppletContentProps {
   applets: IApplet[];
-  setApplets: (d: IApplet[]) => void;
   removeApplet: (d: IApplet) => void;
   pinApplet: (d: IApplet) => void;
 }
 
 export default function AppletContent({
   applets,
-  setApplets,
   removeApplet,
   pinApplet,
 }: AppletContentProps) {
+  const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   console.log(applets);
   return (
@@ -46,7 +47,7 @@ export default function AppletContent({
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addApplet={(d: IApplet) => {
-          setApplets([...applets, d]);
+          dispatch(addApplet(d));
         }}
       />
     </>

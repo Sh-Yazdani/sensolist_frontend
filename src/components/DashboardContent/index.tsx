@@ -1,25 +1,25 @@
 "use client";
 
+import { addDashboard } from "@/lib/features/dashboard/dashboardSlice";
 import { IDashboard } from "@/types/general";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import DashboardCard from "../DashboardCard";
 import DashboardCreateModal from "../DashboardCreateModal";
 import DashboardEmptyState from "../DashboardEmptyState";
 
 interface DashboardContentProps {
   dashboards: IDashboard[];
-  setDashboards: (d: IDashboard[]) => void;
   removeDashboard: (d: IDashboard) => void;
   pinDashboard: (d: IDashboard) => void;
 }
 
 export default function DashboardContent({
   dashboards,
-  setDashboards,
   removeDashboard,
   pinDashboard,
 }: DashboardContentProps) {
-  // const [dashboards, setDashboards] = useState<IDashboard[]>([]);
+  const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   console.log(dashboards);
   return (
@@ -47,7 +47,7 @@ export default function DashboardContent({
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addDashboard={(d: IDashboard) => {
-          setDashboards([...dashboards, d]);
+          dispatch(addDashboard(d));
         }}
       />
     </>
