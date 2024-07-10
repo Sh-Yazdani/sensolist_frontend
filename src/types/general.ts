@@ -75,3 +75,24 @@ export interface INotification {
   date: string;
   new: boolean;
 }
+
+export interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  pin?: boolean;
+}
+
+export interface ISelectOption {
+  title: string;
+  value: string;
+}
+
+export interface IPermission {
+  name: string;
+  view: boolean;
+  add: boolean;
+  edit: boolean;
+  delete: boolean;
+}

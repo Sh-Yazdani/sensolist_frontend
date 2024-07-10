@@ -8,9 +8,10 @@ interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
   open: boolean;
+  large?: boolean;
 }
 
-export default function Modal({ children, onClose, open }: ModalProps) {
+export default function Modal({ children, onClose, open, large }: ModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   setTimeout(() => {
     setIsOpen(open ? true : false);
@@ -28,20 +29,28 @@ export default function Modal({ children, onClose, open }: ModalProps) {
     <>
       {isOpen && <Backdrop onClick={closeHandler} />}
       <div
-        className={` bg-white fixed w-[calc(100%-2rem)] flex flex-col max-h-[calc(100%-4rem)] overflow-auto
+        className={` bg-white fixed flex flex-col max-h-[calc(100%-4rem)] overflow-auto
            text-black dark:text-white dark:bg-black shadow-300 shadow-white-150
-           rounded-t-3xl pt-4 px-4 pb-8 top-10 max-w-[340px] md:max-w-[unset]
-           md:w-[480px] md:rounded-2xl md:py-10 md:px-6 md:top-20 left-0 right-0 mx-auto
+           rounded-t-3xl pt-4 px-4 pb-8 top-10
+            md:rounded-2xl md:py-10 md:px-6 md:top-20 left-0 right-0 mx-auto
          transition-[opacity] duration-500 ease-linear ${
            isOpen ? " opacity-100 z-40" : "opacity-0 -z-10"
-         }`}
+         }
+            w-[calc(100%-2rem)]
+        ${
+          large
+            ? " max-w-[920px]"
+            : " max-w-[340px] md:w-[480px] md:max-w-[unset]"
+        }`}
       >
-        <button
-          onClick={closeHandler}
-          className="absolute top-6 right-6 hidden md:flex text-neutral-5"
-        >
-          <CloseCircle />
-        </button>
+        {!large && (
+          <button
+            onClick={closeHandler}
+            className="absolute top-6 right-6 hidden md:flex text-neutral-5"
+          >
+            <CloseCircle />
+          </button>
+        )}
         {children}
       </div>
     </>
