@@ -9,6 +9,7 @@ import {
 } from "material-react-table";
 import { useMemo, useState } from "react";
 import Modal from "../UI/Modal";
+import UserManagerEditPermissions from "../UserManagerEditPemissions";
 
 interface UserManagerTableProps {
   tableData: IUser[];
@@ -76,7 +77,7 @@ export default function UserManagerTable({ tableData }: UserManagerTableProps) {
           setUserEdit(null);
         }}
       >
-        test
+        <UserManagerEditPermissions />
       </Modal>
     </>
   );
