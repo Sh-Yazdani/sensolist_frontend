@@ -88,7 +88,7 @@ export default function UserManagerTable({ tableData }: UserManagerTableProps) {
           setUserEdit(null);
         }}
       >
-        <UserManagerEditPermissions />
+        {userEdit && <UserManagerEditPermissions user={userEdit} />}
       </Modal>
     </>
   );

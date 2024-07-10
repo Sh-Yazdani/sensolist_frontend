@@ -1,8 +1,8 @@
-import { IPermission } from "@/types/general";
+import { IPermission, IUser } from "@/types/general";
 import { Checkbox, Table } from "flowbite-react";
 import Select from "../UI/Select";
 
-export default function UserManagerEditPermissions() {
+export default function UserManagerEditPermissions({ user }: { user: IUser }) {
   const permissions: IPermission[] = [
     {
       name: "projects",
@@ -63,6 +63,9 @@ export default function UserManagerEditPermissions() {
   ];
   return (
     <div className="overflow-x-auto">
+      <div className="mb-4">
+        {user.firstName} {user.lastName} Permissions
+      </div>
       <Table>
         <Table.Head>
           <Table.HeadCell>Entity</Table.HeadCell>
