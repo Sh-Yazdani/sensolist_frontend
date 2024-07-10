@@ -1,12 +1,14 @@
 "use client";
 
 import { IUser } from "@/types/general";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { UserEdit } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
   useMaterialReactTable,
 } from "material-react-table";
+import { useTheme } from "next-themes";
 import { useMemo, useState } from "react";
 import Modal from "../UI/Modal";
 import UserManagerEditPermissions from "../UserManagerEditPemissions";
@@ -15,11 +17,18 @@ interface UserManagerTableProps {
   tableData: IUser[];
 }
 
-// const data: IUser[] = [];
-
 export default function UserManagerTable({ tableData }: UserManagerTableProps) {
   const [data, setData] = useState<IUser[]>(tableData);
   const [userEdit, setUserEdit] = useState<IUser | null>(null);
+
+  const { resolvedTheme } = useTheme();
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: resolvedTheme === "dark" ? "dark" : "light",
+    },
+  });
+
   const columns = useMemo<MRT_ColumnDef<IUser>[]>(
     () => [
       {
@@ -68,7 +77,9 @@ export default function UserManagerTable({ tableData }: UserManagerTableProps) {
   return (
     <>
       <div className=" p-8">
-        <MaterialReactTable table={table} />
+        <ThemeProvider theme={darkTheme}>
+          <MaterialReactTable table={table} />
+        </ThemeProvider>
       </div>
       <Modal
         large
