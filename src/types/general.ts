@@ -75,3 +75,11 @@ export interface INotification {
   date: string;
   new: boolean;
 }
+
+export interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  pin?: boolean;
+}
