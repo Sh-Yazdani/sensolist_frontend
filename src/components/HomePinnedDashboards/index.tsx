@@ -22,7 +22,7 @@ export default function HomePinnedDashboardes() {
           Pinned Dashboards
         </span>
       </div>
-      <div className="flex mt-4 lg:mt-10 gap-4 w-fit md:flex-col md:w-full lg:flex-row lg:flex-wrap">
+      <div className="flex mt-4 lg:mt-10 gap-4 w-fit md:flex-col md:w-full lg:flex-row lg:flex-wrap m-auto">
         {pinedDashboards.length ? (
           pinedDashboards.map((dashboard: IDashboard, i) => (
             <PinnedDashboardCard

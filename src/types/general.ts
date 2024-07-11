@@ -96,3 +96,8 @@ export interface IPermission {
   edit: boolean;
   delete: boolean;
 }
+
+export interface IRole {
+  name: string;
+  description: string;
+}

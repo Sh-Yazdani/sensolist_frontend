@@ -1,5 +1,6 @@
 import FormError from "@/components/UI/FormError";
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import VerificationInput from "react-verification-input";
@@ -10,9 +11,10 @@ export default function VerificationForm() {
   const dispatch = useDispatch();
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();
+  const router = useRouter();
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("on submit");
+    router.push("/");
     dispatch(createAlert({ message: "login success", type: "success" }));
     if (!verificationValue) {
       setError("This field is required");
