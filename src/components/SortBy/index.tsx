@@ -48,12 +48,12 @@ export default function SortBy() {
           setIsOpen((prev) => !prev);
         }}
         className=" text-neutral-7 rounded-xl lg:rounded-full py-2 px-2 lg:px-4 lg:py-[11px] text-sm
-      border-2 border-neutral-3 dark:border-none h-[36px]
+      border-2 border-neutral-3 dark:border-none h-[36px] items-center
       dark:bg-white-opacity-100 dark:text-neutral-3 flex gap-2 lg:min-w-[120px]"
       >
         <Sort className=" text-black dark:text-white size-5" />
         <span className=" capitalize hidden lg:flex">{value}</span>
-        <ArrowDown2 className="ml-auto my-auto size-4 hidden lg:flex" />
+        <ArrowDown2 className="ml-auto size-4 hidden lg:flex" />
       </button>
       {/* {isOpen && ( */}
       <>

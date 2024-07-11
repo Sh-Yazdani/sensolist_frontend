@@ -5,8 +5,8 @@ import {
   Element3,
   Home2,
   LogoutCurve,
-  Profile,
   Setting4,
+  UserTick,
 } from "iconsax-react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -30,31 +30,31 @@ export default function Menu() {
     >
       <button
         onClick={() => {
-          router.push(`/${locale}/profile`);
+          router.push(`/${locale}/userManager`);
         }}
         className={` flex flex-col items-center md:bg-black-opacity-50 order-1 md:order-5
         w-[74px] md:w-[64px] md:h-[64px]  lg:w-[80px] lg:h-[80px] rounded-lg md:justify-center menu-animation
         ${
-          pathname.includes("/profile")
+          pathname.includes("/userManager")
             ? "dark:md:bg-white-opacity-200"
             : "dark:md:bg-white-opacity-30"
         }`}
       >
-        <Profile
+        <UserTick
           className="md:text-neutral-7 md:size-6 dark:text-white"
-          variant={pathname.includes("/profile") ? "Bold" : undefined}
-          color={pathname.includes("/profile") ? "#E67F3A" : undefined}
+          variant={pathname.includes("/userManager") ? "Bold" : undefined}
+          color={pathname.includes("/userManager") ? "#E67F3A" : undefined}
         />
         <div
           className={`text-xs capitalize  text-secondary-main md:text-[10px] lg:text-xs 
             lg:max-w-[80px] lg:truncate
              md:text-neutral-7 dark:text-white ${
-               pathname.includes("/profile")
+               pathname.includes("/userManager")
                  ? "flex md:text-secondary-main dark:md:text-secondary-main"
                  : "hidden md:flex"
              }`}
         >
-          {t("profile")}
+          {t("userManager", "user manager")}
         </div>
       </button>
       <button

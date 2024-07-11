@@ -256,3 +256,14 @@ body {
   border: 1px solid white;
   color: white;
 }
+/* material table */
+
+.dark .MuiBox-root {
+  background-color: #001426;
+}
+
+.dark .MuiTableCell-root {
+  background-color: #001426;
+  border-bottom: 1px solid #505050;
+  color: #d1d1d1;
+}
