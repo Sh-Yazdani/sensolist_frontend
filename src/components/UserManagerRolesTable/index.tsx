@@ -8,6 +8,9 @@ import {
 } from "material-react-table";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
+import Button from "../UI/Button";
+import Modal from "../UI/Modal";
+import UserManagerAddRoleForm from "../UserManagerAddRoleForm";
 
 interface UserManagerRolesTableProps {
   tableData: IRole[];
@@ -18,7 +21,7 @@ export default function UserManagerRolesTable({
 }: UserManagerRolesTableProps) {
   const [mounted, setMounted] = useState<boolean>(false);
   const [data, setData] = useState<IRole[]>(tableData);
-  //   const [userEdit, setUserEdit] = useState<IUser | null>(null);
+  const [addRoleOpen, setAddRoleOpen] = useState<boolean>(false);
 
   const { resolvedTheme } = useTheme();
 
@@ -49,6 +52,16 @@ export default function UserManagerRolesTable({
     data,
     enableRowActions: true,
     positionActionsColumn: "last",
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Button
+        className="w-[80px]"
+        onClick={() => {
+          setAddRoleOpen(true);
+        }}
+      >
+        add role
+      </Button>
+    ),
     renderRowActions: ({ row }) => {
       return (
         <button
@@ -69,10 +82,33 @@ export default function UserManagerRolesTable({
     return <div className="w-[112px] h-[40px]"></div>;
   }
   return (
-    <div className="p-8">
-      <ThemeProvider theme={darkTheme}>
-        <MaterialReactTable table={table} />
-      </ThemeProvider>
-    </div>
+    <>
+      <div className="p-8">
+        <ThemeProvider theme={darkTheme}>
+          <MaterialReactTable table={table} />
+        </ThemeProvider>
+      </div>
+      <Modal
+        open={addRoleOpen}
+        onClose={() => {
+          setAddRoleOpen(false);
+        }}
+      >
+        <UserManagerAddRoleForm
+          closeModal={() => {
+            setAddRoleOpen(false);
+          }}
+          addRole={(name: string, description: string) => {
+            setData((prev) => [
+              ...prev,
+              {
+                name: name,
+                description: description,
+              },
+            ]);
+          }}
+        />
+      </Modal>
+    </>
   );
 }
