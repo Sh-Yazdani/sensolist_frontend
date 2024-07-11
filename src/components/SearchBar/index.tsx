@@ -12,7 +12,7 @@ export default function SearchBar() {
           placeholder="search"
           className="w-full rounded-full bg-white-opacity-100 h-[40px] pl-10
          placeholder:text-sm placeholder:text-neutral-4 placeholder:capitalize
-          focus-visible:outline-none text-neutral-2
+          focus-visible:outline-none dark:text-neutral-2
            border-2 md:border-neutral-3
            md:placeholder:text-neutral-7
             text-neutral-8

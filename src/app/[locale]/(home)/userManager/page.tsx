@@ -1,7 +1,7 @@
-import UserManagerTable from "@/components/UserManagerTable";
-import { IUser } from "@/types/general";
+import UserManagerContainer from "@/components/UserManagerContainer";
+import { IRole, IUser } from "@/types/general";
 
-const tableData: IUser[] = [
+const permissionsTableData: IUser[] = [
   {
     id: "hjpo32a",
     firstName: "John",
@@ -46,10 +46,24 @@ const tableData: IUser[] = [
   },
 ];
 
+const rolesTableData: IRole[] = [
+  {
+    name: "developer",
+    description: "same random description for developer role",
+  },
+  {
+    name: "administrator",
+    description: "same random description for administrator role",
+  },
+];
+
 export default function Page() {
   return (
     <div className="flex flex-col flex-1 md:mt-[100px] lg:mt-[120px]">
-      <UserManagerTable tableData={tableData} />
+      <UserManagerContainer
+        rolesTableData={rolesTableData}
+        permissionsTableData={permissionsTableData}
+      />
     </div>
   );
 }

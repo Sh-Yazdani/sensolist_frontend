@@ -9,7 +9,7 @@ import {
   useMaterialReactTable,
 } from "material-react-table";
 import { useTheme } from "next-themes";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Modal from "../UI/Modal";
 import UserManagerEditPermissions from "../UserManagerEditPemissions";
 
@@ -17,7 +17,10 @@ interface UserManagerTableProps {
   tableData: IUser[];
 }
 
-export default function UserManagerTable({ tableData }: UserManagerTableProps) {
+export default function UserManagerPermissionsTable({
+  tableData,
+}: UserManagerTableProps) {
+  const [mounted, setMounted] = useState<boolean>(false);
   const [data, setData] = useState<IUser[]>(tableData);
   const [userEdit, setUserEdit] = useState<IUser | null>(null);
 
@@ -74,6 +77,13 @@ export default function UserManagerTable({ tableData }: UserManagerTableProps) {
       );
     },
   });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return <div className="w-[112px] h-[40px]"></div>;
+  }
   return (
     <>
       <div className=" p-8">
