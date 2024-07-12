@@ -267,3 +267,43 @@ body {
   border-bottom: 1px solid #505050;
   color: #d1d1d1;
 }
+
+.dark .css-74uxa4 {
+  background-color: transparent;
+}
+
+.dark .MuiMenu-list {
+  background-color: #001426;
+}
+
+.dark .MuiPaper-root {
+  background-color: #001426;
+}
+
+.dark .MuiButtonBase-root:hover .MuiBox-root {
+  background-color: transparent;
+}
+
+.MuiSwitch-thumb {
+  background-color: rgba(230, 127, 58, 1) !important;
+}
+
+.MuiSwitch-track {
+  background-color: rgba(230, 127, 58, 0.8) !important;
+}
+
+.MuiInputBase-input:focus {
+  outline: none !important;
+  --tw-ring-shadow: none;
+}
+.MuiCollapse-root:focus-visible {
+  outline: none;
+}
+
+.MuiCollapse-root div:focus-visible {
+  outline: none;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border: 1px solid #cacaca !important;
+}
