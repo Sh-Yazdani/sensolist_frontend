@@ -19,6 +19,7 @@ export default function UserManagerContainer({
   return (
     <>
       <Tabs
+        className="mt-8 md:mt-2"
         items={["roles", "permissions"]}
         currentIndex={currentTabIndex}
         onTabChange={(i: number) => {

@@ -2,7 +2,7 @@
 
 import { IUser } from "@/types/general";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { UserEdit } from "iconsax-react";
+import { UserAdd, UserEdit } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
@@ -10,7 +10,9 @@ import {
 } from "material-react-table";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
+import Button from "../UI/Button";
 import Modal from "../UI/Modal";
+import UserManagerAddUserForm from "../UserManagerAddUserForm";
 import UserManagerEditPermissions from "../UserManagerEditPemissions";
 
 interface UserManagerTableProps {
@@ -23,6 +25,7 @@ export default function UserManagerPermissionsTable({
   const [mounted, setMounted] = useState<boolean>(false);
   const [data, setData] = useState<IUser[]>(tableData);
   const [userEdit, setUserEdit] = useState<IUser | null>(null);
+  const [addUserOpen, setAddUserOpen] = useState<boolean>(false);
 
   const { resolvedTheme } = useTheme();
 
@@ -64,6 +67,18 @@ export default function UserManagerPermissionsTable({
     enableRowPinning: true,
     enableRowActions: true,
     positionActionsColumn: "last",
+
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Button
+        className="w-[180px] whitespace-nowrap"
+        onClick={() => {
+          setAddUserOpen(true);
+        }}
+      >
+        <UserAdd className="mr-2" />
+        Create new user
+      </Button>
+    ),
     renderRowActions: ({ row }) => {
       console.log(row);
       return (
@@ -99,6 +114,29 @@ export default function UserManagerPermissionsTable({
         }}
       >
         {userEdit && <UserManagerEditPermissions user={userEdit} />}
+      </Modal>
+      <Modal
+        open={addUserOpen}
+        onClose={() => {
+          setAddUserOpen(false);
+        }}
+      >
+        <UserManagerAddUserForm
+          closeModal={() => {
+            setAddUserOpen(false);
+          }}
+          addUser={(firstName: string, lastName: string, role: string) => {
+            setData((prev) => [
+              ...prev,
+              {
+                id: firstName + lastName,
+                firstName: firstName,
+                lastName: lastName,
+                role: role,
+              },
+            ]);
+          }}
+        />
       </Modal>
     </>
   );

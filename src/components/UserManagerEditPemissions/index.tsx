@@ -1,60 +1,70 @@
 import { IPermission, IUser } from "@/types/general";
 import { Checkbox, Table } from "flowbite-react";
-import Select from "../UI/Select";
 
 export default function UserManagerEditPermissions({ user }: { user: IUser }) {
-  const permissions: IPermission[] = [
+  const thingsPermissions: IPermission[] = [
     {
-      name: "projects",
+      name: "thing 1",
       view: true,
       add: false,
       edit: true,
       delete: true,
     },
     {
-      name: "daily reports",
+      name: "thing 2",
       view: false,
       add: false,
       edit: true,
       delete: true,
     },
     {
-      name: "equipment damage reports",
+      name: "thing 3",
+      view: true,
+      add: false,
+      edit: true,
+      delete: true,
+    },
+  ];
+  const appletsPermissions: IPermission[] = [
+    {
+      name: "applet 1",
       view: true,
       add: false,
       edit: true,
       delete: true,
     },
     {
-      name: "employee accident reports",
+      name: "applet 2",
+      view: false,
+      add: false,
+      edit: true,
+      delete: true,
+    },
+    {
+      name: "applet 3",
+      view: true,
+      add: false,
+      edit: true,
+      delete: true,
+    },
+  ];
+  const dashboardsPermissions: IPermission[] = [
+    {
+      name: "dashboard 1",
       view: true,
       add: false,
       edit: true,
       delete: true,
     },
     {
-      name: "employees",
-      view: true,
+      name: "dashboard 2",
+      view: false,
       add: false,
       edit: true,
       delete: true,
     },
     {
-      name: "equipments",
-      view: true,
-      add: false,
-      edit: true,
-      delete: true,
-    },
-    {
-      name: "materials",
-      view: true,
-      add: false,
-      edit: true,
-      delete: true,
-    },
-    {
-      name: "project gallery",
+      name: "dashboard 3",
       view: true,
       add: false,
       edit: true,
@@ -68,16 +78,14 @@ export default function UserManagerEditPermissions({ user }: { user: IUser }) {
       </div>
       <Table>
         <Table.Head>
-          <Table.HeadCell>Entity</Table.HeadCell>
+          <Table.HeadCell className="w-[280px]">things</Table.HeadCell>
           <Table.HeadCell>View</Table.HeadCell>
           <Table.HeadCell>Add</Table.HeadCell>
           <Table.HeadCell>Edit</Table.HeadCell>
           <Table.HeadCell>Delete</Table.HeadCell>
-          <Table.HeadCell>Column READ blacklist</Table.HeadCell>
-          <Table.HeadCell>Column WRITE blacklist</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {permissions.map((permission) => (
+          {thingsPermissions.map((permission) => (
             <Table.Row key={permission.name}>
               <Table.Cell className=" capitalize">{permission.name}</Table.Cell>
               <Table.Cell>
@@ -92,33 +100,62 @@ export default function UserManagerEditPermissions({ user }: { user: IUser }) {
               <Table.Cell>
                 <Checkbox />
               </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+
+      <Table>
+        <Table.Head>
+          <Table.HeadCell className="w-[280px]">applets</Table.HeadCell>
+          <Table.HeadCell>View</Table.HeadCell>
+          <Table.HeadCell>Add</Table.HeadCell>
+          <Table.HeadCell>Edit</Table.HeadCell>
+          <Table.HeadCell>Delete</Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
+          {appletsPermissions.map((permission) => (
+            <Table.Row key={permission.name}>
+              <Table.Cell className=" capitalize">{permission.name}</Table.Cell>
               <Table.Cell>
-                <Select
-                  options={[
-                    {
-                      value: "1",
-                      title: "Option 1",
-                    },
-                    {
-                      value: "2",
-                      title: "Option 2",
-                    },
-                  ]}
-                />
+                <Checkbox />
               </Table.Cell>
               <Table.Cell>
-                <Select
-                  options={[
-                    {
-                      value: "1",
-                      title: "Option 1",
-                    },
-                    {
-                      value: "2",
-                      title: "Option 2",
-                    },
-                  ]}
-                />
+                <Checkbox />
+              </Table.Cell>
+              <Table.Cell>
+                <Checkbox />
+              </Table.Cell>
+              <Table.Cell>
+                <Checkbox />
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      <Table>
+        <Table.Head>
+          <Table.HeadCell className="w-[280px]">dashboards</Table.HeadCell>
+          <Table.HeadCell>View</Table.HeadCell>
+          <Table.HeadCell>Add</Table.HeadCell>
+          <Table.HeadCell>Edit</Table.HeadCell>
+          <Table.HeadCell>Delete</Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
+          {dashboardsPermissions.map((permission) => (
+            <Table.Row key={permission.name}>
+              <Table.Cell className=" capitalize">{permission.name}</Table.Cell>
+              <Table.Cell>
+                <Checkbox />
+              </Table.Cell>
+              <Table.Cell>
+                <Checkbox />
+              </Table.Cell>
+              <Table.Cell>
+                <Checkbox />
+              </Table.Cell>
+              <Table.Cell>
+                <Checkbox />
               </Table.Cell>
             </Table.Row>
           ))}

@@ -2,11 +2,19 @@ interface TabsProps {
   items: string[];
   currentIndex: number;
   onTabChange: (index: number) => void;
+  className?: string;
 }
 
-export default function Tabs({ items, currentIndex, onTabChange }: TabsProps) {
+export default function Tabs({
+  items,
+  currentIndex,
+  onTabChange,
+  className,
+}: TabsProps) {
   return (
-    <div className="relative flex items-center border-b-2 border-neutral-3 dark:border-neutral-8 w-full">
+    <div
+      className={`relative flex items-center border-b-2 border-neutral-3 dark:border-neutral-8 w-full ${className}`}
+    >
       {items.map((item, i) => (
         <button
           onClick={() => {
