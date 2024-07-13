@@ -5,6 +5,7 @@ import {
   Background,
   BackgroundVariant,
   Controls,
+  NodeTypes,
   OnConnect,
   ReactFlow,
   useEdgesState,
@@ -14,11 +15,15 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useRef } from "react";
+import { getNodeByValue } from "../FlowSidebar/nodeItems";
+import FlowTriggerNode from "../FlowTriggerNode";
 
 const initialNodes: Node[] = [];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+
+const nodeTypes: NodeTypes = { triggerNode: FlowTriggerNode };
 
 export default function FlowContent() {
   const reactFlowWrapper = useRef(null);
@@ -32,33 +37,25 @@ export default function FlowContent() {
     []
   );
 
-  const onDragOver = useCallback(
-    (event: {
-      preventDefault: () => void;
-      dataTransfer: { dropEffect: string };
-    }) => {
-      event.preventDefault();
-      event.dataTransfer.dropEffect = "move";
-    },
-    []
-  );
+  const onDragOver = useCallback((event: any) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  }, []);
 
   const onDrop = useCallback(
     (event: {
       preventDefault: () => void;
-      dataTransfer: { getData: (arg0: string) => any };
-      clientX: any;
-      clientY: any;
+      dataTransfer: { getData: (arg0: string) => string };
+      clientX: number;
+      clientY: number;
     }) => {
       event.preventDefault();
-
       const type = event.dataTransfer.getData("application/reactflow");
-
-      // check if the dropped element is valid
       if (typeof type === "undefined" || !type) {
         return;
       }
-
+      const nodeValue = event.dataTransfer.getData("value");
+      const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -67,7 +64,7 @@ export default function FlowContent() {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { ...triggeredNode },
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -86,6 +83,7 @@ export default function FlowContent() {
           onConnect={onConnect}
           onDrop={onDrop}
           onDragOver={onDragOver}
+          nodeTypes={nodeTypes}
           fitView
         >
           <Background color="#ccc" variant={BackgroundVariant.Dots} />

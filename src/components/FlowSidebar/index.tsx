@@ -1,129 +1,7 @@
 "use client";
 
 import { Accordion } from "flowbite-react";
-import {
-  Book,
-  BoxTime,
-  Calendar,
-  Call,
-  Colorfilter,
-  DeviceMessage,
-  Devices,
-  Link,
-  LogoutCurve,
-  MainComponent,
-  Math,
-  Message,
-  Message2,
-  Messenger,
-  Notification,
-  ShoppingCart,
-} from "iconsax-react";
-
-const triggerNodes = [
-  {
-    name: "Thing",
-    value: "thing",
-    icon: <Devices />,
-  },
-  {
-    name: "Third Party",
-    value: "thirdParty",
-    icon: <Messenger />,
-  },
-  {
-    name: "Scheduler",
-    value: "scheduler",
-    icon: <Calendar />,
-  },
-  {
-    name: "Trigger Orders",
-    value: "triggerOrders",
-    icon: <ShoppingCart />,
-  },
-  {
-    name: "Refrences",
-    value: "refrences",
-    icon: <Book />,
-  },
-];
-
-const actionNodes = [
-  {
-    name: "Action Devices",
-    value: "actionDevices",
-    icon: <Devices />,
-  },
-  {
-    name: "Virtual Devices",
-    value: "virtualDevices",
-    icon: <MainComponent />,
-  },
-  {
-    name: "Email",
-    value: "email",
-    icon: <DeviceMessage />,
-  },
-  {
-    name: "Set Variables",
-    value: "setVariables",
-    icon: <Math />,
-  },
-  {
-    name: "SMS",
-    value: "sms",
-    icon: <Message />,
-  },
-  {
-    name: "Call",
-    value: "call",
-    icon: <Call />,
-  },
-  {
-    name: "Notification",
-    value: "notification",
-    icon: <Notification />,
-  },
-  {
-    name: "Telegram",
-    value: "telegram",
-    icon: <Message2 />,
-  },
-];
-
-const controlNodes = [
-  {
-    name: "Time Filter",
-    value: "timeFilter",
-    icon: <BoxTime />,
-  },
-  {
-    name: "Condition",
-    value: "condition",
-    icon: <Colorfilter />,
-  },
-  {
-    name: "Thing History",
-    value: "thingHistory",
-    icon: <Calendar />,
-  },
-  {
-    name: "Exit Form Workflow",
-    value: "exit",
-    icon: <LogoutCurve />,
-  },
-  {
-    name: "Link to another workflow",
-    value: "link",
-    icon: <Link />,
-  },
-  {
-    name: "Get Variables",
-    value: "variables",
-    icon: <Math />,
-  },
-];
-
+import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
 export default function FlowSidebar() {
   const onDragStart = (
     event: {
@@ -132,9 +10,11 @@ export default function FlowSidebar() {
         effectAllowed: string;
       };
     },
-    nodeType: any
+    nodeType: any,
+    item: string
   ) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.setData("value", item);
     event.dataTransfer.effectAllowed = "move";
   };
   return (
@@ -149,7 +29,9 @@ export default function FlowSidebar() {
                 className={`${
                   i !== 0 && "mt-4"
                 } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
-                onDragStart={(event) => onDragStart(event, "default")}
+                onDragStart={(event) =>
+                  onDragStart(event, "triggerNode", item.value)
+                }
                 draggable
               >
                 {item.icon}
@@ -167,7 +49,9 @@ export default function FlowSidebar() {
                 className={`${
                   i !== 0 && "mt-4"
                 } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
-                onDragStart={(event) => onDragStart(event, "default")}
+                onDragStart={(event) =>
+                  onDragStart(event, "triggerNode", item.value)
+                }
                 draggable
               >
                 {item.icon}
@@ -185,7 +69,9 @@ export default function FlowSidebar() {
                 className={`${
                   i !== 0 && "mt-4"
                 } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
-                onDragStart={(event) => onDragStart(event, "default")}
+                onDragStart={(event) =>
+                  onDragStart(event, "triggerNode", item.value)
+                }
                 draggable
               >
                 {item.icon}
