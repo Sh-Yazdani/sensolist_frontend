@@ -5,6 +5,7 @@ import {
   Background,
   BackgroundVariant,
   Controls,
+  MiniMap,
   NodeTypes,
   OnConnect,
   ReactFlow,
@@ -88,6 +89,7 @@ export default function FlowContent() {
         >
           <Background color="#ccc" variant={BackgroundVariant.Dots} />
           <Controls />
+          <MiniMap nodeStrokeWidth={2} />
         </ReactFlow>
       </div>
     </div>
