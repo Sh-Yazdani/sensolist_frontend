@@ -34,9 +34,11 @@ export default function Home() {
     },
   ];
   return (
-    <main className="flex flex-col py-6 px-4 md:flex-row gap-4 lg:gap-10 flex-1 md:mt-[100px] lg:mt-[120px]">
-      <HomePinnedAppletes />
-      <HomePinnedDashboardes />
+    <main className="flexmd:mt-[100px] lg:mt-[120px]">
+      <div className="flex flex-col py-6 px-4 gap-4 lg:gap-10 flex-1 max-w-[1000px] mx-auto">
+        <HomePinnedAppletes />
+        <HomePinnedDashboardes />
+      </div>
     </main>
   );
 }

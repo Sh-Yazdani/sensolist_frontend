@@ -2,7 +2,8 @@
 
 import { RootState } from "@/lib/store";
 import { IApplet } from "@/types/general";
-import { Setting4 } from "iconsax-react";
+import { ArrowCircleRight2, Setting4 } from "iconsax-react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import EmptyState from "./EmptyState";
 import PinnedAppletCard from "./PinnedAppletCard";
@@ -18,7 +19,7 @@ export default function HomePinnedAppletes() {
   return (
     <div
       className="flex flex-col w-full rounded-2xl bg-black-opacity-50 dark:bg-white-opacity-50
-     p-4 overflow-x-auto md:w-[calc(50%-8px)] lg:w-[calc(50%-20px)]"
+     p-4 overflow-x-auto h-1/2"
     >
       <div className="flex items-center">
         <Setting4 className=" text-secondary-main size-6 mr-2" />
@@ -26,11 +27,26 @@ export default function HomePinnedAppletes() {
           Pinned Applets
         </span>
       </div>
-      <div className="flex mt-4 lg:mt-10 gap-4 w-fit md:flex-col md:w-full lg:flex-row lg:flex-wrap m-auto">
+      <div className="flex mt-4 gap-4 w-fit m-auto h-full min-w-full text-neutral-7 dark:text-neutral-4">
         {pinnedApplets.length ? (
-          pinnedApplets.map((applet: IApplet, i) => (
-            <PinnedAppletCard image={applet.image} name={applet.name} key={i} />
-          ))
+          <>
+            {pinnedApplets.map((applet: IApplet, i) => (
+              <PinnedAppletCard
+                image={applet.image}
+                name={applet.name}
+                key={i}
+              />
+            ))}
+            <Link
+              href="/applets"
+              className=" flex flex-col justify-center items-center ml-auto"
+            >
+              <ArrowCircleRight2 />
+              <span className=" capitalize whitespace-nowrap text-sm">
+                view all
+              </span>
+            </Link>
+          </>
         ) : (
           <EmptyState />
         )}

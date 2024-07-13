@@ -9,7 +9,7 @@ export default function PinnedAppletCard({
 }: PinnedAppletCardProps) {
   return (
     <div
-      className="w-[240px] md:w-full lg:w-[calc(50%-12px)] aspect-square rounded-xl 
+      className="w-[180px] rounded-xl h-fit my-auto
      overflow-hidden bg-neutral-2 dark:bg-white-opacity-100 bg-black-opacity-100"
     >
       <div
@@ -21,7 +21,7 @@ export default function PinnedAppletCard({
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="p-4 capitalize dark:text-neutral-3 text-sm font-medium text-center">
+      <div className="p-4 capitalize dark:text-neutral-3 text-sm font-medium text-center truncate">
         {name}
       </div>
     </div>
