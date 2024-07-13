@@ -3,6 +3,7 @@
 import { IApplet } from "@/types/general";
 import { Trash } from "iconsax-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import DropDownModal from "../UI/DropDownModal";
 import { MoreHorizontalIcon, PinIcon, PinnedIcon } from "../UI/Icons";
@@ -37,7 +38,8 @@ export default function AppletCard({
   };
 
   return (
-    <div
+    <Link
+      href={`/applets/${applet.id}`}
       className={`flex bg-exteremly-light-blue dark:bg-primary 
         w-full md:w-[calc(50%-10px)] lg:w-[calc(33%-10px)] xl:w-[calc(25%-20px)] 2xl:w-[calc(20%-20px)]
         max-w-[420px] mx-auto md:mx-[unset]
@@ -106,6 +108,6 @@ export default function AppletCard({
           </>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
