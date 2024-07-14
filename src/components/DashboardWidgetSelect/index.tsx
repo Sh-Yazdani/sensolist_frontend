@@ -113,11 +113,11 @@ export default function DashboardWidgetSelect({
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
   return (
     <div
-      className={` absolute w-3/4 h-full bg-neutral-2 shadow right-[-1rem] bottom-0
-        flex flex-col
+      className={` absolute w-3/4 h-full bg-neutral-2 dark:bg-neutral-8 shadow right-[-1rem] bottom-0
+        flex flex-col overflow-auto
           transition-all duration-500 ${!isOpen && "translate-x-[120%]"}`}
     >
-      <div className=" bg-primary-tint-3 h-16 flex items-center px-4">
+      <div className=" bg-primary-tint-3 h-16 flex items-center p-4">
         {selectedWidget ? (
           <div className=" text-white font-semibold flex items-center">
             <button onClick={() => setSelectedWidget(null)}>
@@ -130,17 +130,19 @@ export default function DashboardWidgetSelect({
           <div className=" text-white font-semibold">Select Widgets Bundle</div>
         )}
         <button onClick={onClose} className="ml-auto">
-          <Close className=" text-white" />
+          <Close className=" text-white mr-4" />
         </button>
       </div>
       <div className=" flex flex-wrap gap-2 pl-2 pt-4">
         {selectedWidget
           ? selectedWidget.subWidget?.map((sub) => (
               <div
-                className=" bg-white shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
+                className=" bg-white dark:bg-primary-Shade-2 shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
                 key={sub.name}
               >
-                <div className=" capitalize text-sm mb-2">{sub.name}</div>
+                <div className=" capitalize text-sm mb-2 dark:text-white">
+                  {sub.name}
+                </div>
                 <div className="relative w-full aspect-square">
                   <Image fill src={sub.image} alt="widget name" />
                 </div>
@@ -152,9 +154,11 @@ export default function DashboardWidgetSelect({
                   setSelectedWidget(wdg);
                 }}
                 key={wdg.name}
-                className=" bg-white shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
+                className=" bg-white dark:bg-primary-Shade-2 shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
               >
-                <div className=" capitalize text-sm mb-2">{wdg.name}</div>
+                <div className=" capitalize text-sm mb-2 dark:text-white">
+                  {wdg.name}
+                </div>
                 <div className="relative w-full aspect-square">
                   <Image fill src={wdg.image} alt="widget name" />
                 </div>

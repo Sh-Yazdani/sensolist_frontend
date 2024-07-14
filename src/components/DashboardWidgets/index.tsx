@@ -15,9 +15,9 @@ interface DashboardWidgetsProps {
 export default function DashboardWidgets({
   dashboardId,
 }: DashboardWidgetsProps) {
-  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(true);
+  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
   return (
-    <div className="flex flex-col h-full flex-1 relative md:pl-5">
+    <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
       <DashboardWidgetSelect
         onClose={() => {
           setIsSelectOpen(false);
