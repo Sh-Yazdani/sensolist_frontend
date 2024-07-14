@@ -115,3 +115,9 @@ export type TriggerNodeType = Node<{
   name: string;
   icon: React.ReactNode;
 }>;
+
+export interface IWidget {
+  name: string;
+  image: string;
+  subWidget?: { name: string; image: string }[];
+}
