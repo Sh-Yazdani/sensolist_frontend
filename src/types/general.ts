@@ -1,3 +1,5 @@
+import { Node } from "@xyflow/react";
+
 export type LoginStepsType = "details" | "verification";
 
 export type ChangePasswordStepsType =
@@ -101,3 +103,15 @@ export interface IRole {
   name: string;
   description: string;
 }
+
+export interface ITriggerNode {
+  value: string;
+  name: string;
+  icon: React.ReactNode;
+}
+
+export type TriggerNodeType = Node<{
+  value: string;
+  name: string;
+  icon: React.ReactNode;
+}>;
