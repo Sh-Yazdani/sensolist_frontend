@@ -137,7 +137,7 @@ export default function DashboardWidgetSelect({
         {selectedWidget
           ? selectedWidget.subWidget?.map((sub) => (
               <div
-                className=" bg-white shadow-lg flex flex-col w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
+                className=" bg-white shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
                 key={sub.name}
               >
                 <div className=" capitalize text-sm mb-2">{sub.name}</div>
@@ -152,7 +152,7 @@ export default function DashboardWidgetSelect({
                   setSelectedWidget(wdg);
                 }}
                 key={wdg.name}
-                className=" bg-white shadow-lg flex flex-col w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
+                className=" bg-white shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
               >
                 <div className=" capitalize text-sm mb-2">{wdg.name}</div>
                 <div className="relative w-full aspect-square">

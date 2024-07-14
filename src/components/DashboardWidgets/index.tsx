@@ -17,7 +17,7 @@ export default function DashboardWidgets({
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(true);
   return (
-    <div className="flex flex-col h-full flex-1 relative pl-5">
+    <div className="flex flex-col h-full flex-1 relative md:pl-5">
       <DashboardWidgetSelect
         onClose={() => {
           setIsSelectOpen(false);
