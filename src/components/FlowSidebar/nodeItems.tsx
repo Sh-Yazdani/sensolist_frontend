@@ -122,9 +122,32 @@ export const controlNodes: ITriggerNode[] = [
   },
 ];
 
+export const thingNodes: ITriggerNode[] = [
+  {
+    name: "Thing 1",
+    value: "thing1",
+    icon: <Devices />,
+  },
+  {
+    name: "Thing 2",
+    value: "thing2",
+    icon: <Devices />,
+  },
+  {
+    name: "Thing 3",
+    value: "thing3",
+    icon: <Devices />,
+  },
+];
+
 //after seperating nodes this must be change
 export const getNodeByValue = (val: string) => {
-  const array = [...triggerNodes, ...actionNodes, ...controlNodes];
+  const array = [
+    ...triggerNodes,
+    ...actionNodes,
+    ...controlNodes,
+    ...thingNodes,
+  ];
   const filtered = array.filter((item) => item.value === val);
   return filtered.length ? filtered[0] : null;
 };

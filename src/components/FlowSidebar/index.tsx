@@ -1,7 +1,12 @@
 "use client";
 
 import { Accordion } from "flowbite-react";
-import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
+import {
+  actionNodes,
+  controlNodes,
+  thingNodes,
+  triggerNodes,
+} from "./nodeItems";
 export default function FlowSidebar() {
   const onDragStart = (
     event: {
@@ -28,7 +33,7 @@ export default function FlowSidebar() {
                 key={item.value}
                 className={`${
                   i !== 0 && "mt-4"
-                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
+                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                 onDragStart={(event) =>
                   onDragStart(event, "triggerNode", item.value)
                 }
@@ -48,7 +53,7 @@ export default function FlowSidebar() {
                 key={item.value}
                 className={`${
                   i !== 0 && "mt-4"
-                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
+                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                 onDragStart={(event) =>
                   onDragStart(event, "triggerNode", item.value)
                 }
@@ -68,7 +73,27 @@ export default function FlowSidebar() {
                 key={item.value}
                 className={`${
                   i !== 0 && "mt-4"
-                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center`}
+                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
+                onDragStart={(event) =>
+                  onDragStart(event, "triggerNode", item.value)
+                }
+                draggable
+              >
+                {item.icon}
+                <span className="ml-2">{item.name}</span>
+              </div>
+            ))}
+          </Accordion.Content>
+        </Accordion.Panel>
+        <Accordion.Panel>
+          <Accordion.Title>Things</Accordion.Title>
+          <Accordion.Content>
+            {thingNodes.map((item, i) => (
+              <div
+                key={item.value}
+                className={`${
+                  i !== 0 && "mt-4"
+                } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                 onDragStart={(event) =>
                   onDragStart(event, "triggerNode", item.value)
                 }

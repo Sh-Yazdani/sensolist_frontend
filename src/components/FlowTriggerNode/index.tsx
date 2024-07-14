@@ -15,7 +15,7 @@ export default function FlowTriggerNode({
         onConnect={(params) => console.log("handle onConnect", params)}
         isConnectable={isConnectable}
       />
-      <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base">
+      <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4">
         {icon}
         <span className="ml-2">{name}</span>
       </div>
