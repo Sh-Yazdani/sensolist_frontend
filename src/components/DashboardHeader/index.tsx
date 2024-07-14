@@ -31,8 +31,8 @@ export default function DashboardHeader({
       <div className=" capitalize dark:text-white">
         {selectedDashboard?.name}
       </div>
-      <Button className="ml-auto px-4">
-        <Add className="mr-1" onClick={onWidgetAdd} />
+      <Button className="ml-auto px-4" onClick={onWidgetAdd}>
+        <Add className="mr-1" />
         Add widget
       </Button>
       <Button className="mx-4 text-neutral-6" variant="text">

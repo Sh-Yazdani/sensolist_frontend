@@ -17,8 +17,13 @@ export default function DashboardWidgets({
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(true);
   return (
-    <div className="flex flex-col h-full flex-1 relative">
-      <DashboardWidgetSelect isOpen={isSelectOpen} />
+    <div className="flex flex-col h-full flex-1 relative pl-5">
+      <DashboardWidgetSelect
+        onClose={() => {
+          setIsSelectOpen(false);
+        }}
+        isOpen={isSelectOpen}
+      />
       <DashboardHeader
         isSelectOpen={isSelectOpen}
         onWidgetAdd={() => {
