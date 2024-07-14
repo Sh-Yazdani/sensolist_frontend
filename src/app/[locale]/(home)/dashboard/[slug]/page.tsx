@@ -1,10 +1,9 @@
-import DashboardHeader from "@/components/DashboardHeader";
+import DashboardWidgets from "@/components/DashboardWidgets";
 
 export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className=" flex flex-col md:mt-[100px] flex-1 px-4">
-      <DashboardHeader dashboardId={Number(params.slug)} />
-      {params.slug}
+      <DashboardWidgets dashboardId={Number(params.slug)} />
     </div>
   );
 }
