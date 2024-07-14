@@ -113,7 +113,7 @@ export default function DashboardWidgetSelect({
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
   return (
     <div
-      className={` absolute w-3/4 h-full bg-neutral-2 dark:bg-neutral-8 shadow right-[-1rem] bottom-0
+      className={` absolute w-3/4 h-full bg-neutral-2 dark:bg-primary-Shade-1 shadow right-[-1rem] bottom-0
         flex flex-col overflow-auto
           transition-all duration-500 ${!isOpen && "translate-x-[120%]"}`}
     >
