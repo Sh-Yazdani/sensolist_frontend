@@ -70,7 +70,7 @@ export default function UserManagerAddUserForm({
         label="Last Name"
         register={register}
         name="lastName"
-        className="mt-6"
+        className="mt-9"
       />
       <SelectInput
         options={rolesList}
@@ -79,10 +79,10 @@ export default function UserManagerAddUserForm({
         selectedValue={selectedRole}
         setSelectedValue={setSelectedRole}
         label="Role"
-        className="mt-6"
+        className="mt-9"
       />
 
-      <div className="w-full flex items-center mt-6 gap-4">
+      <div className="w-full flex items-center mt-10 gap-4">
         <Button
           onClick={(event: React.MouseEvent<HTMLElement>) => {
             event.preventDefault();

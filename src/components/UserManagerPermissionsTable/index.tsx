@@ -2,7 +2,7 @@
 
 import { IUser } from "@/types/general";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { UserAdd, UserEdit } from "iconsax-react";
+import { ProfileDelete, UserAdd, UserEdit } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
@@ -82,13 +82,24 @@ export default function UserManagerPermissionsTable({
     renderRowActions: ({ row }) => {
       console.log(row);
       return (
-        <button
-          onClick={() => {
-            setUserEdit(row.original);
-          }}
-        >
-          <UserEdit />
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => {
+              setUserEdit(row.original);
+            }}
+          >
+            <UserEdit />
+          </button>
+          <button
+            onClick={() => {
+              setData((prev) =>
+                prev.filter((item) => item.id !== row.original.id)
+              );
+            }}
+          >
+            <ProfileDelete />
+          </button>
+        </div>
       );
     },
   });

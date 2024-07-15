@@ -1,6 +1,9 @@
 "use client";
 
-import { addDashboard } from "@/lib/features/dashboard/dashboardSlice";
+import {
+  addDashboard,
+  editDashboard,
+} from "@/lib/features/dashboard/dashboardSlice";
 import { IDashboard } from "@/types/general";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -23,7 +26,8 @@ export default function DashboardContent({
 }: DashboardContentProps) {
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
-  console.log(dashboards);
+  const [dashboardEdit, setDashboardEdit] = useState<IDashboard | null>(null);
+  console.log("tessst", dashboards);
   return (
     <>
       {dashboards.length ? (
@@ -35,6 +39,9 @@ export default function DashboardContent({
               removeDashboard={removeDashboard}
               key={dashboard.name}
               dashboard={dashboard}
+              editDashboard={(dash: IDashboard) => {
+                setDashboardEdit(dash);
+              }}
             />
           ))}
         </div>
@@ -47,11 +54,18 @@ export default function DashboardContent({
       )}
       <DashboardCreateModal
         dashboards={dashboards}
-        isCreateModalOpen={isCreateModalOpen}
+        isCreateModalOpen={isCreateModalOpen || !!dashboardEdit}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
         addDashboard={(d: IDashboard) => {
           dispatch(addDashboard(d));
         }}
+        closeEditModal={() => {
+          setDashboardEdit(null);
+        }}
+        editDashboard={(d: IDashboard) => {
+          dispatch(editDashboard(d));
+        }}
+        dashboardEdit={dashboardEdit}
       />
     </>
   );

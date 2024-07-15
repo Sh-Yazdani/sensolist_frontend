@@ -2,7 +2,6 @@
 
 import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
-import Link from "next/link";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CustomPhoneInput } from "../../PhoneInput";
@@ -70,12 +69,6 @@ export default function DetailsForm({
           errors.password?.type === "required" ? "This field is required" : ""
         }
       />
-      <Link
-        href="/authentication/forgetPassword"
-        className="flex mt-2 text-white-opacity-900 ml-auto w-fit text-xs md:text-base"
-      >
-        Forgot password?
-      </Link>
       <TermsAgreement
         error={termsError}
         setIsChecked={setTermsChecked}
