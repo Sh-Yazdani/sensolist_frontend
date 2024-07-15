@@ -1,9 +1,10 @@
 import { IRole } from "@/types/general";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Edit2 } from "iconsax-react";
+import { Edit2, Trash } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
+  MRT_TableOptions,
   useMaterialReactTable,
 } from "material-react-table";
 import { useTheme } from "next-themes";
@@ -30,6 +31,17 @@ export default function UserManagerRolesTable({
       mode: resolvedTheme === "dark" ? "dark" : "light",
     },
   });
+
+  const handleOnEditRow: MRT_TableOptions<IRole>["onEditingRowSave"] = (
+    vals
+  ) => {
+    console.log("values", vals);
+    setData((prev) => [
+      ...prev.filter((item) => item.name !== vals.row.original.name),
+      vals.values,
+    ]);
+    vals.table.setEditingRow(null);
+  };
 
   const columns = useMemo<MRT_ColumnDef<IRole>[]>(
     () => [
@@ -64,15 +76,28 @@ export default function UserManagerRolesTable({
     ),
     renderRowActions: ({ row }) => {
       return (
-        <button
-          onClick={() => {
-            table.setEditingRow(row);
-          }}
-        >
-          <Edit2 />
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => {
+              table.setEditingRow(row);
+            }}
+          >
+            <Edit2 />
+          </button>
+          <button
+            onClick={() => {
+              setData((prev) =>
+                prev.filter((item) => item.name !== row.original.name)
+              );
+            }}
+          >
+            <Trash />
+          </button>
+        </div>
       );
     },
+
+    onEditingRowSave: handleOnEditRow,
   });
 
   useEffect(() => {

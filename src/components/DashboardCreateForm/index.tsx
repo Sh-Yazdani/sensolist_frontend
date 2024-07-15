@@ -14,10 +14,14 @@ export default function DashboardCreateForm({
   onCancel,
   dashboardAdd,
   dashboards,
+  initialValues,
+  edit,
 }: {
   dashboardAdd: (d: IDashboard) => void;
   onCancel: () => void;
   dashboards: IDashboard[];
+  initialValues?: IDashboard | null;
+  edit: IDashboard | null;
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",
@@ -33,15 +37,24 @@ export default function DashboardCreateForm({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateDashboardInputs>();
+  } = useForm<ICreateDashboardInputs>({
+    defaultValues: {
+      name: initialValues?.name,
+      description: initialValues?.description,
+    },
+  });
   const dispatch = useDispatch();
 
-  const [selectedImage, setSelectedImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState(initialValues?.image);
 
   const onSubmit: SubmitHandler<ICreateDashboardInputs> = (data) => {
     console.log("submit", data, selectedImage);
     dashboardAdd({
-      id: dashboards?.length ? dashboards[dashboards.length - 1].id + 1 : 0,
+      id: edit
+        ? edit.id
+        : dashboards?.length
+        ? dashboards[dashboards.length - 1].id + 1
+        : 0,
       name: data.name,
       description: data.description,
       image: selectedImage,
@@ -57,6 +70,7 @@ export default function DashboardCreateForm({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
+          initialValue={initialValues?.name}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
           }
@@ -67,6 +81,7 @@ export default function DashboardCreateForm({
           className="mt-6"
         />
         <Input
+          initialValue={initialValues?.description}
           error={
             errors.description?.type === "required"
               ? "This field is required"
@@ -117,7 +132,7 @@ export default function DashboardCreateForm({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

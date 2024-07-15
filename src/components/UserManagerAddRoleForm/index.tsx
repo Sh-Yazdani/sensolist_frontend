@@ -49,9 +49,9 @@ export default function UserManagerAddRoleForm({
         label="Description"
         register={register}
         name="description"
-        className="mt-6"
+        className="mt-9"
       />
-      <div className="w-full flex items-center mt-6 gap-4">
+      <div className="w-full flex items-center mt-10 gap-4">
         <Button
           onClick={(event: React.MouseEvent<HTMLElement>) => {
             event.preventDefault();

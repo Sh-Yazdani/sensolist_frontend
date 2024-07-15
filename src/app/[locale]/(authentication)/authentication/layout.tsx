@@ -16,7 +16,7 @@ export default function AuthLayout({
         className=" flex w-full h-fit flex-col z-20
         max-w-[480px]
         mt-10 mx-auto lg:ml-auto lg:mr-24
-        py-4 px-2 md:py-8 md:px-6 lg:px-8
+        py-4 px-6 md:py-8 md:px-6 lg:px-8
         border border-white-opacity-900 rounded-3xl
       bg-gradient-opacity backdrop-blur-xl
       "

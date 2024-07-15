@@ -41,6 +41,9 @@ export default function AppletCreateButton({
         addApplet={(d: IApplet) => {
           dispatch(addApplet(d));
         }}
+        closeEditModal={() => {}}
+        editApplet={() => {}}
+        appletEdit={null}
       />
     </>
   );

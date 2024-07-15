@@ -14,10 +14,14 @@ export default function AppletCreateForm({
   onCancel,
   appletAdd,
   applets,
+  initialValues,
+  edit,
 }: {
   appletAdd: (d: IApplet) => void;
   onCancel: () => void;
   applets: IApplet[];
+  initialValues?: IApplet | null;
+  edit?: IApplet | null;
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",
@@ -33,15 +37,24 @@ export default function AppletCreateForm({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateAppletInputs>();
+  } = useForm<ICreateAppletInputs>({
+    defaultValues: {
+      name: initialValues?.name,
+      description: initialValues?.description,
+    },
+  });
   const dispatch = useDispatch();
 
-  const [selectedImage, setSelectedImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState(initialValues?.image);
 
   const onSubmit: SubmitHandler<ICreateAppletInputs> = (data) => {
     console.log("submit", data, selectedImage);
     appletAdd({
-      id: applets?.length ? applets[applets.length - 1].id + 1 : 0,
+      id: edit
+        ? edit.id
+        : applets?.length
+        ? applets[applets.length - 1].id + 1
+        : 0,
       name: data.name,
       description: data.description,
       image: selectedImage,
@@ -57,6 +70,7 @@ export default function AppletCreateForm({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
+          initialValue={initialValues?.name}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
           }
@@ -67,6 +81,7 @@ export default function AppletCreateForm({
           className="mt-6"
         />
         <Input
+          initialValue={initialValues?.description}
           error={
             errors.description?.type === "required"
               ? "This field is required"
@@ -117,7 +132,7 @@ export default function AppletCreateForm({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>
