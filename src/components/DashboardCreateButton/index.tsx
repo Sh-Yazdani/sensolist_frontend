@@ -41,6 +41,9 @@ export default function DashboardCreateButton({
         addDashboard={(d: IDashboard) => {
           dispatch(addDashboard(d));
         }}
+        closeEditModal={() => {}}
+        editDashboard={() => {}}
+        dashboardEdit={null}
       />
     </>
   );
