@@ -10,7 +10,7 @@ import {
 } from "iconsax-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface ProfileMenuProps {
   isOpen: boolean;
@@ -19,6 +19,7 @@ interface ProfileMenuProps {
 
 export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const menuItems: IProfileMenuItem[] = [
     {
       name: "edit",
@@ -67,9 +68,11 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
       </div>
       <div className="mt-6 md:mt-10">
         {menuItems.map((item, i) => (
-          <Link
-            onClick={onClose}
-            href={`/profile${item.link}`}
+          <button
+            onClick={() => {
+              router.push(`/profile${item.link}`);
+              onClose();
+            }}
             key={item.name}
             className={`flex items-center w-full md:p-2 md:rounded-lg dark:text-neutral-4 ${
               i !== 0 && "mt-10"
@@ -89,7 +92,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
                   : "md:text-neutral-7"
               }`}
             />
-          </Link>
+          </button>
         ))}
       </div>
       <Link
