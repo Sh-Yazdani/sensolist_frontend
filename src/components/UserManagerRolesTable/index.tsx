@@ -4,6 +4,7 @@ import { Edit2 } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
+  MRT_TableOptions,
   useMaterialReactTable,
 } from "material-react-table";
 import { useTheme } from "next-themes";
@@ -30,6 +31,17 @@ export default function UserManagerRolesTable({
       mode: resolvedTheme === "dark" ? "dark" : "light",
     },
   });
+
+  const handleOnEditRow: MRT_TableOptions<IRole>["onEditingRowSave"] = (
+    vals
+  ) => {
+    console.log("values", vals);
+    setData((prev) => [
+      ...prev.filter((item) => item.name !== vals.row.original.name),
+      vals.values,
+    ]);
+    vals.table.setEditingRow(null);
+  };
 
   const columns = useMemo<MRT_ColumnDef<IRole>[]>(
     () => [
@@ -73,6 +85,8 @@ export default function UserManagerRolesTable({
         </button>
       );
     },
+
+    onEditingRowSave: handleOnEditRow,
   });
 
   useEffect(() => {
