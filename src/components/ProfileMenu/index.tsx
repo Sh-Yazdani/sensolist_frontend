@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface ProfileMenuProps {
   isOpen: boolean;
@@ -18,6 +19,11 @@ interface ProfileMenuProps {
 }
 
 export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
+  const [open, setOpen] = useState(false);
+  setTimeout(() => {
+    setOpen(isOpen ? true : false);
+  }, 100);
+
   const pathname = usePathname();
   const router = useRouter();
   const menuItems: IProfileMenuItem[] = [
@@ -51,8 +57,8 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
       className={` p-4 flex flex-col flex-1 absolute bg-neutral-2 md:min-w-[230px]
         dark:bg-primary-Shade-1 md:bg-black-opacity-50 md:dark:bg-white-opacity-50
          md:ml-6 h-[calc(100vh-134px)] 
-    z-20 transition-all ${
-      !isOpen
+    z-20 transition-all duration-500 ${
+      !open
         ? "translate-x-full invisible w-0 md:translate-x-0 md:visible"
         : "w-full"
     } md:static md:max-w-[232px] lg:[256px] md:rounded-l-2xl md:h-full`}
