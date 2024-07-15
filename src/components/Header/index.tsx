@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div
       className="flex items-center w-full rounded-b-2xl
-    p-4 md:pt-6 md:pb-6 md:fixed z-20 md:bg-white shadow-md
+    p-4 md:pt-6 md:pb-6 md:fixed z-50 md:bg-white shadow-md
     bg-primary-Shade-2 dark:md:bg-primary-Shade-2 md:bg-transparent"
     >
       <ProfileMenu />
