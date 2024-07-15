@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function ProductDetailsHeader() {
   const router = useRouter();
   return (
-    <div className="w-full rounded-b-2xl bg-primary-tint-1 h-[80px] absolute top-[-80px] flex md:hidden z-30">
+    <div className="w-full rounded-b-2xl bg-primary-tint-2 h-[80px] absolute top-[-80px] flex md:hidden z-50">
       <div className=" capitalize mx-auto text-white font-medium mt-6">
         Product’s details
       </div>
