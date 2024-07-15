@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown2, Filter } from "iconsax-react";
+import { ArrowDown2, ArrowUp2, Filter } from "iconsax-react";
 import { useState } from "react";
 import Checkbox from "../Checkbox";
 import DropDownModal from "../UI/DropDownModal";
@@ -124,7 +124,11 @@ export default function FilterComponent() {
                   key={filterOption.title}
                 >
                   <span>{filterOption.title}</span>
-                  <ArrowDown2 className=" size-4" />
+                  {visibleOptions?.title === filterOption.title ? (
+                    <ArrowUp2 className=" size-4" />
+                  ) : (
+                    <ArrowDown2 className=" size-4" />
+                  )}
                 </button>
                 <div
                   className={`flex flex-col transition-all
