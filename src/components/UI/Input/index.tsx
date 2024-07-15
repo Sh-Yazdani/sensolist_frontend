@@ -10,6 +10,7 @@ interface InputProps {
   className?: string;
   placeholder?: string;
   error?: string;
+  initialValue?: string;
 }
 
 export default function Input({
@@ -19,11 +20,13 @@ export default function Input({
   className,
   placeholder,
   error,
+  initialValue,
 }: InputProps) {
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
       <span className=" text-sm md:text-base dark:text-white">{label}</span>
       <input
+        defaultValue={initialValue}
         placeholder={placeholder}
         {...register(name, { required: true })}
         className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent

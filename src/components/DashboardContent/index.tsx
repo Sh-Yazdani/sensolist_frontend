@@ -23,6 +23,7 @@ export default function DashboardContent({
 }: DashboardContentProps) {
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
+  const [dashboardEdit, setDashboardEdit] = useState<IDashboard | null>(null);
   console.log(dashboards);
   return (
     <>
@@ -35,6 +36,9 @@ export default function DashboardContent({
               removeDashboard={removeDashboard}
               key={dashboard.name}
               dashboard={dashboard}
+              editDashboard={(dash: IDashboard) => {
+                setDashboardEdit(dash);
+              }}
             />
           ))}
         </div>

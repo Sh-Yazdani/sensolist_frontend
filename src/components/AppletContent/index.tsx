@@ -23,6 +23,7 @@ export default function AppletContent({
 }: AppletContentProps) {
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
+  const [appletEdit, setAppletEdit] = useState<IApplet | null>(null);
   console.log(applets);
   return (
     <>
@@ -35,6 +36,9 @@ export default function AppletContent({
               removeApplet={removeApplet}
               key={applet.name}
               applet={applet}
+              editApplet={(app: IApplet) => {
+                setAppletEdit(app);
+              }}
             />
           ))}
         </div>

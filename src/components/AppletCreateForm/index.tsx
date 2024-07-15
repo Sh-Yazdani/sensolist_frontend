@@ -14,10 +14,12 @@ export default function AppletCreateForm({
   onCancel,
   appletAdd,
   applets,
+  initialValues,
 }: {
   appletAdd: (d: IApplet) => void;
   onCancel: () => void;
   applets: IApplet[];
+  initialValues?: IApplet | null;
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",
@@ -36,7 +38,7 @@ export default function AppletCreateForm({
   } = useForm<ICreateAppletInputs>();
   const dispatch = useDispatch();
 
-  const [selectedImage, setSelectedImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState(initialValues?.image);
 
   const onSubmit: SubmitHandler<ICreateAppletInputs> = (data) => {
     console.log("submit", data, selectedImage);
@@ -57,6 +59,7 @@ export default function AppletCreateForm({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
+          initialValue={initialValues?.name}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
           }
@@ -67,6 +70,7 @@ export default function AppletCreateForm({
           className="mt-6"
         />
         <Input
+          initialValue={initialValues?.description}
           error={
             errors.description?.type === "required"
               ? "This field is required"
