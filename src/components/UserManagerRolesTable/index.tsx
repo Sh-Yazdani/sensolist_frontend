@@ -1,6 +1,6 @@
 import { IRole } from "@/types/general";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Edit2 } from "iconsax-react";
+import { Edit2, Trash } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
@@ -76,13 +76,24 @@ export default function UserManagerRolesTable({
     ),
     renderRowActions: ({ row }) => {
       return (
-        <button
-          onClick={() => {
-            table.setEditingRow(row);
-          }}
-        >
-          <Edit2 />
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => {
+              table.setEditingRow(row);
+            }}
+          >
+            <Edit2 />
+          </button>
+          <button
+            onClick={() => {
+              setData((prev) =>
+                prev.filter((item) => item.name !== row.original.name)
+              );
+            }}
+          >
+            <Trash />
+          </button>
+        </div>
       );
     },
 
