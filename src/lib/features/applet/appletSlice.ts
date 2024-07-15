@@ -23,6 +23,13 @@ export const appletSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
+    editApplet: (state, action: PayloadAction<IApplet>) => {
+      console.log("action payload", action.payload);
+      state.applets = [
+        ...state.applets.filter((app) => app.id !== action.payload.id),
+        action.payload,
+      ];
+    },
     pinApplet: (state, action: PayloadAction<IApplet>) => {
       state.applets = [
         ...state.applets.filter((app) => app.id !== action.payload.id),
@@ -49,6 +56,6 @@ export const appletSlice = createSlice({
     },
   },
 });
-export const { addApplet, removeApplet, pinApplet, unPinApplet } =
+export const { addApplet, removeApplet, pinApplet, unPinApplet, editApplet } =
   appletSlice.actions;
 export default appletSlice.reducer;

@@ -65,8 +65,8 @@ export default function AppletCard({
           </span>
         </div>
       </Link>
-      <div className="relative w-6 mb-auto md:w-16">
-        <div className="w-full hidden md:flex gap-4">
+      <div className="relative w-6 mb-auto md:w-6">
+        <div className="w-full hidden md:flex flex-col gap-2">
           <button onClick={applet.pin ? unPinHandler : pinHandler}>
             {applet.pin ? <PinnedIcon /> : <PinIcon />}
           </button>

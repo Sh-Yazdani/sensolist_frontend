@@ -23,6 +23,13 @@ export const dashboardSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
+    editDashboard: (state, action: PayloadAction<IDashboard>) => {
+      console.log("action payload", action.payload);
+      state.dashboards = [
+        ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
+        action.payload,
+      ];
+    },
     pinDashboard: (state, action: PayloadAction<IDashboard>) => {
       state.dashboards = [
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
@@ -50,6 +57,11 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { addDashboard, removeDashboard, pinDashboard, unPinDashboard } =
-  dashboardSlice.actions;
+export const {
+  addDashboard,
+  removeDashboard,
+  pinDashboard,
+  unPinDashboard,
+  editDashboard,
+} = dashboardSlice.actions;
 export default dashboardSlice.reducer;
