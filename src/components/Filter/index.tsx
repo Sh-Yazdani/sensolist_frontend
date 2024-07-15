@@ -74,7 +74,7 @@ export default function FilterComponent() {
       <div
         className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
         w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0 top-2
-         lg:w-[264px] lg:h-[650px] lg:rounded-xl lg:dark:shadow-white-opacity-200 lg:shadow lg:mt-0
+         lg:w-[264px] lg:h-fit lg:rounded-xl lg:dark:shadow-white-opacity-200 lg:shadow lg:mt-0
          dark:bg-black flex transition-all duration-500
          left-0 right-0 mx-auto md:left-[unset] md:right-[unset] md:mx-0
         ${
