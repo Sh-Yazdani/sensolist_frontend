@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }
   return (
     <Provider store={storeRef.current}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
         {children}
       </ThemeProvider>
     </Provider>
