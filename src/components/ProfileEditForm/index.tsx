@@ -32,7 +32,7 @@ export default function ProfileEditForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="min-h-[calc(100vh-164px)] md:min-h-full flex flex-col"
+      className="min-h-[calc(100vh-164px)] md:min-h-full flex flex-col p-4"
     >
       <ProfileUploadPhoto register={register} name="photo" />
       <Input

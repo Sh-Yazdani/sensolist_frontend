@@ -53,7 +53,11 @@ export default function SortBy() {
       >
         <Sort className=" text-black dark:text-white size-5" />
         <span className=" capitalize hidden lg:flex">{value}</span>
-        <ArrowDown2 className="ml-auto size-4 hidden lg:flex" />
+        <ArrowDown2
+          className={`ml-auto size-4 hidden lg:flex transition-all duration-500 ${
+            isOpen && "rotate-180"
+          }`}
+        />
       </button>
       {/* {isOpen && ( */}
       <>

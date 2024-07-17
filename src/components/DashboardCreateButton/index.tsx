@@ -24,7 +24,7 @@ export default function DashboardCreateButton({
         onClick={() => {
           setIsCreateModalOpen(true);
         }}
-        className="w-10 h-10 md:w-fit ml-auto px-5"
+        className="w-10 h-10 md:w-fit ml-2 px-5"
       >
         <span className="flex md:hidden">
           <Add />

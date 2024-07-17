@@ -54,12 +54,12 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
   ];
   return (
     <div
-      className={` p-4 flex flex-col flex-1 absolute bg-neutral-2 md:min-w-[230px]
+      className={` p-6 flex flex-col flex-1 absolute bg-neutral-2 md:min-w-[230px]
         dark:bg-primary-Shade-1 md:bg-black-opacity-50 md:dark:bg-white-opacity-50
          md:ml-6 h-[calc(100vh-134px)] 
-    z-20 transition-all duration-500 ${
+    z-20 transition-transform ease-linear duration-500 ${
       !open
-        ? "translate-x-full invisible w-0 md:translate-x-0 md:visible"
+        ? "-translate-x-full invisible w-0 md:translate-x-0 md:visible"
         : "w-full"
     } md:static md:max-w-[232px] lg:[256px] md:rounded-l-2xl md:h-full`}
     >
@@ -80,8 +80,8 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
               onClose();
             }}
             key={item.name}
-            className={`flex items-center w-full md:p-2 md:rounded-lg dark:text-neutral-4 ${
-              i !== 0 && "mt-10"
+            className={`flex items-center w-full md:p-2 md:rounded-lg dark:text-neutral-4 text-sm ${
+              i !== 0 && "mt-10 md:mt-4"
             }
                ${
                  pathname === `/profile${item.link}`
@@ -92,7 +92,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
             {item.icon}
             <span className="ml-2 capitalize">{item.title}</span>
             <ArrowRight2
-              className={` ml-auto md:hidden ${
+              className={` ml-auto md:hidden size-4 ${
                 pathname === `/profile${item.link}`
                   ? " md:text-neutral-8"
                   : "md:text-neutral-7"

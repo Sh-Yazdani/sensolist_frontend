@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <div
       className="hidden md:flex flex-col w-full h-[70px] mt-auto 
-    dark:text-neutral-5 text-neutral-8 bg-white dark:bg-primary-Shade-2 z-50"
+    dark:text-neutral-5 text-neutral-8 bg-white dark:bg-primary-Shade-2 z-10"
     >
       <div
         className="w-full h-[4px] bg-gradient-to-r to-[#C2CBD4] from-[#3F76AA]

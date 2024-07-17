@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import FormError from "../FormError";
 
@@ -23,7 +23,11 @@ export default function Input({
   error,
   initialValue,
 }: InputProps) {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue ? initialValue : "");
+  useEffect(() => {
+    setValue(initialValue ? initialValue : "");
+  }, [initialValue]);
+  console.log("value", value, initialValue);
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
       <span className=" text-sm md:text-base dark:text-white">{label}</span>

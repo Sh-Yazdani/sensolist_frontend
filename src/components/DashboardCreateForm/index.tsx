@@ -1,13 +1,18 @@
 "use client";
 
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
-import { ICreateDashboardInputs, IDashboard } from "@/types/general";
+import {
+  ICreateDashboardInputs,
+  IDashboard,
+  ISelectOption,
+} from "@/types/general";
 import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import SelectInput from "../UI/SelectInput";
 import ImagePicker from "./ImagePicker";
 
 export default function DashboardCreateForm({
@@ -31,6 +36,20 @@ export default function DashboardCreateForm({
     "/assets/dashboard/img-5.png",
     "/assets/dashboard/img-6.png",
   ];
+  const usersList: ISelectOption[] = [
+    {
+      title: "User 1",
+      value: "user1",
+    },
+    {
+      title: "User 2",
+      value: "user2",
+    },
+    {
+      title: "User 3",
+      value: "user3",
+    },
+  ];
   const {
     register,
     handleSubmit,
@@ -46,6 +65,7 @@ export default function DashboardCreateForm({
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState(initialValues?.image);
+  const [selectedUser, setSelectedUser] = useState<ISelectOption>(usersList[0]);
 
   const onSubmit: SubmitHandler<ICreateDashboardInputs> = (data) => {
     console.log("submit", data, selectedImage);
@@ -68,7 +88,7 @@ export default function DashboardCreateForm({
       <div className=" text-xl text-center md:text-left capitalize">
         create dashboard
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col h-full" onSubmit={handleSubmit(onSubmit)}>
         <Input
           initialValue={initialValues?.name}
           error={
@@ -91,6 +111,17 @@ export default function DashboardCreateForm({
           label="Description"
           register={register}
           name="description"
+          className="mt-6"
+        />
+        <SelectInput
+          options={usersList}
+          selectedValue={selectedUser}
+          setSelectedValue={(option) => {
+            setSelectedUser(option);
+          }}
+          register={register}
+          name="user"
+          label="Assign User"
           className="mt-6"
         />
         <div className="mt-6">Choose an image:</div>
@@ -119,7 +150,7 @@ export default function DashboardCreateForm({
             }}
           />
         </div>
-        <div className="flex items-center gap-4 mt-6">
+        <div className="flex items-center gap-4 mt-auto">
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();

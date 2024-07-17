@@ -5,14 +5,17 @@ import { SimplificationIcon } from "../UI/Icons";
 export default function EmptyState() {
   return (
     <div className=" h-fit flex flex-col items-center m-auto">
-      <SimplificationIcon className="w-[80px] h-[67px] lg:w-[112px] lg:h-[94px]" />
+      <SimplificationIcon className="w-[60px] h-[47px] lg:w-[112px] lg:h-[94px]" />
       <div
         className=" text-neutral-5 text-xs text-center 
-  md:text-base w-[330px] mt-6 lg:w-[370px] dark:text-neutral-6"
+  md:text-base mt-4 lg:w-[370px] dark:text-neutral-6"
       >
         You haven’t pinned any applet yet!
       </div>
-      <Button href={"/applets"} className="w-[200px] mt-4 md:w-[240px] md:mt-6">
+      <Button
+        href={"/applets"}
+        className="w-[200px] mt-2 md:w-[240px] md:mt-4 h-[40px]"
+      >
         Go to Appletss <ArrowRight className="ml-2" />
       </Button>
     </div>

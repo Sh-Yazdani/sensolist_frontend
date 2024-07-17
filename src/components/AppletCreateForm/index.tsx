@@ -59,8 +59,8 @@ export default function AppletCreateForm({
       description: data.description,
       image: selectedImage,
     });
-    dispatch(createAlert({ message: "applet added.", type: "success" }));
     reset();
+    dispatch(createAlert({ message: "applet added.", type: "success" }));
     onCancel();
   };
   return (
@@ -68,9 +68,9 @@ export default function AppletCreateForm({
       <div className=" text-xl text-center md:text-left capitalize">
         create applet
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col h-full" onSubmit={handleSubmit(onSubmit)}>
         <Input
-          initialValue={initialValues?.name}
+          initialValue={initialValues?.name || ""}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
           }
@@ -119,7 +119,7 @@ export default function AppletCreateForm({
             }}
           />
         </div>
-        <div className="flex items-center gap-4 mt-6">
+        <div className="flex items-center gap-4 mt-auto">
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();

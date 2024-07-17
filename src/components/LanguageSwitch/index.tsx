@@ -41,7 +41,11 @@ export default function LanguageSwitch() {
     >
       <Global className="size-5" />
       <span className="mx-1 uppercase text-xs lg:text-sm">{locale}</span>
-      <ArrowDown2 className="hidden lg:flex size-5" />
+      <ArrowDown2
+        className={`hidden lg:flex size-5 transition-all duration-500 ${
+          isOpen && "rotate-180"
+        }`}
+      />
       {/* {isOpen && ( */}
       <>
         <DropDownModal

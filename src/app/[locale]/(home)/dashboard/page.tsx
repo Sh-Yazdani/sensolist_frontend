@@ -31,11 +31,11 @@ export default function Page() {
   };
 
   return (
-    <div className=" flex flex-col pt-4 md:pt-0 md:pr-4 px-4 md:mt-[100px] lg:mt-[120px]">
-      <div className="md:relative flex flex-row-reverse justify-end gap-4">
+    <div className=" flex flex-col">
+      <div className="md:relative flex flex-row-reverse justify-end gap-4 px-4">
         <DashboardCreateButton dashboards={dashboards} />
-        <SearchBar />
         <SortBy />
+        <SearchBar />
       </div>
       <DashboardContent
         unPinDashboard={unPinDashboard}
