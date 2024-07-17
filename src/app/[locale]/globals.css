@@ -307,3 +307,17 @@ body {
 .MuiOutlinedInput-notchedOutline {
   border: 1px solid #cacaca !important;
 }
+
+.css-1icfy0x-MuiButtonBase-root-MuiButton-root {
+  background-color: #e67f3a !important;
+  color: white !important;
+}
+
+.css-hna4oi-MuiButtonBase-root-MuiButton-root {
+  color: white !important;
+}
+
+.css-wsew38 {
+  width: 100%;
+  overflow: auto;
+}
