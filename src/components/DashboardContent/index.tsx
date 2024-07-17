@@ -31,7 +31,7 @@ export default function DashboardContent({
   return (
     <>
       {dashboards.length ? (
-        <div className="w-full pt-4 gap-4 flex flex-wrap">
+        <div className="w-full pt-4 gap-4 flex flex-wrap px-4">
           {dashboards.map((dashboard: IDashboard) => (
             <DashboardCard
               unPinDashboard={unPinDashboard}

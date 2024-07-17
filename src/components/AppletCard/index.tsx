@@ -45,7 +45,7 @@ export default function AppletCard({
     <div
       className={`flex bg-exteremly-light-blue dark:bg-primary 
         w-full md:w-[calc(50%-10px)] lg:w-[calc(33%-10px)] xl:w-[calc(25%-20px)] 2xl:w-[calc(20%-20px)]
-        max-w-[420px] mx-auto md:mx-[unset]
+        max-w-[320px] mx-auto md:mx-[unset]
     items-center p-2 rounded-2xl mb-4 ${applet.pin ? "order-0" : "order-2"}`}
     >
       <Link className="flex flex-1 items-center" href={`/applets/${applet.id}`}>
@@ -68,13 +68,17 @@ export default function AppletCard({
       <div className="relative w-6 mb-auto md:w-6">
         <div className="w-full hidden md:flex flex-col gap-2">
           <button onClick={applet.pin ? unPinHandler : pinHandler}>
-            {applet.pin ? <PinnedIcon /> : <PinIcon />}
+            {applet.pin ? (
+              <PinnedIcon className="size-4" />
+            ) : (
+              <PinIcon className="size-4" />
+            )}
           </button>
           <button onClick={editHandler}>
-            <Edit2 className=" text-neutral-5" />
+            <Edit2 className=" text-neutral-5 size-4" />
           </button>
           <button onClick={removeHandler}>
-            <Trash className=" text-neutral-5" />
+            <Trash className=" text-neutral-5 size-4" />
           </button>
         </div>
         <button

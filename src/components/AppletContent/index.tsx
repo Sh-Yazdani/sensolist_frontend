@@ -28,7 +28,7 @@ export default function AppletContent({
   return (
     <>
       {applets.length ? (
-        <div className="w-full pt-4 gap-4 flex flex-wrap">
+        <div className="w-full pt-4 gap-4 flex flex-wrap px-4">
           {applets.map((applet: IApplet) => (
             <AppletCard
               unPinApplet={unPinApplet}
