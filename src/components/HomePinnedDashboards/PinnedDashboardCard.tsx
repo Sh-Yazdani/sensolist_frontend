@@ -9,7 +9,7 @@ export default function PinnedDashboardCard({
 }: PinnedDashboardCardProps) {
   return (
     <div
-      className="w-[180px] rounded-xl h-fit my-auto
+      className="w-[calc(25%-16px)] rounded-xl h-full my-auto
      overflow-hidden bg-neutral-2 dark:bg-white-opacity-100 bg-black-opacity-100"
     >
       <div
@@ -21,7 +21,7 @@ export default function PinnedDashboardCard({
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="p-4 capitalize dark:text-neutral-3 text-sm font-medium text-center">
+      <div className=" px-2 pt-2 capitalize dark:text-neutral-3 text-sm font-medium text-center">
         {name}
       </div>
     </div>

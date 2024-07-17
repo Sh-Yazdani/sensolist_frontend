@@ -65,13 +65,13 @@ export default function Notifications() {
           className={` overflow-hidden absolute
           w-[80vw] max-w-[200px] h-[240px] right-[-2rem] mx-auto
       border border-primary-tint-3 rounded-2xl rounded-tr-none
-       top-11 lg:top-16 px-2 py-4 lg:px-4
+       top-11 lg:top-16 px-2 py-4 
        bg-white dark:bg-primary-Shade-1  transition-all duration-500
         ${isOpen ? "visible opacity-100 z-40 " : " invisible h-0 opacity-0"}`}
         >
           <div
             className=" w-full border-b text-black border-neutral-6 text-sm text-start pb-2
-          lg:text-lg dark:text-neutral-2 dark:border-neutral-3 flex items-center"
+           dark:text-neutral-2 dark:border-neutral-3 flex items-center"
           >
             Notifications
             <button className=" text-secondary-main font-medium ml-auto text-[10px] capitalize">
