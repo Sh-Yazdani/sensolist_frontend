@@ -31,8 +31,8 @@ export default function Page() {
     <div className=" flex flex-col">
       <div className="md:relative flex flex-row-reverse justify-end gap-4 px-4">
         <AppletCreateButton applets={applets} />
-        <SearchBar />
         <SortBy />
+        <SearchBar />
       </div>
       <AppletContent
         unPinApplet={unPinApplet}
