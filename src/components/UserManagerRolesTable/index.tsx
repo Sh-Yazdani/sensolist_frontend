@@ -1,6 +1,6 @@
 import { IRole } from "@/types/general";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Edit2, Trash } from "iconsax-react";
+import { Add, Edit2, Trash } from "iconsax-react";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
@@ -35,7 +35,6 @@ export default function UserManagerRolesTable({
   const handleOnEditRow: MRT_TableOptions<IRole>["onEditingRowSave"] = (
     vals
   ) => {
-    console.log("values", vals);
     setData((prev) => [
       ...prev.filter((item) => item.name !== vals.row.original.name),
       vals.values,
@@ -66,12 +65,13 @@ export default function UserManagerRolesTable({
     positionActionsColumn: "last",
     renderTopToolbarCustomActions: ({ table }) => (
       <Button
-        className="w-[80px]"
+        className="w-[40px] md:w-[80px] whitespace-nowrap"
         onClick={() => {
           setAddRoleOpen(true);
         }}
       >
-        add role
+        <span className="hidden md:flex">add role</span>
+        <Add className="flex md:hidden" />
       </Button>
     ),
     renderRowActions: ({ row }) => {
