@@ -63,7 +63,6 @@ export default function AppletCreateForm({
     dispatch(createAlert({ message: "applet added.", type: "success" }));
     onCancel();
   };
-  console.log("initials", initialValues);
   return (
     <>
       <div className=" text-xl text-center md:text-left capitalize">

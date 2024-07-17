@@ -24,7 +24,6 @@ export default function AppletContent({
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [appletEdit, setAppletEdit] = useState<IApplet | null>(null);
-  console.log(applets);
   return (
     <>
       {applets.length ? (
