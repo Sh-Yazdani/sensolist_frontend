@@ -1,4 +1,3 @@
-import Alert from "@/components/Alert";
 import SensolistTag from "@/components/authentication/SensolistTag";
 
 export default function AuthLayout({
@@ -11,7 +10,6 @@ export default function AuthLayout({
       className=" h-[100vh] flex overflow-y-auto flex-col
        bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center px-4"
     >
-      <Alert />
       <div
         className=" flex w-full flex-col z-20
         max-w-[380px] h-[540px]
