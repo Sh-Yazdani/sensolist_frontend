@@ -62,10 +62,10 @@ export default function DashboardCard({
           />
         </div>
         <div className="flex flex-col justify-between ml-4 flex-1">
-          <span className=" text-black text-sm mb-4 dark:text-white capitalize">
+          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate">
             {dashboard.name}
           </span>
-          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs">
+          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate">
             {dashboard.description}
           </span>
         </div>
