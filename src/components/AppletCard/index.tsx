@@ -5,8 +5,7 @@ import { Edit2, Trash } from "iconsax-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import DropDownModal from "../UI/DropDownModal";
-import { MoreHorizontalIcon, PinIcon, PinnedIcon } from "../UI/Icons";
+import { PinIcon, PinnedIcon } from "../UI/Icons";
 
 interface AppletCardProps {
   applet: IApplet;
@@ -57,16 +56,16 @@ export default function AppletCard({
           />
         </div>
         <div className="flex flex-col justify-between ml-4 flex-1">
-          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate">
+          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate w-[140px]">
             {applet.name}
           </span>
-          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate">
+          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate w-[140px]">
             {applet.description}
           </span>
         </div>
       </Link>
       <div className="relative w-6 mb-auto md:w-6">
-        <div className="w-full hidden md:flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2">
           <button onClick={applet.pin ? unPinHandler : pinHandler}>
             {applet.pin ? (
               <PinnedIcon className="size-4" />
@@ -81,44 +80,6 @@ export default function AppletCard({
             <Trash className=" text-neutral-5 size-4" />
           </button>
         </div>
-        <button
-          className="md:hidden"
-          onClick={() => {
-            setIsPopupOpen(true);
-          }}
-        >
-          <MoreHorizontalIcon className="dark:text-neutral-5" />
-        </button>
-        {isPopupOpen && (
-          <>
-            <DropDownModal
-              visible={isPopupOpen}
-              onClick={() => setIsPopupOpen(false)}
-            />
-            <div className="w-[153px] bg-neutral-2 dark:bg-primary-tint-1 absolute right-0 shadow-300 rounded-lg overflow-hidden z-50">
-              <button
-                onClick={applet.pin ? unPinHandler : pinHandler}
-                className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm border-b border-neutral-5"
-              >
-                {applet.pin ? (
-                  <>
-                    <PinnedIcon /> Pinned
-                  </>
-                ) : (
-                  <>
-                    <PinIcon /> Pin
-                  </>
-                )}
-              </button>
-              <button
-                onClick={removeHandler}
-                className="w-full text-neutral-7 dark:text-neutral-3 p-2 flex items-center text-sm"
-              >
-                <Trash className="pr-2 text-neutral-5" /> Remove
-              </button>
-            </div>
-          </>
-        )}
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ export default function Page() {
 
   return (
     <div className=" flex flex-col">
-      <div className="md:relative flex flex-row-reverse justify-end gap-4">
+      <div className="md:relative flex flex-row-reverse justify-end gap-4 px-4">
         <DashboardCreateButton dashboards={dashboards} />
         <SearchBar />
         <SortBy />
