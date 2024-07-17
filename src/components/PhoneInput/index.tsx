@@ -30,7 +30,7 @@ export function CustomPhoneInput({
 }: InputProps) {
   return (
     <label className={`w-full relative flex flex-col ${className}`}>
-      <span className="mb-1 text-sm lg:text-base dark:text-white">{label}</span>
+      <span className="mb-1 text-sm  dark:text-white">{label}</span>
       <ReactPhoneInput
         disableSearchIcon
         enableSearch={true}
@@ -38,7 +38,7 @@ export function CustomPhoneInput({
         placeholder={placeholder ? placeholder : ""}
         searchPlaceholder="Search for country"
         inputClass={`!h-[45px] !w-full mt-2 flex dark:text-neutral-2
-           placeholder:text-xs placeholder:text-neutral-7 ${
+           placeholder:text-xs placeholder:text-neutral-7 focus:ring-0 ${
              error && "border !border-error"
            } ${variant === "simple" && "simple  !border-neutral-6"}`}
         {...rest}

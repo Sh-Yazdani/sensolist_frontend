@@ -13,8 +13,8 @@ export default function AuthLayout({
     >
       <Alert />
       <div
-        className=" flex w-full h-fit flex-col z-20
-        max-w-[480px]
+        className=" flex w-full flex-col z-20
+        max-w-[380px] h-[540px]
         mt-10 mx-auto lg:ml-auto lg:mr-24
         py-4 px-6 md:py-8 md:px-6 lg:px-8
         border border-white-opacity-900 rounded-3xl
@@ -24,10 +24,6 @@ export default function AuthLayout({
         {children}
       </div>
       <SensolistTag />
-      {/* <div
-        className="absolute top-0 bottom-0 right-0 left-0 h-full
-      bg-[url('/assets/auth-bg.jpeg')] bg-cover bg-center -z-10"
-      ></div> */}
     </div>
   );
 }

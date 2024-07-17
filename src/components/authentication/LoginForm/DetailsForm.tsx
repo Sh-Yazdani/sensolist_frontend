@@ -40,7 +40,7 @@ export default function DetailsForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full mt-6 md:mt-8 lg:mt-10"
+      className="w-full mt-6 md:mt-8 lg:mt-10 h-full flex flex-col"
     >
       <Controller
         name="phoneNumber"
@@ -74,7 +74,7 @@ export default function DetailsForm({
         setIsChecked={setTermsChecked}
         isChecked={termsChecked}
       />
-      <SubmitButton className="mt-10 lg:mt-[56px]">
+      <SubmitButton className="mt-auto">
         Continue
         <ArrowRight className="ml-2" />
       </SubmitButton>

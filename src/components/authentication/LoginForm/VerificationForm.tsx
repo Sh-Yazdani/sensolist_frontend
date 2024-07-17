@@ -24,7 +24,7 @@ export default function VerificationForm() {
     <>
       <form
         onSubmit={submitHandler}
-        className=" flex flex-col items-center justify-center mt-20"
+        className=" flex flex-col items-center justify-center mt-20 h-full"
       >
         <div className="relative">
           <VerificationInput
@@ -45,7 +45,7 @@ export default function VerificationForm() {
           {error && <FormError error="error" />}
         </div>
         <TimerCountDown />
-        <SubmitButton className="mt-20 lg:mb-[120px]">Login</SubmitButton>
+        <SubmitButton className="mt-auto">Login</SubmitButton>
       </form>
     </>
   );

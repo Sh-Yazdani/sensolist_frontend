@@ -59,10 +59,11 @@ export default function AppletCreateForm({
       description: data.description,
       image: selectedImage,
     });
-    dispatch(createAlert({ message: "applet added.", type: "success" }));
     reset();
+    dispatch(createAlert({ message: "applet added.", type: "success" }));
     onCancel();
   };
+  console.log("initials", initialValues);
   return (
     <>
       <div className=" text-xl text-center md:text-left capitalize">
@@ -70,7 +71,7 @@ export default function AppletCreateForm({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          initialValue={initialValues?.name}
+          initialValue={initialValues?.name || ""}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
           }

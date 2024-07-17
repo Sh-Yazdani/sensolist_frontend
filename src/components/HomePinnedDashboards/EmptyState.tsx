@@ -8,7 +8,7 @@ export default function EmptyState() {
       <SimplificationIcon className="w-[80px] h-[67px] lg:w-[112px] lg:h-[94px]" />
       <div
         className=" text-neutral-5 text-xs text-center
-  md:text-base w-[330px] mt-6 lg:w-[370px] dark:text-neutral-6"
+  md:text-base mt-6 lg:w-[370px] dark:text-neutral-6"
       >
         You haven’t pinned any dashboard yet!
       </div>

@@ -27,23 +27,23 @@ export function PasswordInput({
   const [type, setType] = useState<"password" | "text">("password");
   return (
     <label className={`w-full flex flex-col relative ${className}`}>
-      <span className="mb-2 text-sm lg:text-base dark:text-white">{label}</span>
+      <span className="mb-2 text-sm dark:text-white">{label}</span>
       <input
         placeholder={placeholder}
         type={type}
         {...register(name, { required: true })}
-        className={` focus-visible:outline-none h-[45px] md:h-[60px] 
-          rounded-lg px-2 placeholder:text-xs border bg-transparent ${
+        className={` focus-visible:outline-none focus:outline-none h-[45px]
+          rounded-lg px-2 placeholder:text-[10px] border bg-transparent focus:ring-0 ${
             error
               ? "border-error"
               : simple
-              ? "border-neutral-6"
-              : "border-white-opacity-900"
+              ? "border-neutral-6 focus:border-neutral-6"
+              : "border-white-opacity-900 focus:border-white-opacity-900"
           } 
         ${
           simple
             ? " backdrop-blur-[30px] placeholder:text-neutral-7 dark:placeholder:text-neutral-4 dark:text-white"
-            : "placeholder:text-white-opacity-700 bg-gradient-opacity"
+            : "placeholder:text-white-opacity-700  bg-gradient-opacity"
         }`}
       />
       {error && <FormError error={error} />}
@@ -52,7 +52,7 @@ export function PasswordInput({
           event.preventDefault();
           setType((prev) => (prev === "password" ? "text" : "password"));
         }}
-        className=" absolute bottom-[9px] lg:bottom-4 right-4"
+        className=" absolute bottom-[9px] right-4"
       >
         {type === "password" ? (
           <Eye className="dark:text-white" />

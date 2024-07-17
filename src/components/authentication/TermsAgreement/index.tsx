@@ -15,7 +15,7 @@ export default function TermsAgreement({
   return (
     <label
       className="relative checkbox-container flex items-center 
-    mt-[33px] md:mt-9 text-sm lg:text-base"
+    mt-10 text-xs"
     >
       <input
         className={isChecked ? "checked" : ""}
