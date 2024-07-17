@@ -21,17 +21,17 @@ export default function FilterComponent() {
     {
       title: "type",
       options: [
-        { title: "option 1", value: "option1" },
-        { title: "option 2", value: "option2" },
-        { title: "option 3", value: "option3" },
+        { title: "option 4", value: "option4" },
+        { title: "option 5", value: "option5" },
+        { title: "option 6", value: "option6" },
       ],
     },
     {
       title: "actions",
       options: [
-        { title: "option 1", value: "option1" },
-        { title: "option 2", value: "option2" },
-        { title: "option 3", value: "option3" },
+        { title: "option 7", value: "option7" },
+        { title: "option 8", value: "option8" },
+        { title: "option 9", value: "option9" },
       ],
     },
     {
@@ -72,21 +72,17 @@ export default function FilterComponent() {
         }}
       />
       <div
-        className={`flex-col absolute rounded-t-2xl shadow-300 max-w-[400px]
-        w-[96%] bg-white mt-12 md:mt-12 px-4 lg:right-0 top-2
-         lg:w-[264px] lg:h-fit lg:rounded-xl lg:dark:shadow-white-opacity-200 lg:shadow lg:mt-0
+        className={`flex-col absolute lg:static shadow-300 lg:max-w-[400px]
+        w-[80%] max-w-[250px] bg-white mt-12 md:mt-12 px-6 lg:right-0 top-2
+         lg:w-[264px] lg:h-fit lg:min-h-[480px] rounded-xl lg:dark:shadow-white-opacity-200 lg:shadow lg:mt-0
          dark:bg-black flex transition-all duration-500
-         left-0 right-0 mx-auto md:left-[unset] md:right-[unset] md:mx-0
+         right-8 mx-auto  md:mx-0
         ${
           isOpen
             ? "visible opacity-100 z-30"
             : " invisible h-0 opacity-0 lg:visible lg:opacity-100"
         }`}
       >
-        <div
-          className="h-2 rounded-full mt-4 mx-auto w-[120px] md:w-[180px] 
-        bg-neutral-6 lg:hidden dark:bg-neutral-8"
-        ></div>
         <div className="hidden lg:flex pt-6 justify-between items-center">
           <div className="flex gap-2 items-center text-lg text-black dark:text-white">
             <Filter className=" size-5" />
@@ -133,7 +129,12 @@ export default function FilterComponent() {
                 <div
                   className={`flex flex-col transition-all
                     ${
-                      visibleOptions?.title === filterOption.title
+                      visibleOptions?.title === filterOption.title ||
+                      [
+                        ...selectedOptions.filter(
+                          (item) => item.filterTitle === filterOption.title
+                        ),
+                      ].length
                         ? " mt-0 visible"
                         : " invisible h-0 m-0"
                     }`}

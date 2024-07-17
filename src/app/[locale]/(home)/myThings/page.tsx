@@ -120,13 +120,20 @@ export default function Page() {
     <div className=" flex flex-col">
       <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8">
         <SearchBar />
-        <FilterComponent />
+        <div className="lg:hidden">
+          <FilterComponent />
+        </div>
         <SortBy />
       </div>
-      <div className="mt-4 flex flex-col md:flex-row flex-wrap lg:mr-[252px]">
-        {fakeThings.map((thing) => (
-          <MyThingCard key={thing.id} thing={thing} />
-        ))}
+      <div className="flex ">
+        <div className="mt-4 flex flex-col md:flex-row flex-wrap flex-1">
+          {fakeThings.map((thing) => (
+            <MyThingCard key={thing.id} thing={thing} />
+          ))}
+        </div>
+        <div className="hidden lg:flex">
+          <FilterComponent />
+        </div>
       </div>
     </div>
   );
