@@ -33,7 +33,6 @@ export default function VerificationForm() {
             onComplete={(val) => {
               setError("");
               setVerificationValue(val);
-              console.log(val);
             }}
             classNames={{
               container: "justify-between max-w-[280px] lg:max-w-[340px]",
