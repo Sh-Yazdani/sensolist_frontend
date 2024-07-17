@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
 import { IThings } from "@/types/general";
 
-const fakeThings: IThings[] = [
+export const fakeThings: IThings[] = [
   {
     id: "1",
     name: "product’s name",

@@ -1,3 +1,4 @@
+import HomeMyThings from "@/components/HomeMythings";
 import HomePinnedAppletes from "@/components/HomePinnedApplets";
 import HomePinnedDashboardes from "@/components/HomePinnedDashboards";
 import { IDashboard } from "@/types/general";
@@ -36,6 +37,7 @@ export default function Home() {
   return (
     <main className="flex">
       <div className="flex flex-col px-4 gap-4 lg:gap-10 flex-1 max-w-[1000px] mx-auto w-full">
+        <HomeMyThings />
         <HomePinnedAppletes />
         <HomePinnedDashboardes />
       </div>
