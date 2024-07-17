@@ -18,7 +18,6 @@ export default function Menu() {
   const { t } = useTranslation();
 
   const router = useRouter();
-  console.log("locale", locale);
   return (
     <div
       className=" rounded-t-2xl flex flex-row md:flex-col z-30
