@@ -29,10 +29,10 @@ export default function Modal({ children, onClose, open, large }: ModalProps) {
     <>
       {isOpen && <Backdrop onClick={closeHandler} />}
       <div
-        className={` bg-white fixed flex flex-col h-3/4 max-h-[calc(100%-4rem)] overflow-auto
+        className={` bg-white fixed flex flex-col lg:h-3/4 max-h-[calc(100%-4rem)] overflow-auto
            text-black dark:text-white dark:bg-black shadow-300 shadow-white-150
-           rounded-t-3xl pt-4 px-4 pb-8 top-10
-            md:rounded-2xl md:py-10 md:px-6 md:top-20 left-0 right-0 mx-auto
+            pt-4 px-4 pb-8 top-10 bottom-20
+            rounded-2xl md:py-10 md:px-6 md:top-20 left-0 right-0 mx-auto
          transition-[opacity] duration-500 ease-linear ${
            isOpen ? " opacity-100 z-40" : "opacity-0 -z-10"
          }

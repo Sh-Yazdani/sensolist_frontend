@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import SortBy from "@/components/SortBy";
 import { IThings } from "@/types/general";
 
-const fakeThings: IThings[] = [
+export const fakeThings: IThings[] = [
   {
     id: "1",
     name: "product’s name",
@@ -117,16 +117,23 @@ const fakeThings: IThings[] = [
 
 export default function Page() {
   return (
-    <div className=" flex flex-col pt-4 md:pt-0 md:pr-4 px-4 md:mt-[100px] lg:mt-[120px]">
+    <div className=" flex flex-col">
       <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8">
         <SearchBar />
-        <FilterComponent />
+        <div className="lg:hidden">
+          <FilterComponent />
+        </div>
         <SortBy />
       </div>
-      <div className="mt-4 flex flex-col md:flex-row flex-wrap lg:mr-[252px]">
-        {fakeThings.map((thing) => (
-          <MyThingCard key={thing.id} thing={thing} />
-        ))}
+      <div className="flex ">
+        <div className="mt-4 flex flex-col md:flex-row flex-wrap flex-1">
+          {fakeThings.map((thing) => (
+            <MyThingCard key={thing.id} thing={thing} />
+          ))}
+        </div>
+        <div className="hidden lg:flex">
+          <FilterComponent />
+        </div>
       </div>
     </div>
   );

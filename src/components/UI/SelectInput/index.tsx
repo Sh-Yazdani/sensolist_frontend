@@ -33,12 +33,13 @@ export default function SelectInput({
         className="hidden"
         value={selectedValue.value}
       />
-      <span>{label}</span>
+      <span className=" text-sm mb-2">{label}</span>
       <button
-        onClick={() => {
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
+          event.preventDefault();
           setIsOpen(true);
         }}
-        className="flex items-center border border-neutral-6 rounded-lg w-full py-3 px-4 justify-between"
+        className="flex mt-2 items-center border border-neutral-6 rounded-lg w-full py-3 px-4 justify-between"
       >
         <span className=" whitespace-nowrap">{selectedValue.title}</span>
         <ArrowDown2 className="ml-2 size-4" />

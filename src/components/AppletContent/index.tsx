@@ -24,11 +24,10 @@ export default function AppletContent({
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [appletEdit, setAppletEdit] = useState<IApplet | null>(null);
-  console.log(applets);
   return (
     <>
       {applets.length ? (
-        <div className="w-full pt-4 gap-4 flex flex-wrap">
+        <div className="w-full pt-4 gap-4 flex flex-wrap px-4">
           {applets.map((applet: IApplet) => (
             <AppletCard
               unPinApplet={unPinApplet}

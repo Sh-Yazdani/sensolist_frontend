@@ -7,10 +7,10 @@ interface FormErrorProps {
 export default function FormError({ error }: FormErrorProps) {
   return (
     <div
-      className="rounded bg-error text-sm text-white py-1 px-2 flex items-center
-absolute bottom-[-2.25rem]"
+      className="rounded text-xs text-error py-1 left-0 flex items-center whitespace-nowrap
+absolute bottom-[-1.5rem]"
     >
-      <Warning2 /> {error}
+      <Warning2 className=" size-4 mr-2" /> {error}
     </div>
   );
 }

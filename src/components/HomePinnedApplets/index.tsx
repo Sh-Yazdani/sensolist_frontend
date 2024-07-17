@@ -27,7 +27,7 @@ export default function HomePinnedAppletes() {
           Pinned Applets
         </span>
       </div>
-      <div className="flex mt-4 gap-4 w-fit m-auto h-full min-w-full text-neutral-7 dark:text-neutral-4">
+      <div className="flex mt-4 gap-4 w-fit m-auto h-3/4 min-w-full text-neutral-7 dark:text-neutral-4">
         {pinnedApplets.length ? (
           <>
             {pinnedApplets.map((applet: IApplet, i) => (

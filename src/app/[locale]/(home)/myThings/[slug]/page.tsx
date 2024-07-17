@@ -27,11 +27,11 @@ export default function ProducDetailsPage({
   params: { slug: string };
 }) {
   return (
-    <div className=" h-full overflow-auto md:overflow-visible  md:mt-[100px] lg:mt-[120px]">
+    <div className=" h-full overflow-auto md:overflow-visible ">
       <ProductDetailsHeader />
       <div
         className="flex flex-col px-4 lg:flex-row md:w-fit md:mx-auto
-       shadow lg:p-8 md:rounded-2xl bg-neutral-2 dark:bg-primary-tint-1"
+       shadow lg:p-8 md:rounded-2xl bg-neutral-2 dark:bg-transparent md:dark:bg-primary-tint-1"
       >
         <div className=" text-lg lg:hidden mt-4 capitalize dark:text-white">
           {fakeThing.name}

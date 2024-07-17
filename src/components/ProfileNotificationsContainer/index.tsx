@@ -27,7 +27,7 @@ export default function ProfileNotificationsContainer({
   return (
     <div className="flex flex-col h-full">
       <Tabs
-        items={["all", "unread", "read"]}
+        items={["all", "inbox", "sent"]}
         currentIndex={currentTabIndex}
         onTabChange={(i: number) => {
           setCurrentTabIndex(i);
