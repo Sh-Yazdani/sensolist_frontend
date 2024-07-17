@@ -31,7 +31,7 @@ export default function Page() {
   };
 
   return (
-    <div className=" flex flex-col pt-4 md:pt-0 md:pr-4 px-4 md:mt-[100px] lg:mt-[120px]">
+    <div className=" flex flex-col">
       <div className="md:relative flex flex-row-reverse justify-end gap-4">
         <DashboardCreateButton dashboards={dashboards} />
         <SearchBar />

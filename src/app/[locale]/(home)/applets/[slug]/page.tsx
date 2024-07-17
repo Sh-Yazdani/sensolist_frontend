@@ -6,7 +6,7 @@ import { ReactFlowProvider } from "@xyflow/react";
 
 export default function page() {
   return (
-    <div className=" flex flex-row mt-8 md:mt-[100px] lg:mt-[120px] flex-1 pl-8">
+    <div className=" flex flex-row">
       <ReactFlowProvider>
         <FlowSidebar />
         <FlowContent />

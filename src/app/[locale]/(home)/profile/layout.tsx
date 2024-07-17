@@ -6,7 +6,7 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-full flex flex-1 flex-col md:mt-[100px] lg:mt-[120px]">
+    <div className="min-h-full flex flex-1 flex-col">
       <ProfileContainer>{children}</ProfileContainer>
     </div>
   );

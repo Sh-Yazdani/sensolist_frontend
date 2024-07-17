@@ -27,7 +27,7 @@ export default function ProducDetailsPage({
   params: { slug: string };
 }) {
   return (
-    <div className=" h-full overflow-auto md:overflow-visible  md:mt-[100px] lg:mt-[120px]">
+    <div className=" h-full overflow-auto md:overflow-visible ">
       <ProductDetailsHeader />
       <div
         className="flex flex-col px-4 lg:flex-row md:w-fit md:mx-auto

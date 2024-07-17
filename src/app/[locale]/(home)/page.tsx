@@ -34,8 +34,8 @@ export default function Home() {
     },
   ];
   return (
-    <main className="flex md:mt-[100px] lg:mt-[120px]">
-      <div className="flex flex-col py-6 px-4 gap-4 lg:gap-10 flex-1 max-w-[1000px] mx-auto w-full">
+    <main className="flex">
+      <div className="flex flex-col px-4 gap-4 lg:gap-10 flex-1 max-w-[1000px] mx-auto w-full">
         <HomePinnedAppletes />
         <HomePinnedDashboardes />
       </div>
