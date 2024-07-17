@@ -46,7 +46,7 @@ export default function ProductDetailsGallery({
   };
   return (
     <div className="w-full flex mx-auto lg:mx-[unset] lg:w-3/5">
-      <div className="w-full aspect-square lg:min-w-[480px] max-w-[576px] mx-auto md:mx-0 mt-2 mb-9 flex">
+      <div className="w-full aspect-square lg:aspect-auto lg:min-w-[480px] max-w-[576px] mx-auto md:mx-0 mt-2 mb-9 flex">
         <div className="w-[160px] h-full hidden md:flex flex-col justify-between mr-4">
           {images.map((img, i) => (
             <div
