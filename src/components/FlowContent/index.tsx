@@ -16,7 +16,7 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AppletHeader from "../AppletHeader";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
@@ -30,6 +30,7 @@ const getId = () => `dndnode_${id++}`;
 const nodeTypes: NodeTypes = { triggerNode: FlowTriggerNode };
 
 export default function FlowContent({ appletId }: { appletId: number }) {
+  const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -83,7 +84,13 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   );
   return (
     <div className="flex flex-grow flex-col h-auto">
-      <AppletHeader appletName={selectedApplet?.name} />
+      <AppletHeader
+        appletName={selectedApplet?.name}
+        editMode={editMode}
+        toggleEditMode={(a: boolean) => {
+          setEditMode(a);
+        }}
+      />
       <div className="flex-grow h-full" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
