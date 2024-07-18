@@ -18,6 +18,7 @@ export default function DashboardWidgets({
   dashboardId,
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(true);
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
@@ -39,6 +40,8 @@ export default function DashboardWidgets({
         isOpen={isSelectOpen}
       />
       <DashboardHeader
+        editMode={editMode}
+        toggleEditMode={(a: boolean) => setEditMode(a)}
         isSelectOpen={isSelectOpen}
         onWidgetAdd={() => {
           setIsSelectOpen(true);
@@ -65,14 +68,16 @@ export default function DashboardWidgets({
             ))}
           </div>
         ) : (
-          <Button
-            onClick={() => {
-              setIsSelectOpen(true);
-            }}
-            className="px-4 m-auto mt-32"
-          >
-            <Add className="mr-2" /> Add widget
-          </Button>
+          editMode && (
+            <Button
+              onClick={() => {
+                setIsSelectOpen(true);
+              }}
+              className="px-4 m-auto mt-32"
+            >
+              <Add className="mr-2" /> Add widget
+            </Button>
+          )
         )}
       </div>
     </div>
