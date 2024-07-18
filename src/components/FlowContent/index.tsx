@@ -1,5 +1,6 @@
 "use client";
 
+import { RootState } from "@/lib/store";
 import {
   addEdge,
   Background,
@@ -16,6 +17,8 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useRef } from "react";
+import { useSelector } from "react-redux";
+import AppletHeader from "../AppletHeader";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 
@@ -26,10 +29,14 @@ const getId = () => `dndnode_${id++}`;
 
 const nodeTypes: NodeTypes = { triggerNode: FlowTriggerNode };
 
-export default function FlowContent() {
+export default function FlowContent({ appletId }: { appletId: number }) {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const { applets } = useSelector((state: RootState) => state.appletSlice);
+  const selectedApplet = [...applets.filter((app) => app.id === appletId)][0];
+
   const { screenToFlowPosition } = useReactFlow();
 
   const onConnect: OnConnect = useCallback(
@@ -57,6 +64,7 @@ export default function FlowContent() {
       }
       const nodeValue = event.dataTransfer.getData("value");
       const triggeredNode = getNodeByValue(nodeValue);
+      console.log("trigger node", triggeredNode);
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -75,6 +83,7 @@ export default function FlowContent() {
   );
   return (
     <div className="flex flex-grow flex-col h-auto">
+      <AppletHeader appletName={selectedApplet?.name} />
       <div className="flex-grow h-full" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
@@ -86,6 +95,7 @@ export default function FlowContent() {
           onDragOver={onDragOver}
           nodeTypes={nodeTypes}
           fitView
+          zoomOnPinch={false}
         >
           <Background color="#ccc" variant={BackgroundVariant.Dots} />
           <Controls />
