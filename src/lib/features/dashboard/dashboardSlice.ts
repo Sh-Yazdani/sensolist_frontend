@@ -54,6 +54,31 @@ export const dashboardSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
+    addWidget: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: { name: string; image: string };
+      }>
+    ) => {
+      let dashboard: IDashboard = state.dashboards.filter(
+        (item) => item.id === action.payload.dashboardId
+      )[0];
+      const widgets = dashboard.widgets
+        ? [...dashboard.widgets, action.payload.widget]
+        : [action.payload.widget];
+      state.dashboards = [
+        ...state.dashboards.filter((item) => item.id !== dashboard.id),
+        {
+          id: dashboard.id,
+          name: dashboard.name,
+          description: dashboard.description,
+          image: dashboard.image,
+          pin: dashboard.pin,
+          widgets: widgets,
+        },
+      ];
+    },
   },
 });
 
@@ -63,5 +88,6 @@ export const {
   pinDashboard,
   unPinDashboard,
   editDashboard,
+  addWidget,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
