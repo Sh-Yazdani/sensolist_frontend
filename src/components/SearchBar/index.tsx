@@ -4,8 +4,8 @@ export default function SearchBar() {
   return (
     <div
       className="static md:bg-transparent mr-auto
-       w-full md:pb-0 left-0 top-[-16px] md:pt-0 rounded-b-xl :px-0
-    md:w-[300px] lg:ml-8"
+       w-full md:pb-0 left-0 top-[-16px] md:pt-0 rounded-b-xl px-0
+    md:w-[300px]"
     >
       <div className="w-full relative lg:h-full">
         <input
