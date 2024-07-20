@@ -1,14 +1,17 @@
 "use client";
 
+import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { IWidget } from "@/types/general";
 import { Close } from "@mui/icons-material";
 import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface DashboardWidgetSelectProps {
   isOpen: boolean;
   onClose: () => void;
+  dashboardId: number;
 }
 
 const widgets: IWidget[] = [
@@ -109,8 +112,10 @@ const widgets: IWidget[] = [
 export default function DashboardWidgetSelect({
   isOpen,
   onClose,
+  dashboardId,
 }: DashboardWidgetSelectProps) {
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
+  const dispatch = useDispatch();
   return (
     <div
       className={` absolute w-3/4 h-full bg-neutral-2 dark:bg-primary-Shade-1 shadow right-[-1rem] bottom-0
@@ -137,7 +142,18 @@ export default function DashboardWidgetSelect({
         {selectedWidget
           ? selectedWidget.subWidget?.map((sub) => (
               <div
-                className=" bg-white dark:bg-primary-Shade-2 shadow-lg flex flex-col w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 hover:shadow-neutral-6 cursor-pointer"
+                onClick={() => {
+                  dispatch(
+                    addWidget({
+                      dashboardId: dashboardId,
+                      widget: sub,
+                    })
+                  );
+                  onClose();
+                }}
+                className=" bg-white dark:bg-primary-Shade-2 shadow-lg flex flex-col 
+                w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 
+                hover:shadow-neutral-6 cursor-pointer"
                 key={sub.name}
               >
                 <div className=" capitalize text-sm mb-2 dark:text-white">

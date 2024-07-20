@@ -9,12 +9,16 @@ interface DashboardHeaderProps {
   dashboardId: number;
   onWidgetAdd: () => void;
   isSelectOpen: boolean;
+  toggleEditMode: (a: boolean) => void;
+  editMode: boolean;
 }
 
 export default function DashboardHeader({
   dashboardId,
   onWidgetAdd,
   isSelectOpen,
+  editMode,
+  toggleEditMode,
 }: DashboardHeaderProps) {
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
@@ -31,16 +35,36 @@ export default function DashboardHeader({
       <div className=" capitalize dark:text-white">
         {selectedDashboard?.name}
       </div>
-      <Button className="ml-auto px-4" onClick={onWidgetAdd}>
-        <Add className="mr-1" />
-        Add widget
-      </Button>
-      <Button className="mx-4 text-neutral-6" variant="text">
-        <CloseCircle className="mr-1" /> cancel
-      </Button>
-      <Button className="px-2 py-1 h-[40px]" variant="secondary">
-        <TickCircle className="mr-1" /> save
-      </Button>
+      {editMode ? (
+        <>
+          <Button className="ml-auto px-4" onClick={onWidgetAdd}>
+            <Add className="mr-1" />
+            Add widget
+          </Button>
+          <Button className="mx-4 text-neutral-6" variant="text">
+            <CloseCircle className="mr-1" /> cancel
+          </Button>
+          <Button
+            onClick={() => {
+              toggleEditMode(false);
+            }}
+            className="px-2 py-1 h-[40px]"
+            variant="secondary"
+          >
+            <TickCircle className="mr-1" /> save
+          </Button>
+        </>
+      ) : (
+        <Button
+          onClick={() => {
+            toggleEditMode(true);
+          }}
+          className="px-2 py-1 h-[40px] ml-auto"
+          variant="secondary"
+        >
+          <TickCircle className="mr-1" /> edit
+        </Button>
+      )}
     </div>
   );
 }

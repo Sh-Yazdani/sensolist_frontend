@@ -1,5 +1,6 @@
 "use client";
 
+import { RootState } from "@/lib/store";
 import {
   addEdge,
   Background,
@@ -15,7 +16,10 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import AppletHeader from "../AppletHeader";
+import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 
@@ -26,10 +30,15 @@ const getId = () => `dndnode_${id++}`;
 
 const nodeTypes: NodeTypes = { triggerNode: FlowTriggerNode };
 
-export default function FlowContent() {
+export default function FlowContent({ appletId }: { appletId: number }) {
+  const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const { applets } = useSelector((state: RootState) => state.appletSlice);
+  const selectedApplet = [...applets.filter((app) => app.id === appletId)][0];
+
   const { screenToFlowPosition } = useReactFlow();
 
   const onConnect: OnConnect = useCallback(
@@ -57,6 +66,7 @@ export default function FlowContent() {
       }
       const nodeValue = event.dataTransfer.getData("value");
       const triggeredNode = getNodeByValue(nodeValue);
+      console.log("trigger node", triggeredNode);
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -74,24 +84,41 @@ export default function FlowContent() {
     [screenToFlowPosition]
   );
   return (
-    <div className="flex flex-grow flex-col h-auto">
-      <div className="flex-grow h-full" ref={reactFlowWrapper}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-          nodeTypes={nodeTypes}
-          fitView
-        >
-          <Background color="#ccc" variant={BackgroundVariant.Dots} />
-          <Controls />
-          <MiniMap nodeStrokeWidth={2} />
-        </ReactFlow>
+    <>
+      {editMode && <FlowSidebar />}
+      <div className="flex flex-grow flex-col h-auto">
+        <AppletHeader
+          appletName={selectedApplet?.name}
+          editMode={editMode}
+          toggleEditMode={(a: boolean) => {
+            setEditMode(a);
+          }}
+        />
+        <div className="flex-grow h-full" ref={reactFlowWrapper}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+            nodeTypes={nodeTypes}
+            fitView
+            zoomOnPinch={false}
+            // edgesUpdatable={!editMode}
+            edgesFocusable={editMode}
+            nodesDraggable={editMode}
+            nodesConnectable={editMode}
+            nodesFocusable={editMode}
+            elementsSelectable={editMode}
+          >
+            <Background color="#ccc" variant={BackgroundVariant.Dots} />
+            <Controls />
+            <MiniMap nodeStrokeWidth={2} />
+          </ReactFlow>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
