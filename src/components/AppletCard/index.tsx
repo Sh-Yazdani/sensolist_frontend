@@ -47,7 +47,10 @@ export default function AppletCard({
         max-w-[320px] mx-auto md:mx-[unset]
     items-center p-2 rounded-2xl mb-4 ${applet.pin ? "order-0" : "order-2"}`}
     >
-      <Link className="flex flex-1 items-center" href={`/applets/${applet.id}`}>
+      <Link
+        className="flex w-[96%] items-center"
+        href={`/applets/${applet.id}`}
+      >
         <div className="h-[84px] w-[84px] relative">
           <Image
             alt={applet.name}
@@ -55,11 +58,11 @@ export default function AppletCard({
             fill
           />
         </div>
-        <div className="flex flex-col justify-between ml-4 flex-1">
-          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate w-[140px]">
+        <div className="flex flex-col justify-between ml-4">
+          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate w-full">
             {applet.name}
           </span>
-          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate w-[140px]">
+          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate w-full">
             {applet.description}
           </span>
         </div>

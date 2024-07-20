@@ -118,7 +118,7 @@ export const fakeThings: IThings[] = [
 export default function Page() {
   return (
     <div className=" flex flex-col">
-      <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8">
+      <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8 px-4 md:pl-0">
         <SearchBar />
         <div className="lg:hidden">
           <FilterComponent />

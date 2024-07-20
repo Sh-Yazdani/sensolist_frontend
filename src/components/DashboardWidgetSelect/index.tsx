@@ -151,7 +151,7 @@ export default function DashboardWidgetSelect({
                   );
                   onClose();
                 }}
-                className=" bg-white dark:bg-primary-Shade-2 shadow-lg flex flex-col 
+                className=" bg-white dark:bg-primary-Shade-2 shadow flex flex-col 
                 w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 
                 hover:shadow-neutral-6 cursor-pointer"
                 key={sub.name}

@@ -24,7 +24,7 @@ export default function Menu() {
      bg-primary-tint-1 dark:bg-primary-Shade-2 md:ml-4
      bottom-0 w-full h-[62px] md:w-[64px] lg:w-[80px] md:h-full 
      md:bg-transparent dark:md:bg-transparent 
-     fixed md:top-[8.25rem]
+     fixed md:top-[7rem]
      px-9 pt-2 items-center justify-between md:justify-start md:gap-2"
     >
       <button

@@ -32,14 +32,14 @@ export default function DashboardHeader({
         isSelectOpen && "translate-x-[120%]"
       }`}
     >
-      <div className=" capitalize dark:text-white">
+      <div className=" capitalize dark:text-white mr-2">
         {selectedDashboard?.name}
       </div>
       {editMode ? (
         <>
           <Button className="ml-auto px-4" onClick={onWidgetAdd}>
-            <Add className="mr-1" />
-            Add widget
+            <Add className="md:mr-1" />
+            <span className="hidden md:flex">Add widget</span>
           </Button>
           <Button className="mx-4 text-neutral-6" variant="text">
             <CloseCircle className="mr-1" /> cancel

@@ -77,12 +77,12 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         position,
         data: { ...triggeredNode },
       };
-
       setNodes((nds) => nds.concat(newNode));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [screenToFlowPosition]
   );
+
   return (
     <>
       {editMode && <FlowSidebar />}
@@ -105,7 +105,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             onDragOver={onDragOver}
             nodeTypes={nodeTypes}
             fitView
-            zoomOnPinch={false}
             // edgesUpdatable={!editMode}
             edgesFocusable={editMode}
             nodesDraggable={editMode}
