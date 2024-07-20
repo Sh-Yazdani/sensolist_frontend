@@ -3,7 +3,7 @@ import { SearchNormal } from "iconsax-react";
 export default function SearchBar() {
   return (
     <div
-      className="static md:bg-transparent mr-auto
+      className="static md:bg-transparent mr-auto lg:ml-4
        w-full md:pb-0 left-0 top-[-16px] md:pt-0 rounded-b-xl px-0
     md:w-[300px]"
     >

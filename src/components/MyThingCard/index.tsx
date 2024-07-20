@@ -12,7 +12,7 @@ export default function MyThingCard({ thing }: MyThingCardProps) {
       href={`/myThings/${thing.id}`}
       className="w-full md:w-[calc(50%-24px)] mx-auto md:mx-[unset] md:mr-4 lg:w-[calc(33%-24px)] xl:w-[calc(25%-24px)] 2xl:w-[calc(20%-24px)] 
       max-w-[280px] md:max-w-[unset]
-      shadow-300 shadow-white-150 dark:bg-primary-Shade-2 rounded-2xl 
+       dark:shadow-white-opacity-200 shadow dark:bg-primary-Shade-2 rounded-2xl 
       overflow-hidden flex flex-col mb-4 
       hover:border-2 hover:border-secondary-main hover:animate-pulse"
     >
