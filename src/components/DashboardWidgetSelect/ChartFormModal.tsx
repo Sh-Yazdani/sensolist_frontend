@@ -63,9 +63,27 @@ export default function ChartFormModal({
     },
   ];
 
+  const charactristicList: ISelectOption[] = [
+    {
+      title: "charactristic 1",
+      value: "charactristic1",
+    },
+    {
+      title: "charactristic 2",
+      value: "charactristic2",
+    },
+    {
+      title: "charactristic 3",
+      value: "charactristic3",
+    },
+  ];
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
+
+  const [selectedCharactristic, setSelectedCharactristic] =
+    useState<ISelectOption>(charactristicList[0]);
 
   const [selectedYUnit, setSelectedYUnit] = useState<ISelectOption>(
     yAxeUnitList[0]
@@ -114,16 +132,15 @@ export default function ChartFormModal({
           label="Thing"
           className="mt-6"
         />
-        <Input
-          required
-          error={
-            errors.charactristic?.type === "required"
-              ? "This field is required"
-              : ""
-          }
-          label="Charactristic"
+        <SelectInput
+          options={charactristicList}
+          selectedValue={selectedCharactristic}
+          setSelectedValue={(option) => {
+            setSelectedCharactristic(option);
+          }}
           register={register}
           name="charactristic"
+          label="Charactristic"
           className="mt-6"
         />
         <div className="mt-6">X Axes</div>
