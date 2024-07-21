@@ -36,6 +36,7 @@ export default function ProfileEditForm() {
     >
       <ProfileUploadPhoto register={register} name="photo" />
       <Input
+        required
         register={register}
         name="firstName"
         label="First name"
@@ -45,6 +46,7 @@ export default function ProfileEditForm() {
         }
       />
       <Input
+        required
         register={register}
         name="lastName"
         label="Last name"

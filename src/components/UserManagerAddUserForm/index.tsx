@@ -55,6 +55,7 @@ export default function UserManagerAddUserForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>Add New User</div>
       <Input
+        required
         error={
           errors.firstName?.type === "required" ? "This field is required" : ""
         }
@@ -64,6 +65,7 @@ export default function UserManagerAddUserForm({
         className="mt-6"
       />
       <Input
+        required
         error={
           errors.lastName?.type === "required" ? "This field is required" : ""
         }

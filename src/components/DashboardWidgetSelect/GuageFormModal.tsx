@@ -8,7 +8,7 @@ import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import SelectInput from "../UI/SelectInput";
 
-interface ChartFormModalProps {
+interface GuageFormModalProps {
   open: boolean;
   onClose: () => void;
   chart: { name: string; image: string } | null;
@@ -19,20 +19,18 @@ interface ICreateWidgetInputs {
   title: string;
   thing: string;
   charactristic: string;
-  xAxesLabel: string;
-  yAxesLabel: string;
-  yAxesMin: number;
-  yAxesMax: number;
-  yAxesUnit: string;
+  min: number;
+  max: number;
+  unit: string;
   description?: string;
 }
 
-export default function ChartFormModal({
+export default function GuageFormModal({
   open,
   onClose,
   chart,
   onAddWidget,
-}: ChartFormModalProps) {
+}: GuageFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
       title: "thing 1",
@@ -48,7 +46,7 @@ export default function ChartFormModal({
     },
   ];
 
-  const yAxeUnitList: ISelectOption[] = [
+  const unitList: ISelectOption[] = [
     {
       title: "unit 1",
       value: "unit1",
@@ -85,9 +83,7 @@ export default function ChartFormModal({
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
 
-  const [selectedYUnit, setSelectedYUnit] = useState<ISelectOption>(
-    yAxeUnitList[0]
-  );
+  const [selectedUnit, setSelectedUnit] = useState<ISelectOption>(unitList[0]);
 
   const {
     register,
@@ -99,8 +95,8 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
     console.log("submit", data);
-    onAddWidget();
     reset();
+    onAddWidget();
     onClose();
   };
 
@@ -143,87 +139,47 @@ export default function ChartFormModal({
           label="Charactristic"
           className="mt-6"
         />
-        <div className="mt-6">X Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
-          <div className="w-full md:w-1/2">
-            <Input
-              required
-              error={
-                errors.xAxesLabel?.type === "required"
-                  ? "This field is required"
-                  : ""
-              }
-              label="label"
-              register={register}
-              name="xAxesLabel"
-            />
-          </div>
-        </div>
-        <div className="mt-6">Y Axes</div>
         <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-center">
-          <div className="w-full md:w-[calc(50%-12px)]">
-            <Input
-              required
-              error={
-                errors.yAxesLabel?.type === "required"
-                  ? "This field is required"
-                  : ""
-              }
-              label="label"
-              register={register}
-              name="yAxesLabel"
-            />
-          </div>
           <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)] mt-4 md:mt-0">
             <Input
               required
-              error={errors.yAxesMin?.type === "required" ? "required" : ""}
-              label="min"
+              error={errors.min?.type === "required" ? "required" : ""}
+              label="Min"
               register={register}
-              name="yAxesMin"
+              name="min"
               type="number"
             />
           </div>
           <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)] mt-4 md:mt-0">
             <Input
               required
-              error={errors.yAxesMax?.type === "required" ? "required" : ""}
-              label="max"
+              error={errors.max?.type === "required" ? "required" : ""}
+              label="Max"
               register={register}
-              name="yAxesMax"
+              name="max"
               type="number"
             />
           </div>
           <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)]">
             <SelectInput
-              options={yAxeUnitList}
-              selectedValue={selectedYUnit}
+              options={unitList}
+              selectedValue={selectedUnit}
               setSelectedValue={(option) => {
-                setSelectedYUnit(option);
+                setSelectedUnit(option);
               }}
               register={register}
-              name="yAxesUnit"
-              label="unit"
-              className="mt-4"
+              name="unit"
+              label="Unit"
             />
           </div>
         </div>
-        <Input
-          error={
-            errors.description?.type === "required"
-              ? "This field is required"
-              : ""
-          }
-          label="Description"
-          register={register}
-          name="description"
-          className="mt-6"
-        />
         <div className="flex items-center gap-4 mt-8">
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();
-              reset();
+              reset({
+                title: "",
+              });
               onClose();
             }}
             className="w-[36%]"

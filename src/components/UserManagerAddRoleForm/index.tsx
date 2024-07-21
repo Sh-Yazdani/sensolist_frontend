@@ -34,6 +34,7 @@ export default function UserManagerAddRoleForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>Add New Role</div>
       <Input
+        required
         error={errors.name?.type === "required" ? "This field is required" : ""}
         label="Name"
         register={register}
@@ -41,6 +42,7 @@ export default function UserManagerAddRoleForm({
         className="mt-6"
       />
       <Input
+        required
         error={
           errors.description?.type === "required"
             ? "This field is required"
