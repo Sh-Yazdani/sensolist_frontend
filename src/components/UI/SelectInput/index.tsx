@@ -29,6 +29,7 @@ export default function SelectInput({
   return (
     <div className={`relative ${className}`}>
       <input
+        required
         {...register(name, { required: true })}
         className="hidden"
         value={selectedValue.value}

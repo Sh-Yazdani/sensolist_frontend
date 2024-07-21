@@ -70,6 +70,7 @@ export default function AppletCreateForm({
       </div>
       <form className="flex flex-col h-auto" onSubmit={handleSubmit(onSubmit)}>
         <Input
+          required
           initialValue={initialValues?.name || ""}
           error={
             errors.name?.type === "required" ? "This field is required" : ""
@@ -81,6 +82,7 @@ export default function AppletCreateForm({
           className="mt-6"
         />
         <Input
+          required
           initialValue={initialValues?.description}
           error={
             errors.description?.type === "required"

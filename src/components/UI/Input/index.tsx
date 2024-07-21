@@ -24,7 +24,7 @@ export default function Input({
   initialValue,
   ...rest
 }: InputProps) {
-  const { type } = rest;
+  const { type, required } = rest;
   const [value, setValue] = useState(initialValue ? initialValue : "");
   useEffect(() => {
     setValue(initialValue ? initialValue : "");
@@ -41,7 +41,7 @@ export default function Input({
             console.log(event.target.value);
             setValue(event.target.value);
           },
-          required: true,
+          required: required,
         })}
         type={type}
         className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
