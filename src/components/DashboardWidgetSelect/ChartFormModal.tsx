@@ -88,7 +88,7 @@ export default function ChartFormModal({
 
   return (
     <Modal onClose={onClose} open={open}>
-      <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-4">
+      <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
         Add Widget :{" "}
         <span className=" capitalize font-semibold">{chart?.name}</span>
       </div>
@@ -125,7 +125,7 @@ export default function ChartFormModal({
           className="mt-6"
         />
         <div className="mt-6">X Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 mt-4">
+        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
           <div className="w-1/2">
             <Input
               error={
@@ -140,7 +140,7 @@ export default function ChartFormModal({
           </div>
         </div>
         <div className="mt-6">Y Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 mt-4 flex gap-4 flex-wrap">
+        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap">
           <div className="w-[calc(50%-12px)]">
             <Input
               error={
