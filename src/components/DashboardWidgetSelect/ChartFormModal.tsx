@@ -11,7 +11,8 @@ import SelectInput from "../UI/SelectInput";
 interface ChartFormModalProps {
   open: boolean;
   onClose: () => void;
-  chartName: string;
+  chart: { name: string; image: string } | null;
+  onAddWidget: () => void;
 }
 
 interface ICreateWidgetInputs {
@@ -29,7 +30,8 @@ interface ICreateWidgetInputs {
 export default function ChartFormModal({
   open,
   onClose,
-  chartName,
+  chart,
+  onAddWidget,
 }: ChartFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -79,6 +81,7 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
     console.log("submit", data);
+    onAddWidget();
     reset();
     onClose();
   };
@@ -87,7 +90,7 @@ export default function ChartFormModal({
     <Modal onClose={onClose} open={open}>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-4">
         Add Widget :{" "}
-        <span className=" capitalize font-semibold">{chartName}</span>
+        <span className=" capitalize font-semibold">{chart?.name}</span>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input

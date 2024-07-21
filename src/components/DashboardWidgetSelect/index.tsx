@@ -1,5 +1,6 @@
 "use client";
 
+import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { IWidget } from "@/types/general";
 import { Close } from "@mui/icons-material";
 import { ArrowLeft } from "iconsax-react";
@@ -20,15 +21,18 @@ export default function DashboardWidgetSelect({
   dashboardId,
 }: DashboardWidgetSelectProps) {
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
-  const [chartModalOpen, setChartModalOpen] = useState<string | null>(null);
+  const [chartModalOpen, setChartModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
   const dispatch = useDispatch();
 
   const widgets: IWidget[] = [
     {
       name: "chart",
       image: "/assets/widgets/chart.svg",
-      onSelect: (name: string) => {
-        setChartModalOpen(name);
+      onSelect: (sub: { name: string; image: string }) => {
+        setChartModalOpen(sub);
       },
       subWidget: [
         {
@@ -151,16 +155,8 @@ export default function DashboardWidgetSelect({
                 <div
                   onClick={() => {
                     if (selectedWidget.onSelect) {
-                      selectedWidget.onSelect(sub.name);
+                      selectedWidget.onSelect(sub);
                     }
-                    // move this code to add chart modal
-                    // dispatch(
-                    //   addWidget({
-                    //     dashboardId: dashboardId,
-                    //     widget: sub,
-                    //   })
-                    // );
-                    // onClose();
                   }}
                   className=" bg-white dark:bg-primary-Shade-2 shadow flex flex-col 
                 w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 
@@ -194,7 +190,18 @@ export default function DashboardWidgetSelect({
         </div>
       </div>
       <ChartFormModal
-        chartName={chartModalOpen || ""}
+        onAddWidget={() => {
+          if (chartModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: chartModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={chartModalOpen}
         open={!!chartModalOpen}
         onClose={() => {
           setChartModalOpen(null);

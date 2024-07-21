@@ -120,6 +120,6 @@ export type TriggerNodeType = Node<{
 export interface IWidget {
   name: string;
   image: string;
-  onSelect?: (name: string) => void;
+  onSelect?: (sub: { name: string; image: string }) => void;
   subWidget?: { name: string; image: string }[];
 }
