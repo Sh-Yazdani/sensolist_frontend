@@ -43,7 +43,11 @@ export default function SelectInput({
         className="flex mt-2 items-center border border-neutral-6 rounded-lg w-full py-3 px-4 justify-between"
       >
         <span className=" whitespace-nowrap">{selectedValue.title}</span>
-        <ArrowDown2 className="ml-2 size-4" />
+        <ArrowDown2
+          className={`ml-2 size-4 transition-all duration-500 ${
+            isOpen && "rotate-180"
+          }`}
+        />
       </button>
       {isOpen && (
         <>
