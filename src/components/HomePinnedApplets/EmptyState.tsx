@@ -5,7 +5,7 @@ import { SimplificationIcon } from "../UI/Icons";
 export default function EmptyState() {
   return (
     <div className=" h-fit flex flex-col items-center m-auto">
-      <SimplificationIcon className="w-[60px] h-[47px] lg:w-[112px] lg:h-[94px]" />
+      <SimplificationIcon className="w-[60px] h-[47px]" />
       <div
         className=" text-neutral-5 text-xs text-center 
   md:text-base mt-4 lg:w-[370px] dark:text-neutral-6"

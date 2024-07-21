@@ -68,7 +68,7 @@ export default function AppletCreateForm({
       <div className=" text-xl text-center md:text-left capitalize">
         create applet
       </div>
-      <form className="flex flex-col h-full" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col h-auto" onSubmit={handleSubmit(onSubmit)}>
         <Input
           initialValue={initialValues?.name || ""}
           error={
@@ -119,7 +119,7 @@ export default function AppletCreateForm({
             }}
           />
         </div>
-        <div className="flex items-center gap-4 mt-auto">
+        <div className="flex items-center gap-4 mt-6">
           <Button
             onClick={(event: React.MouseEvent<HTMLElement>) => {
               event.preventDefault();

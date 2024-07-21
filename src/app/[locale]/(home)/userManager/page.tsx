@@ -59,7 +59,7 @@ const rolesTableData: IRole[] = [
 
 export default function Page() {
   return (
-    <div className="flex flex-col bg-primary-Shade-2 h-fit m-4 md:m-8 p-2 md:p-8">
+    <div className="flex flex-col bg-neutral-3 dark:bg-primary-Shade-2 h-fit m-4 md:m-8 p-2 md:p-8">
       <UserManagerContainer
         rolesTableData={rolesTableData}
         permissionsTableData={permissionsTableData}
