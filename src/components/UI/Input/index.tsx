@@ -1,6 +1,6 @@
 "use client";
 
-import { InputHTMLAttributes, useEffect, useState } from "react";
+import { InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 import FormError from "../FormError";
 
@@ -25,11 +25,11 @@ export default function Input({
   ...rest
 }: InputProps) {
   const { type, required } = rest;
-  const [value, setValue] = useState(initialValue ? initialValue : "");
-  useEffect(() => {
-    setValue(initialValue ? initialValue : "");
-  }, [initialValue]);
-  console.log("value", value, initialValue);
+  // const [value, setValue] = useState(initialValue ? initialValue : "");
+  // useEffect(() => {
+  //   setValue(initialValue ? initialValue : "");
+  // }, [initialValue]);
+  // console.log("value", value, initialValue);
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
       <span
@@ -40,12 +40,13 @@ export default function Input({
         {label}
       </span>
       <input
-        value={value}
+        // value={value}
+        defaultValue={initialValue}
         placeholder={placeholder}
         {...register(name, {
           onChange(event) {
             console.log(event.target.value);
-            setValue(event.target.value);
+            // setValue(event.target.value);
           },
           required: required,
         })}
