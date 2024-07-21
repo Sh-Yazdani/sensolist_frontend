@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { InputHTMLAttributes, useEffect, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import FormError from "../FormError";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register: UseFormRegister<any>;
   name: string;
   label: string;
@@ -22,7 +22,9 @@ export default function Input({
   placeholder,
   error,
   initialValue,
+  ...rest
 }: InputProps) {
+  const { type } = rest;
   const [value, setValue] = useState(initialValue ? initialValue : "");
   useEffect(() => {
     setValue(initialValue ? initialValue : "");
@@ -41,6 +43,7 @@ export default function Input({
           },
           required: true,
         })}
+        type={type}
         className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
              placeholder:text-neutral-6 placeholder:text-sm focus-visible:outline-none dark:text-neutral-2`}
       />
