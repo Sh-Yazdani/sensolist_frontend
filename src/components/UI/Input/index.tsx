@@ -1,6 +1,6 @@
 "use client";
 
-import { InputHTMLAttributes, useEffect, useState } from "react";
+import { InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 import FormError from "../FormError";
 
@@ -24,24 +24,31 @@ export default function Input({
   initialValue,
   ...rest
 }: InputProps) {
-  const { type } = rest;
-  const [value, setValue] = useState(initialValue ? initialValue : "");
-  useEffect(() => {
-    setValue(initialValue ? initialValue : "");
-  }, [initialValue]);
-  console.log("value", value, initialValue);
+  const { type, required } = rest;
+  // const [value, setValue] = useState(initialValue ? initialValue : "");
+  // useEffect(() => {
+  //   setValue(initialValue ? initialValue : "");
+  // }, [initialValue]);
+  // console.log("value", value, initialValue);
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
-      <span className=" text-sm md:text-base dark:text-white">{label}</span>
+      <span
+        className={`text-sm md:text-base dark:text-white ${
+          required && "after:content-['*']"
+        }`}
+      >
+        {label}
+      </span>
       <input
-        value={value}
+        // value={value}
+        defaultValue={initialValue}
         placeholder={placeholder}
         {...register(name, {
           onChange(event) {
             console.log(event.target.value);
-            setValue(event.target.value);
+            // setValue(event.target.value);
           },
-          required: true,
+          required: required,
         })}
         type={type}
         className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent

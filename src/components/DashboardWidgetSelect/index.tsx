@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ChartFormModal from "./ChartFormModal";
+import GuageFormModal from "./GuageFormModal";
 
 interface DashboardWidgetSelectProps {
   isOpen: boolean;
@@ -25,6 +26,12 @@ export default function DashboardWidgetSelect({
     name: string;
     image: string;
   } | null>(null);
+
+  const [guageModalOpen, setGuageModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
   const dispatch = useDispatch();
 
   const widgets: IWidget[] = [
@@ -84,6 +91,9 @@ export default function DashboardWidgetSelect({
     {
       name: "guage",
       image: "/assets/widgets/guage.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setGuageModalOpen(sub);
+      },
       subWidget: [
         {
           name: "simple guage",
@@ -205,6 +215,25 @@ export default function DashboardWidgetSelect({
         open={!!chartModalOpen}
         onClose={() => {
           setChartModalOpen(null);
+        }}
+      />
+
+      <GuageFormModal
+        onAddWidget={() => {
+          if (guageModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: guageModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={guageModalOpen}
+        open={!!guageModalOpen}
+        onClose={() => {
+          setGuageModalOpen(null);
         }}
       />
     </>
