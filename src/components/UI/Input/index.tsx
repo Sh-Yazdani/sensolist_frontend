@@ -32,7 +32,13 @@ export default function Input({
   console.log("value", value, initialValue);
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
-      <span className=" text-sm md:text-base dark:text-white">{label}</span>
+      <span
+        className={`text-sm md:text-base dark:text-white ${
+          required && "after:content-['*']"
+        }`}
+      >
+        {label}
+      </span>
       <input
         value={value}
         placeholder={placeholder}
