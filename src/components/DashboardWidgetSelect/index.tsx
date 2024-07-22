@@ -180,6 +180,17 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
+
+    {
+      name: "video streaming",
+      image: "/assets/widgets/video.png",
+      subWidget: [
+        {
+          name: "video",
+          image: "/assets/widgets/video.png",
+        },
+      ],
+    },
   ];
   return (
     <>
