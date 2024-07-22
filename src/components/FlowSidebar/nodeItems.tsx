@@ -20,11 +20,6 @@ import {
 
 export const triggerNodes: ITriggerNode[] = [
   {
-    name: "Thing",
-    value: "thing",
-    icon: <Devices />,
-  },
-  {
     name: "Third Party",
     value: "thirdParty",
     icon: <Messenger />,
