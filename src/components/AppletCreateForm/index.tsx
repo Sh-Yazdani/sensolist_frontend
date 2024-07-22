@@ -25,12 +25,15 @@ export default function AppletCreateForm({
   edit?: IApplet | null;
 }) {
   const imagesForSelect = [
-    "/assets/dashboard/img-1.png",
-    "/assets/dashboard/img-2.png",
-    "/assets/dashboard/img-3.png",
-    "/assets/dashboard/img-4.png",
-    "/assets/dashboard/img-5.png",
-    "/assets/dashboard/img-6.png",
+    "/assets/applet/img-1.png",
+    "/assets/applet/img-2.png",
+    "/assets/applet/img-3.png",
+    "/assets/applet/img-4.png",
+    "/assets/applet/img-5.png",
+    "/assets/applet/img-6.png",
+    "/assets/applet/img-7.png",
+    "/assets/applet/img-8.png",
+    "/assets/applet/img-9.png",
   ];
 
   const usersList: ISelectOption[] = [
