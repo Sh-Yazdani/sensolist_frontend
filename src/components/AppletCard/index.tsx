@@ -59,10 +59,10 @@ export default function AppletCard({
           />
         </div>
         <div className="flex flex-col justify-between ml-4">
-          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate w-full">
+          <span className=" text-black text-sm mb-4 dark:text-white capitalize truncate w-[140px]">
             {applet.name}
           </span>
-          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate w-full">
+          <span className=" text-neutral-7 dark:text-neutral-3 pb-2 text-xs truncate w-[140px]">
             {applet.description}
           </span>
         </div>
