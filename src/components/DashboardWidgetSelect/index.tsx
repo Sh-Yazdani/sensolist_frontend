@@ -7,6 +7,8 @@ import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import AlarmCountFormModal from "./AlarmCountFormModal";
+import CardFormModal from "./CardFormModal";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
 import TableFormModal from "./TableFormModal";
@@ -34,6 +36,16 @@ export default function DashboardWidgetSelect({
   } | null>(null);
 
   const [tableModalOpen, setTableModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [cardModalOpen, setCardModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [alarmCountModalOpen, setAlarmCountModalOpen] = useState<{
     name: string;
     image: string;
   } | null>(null);
@@ -83,6 +95,9 @@ export default function DashboardWidgetSelect({
     {
       name: "count",
       image: "/assets/widgets/count.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setAlarmCountModalOpen(sub);
+      },
       subWidget: [
         {
           name: "alarm count",
@@ -140,6 +155,48 @@ export default function DashboardWidgetSelect({
         {
           name: "alarm table",
           image: "/assets/widgets/alarm-table.png",
+        },
+      ],
+    },
+    {
+      name: "card",
+      image: "/assets/widgets/card.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setCardModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "value card",
+          image: "/assets/widgets/value-card.png",
+        },
+        {
+          name: "progress bar",
+          image: "/assets/widgets/progress-bar.svg",
+        },
+      ],
+    },
+    {
+      name: "indoor environment",
+      image: "/assets/widgets/indoor.png",
+      subWidget: [
+        {
+          name: "indoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+        },
+        {
+          name: "indoor temprature chart",
+          image: "/assets/widgets/temprature-chart.png",
+        },
+      ],
+    },
+
+    {
+      name: "video streaming",
+      image: "/assets/widgets/video.png",
+      subWidget: [
+        {
+          name: "video",
+          image: "/assets/widgets/video.png",
         },
       ],
     },
@@ -261,6 +318,42 @@ export default function DashboardWidgetSelect({
         open={!!tableModalOpen}
         onClose={() => {
           setTableModalOpen(null);
+        }}
+      />
+      <CardFormModal
+        onAddWidget={() => {
+          if (cardModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: cardModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={cardModalOpen}
+        open={!!cardModalOpen}
+        onClose={() => {
+          setCardModalOpen(null);
+        }}
+      />
+      <AlarmCountFormModal
+        onAddWidget={() => {
+          if (alarmCountModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: alarmCountModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={alarmCountModalOpen}
+        open={!!alarmCountModalOpen}
+        onClose={() => {
+          setAlarmCountModalOpen(null);
         }}
       />
     </>
