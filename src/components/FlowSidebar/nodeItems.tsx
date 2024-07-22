@@ -112,7 +112,7 @@ export const controlNodes: ITriggerNode[] = [
   },
   {
     name: "Get Variables",
-    value: "variables",
+    value: "getVariables",
     icon: <Math />,
   },
 ];
@@ -142,11 +142,6 @@ export const getNodeByValue = (val: string) => {
     ...actionNodes,
     ...controlNodes,
     ...thingNodes,
-    {
-      name: "Variable",
-      value: "variable",
-      icon: <></>,
-    },
   ];
   const filtered = array.filter((item) => item.value === val);
   return filtered.length ? filtered[0] : null;

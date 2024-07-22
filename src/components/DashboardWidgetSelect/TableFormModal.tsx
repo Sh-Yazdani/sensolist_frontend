@@ -125,31 +125,29 @@ export default function TableFormModal({
         />
         <div className="mt-6">Columns:</div>
 
-        {columnCount.map((col) => (
+        {columnCount.map((col, i) => (
           <div
-            key={col}
+            key={i}
             className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-end"
           >
             <div className="w-[calc(45%-12px)]">
               <Input
                 required
-                error={
-                  errors[`key${col}`]?.type === "required" ? "required" : ""
-                }
+                error={errors[`key${i}`]?.type === "required" ? "required" : ""}
                 label="Key"
                 register={register}
-                name={`key${col}`}
+                name={`key${i}`}
               />
             </div>
             <div className="w-[calc(45%-12px)]">
               <Input
                 required
                 error={
-                  errors[`name${col}`]?.type === "required" ? "required" : ""
+                  errors[`name${i}`]?.type === "required" ? "required" : ""
                 }
                 label="Name"
                 register={register}
-                name={`name${col}`}
+                name={`name${i}`}
               />
             </div>
             <button

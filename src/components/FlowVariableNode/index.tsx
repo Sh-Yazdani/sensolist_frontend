@@ -1,12 +1,12 @@
-import { TriggerNodeType } from "@/types/general";
+import { VariableNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 
-export default function FlowTriggerNode({
+export default function FlowVariableNode({
   data,
   isConnectable,
-}: NodeProps<TriggerNodeType>) {
-  const { name, icon, value } = data;
-  console.log("node name", value);
+}: NodeProps<VariableNodeType>) {
+  const { name, value, count } = data;
+  console.log("node name", name);
   return (
     <>
       <Handle
@@ -17,8 +17,10 @@ export default function FlowTriggerNode({
         isConnectable={isConnectable}
       />
       <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4">
-        {icon}
-        <span className="ml-2">{name}</span>
+        <span className="ml-2">
+          {name} {value}
+        </span>
+        <span className="ml-4">{count}</span>
       </div>
       <Handle
         type="source"

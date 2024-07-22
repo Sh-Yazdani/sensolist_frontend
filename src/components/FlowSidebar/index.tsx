@@ -11,6 +11,26 @@ import {
 } from "./nodeItems";
 export default function FlowSidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [variableCount] = useState<number>(3);
+  const onVariableDragStart = (
+    event: {
+      dataTransfer: {
+        setData: (arg0: string, arg1: any) => void;
+        effectAllowed: string;
+      };
+    },
+    nodeType: any,
+    item: string,
+    count: number,
+    name: string
+  ) => {
+    console.log("node type", nodeType);
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.setData("name", name);
+    event.dataTransfer.setData("value", item);
+    event.dataTransfer.setData("count", count);
+    event.dataTransfer.effectAllowed = "move";
+  };
   const onDragStart = (
     event: {
       dataTransfer: {
@@ -21,6 +41,7 @@ export default function FlowSidebar() {
     nodeType: any,
     item: string
   ) => {
+    console.log("node type", nodeType);
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.setData("value", item);
     event.dataTransfer.effectAllowed = "move";
@@ -127,15 +148,25 @@ export default function FlowSidebar() {
           <Accordion.Panel>
             <Accordion.Title>Variables</Accordion.Title>
             <Accordion.Content>
-              <div
-                className={`mt-4 border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
-                onDragStart={(event) =>
-                  onDragStart(event, "triggerNode", "variable")
-                }
-                draggable
-              >
-                <span className="ml-2">Variable</span>
-              </div>
+              {[...new Array(variableCount)].map((_var, i) => (
+                <div
+                  key={i}
+                  className={`mt-4 border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
+                  onDragStart={(event) =>
+                    onVariableDragStart(
+                      event,
+                      "variableNode",
+                      `${i + 1}`,
+                      (i + 1) * 5,
+                      "Variable"
+                    )
+                  }
+                  draggable
+                >
+                  <span className="ml-2">Variable {i + 1}</span>
+                  <span className="ml-auto">{(i + 1) * 5}</span>
+                </div>
+              ))}
             </Accordion.Content>
           </Accordion.Panel>
         </Accordion>
