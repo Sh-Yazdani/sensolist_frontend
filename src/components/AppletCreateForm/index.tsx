@@ -1,7 +1,7 @@
 "use client";
 
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
-import { IApplet, ICreateAppletInputs } from "@/types/general";
+import { IApplet, ICreateAppletInputs, ISelectOption } from "@/types/general";
 import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import ImagePicker from "../DashboardCreateForm/ImagePicker";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import MultiSelect from "../UI/MultiSelect";
 
 export default function AppletCreateForm({
   onCancel,
@@ -31,6 +32,25 @@ export default function AppletCreateForm({
     "/assets/dashboard/img-5.png",
     "/assets/dashboard/img-6.png",
   ];
+
+  const usersList: ISelectOption[] = [
+    {
+      title: "User 1",
+      value: "user1",
+    },
+    {
+      title: "User 2",
+      value: "user2",
+    },
+    {
+      title: "User 3",
+      value: "user3",
+    },
+    {
+      title: "User 4",
+      value: "user4",
+    },
+  ];
   const {
     register,
     handleSubmit,
@@ -46,6 +66,8 @@ export default function AppletCreateForm({
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState(initialValues?.image);
+
+  const [selectedUsers, setSelectedUsers] = useState<ISelectOption[]>([]);
 
   const onSubmit: SubmitHandler<ICreateAppletInputs> = (data) => {
     console.log("submit", data, selectedImage);
@@ -93,6 +115,14 @@ export default function AppletCreateForm({
           label="Description"
           register={register}
           name="description"
+          className="mt-6"
+        />
+
+        <MultiSelect
+          options={usersList}
+          selectedValues={selectedUsers}
+          setSelectedValues={setSelectedUsers}
+          label="Assign User"
           className="mt-6"
         />
         <div className="mt-6">Choose an image:</div>
