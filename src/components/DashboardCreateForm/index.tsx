@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
-import SelectInput from "../UI/SelectInput";
+import MultiSelect from "../UI/MultiSelect";
 import ImagePicker from "./ImagePicker";
 
 export default function DashboardCreateForm({
@@ -49,6 +49,10 @@ export default function DashboardCreateForm({
       title: "User 3",
       value: "user3",
     },
+    {
+      title: "User 4",
+      value: "user4",
+    },
   ];
   const {
     register,
@@ -65,7 +69,9 @@ export default function DashboardCreateForm({
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState(initialValues?.image);
-  const [selectedUser, setSelectedUser] = useState<ISelectOption>(usersList[0]);
+  const [selectedUsers, setSelectedUsers] = useState<ISelectOption[]>([]);
+
+  //   const [selectedValues, setSelectedValues] = useState<ISelectOption[]>([]);
 
   const onSubmit: SubmitHandler<ICreateDashboardInputs> = (data) => {
     console.log("submit", data, selectedImage);
@@ -115,14 +121,10 @@ export default function DashboardCreateForm({
           name="description"
           className="mt-6"
         />
-        <SelectInput
+        <MultiSelect
           options={usersList}
-          selectedValue={selectedUser}
-          setSelectedValue={(option) => {
-            setSelectedUser(option);
-          }}
-          register={register}
-          name="user"
+          selectedValues={selectedUsers}
+          setSelectedValues={setSelectedUsers}
           label="Assign User"
           className="mt-6"
         />
