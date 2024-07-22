@@ -117,6 +117,12 @@ export type TriggerNodeType = Node<{
   icon: React.ReactNode;
 }>;
 
+export type VariableNodeType = Node<{
+  value: string;
+  name: string;
+  count: number;
+}>;
+
 export interface IWidget {
   name: string;
   image: string;

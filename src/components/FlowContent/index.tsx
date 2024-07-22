@@ -22,13 +22,17 @@ import AppletHeader from "../AppletHeader";
 import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
+import FlowVariableNode from "../FlowVariableNode";
 
 const initialNodes: Node[] = [];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-const nodeTypes: NodeTypes = { triggerNode: FlowTriggerNode };
+const nodeTypes: NodeTypes = {
+  triggerNode: FlowTriggerNode,
+  variableNode: FlowVariableNode,
+};
 
 export default function FlowContent({ appletId }: { appletId: number }) {
   const [editMode, setEditMode] = useState<boolean>(true);
@@ -64,9 +68,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       if (typeof type === "undefined" || !type) {
         return;
       }
+      console.log("node type", type);
       const nodeValue = event.dataTransfer.getData("value");
       const triggeredNode = getNodeByValue(nodeValue);
-      console.log("trigger node", triggeredNode);
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -75,7 +79,14 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         id: getId(),
         type,
         position,
-        data: { ...triggeredNode },
+        data:
+          type === "triggerNode"
+            ? { ...triggeredNode }
+            : {
+                name: event.dataTransfer.getData("name"),
+                value: event.dataTransfer.getData("value"),
+                count: event.dataTransfer.getData("count"),
+              },
       };
       setNodes((nds) => nds.concat(newNode));
     },
