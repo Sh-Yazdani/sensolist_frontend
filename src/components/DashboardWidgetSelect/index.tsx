@@ -143,6 +143,20 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
+    {
+      name: "card",
+      image: "/assets/widgets/card.png",
+      subWidget: [
+        {
+          name: "value card",
+          image: "/assets/widgets/value-card.png",
+        },
+        {
+          name: "progress bar",
+          image: "/assets/widgets/progress-bar.svg",
+        },
+      ],
+    },
   ];
   return (
     <>
