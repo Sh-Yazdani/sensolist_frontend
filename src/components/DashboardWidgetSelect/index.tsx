@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
+import TableFormModal from "./TableFormModal";
 
 interface DashboardWidgetSelectProps {
   isOpen: boolean;
@@ -28,6 +29,11 @@ export default function DashboardWidgetSelect({
   } | null>(null);
 
   const [guageModalOpen, setGuageModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [tableModalOpen, setTableModalOpen] = useState<{
     name: string;
     image: string;
   } | null>(null);
@@ -122,6 +128,10 @@ export default function DashboardWidgetSelect({
     {
       name: "table",
       image: "/assets/widgets/table.png",
+
+      onSelect: (sub: { name: string; image: string }) => {
+        setTableModalOpen(sub);
+      },
       subWidget: [
         {
           name: "entity table",
@@ -217,7 +227,6 @@ export default function DashboardWidgetSelect({
           setChartModalOpen(null);
         }}
       />
-
       <GuageFormModal
         onAddWidget={() => {
           if (guageModalOpen) {
@@ -234,6 +243,24 @@ export default function DashboardWidgetSelect({
         open={!!guageModalOpen}
         onClose={() => {
           setGuageModalOpen(null);
+        }}
+      />
+      <TableFormModal
+        onAddWidget={() => {
+          if (tableModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: tableModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={tableModalOpen}
+        open={!!tableModalOpen}
+        onClose={() => {
+          setTableModalOpen(null);
         }}
       />
     </>
