@@ -7,6 +7,7 @@ import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import CardFormModal from "./CardFormModal";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
 import TableFormModal from "./TableFormModal";
@@ -34,6 +35,11 @@ export default function DashboardWidgetSelect({
   } | null>(null);
 
   const [tableModalOpen, setTableModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [cardModalOpen, setCardModalOpen] = useState<{
     name: string;
     image: string;
   } | null>(null);
@@ -146,6 +152,9 @@ export default function DashboardWidgetSelect({
     {
       name: "card",
       image: "/assets/widgets/card.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setCardModalOpen(sub);
+      },
       subWidget: [
         {
           name: "value card",
@@ -289,6 +298,25 @@ export default function DashboardWidgetSelect({
         open={!!tableModalOpen}
         onClose={() => {
           setTableModalOpen(null);
+        }}
+      />
+
+      <CardFormModal
+        onAddWidget={() => {
+          if (cardModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: cardModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={cardModalOpen}
+        open={!!cardModalOpen}
+        onClose={() => {
+          setCardModalOpen(null);
         }}
       />
     </>
