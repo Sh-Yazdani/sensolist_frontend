@@ -157,6 +157,20 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
+    {
+      name: "indoor environment",
+      image: "/assets/widgets/indoor.png",
+      subWidget: [
+        {
+          name: "indoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+        },
+        {
+          name: "indoor temprature chart",
+          image: "/assets/widgets/temprature-chart.png",
+        },
+      ],
+    },
   ];
   return (
     <>
