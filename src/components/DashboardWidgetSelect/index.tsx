@@ -7,6 +7,7 @@ import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import AlarmCountFormModal from "./AlarmCountFormModal";
 import CardFormModal from "./CardFormModal";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
@@ -40,6 +41,11 @@ export default function DashboardWidgetSelect({
   } | null>(null);
 
   const [cardModalOpen, setCardModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [alarmCountModalOpen, setAlarmCountModalOpen] = useState<{
     name: string;
     image: string;
   } | null>(null);
@@ -89,6 +95,9 @@ export default function DashboardWidgetSelect({
     {
       name: "count",
       image: "/assets/widgets/count.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setAlarmCountModalOpen(sub);
+      },
       subWidget: [
         {
           name: "alarm count",
@@ -311,7 +320,6 @@ export default function DashboardWidgetSelect({
           setTableModalOpen(null);
         }}
       />
-
       <CardFormModal
         onAddWidget={() => {
           if (cardModalOpen) {
@@ -328,6 +336,24 @@ export default function DashboardWidgetSelect({
         open={!!cardModalOpen}
         onClose={() => {
           setCardModalOpen(null);
+        }}
+      />
+      <AlarmCountFormModal
+        onAddWidget={() => {
+          if (alarmCountModalOpen) {
+            dispatch(
+              addWidget({
+                dashboardId: dashboardId,
+                widget: alarmCountModalOpen,
+              })
+            );
+          }
+          onClose();
+        }}
+        chart={alarmCountModalOpen}
+        open={!!alarmCountModalOpen}
+        onClose={() => {
+          setAlarmCountModalOpen(null);
         }}
       />
     </>
