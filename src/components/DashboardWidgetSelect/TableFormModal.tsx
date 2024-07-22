@@ -87,7 +87,6 @@ export default function TableFormModal({
   return (
     <Modal onClose={onClose} open={open}>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
-        Add Widget :{" "}
         <span className=" capitalize font-semibold">{chart?.name}</span>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>

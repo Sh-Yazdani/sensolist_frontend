@@ -8,7 +8,7 @@ import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import SelectInput from "../UI/SelectInput";
 
-interface ChartFormModalProps {
+interface CardFormModalProps {
   open: boolean;
   onClose: () => void;
   chart: { name: string; image: string } | null;
@@ -18,12 +18,9 @@ interface ChartFormModalProps {
 interface ICreateWidgetInputs {
   title: string;
   thing: string;
+  value: string;
+  unit: string;
   charactristic: string;
-  xAxesLabel: string;
-  yAxesLabel: string;
-  yAxesMin: number;
-  yAxesMax: number;
-  yAxesUnit: string;
   description?: string;
 }
 
@@ -32,7 +29,7 @@ export default function ChartFormModal({
   onClose,
   chart,
   onAddWidget,
-}: ChartFormModalProps) {
+}: CardFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
       title: "thing 1",
@@ -47,22 +44,6 @@ export default function ChartFormModal({
       value: "thing3",
     },
   ];
-
-  const yAxeUnitList: ISelectOption[] = [
-    {
-      title: "unit 1",
-      value: "unit1",
-    },
-    {
-      title: "unit 2",
-      value: "unit2",
-    },
-    {
-      title: "unit 3",
-      value: "unit3",
-    },
-  ];
-
   const charactristicList: ISelectOption[] = [
     {
       title: "charactristic 1",
@@ -77,6 +58,16 @@ export default function ChartFormModal({
       value: "charactristic3",
     },
   ];
+  const unitList: ISelectOption[] = [
+    {
+      title: "kelvin",
+      value: "kelvin",
+    },
+    {
+      title: "celsius",
+      value: "celsius",
+    },
+  ];
 
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
@@ -85,9 +76,7 @@ export default function ChartFormModal({
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
 
-  const [selectedYUnit, setSelectedYUnit] = useState<ISelectOption>(
-    yAxeUnitList[0]
-  );
+  const [selectedUnit, setSelectedUnit] = useState<ISelectOption>(unitList[0]);
 
   const {
     register,
@@ -142,68 +131,30 @@ export default function ChartFormModal({
           label="Charactristic"
           className="mt-6"
         />
-        <div className="mt-6">X Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
-          <div className="w-full md:w-1/2">
+        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 items-center">
+          <div className="w-3/5">
             <Input
               required
               error={
-                errors.xAxesLabel?.type === "required"
+                errors.value?.type === "required"
                   ? "This field is required"
                   : ""
               }
-              label="label"
+              label="value"
               register={register}
-              name="xAxesLabel"
+              name="value"
             />
           </div>
-        </div>
-        <div className="mt-6">Y Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-center">
-          <div className="w-full md:w-[calc(50%-12px)]">
-            <Input
-              required
-              error={
-                errors.yAxesLabel?.type === "required"
-                  ? "This field is required"
-                  : ""
-              }
-              label="label"
-              register={register}
-              name="yAxesLabel"
-            />
-          </div>
-          <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)] mt-4 md:mt-0">
-            <Input
-              required
-              error={errors.yAxesMin?.type === "required" ? "required" : ""}
-              label="min"
-              register={register}
-              name="yAxesMin"
-              type="number"
-            />
-          </div>
-          <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)] mt-4 md:mt-0">
-            <Input
-              required
-              error={errors.yAxesMax?.type === "required" ? "required" : ""}
-              label="max"
-              register={register}
-              name="yAxesMax"
-              type="number"
-            />
-          </div>
-          <div className="w-[calc(50%-12px)] md:w-[calc(25%-12px)]">
+          <div className="w-2/5">
             <SelectInput
-              options={yAxeUnitList}
-              selectedValue={selectedYUnit}
+              options={unitList}
+              selectedValue={selectedUnit}
               setSelectedValue={(option) => {
-                setSelectedYUnit(option);
+                setSelectedUnit(option);
               }}
               register={register}
-              name="yAxesUnit"
-              label="unit"
-              className="mt-4"
+              name="unit"
+              label="Unit"
             />
           </div>
         </div>
