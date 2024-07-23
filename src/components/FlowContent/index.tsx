@@ -24,7 +24,9 @@ import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
+import RefrencesFormModal from "./RefrencesFormModal";
 import ThingFormModal from "./ThingFormModal";
+import ThirdPartyFormModal from "./ThirdPartyFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -43,6 +45,12 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const [thingModalOpen, setThingModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [thirdPartyModalOpen, setThirdPartyModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [refrencesModalOpen, setRefrencesModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -92,9 +100,16 @@ export default function FlowContent({ appletId }: { appletId: number }) {
                 count: event.dataTransfer.getData("count"),
               },
       };
-
       if (nodeValue.includes("thing")) {
         setThingModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "thirdParty") {
+        setThirdPartyModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "refrences") {
+        setRefrencesModalOpen(newNode);
         return;
       }
 
@@ -149,6 +164,30 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         open={!!thingModalOpen}
         onClose={() => {
           setThingModalOpen(null);
+        }}
+      />
+      <ThirdPartyFormModal
+        onAddNode={() => {
+          if (thirdPartyModalOpen) {
+            setNodes((nds) => nds.concat(thirdPartyModalOpen));
+          }
+        }}
+        node={thirdPartyModalOpen}
+        open={!!thirdPartyModalOpen}
+        onClose={() => {
+          setThirdPartyModalOpen(null);
+        }}
+      />
+      <RefrencesFormModal
+        onAddNode={() => {
+          if (refrencesModalOpen) {
+            setNodes((nds) => nds.concat(refrencesModalOpen));
+          }
+        }}
+        node={refrencesModalOpen}
+        open={!!refrencesModalOpen}
+        onClose={() => {
+          setRefrencesModalOpen(null);
         }}
       />
     </>
