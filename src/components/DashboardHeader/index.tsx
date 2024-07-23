@@ -32,8 +32,13 @@ export default function DashboardHeader({
         isSelectOpen && "translate-x-[120%]"
       }`}
     >
-      <div className=" capitalize dark:text-white mr-2">
-        {selectedDashboard?.name}
+      <div className=" flex-col">
+        <div className=" capitalize dark:text-white mr-2">
+          {selectedDashboard?.name}
+        </div>
+        <div className=" text-neutral-7 dark:text-neutral-4 mr-2 text-xs">
+          {selectedDashboard?.description}
+        </div>
       </div>
       {editMode ? (
         <>
