@@ -127,7 +127,7 @@ export default function TableFormModal({
         {columnCount.map((col, i) => (
           <div
             key={i}
-            className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-end"
+            className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-end"
           >
             <div className="w-[calc(45%-12px)]">
               <Input
