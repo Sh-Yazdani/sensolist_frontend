@@ -131,7 +131,7 @@ export default function ChartFormModal({
           label="Charactristic"
           className="mt-6"
         />
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 items-center">
+        <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 items-center">
           <div className="w-3/5">
             <Input
               required
