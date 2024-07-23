@@ -39,6 +39,9 @@ export default function ThirdPartyFormModal({
   };
   return (
     <Modal onClose={onClose} open={open}>
+      <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
+        <span className=" capitalize font-semibold">{node?.data.name}</span>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           required

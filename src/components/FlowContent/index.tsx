@@ -27,6 +27,7 @@ import FlowVariableNode from "../FlowVariableNode";
 import RefrencesFormModal from "./RefrencesFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
+import TriggerOrderFormModal from "./TriggerOrderFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -51,6 +52,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [refrencesModalOpen, setRefrencesModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [triggerOrderModalOpen, setTriggerOrderModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -110,6 +114,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "refrences") {
         setRefrencesModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "triggerOrders") {
+        setTriggerOrderModalOpen(newNode);
         return;
       }
 
@@ -188,6 +196,18 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         open={!!refrencesModalOpen}
         onClose={() => {
           setRefrencesModalOpen(null);
+        }}
+      />
+      <TriggerOrderFormModal
+        onAddNode={() => {
+          if (triggerOrderModalOpen) {
+            setNodes((nds) => nds.concat(triggerOrderModalOpen));
+          }
+        }}
+        node={triggerOrderModalOpen}
+        open={!!triggerOrderModalOpen}
+        onClose={() => {
+          setTriggerOrderModalOpen(null);
         }}
       />
     </>

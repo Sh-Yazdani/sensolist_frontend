@@ -1,15 +1,11 @@
-"use client";
-
-import { ISelectOption, NodeDataType } from "@/types/general";
+import { NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
-import SelectInput from "../UI/SelectInput";
 
-interface ChartFormModalProps {
+interface TriggerOrderFormModalProps {
   open: boolean;
   onClose: () => void;
   node: Node<NodeDataType> | null;
@@ -18,34 +14,15 @@ interface ChartFormModalProps {
 
 interface ICreateNodeInputs {
   title: string;
-  charactristic: string;
+  dashboard: string;
   description?: string;
 }
-
-export default function ThingFormModal({
+export default function TriggerOrderFormModal({
   open,
   onClose,
   node,
   onAddNode,
-}: ChartFormModalProps) {
-  const charactristicList: ISelectOption[] = [
-    {
-      title: "charactristic 1",
-      value: "charactristic1",
-    },
-    {
-      title: "charactristic 2",
-      value: "charactristic2",
-    },
-    {
-      title: "charactristic 3",
-      value: "charactristic3",
-    },
-  ];
-
-  const [selectedCharactristic, setSelectedCharactristic] =
-    useState<ISelectOption>(charactristicList[0]);
-
+}: TriggerOrderFormModalProps) {
   const {
     register,
     handleSubmit,
@@ -75,17 +52,6 @@ export default function ThingFormModal({
           label="Title"
           register={register}
           name="title"
-          className="mt-6"
-        />
-        <SelectInput
-          options={charactristicList}
-          selectedValue={selectedCharactristic}
-          setSelectedValue={(option) => {
-            setSelectedCharactristic(option);
-          }}
-          register={register}
-          name="charactristic"
-          label="Charactristic"
           className="mt-6"
         />
         <Input
