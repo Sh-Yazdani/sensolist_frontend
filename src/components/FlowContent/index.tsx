@@ -1,6 +1,7 @@
 "use client";
 
 import { RootState } from "@/lib/store";
+import { NodeDataType } from "@/types/general";
 import {
   addEdge,
   Background,
@@ -23,6 +24,10 @@ import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
+import RefrencesFormModal from "./RefrencesFormModal";
+import ThingFormModal from "./ThingFormModal";
+import ThirdPartyFormModal from "./ThirdPartyFormModal";
+import TriggerOrderFormModal from "./TriggerOrderFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -39,6 +44,18 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const [thingModalOpen, setThingModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [thirdPartyModalOpen, setThirdPartyModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [refrencesModalOpen, setRefrencesModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [triggerOrderModalOpen, setTriggerOrderModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
   const selectedApplet = [...applets.filter((app) => app.id === appletId)][0];
@@ -68,7 +85,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       if (typeof type === "undefined" || !type) {
         return;
       }
-      console.log("node type", type);
       const nodeValue = event.dataTransfer.getData("value");
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
@@ -88,6 +104,23 @@ export default function FlowContent({ appletId }: { appletId: number }) {
                 count: event.dataTransfer.getData("count"),
               },
       };
+      if (nodeValue.includes("thing")) {
+        setThingModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "thirdParty") {
+        setThirdPartyModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "refrences") {
+        setRefrencesModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "triggerOrders") {
+        setTriggerOrderModalOpen(newNode);
+        return;
+      }
+
       setNodes((nds) => nds.concat(newNode));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -129,6 +162,54 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           </ReactFlow>
         </div>
       </div>
+      <ThingFormModal
+        onAddNode={() => {
+          if (thingModalOpen) {
+            setNodes((nds) => nds.concat(thingModalOpen));
+          }
+        }}
+        node={thingModalOpen}
+        open={!!thingModalOpen}
+        onClose={() => {
+          setThingModalOpen(null);
+        }}
+      />
+      <ThirdPartyFormModal
+        onAddNode={() => {
+          if (thirdPartyModalOpen) {
+            setNodes((nds) => nds.concat(thirdPartyModalOpen));
+          }
+        }}
+        node={thirdPartyModalOpen}
+        open={!!thirdPartyModalOpen}
+        onClose={() => {
+          setThirdPartyModalOpen(null);
+        }}
+      />
+      <RefrencesFormModal
+        onAddNode={() => {
+          if (refrencesModalOpen) {
+            setNodes((nds) => nds.concat(refrencesModalOpen));
+          }
+        }}
+        node={refrencesModalOpen}
+        open={!!refrencesModalOpen}
+        onClose={() => {
+          setRefrencesModalOpen(null);
+        }}
+      />
+      <TriggerOrderFormModal
+        onAddNode={() => {
+          if (triggerOrderModalOpen) {
+            setNodes((nds) => nds.concat(triggerOrderModalOpen));
+          }
+        }}
+        node={triggerOrderModalOpen}
+        open={!!triggerOrderModalOpen}
+        onClose={() => {
+          setTriggerOrderModalOpen(null);
+        }}
+      />
     </>
   );
 }
