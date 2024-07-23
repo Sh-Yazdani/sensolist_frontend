@@ -129,3 +129,12 @@ export interface IWidget {
   onSelect?: (sub: { name: string; image: string }) => void;
   subWidget?: { name: string; image: string }[];
 }
+
+export type NodeDataType =
+  | {
+      value?: string | undefined;
+      name?: string | undefined;
+      icon?: React.ReactNode;
+      count: undefined;
+    }
+  | { name: string; value: string; count: string };

@@ -1,6 +1,7 @@
 "use client";
 
 import { RootState } from "@/lib/store";
+import { NodeDataType } from "@/types/general";
 import {
   addEdge,
   Background,
@@ -23,6 +24,7 @@ import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
+import ThingFormModal from "./ThingFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -39,6 +41,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const [thingModalOpen, setThingModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
   const selectedApplet = [...applets.filter((app) => app.id === appletId)][0];
@@ -68,7 +73,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       if (typeof type === "undefined" || !type) {
         return;
       }
-      console.log("node type", type);
       const nodeValue = event.dataTransfer.getData("value");
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
@@ -88,6 +92,12 @@ export default function FlowContent({ appletId }: { appletId: number }) {
                 count: event.dataTransfer.getData("count"),
               },
       };
+
+      if (nodeValue.includes("thing")) {
+        setThingModalOpen(newNode);
+        return;
+      }
+
       setNodes((nds) => nds.concat(newNode));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -129,6 +139,18 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           </ReactFlow>
         </div>
       </div>
+      <ThingFormModal
+        onAddNode={() => {
+          if (thingModalOpen) {
+            setNodes((nds) => nds.concat(thingModalOpen));
+          }
+        }}
+        node={thingModalOpen}
+        open={!!thingModalOpen}
+        onClose={() => {
+          setThingModalOpen(null);
+        }}
+      />
     </>
   );
 }
