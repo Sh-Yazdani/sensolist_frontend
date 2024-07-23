@@ -9,7 +9,7 @@ export default function PinnedAppletCard({
 }: PinnedAppletCardProps) {
   return (
     <div
-      className="w-[calc(25%-16px)] rounded-xl h-full my-auto
+      className="w-[130px] rounded-xl h-full my-auto
      overflow-hidden bg-neutral-2 dark:bg-white-opacity-100 bg-black-opacity-100"
     >
       <div

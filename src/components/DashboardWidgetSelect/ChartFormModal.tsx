@@ -143,7 +143,7 @@ export default function ChartFormModal({
           className="mt-6"
         />
         <div className="mt-6">X Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
+        <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
           <div className="w-full md:w-1/2">
             <Input
               required
@@ -159,7 +159,7 @@ export default function ChartFormModal({
           </div>
         </div>
         <div className="mt-6">Y Axes</div>
-        <div className="p-4 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-center">
+        <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 flex-wrap items-center">
           <div className="w-full md:w-[calc(50%-12px)]">
             <Input
               required
