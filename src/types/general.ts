@@ -127,7 +127,12 @@ export interface IWidget {
   name: string;
   image: string;
   onSelect?: (sub: { name: string; image: string }) => void;
-  subWidget?: { name: string; image: string }[];
+  subWidget?: ISubWidget[];
+}
+
+export interface ISubWidget {
+  name: string;
+  image: string;
 }
 
 export type NodeDataType =
@@ -138,3 +143,17 @@ export type NodeDataType =
       count: undefined;
     }
   | { name: string; value: string; count: string };
+
+export interface IChartData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  xAxesLabel: string;
+  yAxesLabel: string;
+  yAxesMin: number;
+  yAxesMax: number;
+  yAxesUnit: string;
+  description?: string;
+}
+
+export type WidgetDataType = IChartData;

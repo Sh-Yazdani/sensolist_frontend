@@ -41,10 +41,6 @@ export default function Input({
         defaultValue={initialValue}
         placeholder={placeholder}
         {...register(name, {
-          onChange(event) {
-            console.log(event.target.value);
-            // setValue(event.target.value);
-          },
           required: required,
         })}
         type={type}
