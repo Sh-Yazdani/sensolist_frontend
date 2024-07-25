@@ -9,7 +9,7 @@ import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import SelectInput from "../UI/SelectInput";
 
-interface ChartFormModalProps {
+interface ThingFormModalProps {
   open: boolean;
   onClose: () => void;
   node: Node<NodeDataType> | null;
@@ -27,7 +27,7 @@ export default function ThingFormModal({
   onClose,
   node,
   onAddNode,
-}: ChartFormModalProps) {
+}: ThingFormModalProps) {
   const charactristicList: ISelectOption[] = [
     {
       title: "charactristic 1",

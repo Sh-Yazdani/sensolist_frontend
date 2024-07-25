@@ -7,7 +7,7 @@ import FormError from "../FormError";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register: UseFormRegister<any>;
   name: string;
-  label: string;
+  label?: string;
   className?: string;
   placeholder?: string;
   error?: string;
@@ -25,20 +25,17 @@ export default function Input({
   ...rest
 }: InputProps) {
   const { type, required } = rest;
-  // const [value, setValue] = useState(initialValue ? initialValue : "");
-  // useEffect(() => {
-  //   setValue(initialValue ? initialValue : "");
-  // }, [initialValue]);
-  // console.log("value", value, initialValue);
   return (
     <label className={`relative flex flex-col w-full ${className}`}>
-      <span
-        className={`text-sm md:text-base dark:text-white ${
-          required && "after:content-['*']"
-        }`}
-      >
-        {label}
-      </span>
+      {label && (
+        <span
+          className={`text-sm md:text-base dark:text-white ${
+            required && "after:content-['*']"
+          }`}
+        >
+          {label}
+        </span>
+      )}
       <input
         // value={value}
         defaultValue={initialValue}

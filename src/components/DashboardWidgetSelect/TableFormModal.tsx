@@ -17,10 +17,6 @@ interface TableFormModalProps {
 }
 
 interface ICreateWidgetInputs {
-  // title: string;
-  // thing: string;
-  // charactristic: string;
-  // description?: string;
   [key: string]: string;
 }
 
