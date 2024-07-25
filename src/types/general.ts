@@ -43,7 +43,7 @@ export interface IDashboard {
   description: string;
   image?: string;
   pin?: boolean;
-  widgets?: { name: string; image: string }[];
+  widgets?: { name: string; image: string; data?: WidgetDataType }[];
 }
 
 export interface ICreateDashboardInputs {
