@@ -14,12 +14,8 @@ Chart.register(CategoryScale);
 export default function BarChart({ xLabel, title, min, max }: BarChartProps) {
   const fakeData = [7, 4, 7, 6, 2, 1, 6, 8];
 
-  const datafake = fakeData.map((data) => {
-    return { data: data };
-  });
-  console.log("datafake", datafake);
   return (
-    <div className="h-[600px] w-[600px]">
+    <div className=" w-[600px]">
       <Bar
         className="h-full"
         options={{
@@ -42,7 +38,7 @@ export default function BarChart({ xLabel, title, min, max }: BarChartProps) {
           datasets: [
             {
               label: xLabel,
-              data: fakeData,
+              data: fakeData.map((data) => data.toFixed(0)),
             },
           ],
         }}

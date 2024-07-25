@@ -10,6 +10,7 @@ import DashboardHeader from "../DashboardHeader";
 import DashboardWidgetSelect from "../DashboardWidgetSelect";
 import Button from "../UI/Button";
 import BarChart from "./BarChart";
+import LineChart from "./LineChart";
 
 interface DashboardWidgetsProps {
   dashboardId: number;
@@ -57,6 +58,14 @@ export default function DashboardWidgets({
             {selectedDashboard?.widgets.map((wdg) =>
               wdg.name === "bar chart" ? (
                 <BarChart
+                  key={wdg.name}
+                  xLabel={wdg.data?.xAxesLabel || ""}
+                  title={wdg.data?.title || ""}
+                  min={wdg.data?.yAxesMin || 0}
+                  max={wdg.data?.yAxesMax || 0}
+                />
+              ) : wdg.name === "line chart" ? (
+                <LineChart
                   key={wdg.name}
                   xLabel={wdg.data?.xAxesLabel || ""}
                   title={wdg.data?.title || ""}
