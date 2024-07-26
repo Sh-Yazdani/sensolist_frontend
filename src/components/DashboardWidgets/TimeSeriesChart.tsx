@@ -58,7 +58,10 @@ export default function TimeSeriesChart({
   return (
     <ComposedChart width={400} height={200} data={data}>
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis
+        type="number"
+        domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
+      />
       <Tooltip />
       <Legend />
       <CartesianGrid stroke="#f5f5f5" />

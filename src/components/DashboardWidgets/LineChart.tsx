@@ -44,7 +44,10 @@ export default function CustomLineChart({
       <Line type="monotone" dataKey="amount" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" />
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis
+        type="number"
+        domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
+      />
     </LineChart>
   );
 }

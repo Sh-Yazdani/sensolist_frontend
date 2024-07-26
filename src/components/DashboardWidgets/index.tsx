@@ -78,7 +78,6 @@ export default function DashboardWidgets({
                 </div>
               ) : wdg.name === "time series" ? (
                 <div className="overflow-auto" key={wdg.name}>
-                  ttt
                   <TimeSeriesChart
                     // key={wdg.name}
                     xLabel={wdg.data?.xAxesLabel || ""}

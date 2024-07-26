@@ -22,6 +22,7 @@ export default function CustomBarChart({
   max,
 }: BarChartProps) {
   const fakeData = [7, 4, 7, 6, 2, 1, 6, 8];
+  console.log(max, min);
   const data = [
     {
       name: xLabel,
@@ -58,7 +59,10 @@ export default function CustomBarChart({
     <BarChart width={400} height={200} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis
+        type="number"
+        domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
+      />
       <Tooltip />
       <Legend />
       <Bar dataKey="amount" fill="#8884d8" />
