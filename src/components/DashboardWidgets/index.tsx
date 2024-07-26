@@ -11,6 +11,7 @@ import DashboardWidgetSelect from "../DashboardWidgetSelect";
 import Button from "../UI/Button";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
+import TimeSeriesChart from "./TimeSeriesChart";
 
 interface DashboardWidgetsProps {
   dashboardId: number;
@@ -57,21 +58,35 @@ export default function DashboardWidgets({
           <div className="w-full flex flex-wrap gap-4">
             {selectedDashboard?.widgets.map((wdg) =>
               wdg.name === "bar chart" ? (
-                <BarChart
-                  key={wdg.name}
-                  xLabel={wdg.data?.xAxesLabel || ""}
-                  title={wdg.data?.title || ""}
-                  min={wdg.data?.yAxesMin || 0}
-                  max={wdg.data?.yAxesMax || 0}
-                />
+                <div className="overflow-auto" key={wdg.name}>
+                  <BarChart
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
               ) : wdg.name === "line chart" ? (
-                <LineChart
-                  key={wdg.name}
-                  xLabel={wdg.data?.xAxesLabel || ""}
-                  title={wdg.data?.title || ""}
-                  min={wdg.data?.yAxesMin || 0}
-                  max={wdg.data?.yAxesMax || 0}
-                />
+                <div className="overflow-auto" key={wdg.name}>
+                  <LineChart
+                    // key={wdg.name}
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
+              ) : wdg.name === "time series" ? (
+                <div className="overflow-auto" key={wdg.name}>
+                  ttt
+                  <TimeSeriesChart
+                    // key={wdg.name}
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
               ) : (
                 <div
                   key={wdg.name}
