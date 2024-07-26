@@ -54,7 +54,6 @@ export default function CustomBarChart({
       value: 8,
     },
   ];
-  console.log(max);
   return (
     <BarChart width={400} height={200} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
