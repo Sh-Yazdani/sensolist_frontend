@@ -1,4 +1,4 @@
-import { IDashboard } from "@/types/general";
+import { IChartData, IDashboard } from "@/types/general";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DashboardState {
@@ -24,7 +24,6 @@ export const dashboardSlice = createSlice({
       );
     },
     editDashboard: (state, action: PayloadAction<IDashboard>) => {
-      console.log("action payload", action.payload);
       state.dashboards = [
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
         action.payload,
@@ -58,7 +57,7 @@ export const dashboardSlice = createSlice({
       state,
       action: PayloadAction<{
         dashboardId: number;
-        widget: { name: string; image: string };
+        widget: { name: string; image: string; data?: IChartData };
       }>
     ) => {
       let dashboard: IDashboard = state.dashboards.filter(

@@ -1,8 +1,10 @@
 "use client";
 
-import { ISelectOption } from "@/types/general";
+import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
+import { IChartData, ISelectOption } from "@/types/general";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -12,26 +14,30 @@ interface ChartFormModalProps {
   open: boolean;
   onClose: () => void;
   chart: { name: string; image: string } | null;
-  onAddWidget: () => void;
+  // onAddWidget: () => void;
+  onWidgetsClose: () => void;
+  dashboardId: number;
 }
 
-interface ICreateWidgetInputs {
-  title: string;
-  thing: string;
-  charactristic: string;
-  xAxesLabel: string;
-  yAxesLabel: string;
-  yAxesMin: number;
-  yAxesMax: number;
-  yAxesUnit: string;
-  description?: string;
-}
+// interface ICreateWidgetInputs {
+//   title: string;
+//   thing: string;
+//   charactristic: string;
+//   xAxesLabel: string;
+//   yAxesLabel: string;
+//   yAxesMin: number;
+//   yAxesMax: number;
+//   yAxesUnit: string;
+//   description?: string;
+// }
 
 export default function ChartFormModal({
   open,
   onClose,
   chart,
-  onAddWidget,
+  // onAddWidget,
+  onWidgetsClose,
+  dashboardId,
 }: ChartFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -78,6 +84,8 @@ export default function ChartFormModal({
     },
   ];
 
+  const dispatch = useDispatch();
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -95,13 +103,21 @@ export default function ChartFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateWidgetInputs>();
+  } = useForm<IChartData>();
 
-  const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
+  const onSubmit: SubmitHandler<IChartData> = (data) => {
     console.log("submit", data);
-    onAddWidget();
+    if (chart)
+      dispatch(
+        addWidget({
+          dashboardId: dashboardId,
+          widget: { ...chart, data },
+        })
+      );
+    console.log("widget", chart);
     reset();
     onClose();
+    onWidgetsClose();
   };
 
   return (
