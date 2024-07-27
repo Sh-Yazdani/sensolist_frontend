@@ -111,7 +111,7 @@ export default function ChartFormModal({
       dispatch(
         addWidget({
           dashboardId: dashboardId,
-          widget: { ...chart, data },
+          widget: { ...chart, chartData: data },
         })
       );
     console.log("widget", chart);

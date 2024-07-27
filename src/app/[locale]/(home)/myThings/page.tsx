@@ -114,8 +114,21 @@ export const fakeThings: IThings[] = [
       "a short description about the sensor it could be a bit longer like this.  ",
   },
 ];
+const backendUrl = process.env.BACKEND_URL;
 
-export default function Page() {
+async function getData() {
+  console.log("res", `${backendUrl}/things?sort=0`);
+  // const res = await fetch(`${backendUrl}/things?sort=0`);
+  // if (!res.ok) {
+  //   throw new Error("Failed to fetch data");
+  // }
+
+  // return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+  console.log("data things", data);
   return (
     <div className=" flex flex-col">
       <div className="md:relative flex lg:flex-row-reverse justify-end items-center lg:items-baseline md:pr-8 px-4 md:pl-0">
