@@ -9,6 +9,9 @@ import { useSelector } from "react-redux";
 import DashboardHeader from "../DashboardHeader";
 import DashboardWidgetSelect from "../DashboardWidgetSelect";
 import Button from "../UI/Button";
+import BarChart from "./BarChart";
+import LineChart from "./LineChart";
+import TimeSeriesChart from "./TimeSeriesChart";
 
 interface DashboardWidgetsProps {
   dashboardId: number;
@@ -29,6 +32,8 @@ export default function DashboardWidgets({
   if (!selectedDashboard) {
     redirect("/dashboard");
   }
+
+  console.log("selected dashboards", selectedDashboard);
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
@@ -51,21 +56,52 @@ export default function DashboardWidgets({
       <div className=" m-auto w-full flex-1 p-4">
         {selectedDashboard?.widgets?.length ? (
           <div className="w-full flex flex-wrap gap-4">
-            {selectedDashboard?.widgets.map((wdg) => (
-              <div
-                key={wdg.name}
-                className=" bg-white dark:bg-primary-Shade-2 shadow flex flex-col 
+            {selectedDashboard?.widgets.map((wdg) =>
+              wdg.name === "bar chart" ? (
+                <div className="overflow-auto" key={wdg.name}>
+                  <BarChart
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
+              ) : wdg.name === "line chart" ? (
+                <div className="overflow-auto" key={wdg.name}>
+                  <LineChart
+                    // key={wdg.name}
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
+              ) : wdg.name === "time series" ? (
+                <div className="overflow-auto" key={wdg.name}>
+                  <TimeSeriesChart
+                    // key={wdg.name}
+                    xLabel={wdg.data?.xAxesLabel || ""}
+                    title={wdg.data?.title || ""}
+                    min={wdg.data?.yAxesMin || 0}
+                    max={wdg.data?.yAxesMax || 0}
+                  />
+                </div>
+              ) : (
+                <div
+                  key={wdg.name}
+                  className=" bg-white dark:bg-primary-Shade-2 shadow flex flex-col 
                 w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 
                 hover:shadow-neutral-6 cursor-pointer"
-              >
-                <div className=" capitalize text-sm mb-2 dark:text-white">
-                  {wdg.name}
+                >
+                  <div className=" capitalize text-sm mb-2 dark:text-white">
+                    {wdg.name}
+                  </div>
+                  <div className="relative w-full aspect-square">
+                    <Image fill src={wdg.image} alt="widget name" />
+                  </div>
                 </div>
-                <div className="relative w-full aspect-square">
-                  <Image fill src={wdg.image} alt="widget name" />
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         ) : (
           editMode && (

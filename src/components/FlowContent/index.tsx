@@ -24,6 +24,7 @@ import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
+import ConditionFormModal from "./ConditionFormModal";
 import RefrencesFormModal from "./RefrencesFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
@@ -55,6 +56,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [triggerOrderModalOpen, setTriggerOrderModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [conditionModalOpen, setConditionModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -118,6 +122,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "triggerOrders") {
         setTriggerOrderModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "condition") {
+        setConditionModalOpen(newNode);
         return;
       }
 
@@ -208,6 +216,18 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         open={!!triggerOrderModalOpen}
         onClose={() => {
           setTriggerOrderModalOpen(null);
+        }}
+      />
+      <ConditionFormModal
+        onAddNode={() => {
+          if (conditionModalOpen) {
+            setNodes((nds) => nds.concat(conditionModalOpen));
+          }
+        }}
+        node={conditionModalOpen}
+        open={!!conditionModalOpen}
+        onClose={() => {
+          setConditionModalOpen(null);
         }}
       />
     </>

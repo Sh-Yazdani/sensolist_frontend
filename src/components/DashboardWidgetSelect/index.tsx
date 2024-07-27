@@ -267,17 +267,8 @@ export default function DashboardWidgetSelect({
         </div>
       </div>
       <ChartFormModal
-        onAddWidget={() => {
-          if (chartModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: chartModalOpen,
-              })
-            );
-          }
-          onClose();
-        }}
+        dashboardId={dashboardId}
+        onWidgetsClose={onClose}
         chart={chartModalOpen}
         open={!!chartModalOpen}
         onClose={() => {
