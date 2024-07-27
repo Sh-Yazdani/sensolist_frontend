@@ -43,7 +43,12 @@ export interface IDashboard {
   description: string;
   image?: string;
   pin?: boolean;
-  widgets?: { name: string; image: string; data?: WidgetDataType }[];
+  widgets?: {
+    name: string;
+    image: string;
+    chartData?: IChartData;
+    tableData?: IWidgetTableData;
+  }[];
 }
 
 export interface ICreateDashboardInputs {
@@ -156,4 +161,12 @@ export interface IChartData {
   description?: string;
 }
 
-export type WidgetDataType = IChartData;
+export interface IWidgetTableData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  description?: string;
+  columns: { key: string; name: string }[];
+}
+
+// export type WidgetDataType = IChartData | IWidgetTableData;

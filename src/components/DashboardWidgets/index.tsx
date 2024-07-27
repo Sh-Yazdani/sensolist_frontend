@@ -10,6 +10,7 @@ import DashboardHeader from "../DashboardHeader";
 import DashboardWidgetSelect from "../DashboardWidgetSelect";
 import Button from "../UI/Button";
 import BarChart from "./BarChart";
+import EntityTable from "./EntityTable";
 import LineChart from "./LineChart";
 import TimeSeriesChart from "./TimeSeriesChart";
 
@@ -60,31 +61,40 @@ export default function DashboardWidgets({
               wdg.name === "bar chart" ? (
                 <div className="overflow-auto" key={wdg.name}>
                   <BarChart
-                    xLabel={wdg.data?.xAxesLabel || ""}
-                    title={wdg.data?.title || ""}
-                    min={wdg.data?.yAxesMin || 0}
-                    max={wdg.data?.yAxesMax || 0}
+                    yLabel={wdg.chartData?.yAxesLabel || ""}
+                    xLabel={wdg.chartData?.xAxesLabel || ""}
+                    title={wdg.chartData?.title || ""}
+                    min={(wdg.chartData?.yAxesMin || 0) as number}
+                    max={(wdg.chartData?.yAxesMax || 0) as number}
                   />
                 </div>
               ) : wdg.name === "line chart" ? (
                 <div className="overflow-auto" key={wdg.name}>
                   <LineChart
                     // key={wdg.name}
-                    xLabel={wdg.data?.xAxesLabel || ""}
-                    title={wdg.data?.title || ""}
-                    min={wdg.data?.yAxesMin || 0}
-                    max={wdg.data?.yAxesMax || 0}
+                    xLabel={wdg.chartData?.xAxesLabel || ""}
+                    yLabel={wdg.chartData?.yAxesLabel || ""}
+                    title={wdg.chartData?.title || ""}
+                    min={
+                      (wdg.chartData?.yAxesMin || 0) < 0
+                        ? 0
+                        : wdg.chartData?.yAxesMin || 0
+                    }
+                    max={wdg.chartData?.yAxesMax || 0}
                   />
                 </div>
               ) : wdg.name === "time series" ? (
                 <div className="overflow-auto" key={wdg.name}>
                   <TimeSeriesChart
-                    // key={wdg.name}
-                    xLabel={wdg.data?.xAxesLabel || ""}
-                    title={wdg.data?.title || ""}
-                    min={wdg.data?.yAxesMin || 0}
-                    max={wdg.data?.yAxesMax || 0}
+                    xLabel={wdg.chartData?.xAxesLabel || ""}
+                    title={wdg.chartData?.title || ""}
+                    min={(wdg.chartData?.yAxesMin || 0) as number}
+                    max={(wdg.chartData?.yAxesMax || 0) as number}
                   />
+                </div>
+              ) : wdg.name === "entity table" ? (
+                <div className="overflow-auto" key={wdg.name}>
+                  <EntityTable data={wdg.tableData} />
                 </div>
               ) : (
                 <div

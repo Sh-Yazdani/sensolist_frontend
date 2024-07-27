@@ -152,10 +152,10 @@ export default function DashboardWidgetSelect({
           name: "entity table",
           image: "/assets/widgets/entity-table.png",
         },
-        {
-          name: "alarm table",
-          image: "/assets/widgets/alarm-table.png",
-        },
+        // {
+        //   name: "alarm table",
+        //   image: "/assets/widgets/alarm-table.png",
+        // },
       ],
     },
     {
@@ -275,6 +275,15 @@ export default function DashboardWidgetSelect({
           setChartModalOpen(null);
         }}
       />
+      <TableFormModal
+        dashboardId={dashboardId}
+        onWidgetsClose={onClose}
+        table={tableModalOpen}
+        open={!!tableModalOpen}
+        onClose={() => {
+          setTableModalOpen(null);
+        }}
+      />
       <GuageFormModal
         onAddWidget={() => {
           if (guageModalOpen) {
@@ -291,24 +300,6 @@ export default function DashboardWidgetSelect({
         open={!!guageModalOpen}
         onClose={() => {
           setGuageModalOpen(null);
-        }}
-      />
-      <TableFormModal
-        onAddWidget={() => {
-          if (tableModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: tableModalOpen,
-              })
-            );
-          }
-          onClose();
-        }}
-        chart={tableModalOpen}
-        open={!!tableModalOpen}
-        onClose={() => {
-          setTableModalOpen(null);
         }}
       />
       <CardFormModal
