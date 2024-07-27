@@ -2,6 +2,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Label,
   Legend,
   Tooltip,
   XAxis,
@@ -10,6 +11,7 @@ import {
 
 interface BarChartProps {
   xLabel: string;
+  yLabel: string;
   title: string;
   min: number;
   max: number;
@@ -18,6 +20,7 @@ interface BarChartProps {
 export default function CustomBarChart({
   xLabel,
   title,
+  yLabel,
   min,
   max,
 }: BarChartProps) {
@@ -25,32 +28,32 @@ export default function CustomBarChart({
   console.log(max, min);
   const data = [
     {
-      name: xLabel,
+      name: "1",
       amount: 7,
       value: 2,
     },
     {
-      name: xLabel,
+      name: "2",
       amount: 4,
       value: 4,
     },
     {
-      name: xLabel,
+      name: "3",
       amount: 7,
       value: 1,
     },
     {
-      name: xLabel,
+      name: "4",
       amount: 6,
       value: 1,
     },
     {
-      name: xLabel,
+      name: "5",
       amount: 2,
       value: 7,
     },
     {
-      name: xLabel,
+      name: "6",
       amount: 3,
       value: 8,
     },
@@ -58,11 +61,17 @@ export default function CustomBarChart({
   return (
     <BarChart width={400} height={200} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="name">
+        <Label position={"insideBottom"} offset={0}>
+          {xLabel}
+        </Label>
+      </XAxis>
       <YAxis
         type="number"
         domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
-      />
+      >
+        <Label>{yLabel}</Label>
+      </YAxis>
       <Tooltip />
       <Legend />
       <Bar dataKey="amount" fill="#8884d8" />

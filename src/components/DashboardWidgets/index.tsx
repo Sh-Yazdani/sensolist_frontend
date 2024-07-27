@@ -61,6 +61,7 @@ export default function DashboardWidgets({
               wdg.name === "bar chart" ? (
                 <div className="overflow-auto" key={wdg.name}>
                   <BarChart
+                    yLabel={wdg.chartData?.yAxesLabel || ""}
                     xLabel={wdg.chartData?.xAxesLabel || ""}
                     title={wdg.chartData?.title || ""}
                     min={(wdg.chartData?.yAxesMin || 0) as number}
@@ -72,9 +73,14 @@ export default function DashboardWidgets({
                   <LineChart
                     // key={wdg.name}
                     xLabel={wdg.chartData?.xAxesLabel || ""}
+                    yLabel={wdg.chartData?.yAxesLabel || ""}
                     title={wdg.chartData?.title || ""}
-                    min={(wdg.chartData?.yAxesMin || 0) as number}
-                    max={(wdg.chartData?.yAxesMax || 0) as number}
+                    min={
+                      (wdg.chartData?.yAxesMin || 0) < 0
+                        ? 0
+                        : wdg.chartData?.yAxesMin || 0
+                    }
+                    max={wdg.chartData?.yAxesMax || 0}
                   />
                 </div>
               ) : wdg.name === "time series" ? (

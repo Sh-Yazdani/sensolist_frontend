@@ -11,7 +11,7 @@ export default function EntityTable({ data }: EntityTableProps) {
   }
 
   return (
-    <div className="w-[600px]">
+    <div className="w-[400px]">
       <Table>
         <Table.Head>
           {data.columns.map((col) => (
