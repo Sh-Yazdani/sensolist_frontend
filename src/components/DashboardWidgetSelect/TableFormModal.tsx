@@ -100,8 +100,8 @@ export default function TableFormModal({
       );
     }
     reset();
-    // onAddWidget();
     onClose();
+    onWidgetsClose();
   };
 
   const { fields, append, remove } = useFieldArray({

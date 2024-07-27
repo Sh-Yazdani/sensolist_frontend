@@ -10,6 +10,7 @@ import DashboardHeader from "../DashboardHeader";
 import DashboardWidgetSelect from "../DashboardWidgetSelect";
 import Button from "../UI/Button";
 import BarChart from "./BarChart";
+import EntityTable from "./EntityTable";
 import LineChart from "./LineChart";
 import TimeSeriesChart from "./TimeSeriesChart";
 
@@ -87,7 +88,7 @@ export default function DashboardWidgets({
                 </div>
               ) : wdg.name === "entity table" ? (
                 <div className="overflow-auto" key={wdg.name}>
-                  {/* <EntityTable data={wdg.tableData} /> */}
+                  <EntityTable data={wdg.tableData} />
                 </div>
               ) : (
                 <div
