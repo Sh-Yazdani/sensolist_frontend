@@ -7,10 +7,13 @@ import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import AirQualityFormModal from "./AirQualityFormModal";
 import AlarmCountFormModal from "./AlarmCountFormModal";
 import CardFormModal from "./CardFormModal";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
+import IndoorEnvironmentFormModal from "./IndoorEnvironmentFormModal";
+import OutdoorEnvironmentFormModal from "./OutdoorEnvironmentFormModal";
 import TableFormModal from "./TableFormModal";
 
 interface DashboardWidgetSelectProps {
@@ -49,6 +52,22 @@ export default function DashboardWidgetSelect({
     name: string;
     image: string;
   } | null>(null);
+
+  const [airQualityModalOpen, setAirQualityModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [indoorEnvironmentModalOpen, setIndoorEnvironmentModalOpen] = useState<{
+    name: string;
+    image: string;
+  } | null>(null);
+
+  const [outdoorEnvironmentModalOpen, setOutdoorEnvironmentModalOpen] =
+    useState<{
+      name: string;
+      image: string;
+    } | null>(null);
 
   const dispatch = useDispatch();
 
@@ -178,6 +197,9 @@ export default function DashboardWidgetSelect({
     {
       name: "indoor environment",
       image: "/assets/widgets/indoor.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setIndoorEnvironmentModalOpen(sub);
+      },
       subWidget: [
         {
           name: "indoor temprature card",
@@ -189,7 +211,23 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
-
+    {
+      name: "outdoor environment",
+      image: "/assets/widgets/outdoor.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setOutdoorEnvironmentModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "outdoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+        },
+        {
+          name: "outdoor temprature chart",
+          image: "/assets/widgets/temprature-chart.png",
+        },
+      ],
+    },
     {
       name: "video streaming",
       image: "/assets/widgets/video.png",
@@ -197,6 +235,23 @@ export default function DashboardWidgetSelect({
         {
           name: "video",
           image: "/assets/widgets/video.png",
+        },
+      ],
+    },
+    {
+      name: "air quality",
+      image: "/assets/widgets/air-quality.svg",
+      onSelect: (sub: { name: string; image: string }) => {
+        setAirQualityModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "air quality card",
+          image: "/assets/widgets/air-quality-index.png",
+        },
+        {
+          name: "air quality chart card",
+          image: "/assets/widgets/air-quality-chart.png",
         },
       ],
     },
@@ -259,7 +314,13 @@ export default function DashboardWidgetSelect({
                   <div className=" capitalize text-sm mb-2 dark:text-white">
                     {wdg.name}
                   </div>
-                  <div className="relative w-full aspect-square">
+                  <div
+                    className={`relative aspect-square ${
+                      wdg.name === "video streaming"
+                        ? "w-[80%] m-auto"
+                        : " w-full"
+                    } `}
+                  >
                     <Image fill src={wdg.image} alt="widget name" />
                   </div>
                 </div>
@@ -273,6 +334,33 @@ export default function DashboardWidgetSelect({
         open={!!chartModalOpen}
         onClose={() => {
           setChartModalOpen(null);
+        }}
+      />
+      <AirQualityFormModal
+        dashboardId={dashboardId}
+        onWidgetsClose={onClose}
+        card={airQualityModalOpen}
+        open={!!airQualityModalOpen}
+        onClose={() => {
+          setAirQualityModalOpen(null);
+        }}
+      />
+      <IndoorEnvironmentFormModal
+        dashboardId={dashboardId}
+        onWidgetsClose={onClose}
+        card={indoorEnvironmentModalOpen}
+        open={!!indoorEnvironmentModalOpen}
+        onClose={() => {
+          setIndoorEnvironmentModalOpen(null);
+        }}
+      />
+      <OutdoorEnvironmentFormModal
+        dashboardId={dashboardId}
+        onWidgetsClose={onClose}
+        card={outdoorEnvironmentModalOpen}
+        open={!!outdoorEnvironmentModalOpen}
+        onClose={() => {
+          setOutdoorEnvironmentModalOpen(null);
         }}
       />
       <TableFormModal

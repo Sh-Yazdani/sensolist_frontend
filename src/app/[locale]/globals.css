@@ -321,3 +321,7 @@ body {
   width: 100%;
   overflow: auto;
 }
+
+.recharts-wrapper {
+  padding: 0.75rem;
+}

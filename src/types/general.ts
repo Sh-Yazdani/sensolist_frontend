@@ -43,12 +43,17 @@ export interface IDashboard {
   description: string;
   image?: string;
   pin?: boolean;
-  widgets?: {
-    name: string;
-    image: string;
-    chartData?: IChartData;
-    tableData?: IWidgetTableData;
-  }[];
+  widgets?: ISubWidget[];
+}
+
+export interface ISubWidget {
+  name: string;
+  image: string;
+  chartData?: IChartData;
+  tableData?: IWidgetTableData;
+  airQualityData?: IAirQualityData;
+  indoorEnvironmentData?: IIndoorEnvironmentData;
+  outdoorEnvironmentData?: IOutdoorEnvironmentData;
 }
 
 export interface ICreateDashboardInputs {
@@ -158,6 +163,28 @@ export interface IChartData {
   yAxesMin: number;
   yAxesMax: number;
   yAxesUnit: string;
+  description?: string;
+}
+
+export interface IAirQualityData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  unit: string;
+  description?: string;
+}
+
+export interface IIndoorEnvironmentData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  description?: string;
+}
+
+export interface IOutdoorEnvironmentData {
+  title: string;
+  thing: string;
+  charactristic: string;
   description?: string;
 }
 
