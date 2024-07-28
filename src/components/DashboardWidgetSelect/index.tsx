@@ -286,7 +286,13 @@ export default function DashboardWidgetSelect({
                   <div className=" capitalize text-sm mb-2 dark:text-white">
                     {wdg.name}
                   </div>
-                  <div className="relative w-full aspect-square">
+                  <div
+                    className={`relative aspect-square ${
+                      wdg.name === "video streaming"
+                        ? "w-[80%] m-auto"
+                        : " w-full"
+                    } `}
+                  >
                     <Image fill src={wdg.image} alt="widget name" />
                   </div>
                 </div>
