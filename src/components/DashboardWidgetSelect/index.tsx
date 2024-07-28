@@ -12,6 +12,8 @@ import AlarmCountFormModal from "./AlarmCountFormModal";
 import CardFormModal from "./CardFormModal";
 import ChartFormModal from "./ChartFormModal";
 import GuageFormModal from "./GuageFormModal";
+import IndoorEnvironmentFormModal from "./IndoorEnvironmentFormModal";
+import OutdoorEnvironmentFormModal from "./OutdoorEnvironmentFormModal";
 import TableFormModal from "./TableFormModal";
 
 interface DashboardWidgetSelectProps {
@@ -343,7 +345,7 @@ export default function DashboardWidgetSelect({
           setAirQualityModalOpen(null);
         }}
       />
-      {/* <IndoorEnvironmentFormModal
+      <IndoorEnvironmentFormModal
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={indoorEnvironmentModalOpen}
@@ -360,7 +362,7 @@ export default function DashboardWidgetSelect({
         onClose={() => {
           setOutdoorEnvironmentModalOpen(null);
         }}
-      /> */}
+      />
       <TableFormModal
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
