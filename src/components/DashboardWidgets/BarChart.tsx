@@ -61,12 +61,14 @@ export default function CustomBarChart({
   return (
     <BarChart width={400} height={200} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name">
+      <XAxis tick={{ fontSize: 10 }} interval={0} dataKey="name">
         <Label position={"insideBottom"} offset={0}>
           {xLabel}
         </Label>
       </XAxis>
       <YAxis
+        interval={0}
+        tick={{ fontSize: 10 }}
         type="number"
         domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
       >

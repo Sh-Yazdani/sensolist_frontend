@@ -57,8 +57,10 @@ export default function TimeSeriesChart({
   ];
   return (
     <ComposedChart width={400} height={200} data={data}>
-      <XAxis dataKey="name" />
+      <XAxis tick={{ fontSize: 10 }} interval={0} dataKey="name" />
       <YAxis
+        interval={0}
+        tick={{ fontSize: 10 }}
         type="number"
         domain={[(_dataMin: number) => min, (_dataMax: number) => max]}
       />
