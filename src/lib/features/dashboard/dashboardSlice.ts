@@ -1,4 +1,9 @@
-import { IChartData, IDashboard, IWidgetTableData } from "@/types/general";
+import {
+  IAirQualityData,
+  IChartData,
+  IDashboard,
+  IWidgetTableData,
+} from "@/types/general";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DashboardState {
@@ -62,6 +67,7 @@ export const dashboardSlice = createSlice({
           image: string;
           chartData?: IChartData;
           tableData?: IWidgetTableData;
+          airQualityData?: IAirQualityData;
         };
       }>
     ) => {

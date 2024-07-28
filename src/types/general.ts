@@ -48,6 +48,7 @@ export interface IDashboard {
     image: string;
     chartData?: IChartData;
     tableData?: IWidgetTableData;
+    airQualityData?: IAirQualityData;
   }[];
 }
 
@@ -158,6 +159,14 @@ export interface IChartData {
   yAxesMin: number;
   yAxesMax: number;
   yAxesUnit: string;
+  description?: string;
+}
+
+export interface IAirQualityData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  unit: string;
   description?: string;
 }
 
