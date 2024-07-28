@@ -229,16 +229,6 @@ export default function DashboardWidgetSelect({
       ],
     },
     {
-      name: "video streaming",
-      image: "/assets/widgets/video.png",
-      subWidget: [
-        {
-          name: "video",
-          image: "/assets/widgets/video.png",
-        },
-      ],
-    },
-    {
       name: "air quality",
       image: "/assets/widgets/air-quality.svg",
       onSelect: (sub: { name: string; image: string }) => {
@@ -252,6 +242,16 @@ export default function DashboardWidgetSelect({
         {
           name: "air quality chart card",
           image: "/assets/widgets/air-quality-chart.png",
+        },
+      ],
+    },
+    {
+      name: "video streaming",
+      image: "/assets/widgets/video.png",
+      subWidget: [
+        {
+          name: "video",
+          image: "/assets/widgets/video.png",
         },
       ],
     },
