@@ -189,7 +189,20 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
-
+    {
+      name: "outdoor environment",
+      image: "/assets/widgets/outdoor.png",
+      subWidget: [
+        {
+          name: "outdoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+        },
+        {
+          name: "outdoor temprature chart",
+          image: "/assets/widgets/temprature-chart.png",
+        },
+      ],
+    },
     {
       name: "video streaming",
       image: "/assets/widgets/video.png",
@@ -197,6 +210,20 @@ export default function DashboardWidgetSelect({
         {
           name: "video",
           image: "/assets/widgets/video.png",
+        },
+      ],
+    },
+    {
+      name: "air quality",
+      image: "/assets/widgets/air-quality.svg",
+      subWidget: [
+        {
+          name: "air quality card",
+          image: "/assets/widgets/air-quality-index.png",
+        },
+        {
+          name: "air quality chart card",
+          image: "/assets/widgets/air-quality-chart.png",
         },
       ],
     },
