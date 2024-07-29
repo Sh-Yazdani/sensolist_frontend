@@ -195,6 +195,23 @@ export default function ConditionFormModal({
                 </div>
               </div>
             ))}
+            <Button
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                event.preventDefault();
+                setConditions((prev) => [
+                  ...prev,
+                  {
+                    condition: "",
+                    value: "",
+                    output: outputs[0],
+                  },
+                ]);
+              }}
+              variant="secondary"
+              className="px-4 mt-6 w-fit mx-auto"
+            >
+              Add Condition
+            </Button>
           </div>
           <div className="w-[calc(50%-10px)]">
             <Input

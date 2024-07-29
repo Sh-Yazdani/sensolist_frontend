@@ -16,7 +16,6 @@ export default function ConditionSelectModal({
   onClose,
   setCondition,
 }: ConditionSelectModalProps) {
-  console.log("condition select", open);
   const conditions: ISelectOption[] = [
     {
       value: "equal",
