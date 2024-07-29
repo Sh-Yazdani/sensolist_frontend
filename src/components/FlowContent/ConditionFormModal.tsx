@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import SimpleInput from "../UI/SimpleInput";
 
 interface ConditionFormModalProps {
   open: boolean;
@@ -16,7 +17,10 @@ interface ConditionFormModalProps {
 }
 
 interface ICreateNodeInputs {
-  [key: string]: string;
+  title: string;
+  description: string;
+  inputs: { label: string }[];
+  outputs: { label: string }[];
 }
 
 export default function ConditionFormModal({
@@ -26,7 +30,7 @@ export default function ConditionFormModal({
   onAddNode,
 }: ConditionFormModalProps) {
   const [inputCount, setInputCount] = useState<number[]>([1]);
-  const [outputCount, setOutputCount] = useState<number[]>([1]);
+  const [outputs, setOutputs] = useState<string[]>(["else"]);
 
   const {
     register,
@@ -43,6 +47,7 @@ export default function ConditionFormModal({
     onClose();
   };
 
+  console.log("outputs", outputs);
   return (
     <Modal onClose={onClose} open={open} large>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
@@ -65,17 +70,18 @@ export default function ConditionFormModal({
           <div className="w-[calc(50%-10px)] bg-black-opacity-50 rounded-lg p-4 flex flex-col">
             <div className=" text-sm w-fit mx-auto">Diagram Inputs</div>
             <div className="mt-6 after:content-['*']">Label</div>
-            {inputCount.map((num) => (
+            {inputCount.map((num, i) => (
               <Input
                 key={num}
                 required
                 error={
-                  errors.label?.type === "required"
+                  errors.inputs?.length &&
+                  errors.inputs[i]?.label?.type === "required"
                     ? "This field is required"
                     : ""
                 }
                 register={register}
-                name={`label${num}`}
+                name={`inputs.${i}.label`}
                 className="mt-4"
               />
             ))}
@@ -91,26 +97,23 @@ export default function ConditionFormModal({
             </Button>
           </div>
           <div className="w-[calc(50%-10px)] bg-black-opacity-50 rounded-lg p-4 flex flex-col">
-            <div className=" text-sm w-fit mx-auto">Diagram Outputs</div>
-            <div className="mt-6 after:content-['*']">Label</div>
-            {outputCount.map((num) => (
-              <Input
-                key={num}
-                required
-                error={
-                  errors.label?.type === "required"
-                    ? "This field is required"
-                    : ""
-                }
-                register={register}
-                name={`label${num}`}
+            <div className=" text-sm w-fit mx-auto">Output Labels</div>
+            {outputs.map((val, i) => (
+              <SimpleInput
+                key={i}
+                value={val}
+                onChange={(val: string) => {
+                  setOutputs((prev) =>
+                    prev.map((item, index) => (index === i ? val : item))
+                  );
+                }}
                 className="mt-4"
               />
             ))}
             <Button
               onClick={(event: React.MouseEvent<HTMLElement>) => {
                 event.preventDefault();
-                setOutputCount((prev) => [...prev, prev[prev.length - 1] + 1]);
+                setOutputs((prev) => [...prev, ""]);
               }}
               variant="secondary"
               className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
