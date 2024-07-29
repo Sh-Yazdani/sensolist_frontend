@@ -8,6 +8,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import SimpleInput from "../UI/SimpleInput";
+import ConditionSelectModal from "./ConditionSelectModal";
 
 interface ConditionFormModalProps {
   open: boolean;
@@ -31,6 +32,10 @@ export default function ConditionFormModal({
 }: ConditionFormModalProps) {
   const [inputs, setInputs] = useState<string[]>([""]);
   const [outputs, setOutputs] = useState<string[]>(["else", ""]);
+  const [conditions, setConditions] = useState<string[]>([""]);
+  const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
+    null
+  );
 
   const {
     register,
@@ -48,106 +53,143 @@ export default function ConditionFormModal({
   };
 
   return (
-    <Modal onClose={onClose} open={open} large>
-      <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
-        <span className=" capitalize font-semibold">{node?.data.name}</span>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-[calc(50%-10px)]">
-          <Input
-            required
-            error={
-              errors.title?.type === "required" ? "This field is required" : ""
-            }
-            label="Title"
-            register={register}
-            name="title"
-            className="mt-6"
-          />
+    <>
+      <Modal onClose={onClose} open={open} large>
+        <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
+          <span className=" capitalize font-semibold">{node?.data.name}</span>
         </div>
-        <div className="w-full flex items-start mt-6 gap-4">
-          <div className="w-[calc(50%-10px)] bg-black-opacity-50 rounded-lg p-4 flex flex-col">
-            <div className=" text-sm w-fit mx-auto">Input Labels</div>
-            {inputs.map((val, i) => (
-              <SimpleInput
-                key={i}
-                value={val}
-                onChange={(val: string) => {
-                  setInputs((prev) =>
-                    prev.map((item, index) => (index === i ? val : item))
-                  );
-                }}
-                className="mt-4"
-              />
-            ))}
-            <Button
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                event.preventDefault();
-                setInputs((prev) => [...prev, ""]);
-              }}
-              variant="secondary"
-              className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
-            >
-              Add New
-            </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-[calc(50%-10px)]">
+            <Input
+              required
+              error={
+                errors.title?.type === "required"
+                  ? "This field is required"
+                  : ""
+              }
+              label="Title"
+              register={register}
+              name="title"
+              className="mt-6"
+            />
           </div>
-          <div className="w-[calc(50%-10px)] bg-black-opacity-50 rounded-lg p-4 flex flex-col">
-            <div className=" text-sm w-fit mx-auto">Output Labels</div>
-            {outputs.map((val, i) => (
-              <SimpleInput
-                key={i}
-                value={val}
-                onChange={(val: string) => {
-                  setOutputs((prev) =>
-                    prev.map((item, index) => (index === i ? val : item))
-                  );
+          <div className="w-full flex items-start mt-6 gap-4">
+            <div className="w-[calc(50%-10px)] bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col">
+              <div className=" text-sm w-fit mx-auto">Input Labels</div>
+              {inputs.map((val, i) => (
+                <SimpleInput
+                  key={i}
+                  value={val}
+                  onChange={(val: string) => {
+                    setInputs((prev) =>
+                      prev.map((item, index) => (index === i ? val : item))
+                    );
+                  }}
+                  className="mt-4"
+                />
+              ))}
+              <Button
+                onClick={(event: React.MouseEvent<HTMLElement>) => {
+                  event.preventDefault();
+                  setInputs((prev) => [...prev, ""]);
                 }}
-                className="mt-4"
-              />
-            ))}
-            <Button
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                event.preventDefault();
-                setOutputs((prev) => [...prev, ""]);
-              }}
-              variant="secondary"
-              className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
-            >
-              Add New
-            </Button>
+                variant="secondary"
+                className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="w-[calc(50%-10px)] bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col">
+              <div className=" text-sm w-fit mx-auto">Output Labels</div>
+              {outputs.map((val, i) => (
+                <SimpleInput
+                  key={i}
+                  value={val}
+                  onChange={(val: string) => {
+                    setOutputs((prev) =>
+                      prev.map((item, index) => (index === i ? val : item))
+                    );
+                  }}
+                  className="mt-4"
+                />
+              ))}
+              <Button
+                onClick={(event: React.MouseEvent<HTMLElement>) => {
+                  event.preventDefault();
+                  setOutputs((prev) => [...prev, ""]);
+                }}
+                variant="secondary"
+                className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
+              >
+                Add New
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="w-[calc(50%-10px)]">
-          <Input
-            error={
-              errors.description?.type === "required"
-                ? "This field is required"
-                : ""
-            }
-            label="Description"
-            register={register}
-            name="description"
-            className="mt-6"
-          />
-        </div>
+          <div className="bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col mt-6">
+            <div className=" text-sm">Diagram Conditions</div>
+            {conditions.map((cdt, i) => (
+              <div key={i} className="flex items-center">
+                <div className="flex flex-col w-[32%]">
+                  <div>Diagram Condition</div>
+                  <button
+                    className="h-[45px]"
+                    onClick={(event: React.MouseEvent<HTMLElement>) => {
+                      event.preventDefault();
+                      console.log(i);
+                      setOpenConditionIndex(i + 1);
+                    }}
+                  >
+                    {cdt}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="w-[calc(50%-10px)]">
+            <Input
+              error={
+                errors.description?.type === "required"
+                  ? "This field is required"
+                  : ""
+              }
+              label="Description"
+              register={register}
+              name="description"
+              className="mt-6"
+            />
+          </div>
 
-        <div className="flex items-center gap-4 mt-8">
-          <Button
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              event.preventDefault();
-              reset();
-              onClose();
-            }}
-            className="w-[36%]"
-            variant="secondary"
-          >
-            Cancel
-          </Button>
-          <Button className="w-[64%]" type="submit">
-            Create
-          </Button>
-        </div>
-      </form>
-    </Modal>
+          <div className="flex items-center gap-4 mt-8">
+            <Button
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                event.preventDefault();
+                reset();
+                onClose();
+              }}
+              className="w-[36%]"
+              variant="secondary"
+            >
+              Cancel
+            </Button>
+            <Button className="w-[64%]" type="submit">
+              Create
+            </Button>
+          </div>
+        </form>
+      </Modal>
+      <ConditionSelectModal
+        open={openConditionIndex}
+        onClose={() => {
+          setOpenConditionIndex(null);
+        }}
+        setCondition={(condition: string) => {
+          setConditions((prev) =>
+            prev.map((item, index) =>
+              index === openConditionIndex ? condition : item
+            )
+          );
+        }}
+      />
+    </>
   );
 }
