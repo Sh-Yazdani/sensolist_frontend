@@ -1,10 +1,17 @@
 "use client";
 
-import { ICondition, ISelectOption, NodeDataType } from "@/types/general";
+import { addConditionNode } from "@/lib/features/applet/appletSlice";
+import {
+  ICondition,
+  IConditionNodeInputs,
+  ISelectOption,
+  NodeDataType,
+} from "@/types/general";
 import { Node } from "@xyflow/react";
 import { CloseCircle } from "iconsax-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import FormError from "../UI/FormError";
 import Input from "../UI/Input";
@@ -18,14 +25,6 @@ interface ConditionFormModalProps {
   onClose: () => void;
   node: Node<NodeDataType> | null;
   onAddNode: () => void;
-}
-
-interface ICreateNodeInputs {
-  title: string;
-  description: string;
-  inputs: { label: string }[];
-  outputs: { label: string }[];
-  conditions: { value: string; condition: string }[];
 }
 
 export default function ConditionFormModal({
@@ -53,10 +52,13 @@ export default function ConditionFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateNodeInputs>();
+  } = useForm<IConditionNodeInputs>();
 
-  const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
+  const dispatch = useDispatch();
+
+  const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
     console.log("submit", data);
+    dispatch(addConditionNode(data));
     onAddNode();
     reset();
     onClose();
@@ -170,13 +172,13 @@ export default function ConditionFormModal({
                       setOpenConditionIndex(i + 1);
                     }}
                   >
-                    {/* <input
+                    <input
                       className="hidden"
                       {...register(`conditions.${i}.condition`, {
-                        required: true,
+                        // required: true,
                         value: cdt.condition,
                       })}
-                    /> */}
+                    />
                     {cdt.condition}
                   </button>
                   {errors.conditions?.length &&

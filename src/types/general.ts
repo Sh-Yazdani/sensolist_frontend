@@ -201,3 +201,11 @@ export interface ICondition {
   value: string;
   output: string;
 }
+
+export interface IConditionNodeInputs {
+  title: string;
+  description: string;
+  inputs: { label: string }[];
+  outputs: { label: string }[];
+  conditions: { value: string; condition: string }[];
+}
