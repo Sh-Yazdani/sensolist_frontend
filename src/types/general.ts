@@ -126,6 +126,9 @@ export type TriggerNodeType = Node<{
   name: string;
   icon: React.ReactNode;
 }>;
+export type ConditionNodeType = Node<{
+  index: number;
+}>;
 
 export type VariableNodeType = Node<{
   value: string;

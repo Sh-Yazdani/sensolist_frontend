@@ -70,7 +70,6 @@ export default function ConditionSelectModal({
     reset();
     onClose();
   };
-  console.log("errorssss", errors);
   return (
     <SecondaryModal onClose={onClose} open={!!open}>
       <div className="mt-20 text-sm w-fit mx-auto">

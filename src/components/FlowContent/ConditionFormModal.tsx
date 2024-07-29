@@ -64,8 +64,6 @@ export default function ConditionFormModal({
     onClose();
   };
 
-  console.log("erorsss", errors);
-
   return (
     <>
       <Modal onClose={onClose} open={open} large>

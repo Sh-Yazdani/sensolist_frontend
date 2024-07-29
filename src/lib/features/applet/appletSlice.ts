@@ -56,7 +56,9 @@ export const appletSlice = createSlice({
       );
     },
     addConditionNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
-      state.conditionNodes?.push(action.payload);
+      state.conditionNodes = state.conditionNodes?.length
+        ? [...state.conditionNodes, action.payload]
+        : [action.payload];
     },
   },
 });

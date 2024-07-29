@@ -1,8 +1,10 @@
 "use client";
 
+import { RootState } from "@/lib/store";
 import { Accordion } from "flowbite-react";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   actionNodes,
   controlNodes,
@@ -10,6 +12,9 @@ import {
   triggerNodes,
 } from "./nodeItems";
 export default function FlowSidebar() {
+  const { conditionNodes } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [variableCount] = useState<number>(3);
   const onVariableDragStart = (
@@ -24,11 +29,27 @@ export default function FlowSidebar() {
     count: number,
     name: string
   ) => {
-    console.log("node type", nodeType);
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.setData("name", name);
     event.dataTransfer.setData("value", item);
     event.dataTransfer.setData("count", count);
+    event.dataTransfer.effectAllowed = "move";
+  };
+  const onConditionDragStart = (
+    event: {
+      dataTransfer: {
+        setData: (arg0: string, arg1: any) => void;
+        effectAllowed: string;
+      };
+    },
+    nodeType: any
+  ) => {
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.setData("value", "condition");
+    event.dataTransfer.setData(
+      "index",
+      conditionNodes?.length ? conditionNodes?.length : 0
+    );
     event.dataTransfer.effectAllowed = "move";
   };
   const onDragStart = (
@@ -41,7 +62,6 @@ export default function FlowSidebar() {
     nodeType: any,
     item: string
   ) => {
-    console.log("node type", nodeType);
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.setData("value", item);
     event.dataTransfer.effectAllowed = "move";
@@ -136,7 +156,7 @@ export default function FlowSidebar() {
                   } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                   onDragStart={(event) =>
                     item.value === "condition"
-                      ? onDragStart(event, "conditionNode", item.value)
+                      ? onConditionDragStart(event, "conditionNode")
                       : onDragStart(event, "triggerNode", item.value)
                   }
                   draggable

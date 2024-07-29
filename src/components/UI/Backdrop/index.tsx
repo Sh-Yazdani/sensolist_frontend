@@ -3,7 +3,6 @@ interface BackdropProps {
   secondary?: boolean;
 }
 export default function Backdrop({ onClick, secondary }: BackdropProps) {
-  console.log("modal secondary", secondary);
   return (
     <div
       onClick={onClick}

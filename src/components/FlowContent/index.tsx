@@ -92,12 +92,12 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
       const nodeValue = event.dataTransfer.getData("value");
+      console.log("node val is condition", nodeValue);
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
-      console.log("type", type, nodeValue);
       const newNode = {
         id: getId(),
         type,
@@ -105,6 +105,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         data:
           type === "triggerNode"
             ? { ...triggeredNode }
+            : type === "conditionNode"
+            ? {
+                index: event.dataTransfer.getData("index"),
+              }
             : {
                 name: event.dataTransfer.getData("name"),
                 value: event.dataTransfer.getData("value"),
