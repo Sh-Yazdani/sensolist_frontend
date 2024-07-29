@@ -20,6 +20,7 @@ import "@xyflow/react/dist/style.css";
 import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AppletHeader from "../AppletHeader";
+import FlowConditionNode from "../FlowConditionNode";
 import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
@@ -38,6 +39,7 @@ const getId = () => `dndnode_${id++}`;
 const nodeTypes: NodeTypes = {
   triggerNode: FlowTriggerNode,
   variableNode: FlowVariableNode,
+  conditionNode: FlowConditionNode,
 };
 
 export default function FlowContent({ appletId }: { appletId: number }) {
@@ -90,6 +92,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
       const nodeValue = event.dataTransfer.getData("value");
+      console.log("node val is condition", nodeValue);
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -102,6 +105,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         data:
           type === "triggerNode"
             ? { ...triggeredNode }
+            : type === "conditionNode"
+            ? {
+                index: event.dataTransfer.getData("index"),
+              }
             : {
                 name: event.dataTransfer.getData("name"),
                 value: event.dataTransfer.getData("value"),

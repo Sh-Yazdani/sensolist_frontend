@@ -126,6 +126,9 @@ export type TriggerNodeType = Node<{
   name: string;
   icon: React.ReactNode;
 }>;
+export type ConditionNodeType = Node<{
+  index: number;
+}>;
 
 export type VariableNodeType = Node<{
   value: string;
@@ -196,4 +199,16 @@ export interface IWidgetTableData {
   columns: { key: string; name: string }[];
 }
 
-// export type WidgetDataType = IChartData | IWidgetTableData;
+export interface ICondition {
+  condition: string;
+  value: string;
+  output: string;
+}
+
+export interface IConditionNodeInputs {
+  title: string;
+  description: string;
+  inputs: string[];
+  outputs: string[];
+  conditions: { value: string; condition: string }[];
+}
