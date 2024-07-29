@@ -135,7 +135,9 @@ export default function FlowSidebar() {
                     i !== 0 && "mt-4"
                   } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                   onDragStart={(event) =>
-                    onDragStart(event, "triggerNode", item.value)
+                    item.value === "condition"
+                      ? onDragStart(event, "conditionNode", item.value)
+                      : onDragStart(event, "triggerNode", item.value)
                   }
                   draggable
                 >
