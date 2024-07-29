@@ -29,8 +29,8 @@ export default function ConditionFormModal({
   node,
   onAddNode,
 }: ConditionFormModalProps) {
-  const [inputCount, setInputCount] = useState<number[]>([1]);
-  const [outputs, setOutputs] = useState<string[]>(["else"]);
+  const [inputs, setInputs] = useState<string[]>([""]);
+  const [outputs, setOutputs] = useState<string[]>(["else", ""]);
 
   const {
     register,
@@ -47,7 +47,6 @@ export default function ConditionFormModal({
     onClose();
   };
 
-  console.log("outputs", outputs);
   return (
     <Modal onClose={onClose} open={open} large>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
@@ -68,27 +67,23 @@ export default function ConditionFormModal({
         </div>
         <div className="w-full flex items-start mt-6 gap-4">
           <div className="w-[calc(50%-10px)] bg-black-opacity-50 rounded-lg p-4 flex flex-col">
-            <div className=" text-sm w-fit mx-auto">Diagram Inputs</div>
-            <div className="mt-6 after:content-['*']">Label</div>
-            {inputCount.map((num, i) => (
-              <Input
-                key={num}
-                required
-                error={
-                  errors.inputs?.length &&
-                  errors.inputs[i]?.label?.type === "required"
-                    ? "This field is required"
-                    : ""
-                }
-                register={register}
-                name={`inputs.${i}.label`}
+            <div className=" text-sm w-fit mx-auto">Input Labels</div>
+            {inputs.map((val, i) => (
+              <SimpleInput
+                key={i}
+                value={val}
+                onChange={(val: string) => {
+                  setInputs((prev) =>
+                    prev.map((item, index) => (index === i ? val : item))
+                  );
+                }}
                 className="mt-4"
               />
             ))}
             <Button
               onClick={(event: React.MouseEvent<HTMLElement>) => {
                 event.preventDefault();
-                setInputCount((prev) => [...prev, prev[prev.length - 1] + 1]);
+                setInputs((prev) => [...prev, ""]);
               }}
               variant="secondary"
               className="px-3 h-[40px] mt-4 text-xs w-fit mx-auto"
