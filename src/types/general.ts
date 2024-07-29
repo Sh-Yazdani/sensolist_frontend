@@ -208,7 +208,7 @@ export interface ICondition {
 export interface IConditionNodeInputs {
   title: string;
   description: string;
-  inputs: { label: string }[];
-  outputs: { label: string }[];
+  inputs: string[];
+  outputs: string[];
   conditions: { value: string; condition: string }[];
 }

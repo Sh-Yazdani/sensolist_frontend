@@ -121,7 +121,17 @@ export default function ConditionSelectModal({
             placeholder="second variable"
           />
         </div>
-        <Button type="submit" className="mt-auto px-4">
+        <Button
+          onClick={(event: React.MouseEvent<HTMLElement>) => {
+            event.preventDefault();
+            setCondition(
+              `${firstVariable} ${selectedCondition.title} ${secondVariable}`
+            );
+            reset();
+            onClose();
+          }}
+          className="mt-auto px-4"
+        >
           Add
         </Button>
       </form>
