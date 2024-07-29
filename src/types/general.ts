@@ -196,4 +196,8 @@ export interface IWidgetTableData {
   columns: { key: string; name: string }[];
 }
 
-// export type WidgetDataType = IChartData | IWidgetTableData;
+export interface ICondition {
+  condition: string;
+  value: string;
+  output: string;
+}

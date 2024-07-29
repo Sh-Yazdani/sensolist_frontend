@@ -4,15 +4,18 @@ interface SimpleInputProps {
   value: string;
   onChange: (val: string) => void;
   className?: string;
+  placeholder?: string;
 }
 
 export default function SimpleInput({
   value,
   onChange,
   className,
+  placeholder,
 }: SimpleInputProps) {
   return (
     <input
+      placeholder={placeholder}
       value={value}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);

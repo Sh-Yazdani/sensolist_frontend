@@ -28,7 +28,6 @@ export default function SecondaryModal({
       onClose();
     }, 100);
   };
-  console.log("secondary modal", isOpen);
   return (
     <>
       {isOpen && <Backdrop secondary onClick={closeHandler} />}
@@ -49,6 +48,7 @@ export default function SecondaryModal({
         >
           <CloseCircle />
         </button>
+        {children}
       </div>
     </>
   );

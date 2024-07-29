@@ -7,22 +7,32 @@ import DropDownModal from "../DropDownModal";
 
 interface SelectProps {
   options: ISelectOption[];
+  value: ISelectOption;
+  onChange: (val: ISelectOption) => void;
   className?: string;
 }
 
-export default function Select({ options, className }: SelectProps) {
+export default function Select({
+  options,
+  className,
+  value,
+  onChange,
+}: SelectProps) {
   const [selectedValue, setSelectedValue] = useState<ISelectOption>(options[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className={`relative ${className}`}>
       <button
-        onClick={() => {
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
+          event.preventDefault();
           setIsOpen(true);
         }}
-        className="flex items-center border border-neutral-6 rounded-xl w-full py-2 px-4 justify-between"
+        className="flex items-center border border-neutral-6 rounded-lg w-full py-2 px-4 justify-between h-[45px]"
       >
         <span className=" whitespace-nowrap">{selectedValue.title}</span>
-        <ArrowDown2 className="ml-2 size-4" />
+        <ArrowDown2
+          className={`ml-2 size-4 transition-all ${isOpen && "rotate-180"}`}
+        />
       </button>
       {isOpen && (
         <>

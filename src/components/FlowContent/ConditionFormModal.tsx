@@ -1,12 +1,13 @@
 "use client";
 
-import { NodeDataType } from "@/types/general";
+import { ICondition, ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import Select from "../UI/Select";
 import SimpleInput from "../UI/SimpleInput";
 import ConditionSelectModal from "./ConditionSelectModal";
 
@@ -32,7 +33,13 @@ export default function ConditionFormModal({
 }: ConditionFormModalProps) {
   const [inputs, setInputs] = useState<string[]>([""]);
   const [outputs, setOutputs] = useState<string[]>(["else", ""]);
-  const [conditions, setConditions] = useState<string[]>([""]);
+  const [conditions, setConditions] = useState<ICondition[]>([
+    {
+      condition: "",
+      value: "",
+      output: "",
+    },
+  ]);
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
@@ -126,21 +133,65 @@ export default function ConditionFormModal({
             </div>
           </div>
           <div className="bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col mt-6">
-            <div className=" text-sm">Diagram Conditions</div>
+            <div className=" text-sm w-fit m-auto">Diagram Conditions</div>
             {conditions.map((cdt, i) => (
-              <div key={i} className="flex items-center">
-                <div className="flex flex-col w-[32%]">
-                  <div>Diagram Condition</div>
+              <div key={i} className="flex items-center justify-between mt-6">
+                <div className="flex flex-col w-[38%]">
+                  <div className=" text-xs">Diagram Condition</div>
                   <button
-                    className="h-[45px]"
+                    className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
+                      placeholder:text-neutral-6 placeholder:text-sm focus-visible:outline-none dark:text-neutral-2 h-[45px]`}
                     onClick={(event: React.MouseEvent<HTMLElement>) => {
                       event.preventDefault();
-                      console.log(i);
                       setOpenConditionIndex(i + 1);
                     }}
                   >
-                    {cdt}
+                    {cdt.condition}
                   </button>
+                </div>
+                <div className="flex flex-col w-[38%]">
+                  <div className=" text-xs">Diagram output value</div>
+                  <SimpleInput
+                    value={conditions[i].value}
+                    onChange={(val: string) => {
+                      setConditions((prev) =>
+                        prev.map((item, index) =>
+                          index === i
+                            ? {
+                                condition: item.condition,
+                                value: val,
+                                output: item.value,
+                              }
+                            : item
+                        )
+                      );
+                    }}
+                  />
+                </div>
+                <div className="flex flex-col w-[20%]">
+                  <div className=" text-xs mb-2">Diagram output</div>
+                  <Select
+                    options={outputs.map((output) => {
+                      return {
+                        title: output,
+                        value: output,
+                      };
+                    })}
+                    value={{ title: outputs[0], value: outputs[0] }}
+                    onChange={(val: ISelectOption) => {
+                      setConditions((prev) =>
+                        prev.map((item, index) =>
+                          index === i
+                            ? {
+                                condition: item.condition,
+                                value: item.value,
+                                output: val.value,
+                              }
+                            : item
+                        )
+                      );
+                    }}
+                  />
                 </div>
               </div>
             ))}
@@ -185,7 +236,13 @@ export default function ConditionFormModal({
         setCondition={(condition: string) => {
           setConditions((prev) =>
             prev.map((item, index) =>
-              index === openConditionIndex ? condition : item
+              index === Number(openConditionIndex) - 1
+                ? {
+                    condition: condition,
+                    value: item.value,
+                    output: item.output,
+                  }
+                : item
             )
           );
         }}
