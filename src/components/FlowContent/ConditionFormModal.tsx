@@ -6,6 +6,7 @@ import { CloseCircle } from "iconsax-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
+import FormError from "../UI/FormError";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import Select from "../UI/Select";
@@ -24,6 +25,7 @@ interface ICreateNodeInputs {
   description: string;
   inputs: { label: string }[];
   outputs: { label: string }[];
+  conditions: { value: string; condition: string }[];
 }
 
 export default function ConditionFormModal({
@@ -59,6 +61,8 @@ export default function ConditionFormModal({
     reset();
     onClose();
   };
+
+  console.log("erorsss", errors);
 
   return (
     <>
@@ -96,7 +100,13 @@ export default function ConditionFormModal({
                       prev.map((item, index) => (index === i ? val : item))
                     );
                   }}
-                  className="mt-4"
+                  className="mt-6"
+                  error={
+                    errors.inputs?.length &&
+                    errors.inputs[i]?.type === "required"
+                      ? "This field is required"
+                      : ""
+                  }
                 />
               ))}
               <Button
@@ -124,7 +134,13 @@ export default function ConditionFormModal({
                       prev.map((item, index) => (index === i ? val : item))
                     );
                   }}
-                  className="mt-4"
+                  className="mt-6"
+                  error={
+                    errors.outputs?.length &&
+                    errors.outputs[i]?.type === "required"
+                      ? "This field is required"
+                      : ""
+                  }
                 />
               ))}
               <Button
@@ -143,8 +159,9 @@ export default function ConditionFormModal({
             <div className=" text-sm w-fit m-auto">Diagram Conditions</div>
             {conditions.map((cdt, i) => (
               <div key={i} className="flex items-center justify-between mt-6">
-                <div className="flex flex-col w-[35%]">
+                <div className="flex flex-col w-[35%] relative">
                   <div className=" text-xs">Diagram Condition</div>
+
                   <button
                     className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
                       placeholder:text-neutral-6 placeholder:text-sm focus-visible:outline-none dark:text-neutral-2 h-[45px]`}
@@ -153,12 +170,29 @@ export default function ConditionFormModal({
                       setOpenConditionIndex(i + 1);
                     }}
                   >
+                    {/* <input
+                      className="hidden"
+                      {...register(`conditions.${i}.condition`, {
+                        required: true,
+                        value: cdt.condition,
+                      })}
+                    /> */}
                     {cdt.condition}
                   </button>
+                  {errors.conditions?.length &&
+                  errors.conditions[i]?.condition?.type === "required" ? (
+                    <FormError error={"This field is required"} />
+                  ) : null}
                 </div>
                 <div className="flex flex-col w-[35%]">
-                  <div className=" text-xs">Diagram output value</div>
+                  <div className=" text-xs mb-2">Diagram output value</div>
                   <SimpleInput
+                    error={
+                      errors.conditions?.length &&
+                      errors.conditions[i]?.value?.type === "required"
+                        ? "This field is required"
+                        : ""
+                    }
                     register={register}
                     required
                     name={`conditions.${i}.value`}

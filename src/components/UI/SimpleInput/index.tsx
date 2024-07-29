@@ -24,7 +24,6 @@ export default function SimpleInput({
   required,
   error,
 }: SimpleInputProps) {
-  console.log("error", error);
   return (
     <div className={`relative ${className}`}>
       <input
