@@ -86,6 +86,9 @@ export default function ConditionFormModal({
               <div className=" text-sm w-fit mx-auto">Input Labels</div>
               {inputs.map((val, i) => (
                 <SimpleInput
+                  register={register}
+                  required
+                  name={`inputs.${i}`}
                   key={i}
                   value={val}
                   onChange={(val: string) => {
@@ -111,6 +114,9 @@ export default function ConditionFormModal({
               <div className=" text-sm w-fit mx-auto">Output Labels</div>
               {outputs.map((val, i) => (
                 <SimpleInput
+                  register={register}
+                  required
+                  name={`outputs.${i}`}
                   key={i}
                   value={val}
                   onChange={(val: string) => {
@@ -153,6 +159,9 @@ export default function ConditionFormModal({
                 <div className="flex flex-col w-[35%]">
                   <div className=" text-xs">Diagram output value</div>
                   <SimpleInput
+                    register={register}
+                    required
+                    name={`conditions.${i}.value`}
                     value={conditions[i].value}
                     onChange={(val: string) => {
                       setConditions((prev) =>

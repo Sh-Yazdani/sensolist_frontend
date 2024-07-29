@@ -1,5 +1,6 @@
 import { ISelectOption } from "@/types/general";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import SecondaryModal from "../UI/SecondaryModal";
 import Select from "../UI/Select";
@@ -9,6 +10,11 @@ interface ConditionSelectModalProps {
   open: number | null;
   onClose: () => void;
   setCondition: (condition: string) => void;
+}
+
+interface IConditionSelect {
+  firstVariable: string;
+  secondVariable: string;
 }
 
 export default function ConditionSelectModal({
@@ -47,48 +53,79 @@ export default function ConditionSelectModal({
   const [selectedCondition, setSelectedCondition] = useState<ISelectOption>(
     conditions[0]
   );
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<IConditionSelect>();
+
+  const onSubmit: SubmitHandler<IConditionSelect> = (data) => {
+    console.log("submit", data);
+    setCondition(
+      `${firstVariable} ${selectedCondition.title} ${secondVariable}`
+    );
+    reset();
+    onClose();
+  };
+  console.log("errorssss", errors);
   return (
     <SecondaryModal onClose={onClose} open={!!open}>
       <div className="mt-20 text-sm w-fit mx-auto">
         You can configure filter using below fields
       </div>
-      <div className="mt-20 flex justify-between items-end">
-        <SimpleInput
-          value={firstVariable}
-          onChange={(val) => {
-            setFirstVariable(val);
-          }}
-          className="w-[36%] h-[45px]"
-          placeholder="first variable"
-        />
-        <Select
-          options={conditions}
-          value={selectedCondition}
-          onChange={(val: ISelectOption) => {
-            setSelectedCondition(val);
-          }}
-          className=" w-[25%] h-[45px]"
-        />
-        <SimpleInput
-          value={secondVariable}
-          onChange={(val) => {
-            setSecondVariable(val);
-          }}
-          className="w-[36%] h-[45px]"
-          placeholder="second variable"
-        />
-      </div>
-      <Button
-        onClick={() => {
-          setCondition(
-            `${firstVariable} ${selectedCondition.title} ${secondVariable}`
-          );
-          onClose();
-        }}
-        className="mt-auto px-4"
+      <form
+        className="mt-20 flex flex-col h-full"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        Add
-      </Button>
+        <div className=" flex justify-between items-center">
+          <SimpleInput
+            register={register}
+            required
+            name={`firstVariable`}
+            value={firstVariable}
+            onChange={(val) => {
+              setFirstVariable(val);
+            }}
+            error={
+              errors.firstVariable?.type === "required"
+                ? "This field is required"
+                : ""
+            }
+            className="w-[36%] h-[45px]"
+            placeholder="first variable"
+          />
+          <Select
+            options={conditions}
+            value={selectedCondition}
+            onChange={(val: ISelectOption) => {
+              setSelectedCondition(val);
+            }}
+            className=" w-[25%] h-[45px]"
+          />
+          <SimpleInput
+            register={register}
+            required
+            name={`secondVariable`}
+            value={secondVariable}
+            onChange={(val) => {
+              setSecondVariable(val);
+            }}
+            error={
+              errors.secondVariable?.type === "required"
+                ? "This field is required"
+                : ""
+            }
+            className="w-[36%] h-[45px]"
+            placeholder="second variable"
+          />
+        </div>
+        <Button type="submit" className="mt-auto px-4">
+          Add
+        </Button>
+      </form>
     </SecondaryModal>
   );
 }
