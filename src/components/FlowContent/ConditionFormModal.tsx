@@ -2,6 +2,7 @@
 
 import { ICondition, ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
+import { CloseCircle } from "iconsax-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
@@ -136,7 +137,7 @@ export default function ConditionFormModal({
             <div className=" text-sm w-fit m-auto">Diagram Conditions</div>
             {conditions.map((cdt, i) => (
               <div key={i} className="flex items-center justify-between mt-6">
-                <div className="flex flex-col w-[38%]">
+                <div className="flex flex-col w-[35%]">
                   <div className=" text-xs">Diagram Condition</div>
                   <button
                     className={` border border-neutral-6 rounded-lg py-3 px-4 mt-2 text-sm backdrop-blur-[30px] bg-transparent
@@ -149,7 +150,7 @@ export default function ConditionFormModal({
                     {cdt.condition}
                   </button>
                 </div>
-                <div className="flex flex-col w-[38%]">
+                <div className="flex flex-col w-[35%]">
                   <div className=" text-xs">Diagram output value</div>
                   <SimpleInput
                     value={conditions[i].value}
@@ -168,7 +169,7 @@ export default function ConditionFormModal({
                     }}
                   />
                 </div>
-                <div className="flex flex-col w-[20%]">
+                <div className="flex flex-col w-[17%]">
                   <div className=" text-xs mb-2">Diagram output</div>
                   <Select
                     options={outputs.map((output) => {
@@ -193,6 +194,17 @@ export default function ConditionFormModal({
                     }}
                   />
                 </div>
+                <button
+                  className="mt-4"
+                  onClick={(event: React.MouseEvent<HTMLElement>) => {
+                    event.preventDefault();
+                    setConditions((prev) =>
+                      prev.filter((_item, index) => index !== i)
+                    );
+                  }}
+                >
+                  <CloseCircle />
+                </button>
               </div>
             ))}
             <Button
