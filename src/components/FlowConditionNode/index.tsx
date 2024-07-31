@@ -1,11 +1,12 @@
 "use client";
 
 import useContextMenu from "@/hooks/useContextMenu";
+import { addEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
-import { ConditionNodeType } from "@/types/general";
+import { ConditionNodeType, IConditionNodeInputs } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ContextMenu from "./ContextMenu";
 
 export default function FlowConditionNode({
@@ -13,6 +14,7 @@ export default function FlowConditionNode({
   isConnectable,
 }: NodeProps<ConditionNodeType>) {
   const { index } = data;
+  const dispatch = useDispatch();
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
@@ -20,9 +22,10 @@ export default function FlowConditionNode({
     conditionNodes?.length ? conditionNodes[index] : null
   );
 
+  const [editOpen, setEditOpen] = useState<IConditionNodeInputs | null>();
+
   const { clicked, setClicked, points, setPoints } = useContextMenu();
 
-  console.log("selected node", selectedNode);
   return (
     <>
       <div
@@ -71,7 +74,13 @@ export default function FlowConditionNode({
             ))}
           </div>
         </div>
-        {clicked && <ContextMenu />}
+        {clicked && (
+          <ContextMenu
+            onEditSelect={() => {
+              if (selectedNode) dispatch(addEditNode(selectedNode));
+            }}
+          />
+        )}
       </div>
     </>
   );

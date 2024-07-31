@@ -5,6 +5,7 @@ export interface AppletState {
   applets: IApplet[];
   pinnedApplets: IApplet[];
   conditionNodes?: IConditionNodeInputs[];
+  editNode?: IConditionNodeInputs;
 }
 
 const initialState: AppletState = {
@@ -25,7 +26,6 @@ export const appletSlice = createSlice({
       );
     },
     editApplet: (state, action: PayloadAction<IApplet>) => {
-      console.log("action payload", action.payload);
       state.applets = [
         ...state.applets.filter((app) => app.id !== action.payload.id),
         action.payload,
@@ -60,6 +60,12 @@ export const appletSlice = createSlice({
         ? [...state.conditionNodes, action.payload]
         : [action.payload];
     },
+    addEditNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
+      state.editNode = action.payload;
+    },
+    removeEditNode: (state) => {
+      delete state.editNode;
+    },
   },
 });
 export const {
@@ -69,5 +75,7 @@ export const {
   unPinApplet,
   editApplet,
   addConditionNode,
+  addEditNode,
+  removeEditNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;

@@ -23,8 +23,9 @@ import ConditionSelectModal from "./ConditionSelectModal";
 interface ConditionFormModalProps {
   open: boolean;
   onClose: () => void;
-  node: Node<NodeDataType> | null;
+  node?: Node<NodeDataType> | null;
   onAddNode: () => void;
+  edit?: IConditionNodeInputs | null;
 }
 
 export default function ConditionFormModal({
@@ -32,6 +33,7 @@ export default function ConditionFormModal({
   onClose,
   node,
   onAddNode,
+  edit,
 }: ConditionFormModalProps) {
   const [inputs, setInputs] = useState<string[]>([""]);
   const [outputs, setOutputs] = useState<string[]>(["else", ""]);
@@ -45,14 +47,15 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
-
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<IConditionNodeInputs>();
+  } = useForm<IConditionNodeInputs>({
+    defaultValues: edit ? edit : {},
+  });
 
   const dispatch = useDispatch();
 
