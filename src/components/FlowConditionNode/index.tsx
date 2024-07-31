@@ -1,8 +1,12 @@
+"use client";
+
+import useContextMenu from "@/hooks/useContextMenu";
 import { RootState } from "@/lib/store";
 import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import ContextMenu from "./ContextMenu";
 
 export default function FlowConditionNode({
   data,
@@ -15,10 +19,23 @@ export default function FlowConditionNode({
   const [selectedNode, setSelectedNode] = useState(
     conditionNodes?.length ? conditionNodes[index] : null
   );
+
+  const { clicked, setClicked, points, setPoints } = useContextMenu();
+
   console.log("selected node", selectedNode);
   return (
     <>
-      <div className=" border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4">
+      <div
+        onContextMenu={(e) => {
+          e.preventDefault();
+          setClicked(true);
+          setPoints({
+            x: e.pageX,
+            y: e.pageY,
+          });
+        }}
+        className="relative border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4"
+      >
         <div className="mb-2">{selectedNode?.title}</div>
         <div className="flex items-center">
           <div className="flex flex-col mr-4">
@@ -54,6 +71,7 @@ export default function FlowConditionNode({
             ))}
           </div>
         </div>
+        {clicked && <ContextMenu />}
       </div>
     </>
   );
