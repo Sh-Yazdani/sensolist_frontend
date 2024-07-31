@@ -1,6 +1,6 @@
 "use client";
 
-import { addConditionNode } from "@/lib/features/applet/appletSlice";
+import { addConditionNode, editNode } from "@/lib/features/applet/appletSlice";
 import {
   ICondition,
   IConditionNodeInputs,
@@ -24,7 +24,7 @@ interface ConditionFormModalProps {
   open: boolean;
   onClose: () => void;
   node?: Node<NodeDataType> | null;
-  onAddNode: () => void;
+  onAddNode?: (data?: IConditionNodeInputs) => void;
   edit?: IConditionNodeInputs | null;
 }
 
@@ -61,8 +61,13 @@ export default function ConditionFormModal({
 
   const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
     console.log("submit", data);
-    dispatch(addConditionNode(data));
-    onAddNode();
+    if (edit) {
+      console.groupCollapsed("edit nodeeeeee", data);
+      dispatch(editNode({ newNode: data, index: 0 }));
+    } else {
+      dispatch(addConditionNode(data));
+    }
+    if (onAddNode) onAddNode(data);
     reset();
     onClose();
   };

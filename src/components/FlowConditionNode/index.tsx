@@ -3,7 +3,7 @@
 import useContextMenu from "@/hooks/useContextMenu";
 import { addEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
-import { ConditionNodeType, IConditionNodeInputs } from "@/types/general";
+import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,8 +21,6 @@ export default function FlowConditionNode({
   const [selectedNode, setSelectedNode] = useState(
     conditionNodes?.length ? conditionNodes[index] : null
   );
-
-  const [editOpen, setEditOpen] = useState<IConditionNodeInputs | null>();
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
 

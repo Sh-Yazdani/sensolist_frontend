@@ -50,8 +50,14 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const dispatch = useDispatch();
+  const { conditionNodes: selector } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
+  console.log("selectorrr", selector);
 
-  const { editNode } = useSelector((state: RootState) => state.appletSlice);
+  const { editNode, conditionNodes } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
 
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
@@ -242,11 +248,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         }}
       />
       <ConditionFormModal
-        onAddNode={() => {
-          // if (conditionModalOpen) {
-          //   setNodes((nds) => nds.concat(conditionModalOpen));
-          // }
-        }}
         open={!!editNode}
         onClose={() => {
           dispatch(removeEditNode());
