@@ -1,6 +1,10 @@
 "use client";
 
-import { addConditionNode, editNode } from "@/lib/features/applet/appletSlice";
+import {
+  addConditionNode,
+  editNode as editNodeReducer,
+} from "@/lib/features/applet/appletSlice";
+import { RootState } from "@/lib/store";
 import {
   ICondition,
   IConditionNodeInputs,
@@ -11,7 +15,7 @@ import { Node } from "@xyflow/react";
 import { CloseCircle } from "iconsax-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import FormError from "../UI/FormError";
 import Input from "../UI/Input";
@@ -58,12 +62,19 @@ export default function ConditionFormModal({
   });
 
   const dispatch = useDispatch();
+  const { conditionNodes, editNode } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
 
   const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
     console.log("submit", data);
     if (edit) {
-      console.groupCollapsed("edit nodeeeeee", data);
-      dispatch(editNode({ newNode: data, index: 0 }));
+      dispatch(
+        editNodeReducer({
+          newNode: data,
+          index: editNode ? conditionNodes?.indexOf(editNode) || 0 : 0,
+        })
+      );
     } else {
       dispatch(addConditionNode(data));
     }
@@ -303,7 +314,7 @@ export default function ConditionFormModal({
               Cancel
             </Button>
             <Button className="w-[64%]" type="submit">
-              Create
+              {edit ? "Edit" : "Create"}
             </Button>
           </div>
         </form>

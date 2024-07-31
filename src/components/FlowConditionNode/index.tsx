@@ -5,7 +5,7 @@ import { addEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContextMenu from "./ContextMenu";
 
@@ -23,6 +23,12 @@ export default function FlowConditionNode({
   );
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
+
+  useEffect(() => {
+    console.log("useeeffee", conditionNodes);
+    setSelectedNode(conditionNodes?.length ? conditionNodes[index] : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conditionNodes]);
 
   return (
     <>

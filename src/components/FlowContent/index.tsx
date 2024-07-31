@@ -53,7 +53,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const { conditionNodes: selector } = useSelector(
     (state: RootState) => state.appletSlice
   );
-  console.log("selectorrr", selector);
 
   const { editNode, conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
