@@ -153,7 +153,7 @@ export type NodeDataType =
       value?: string | undefined;
       name?: string | undefined;
       icon?: React.ReactNode;
-      count: undefined;
+      count?: undefined;
     }
   | { name: string; value: string; count: string };
 

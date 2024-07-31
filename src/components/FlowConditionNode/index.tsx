@@ -1,24 +1,48 @@
+"use client";
+
+import useContextMenu from "@/hooks/useContextMenu";
+import { addEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ContextMenu from "./ContextMenu";
 
 export default function FlowConditionNode({
   data,
   isConnectable,
 }: NodeProps<ConditionNodeType>) {
   const { index } = data;
+  const dispatch = useDispatch();
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
   const [selectedNode, setSelectedNode] = useState(
     conditionNodes?.length ? conditionNodes[index] : null
   );
-  console.log("selected node", selectedNode);
+
+  const { clicked, setClicked, points, setPoints } = useContextMenu();
+
+  useEffect(() => {
+    console.log("useeeffee", conditionNodes);
+    setSelectedNode(conditionNodes?.length ? conditionNodes[index] : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conditionNodes]);
+
   return (
     <>
-      <div className=" border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4">
+      <div
+        onContextMenu={(e) => {
+          e.preventDefault();
+          setClicked(true);
+          setPoints({
+            x: e.pageX,
+            y: e.pageY,
+          });
+        }}
+        className="relative border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4"
+      >
         <div className="mb-2">{selectedNode?.title}</div>
         <div className="flex items-center">
           <div className="flex flex-col mr-4">
@@ -54,6 +78,13 @@ export default function FlowConditionNode({
             ))}
           </div>
         </div>
+        {clicked && (
+          <ContextMenu
+            onEditSelect={() => {
+              if (selectedNode) dispatch(addEditNode(selectedNode));
+            }}
+          />
+        )}
       </div>
     </>
   );
