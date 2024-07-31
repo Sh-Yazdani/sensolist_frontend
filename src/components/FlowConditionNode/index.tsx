@@ -32,6 +32,7 @@ export default function FlowConditionNode({
 
   return (
     <>
+
       <div
         onContextMenu={(e) => {
           e.preventDefault();
@@ -43,6 +44,7 @@ export default function FlowConditionNode({
         }}
         className="relative border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4"
       >
+
         <div className="mb-2">{selectedNode?.title}</div>
         <div className="flex items-center">
           <div className="flex flex-col mr-4">
@@ -78,6 +80,7 @@ export default function FlowConditionNode({
             ))}
           </div>
         </div>
+
         {clicked && (
           <ContextMenu
             onEditSelect={() => {
@@ -85,6 +88,7 @@ export default function FlowConditionNode({
             }}
           />
         )}
+
       </div>
     </>
   );
