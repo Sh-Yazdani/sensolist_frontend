@@ -2,9 +2,13 @@ import { Copy, Edit, Trash } from "iconsax-react";
 
 interface ContextMenuProps {
   onEditSelect: () => void;
+  onDelete: () => void;
 }
 
-export default function ContextMenu({ onEditSelect }: ContextMenuProps) {
+export default function ContextMenu({
+  onEditSelect,
+  onDelete,
+}: ContextMenuProps) {
   return (
     <div className=" absolute bg-neutral-4 rounded-lg flex flex-col">
       <button
@@ -16,7 +20,10 @@ export default function ContextMenu({ onEditSelect }: ContextMenuProps) {
       <div className="p-4 border-b border-neutral-6 flex text-neutral-8 text-sm items-center">
         <Copy className="mr-4 size-4" /> Copy
       </div>
-      <div className="p-4 flex text-neutral-8 text-sm items-center">
+      <div
+        onClick={onDelete}
+        className="p-4 flex text-neutral-8 text-sm items-center"
+      >
         <Trash className="mr-4 size-4" /> Delete
       </div>
     </div>

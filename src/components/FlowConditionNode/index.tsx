@@ -1,7 +1,7 @@
 "use client";
 
 import useContextMenu from "@/hooks/useContextMenu";
-import { addEditNode } from "@/lib/features/applet/appletSlice";
+import { addEditNode, deleteNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
@@ -29,6 +29,7 @@ export default function FlowConditionNode({
     setSelectedNode(conditionNodes?.length ? conditionNodes[index] : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conditionNodes]);
+  if (!selectedNode) return;
 
   return (
     <>
@@ -64,13 +65,13 @@ export default function FlowConditionNode({
 
           {/* <span className="ml-2">{index}</span> */}
           <div className="flex flex-col ml-4 items-end">
-            {selectedNode?.outputs.map((input, i) => (
+            {selectedNode?.outputs.map((output, i) => (
               <div key={i} className="relative">
-                <span className="mr-2">{input}</span>
+                <span className="mr-2">{output}</span>
                 <Handle
                   type="source"
                   position={Position.Right}
-                  id="a"
+                  id={output}
                   style={{ background: "#555" }}
                   isConnectable={isConnectable}
                 />
@@ -82,6 +83,12 @@ export default function FlowConditionNode({
           <ContextMenu
             onEditSelect={() => {
               if (selectedNode) dispatch(addEditNode(selectedNode));
+            }}
+            onDelete={() => {
+              if (selectedNode)
+                dispatch(
+                  deleteNode({ index: conditionNodes?.indexOf(selectedNode) })
+                );
             }}
           />
         )}

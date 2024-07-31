@@ -73,6 +73,14 @@ export const appletSlice = createSlice({
       if (state.conditionNodes)
         state.conditionNodes[action.payload.index] = action.payload.newNode;
     },
+    deleteNode: (
+      state,
+      action: PayloadAction<{ index: number | undefined }>
+    ) => {
+      state.conditionNodes = state.conditionNodes?.filter(
+        (_item, index) => index !== action.payload.index
+      );
+    },
   },
 });
 export const {
@@ -85,5 +93,6 @@ export const {
   addEditNode,
   removeEditNode,
   editNode,
+  deleteNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;
