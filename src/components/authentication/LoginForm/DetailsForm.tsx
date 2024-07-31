@@ -28,9 +28,25 @@ export default function DetailsForm({
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const [termsError, setTermsError] = useState<string>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
+      try {
+        const res = await fetch(
+          "https://sensolist-backend.vercel.app/auth/login",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              phonenumber: "+" + data.phoneNumber,
+              password: data.password,
+            }),
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        console.log("resss", res);
+      } catch (e) {}
       goToVerification();
     } else {
       setTermsError("Please agree with terms and policies.");
