@@ -18,30 +18,42 @@ export default function FlowConditionNode({
   console.log("selected node", selectedNode);
   return (
     <>
-      <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4">
-        <div className="flex flex-col">
-          {selectedNode?.inputs.map((input, i) => (
-            <div key={i}>
-              {input}
-              <Handle
-                type="target"
-                position={Position.Left}
-                style={{ background: "#555" }}
-                onConnect={(params) => console.log("handle onConnect", params)}
-                isConnectable={isConnectable}
-              />
-            </div>
-          ))}
-        </div>
+      <div className=" border border-neutral-6 py-2 rounded-lg flex flex-col items-center text-base dark:text-neutral-4">
+        <div className="mb-2">{selectedNode?.title}</div>
+        <div className="flex items-center">
+          <div className="flex flex-col mr-4">
+            {selectedNode?.inputs.map((input, i) => (
+              <div key={i} className="relative">
+                <span className="ml-2">{input}</span>
+                <Handle
+                  type="target"
+                  position={Position.Left}
+                  style={{ background: "#555" }}
+                  onConnect={(params) =>
+                    console.log("handle onConnect", params)
+                  }
+                  isConnectable={isConnectable}
+                />
+              </div>
+            ))}
+          </div>
 
-        <span className="ml-2">{index}</span>
-        <Handle
-          type="source"
-          position={Position.Right}
-          id="a"
-          style={{ background: "#555" }}
-          isConnectable={isConnectable}
-        />
+          {/* <span className="ml-2">{index}</span> */}
+          <div className="flex flex-col ml-4 items-end">
+            {selectedNode?.outputs.map((input, i) => (
+              <div key={i} className="relative">
+                <span className="mr-2">{input}</span>
+                <Handle
+                  type="source"
+                  position={Position.Right}
+                  id="a"
+                  style={{ background: "#555" }}
+                  isConnectable={isConnectable}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
