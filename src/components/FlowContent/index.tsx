@@ -1,5 +1,6 @@
 "use client";
 
+import { removeEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { NodeDataType } from "@/types/general";
 import {
@@ -18,7 +19,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppletHeader from "../AppletHeader";
 import FlowConditionNode from "../FlowConditionNode";
 import FlowSidebar from "../FlowSidebar";
@@ -47,6 +48,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const dispatch = useDispatch();
+  const { conditionNodes: selector } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
+
+  const { editNode, conditionNodes } = useSelector(
+    (state: RootState) => state.appletSlice
+  );
 
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
@@ -92,7 +102,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
       const nodeValue = event.dataTransfer.getData("value");
-      console.log("node val is condition", nodeValue);
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -236,6 +245,13 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         onClose={() => {
           setConditionModalOpen(null);
         }}
+      />
+      <ConditionFormModal
+        open={!!editNode}
+        onClose={() => {
+          dispatch(removeEditNode());
+        }}
+        edit={editNode}
       />
     </>
   );
