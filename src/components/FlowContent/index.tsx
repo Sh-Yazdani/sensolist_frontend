@@ -52,7 +52,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const dispatch = useDispatch();
 
   const { editNode } = useSelector((state: RootState) => state.appletSlice);
-  console.log("edit node", editNode);
 
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
@@ -98,7 +97,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
       const nodeValue = event.dataTransfer.getData("value");
-      console.log("node val is condition", nodeValue);
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
