@@ -13,7 +13,7 @@ import {
 } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { CloseCircle } from "iconsax-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
@@ -51,7 +51,6 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
-  console.log("edit", edit);
   const {
     register,
     handleSubmit,
@@ -84,6 +83,20 @@ export default function ConditionFormModal({
     onClose();
   };
 
+  useEffect(() => {
+    setInputs([""]);
+    setOutputs(["else", ""]);
+    setConditions([
+      {
+        condition: "",
+        value: "",
+        output: "",
+      },
+    ]);
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   return (
     <>
       <Modal onClose={onClose} open={open} large>
@@ -108,27 +121,29 @@ export default function ConditionFormModal({
           <div className="w-full flex items-start mt-6 gap-4">
             <div className="w-[calc(50%-10px)] bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col">
               <div className=" text-sm w-fit mx-auto">Input Labels</div>
-              {inputs.map((val, i) => (
-                <SimpleInput
-                  register={register}
-                  required
-                  name={`inputs.${i}`}
-                  key={i}
-                  value={val}
-                  onChange={(val: string) => {
-                    setInputs((prev) =>
-                      prev.map((item, index) => (index === i ? val : item))
-                    );
-                  }}
-                  className="mt-6"
-                  error={
-                    errors.inputs?.length &&
-                    errors.inputs[i]?.type === "required"
-                      ? "This field is required"
-                      : ""
-                  }
-                />
-              ))}
+              {inputs.map((val, i) => {
+                return (
+                  <SimpleInput
+                    register={register}
+                    required
+                    name={`inputs.${i}`}
+                    key={i}
+                    value={val}
+                    onChange={(val: string) => {
+                      setInputs((prev) =>
+                        prev.map((item, index) => (index === i ? val : item))
+                      );
+                    }}
+                    className="mt-6"
+                    error={
+                      errors.inputs?.length &&
+                      errors.inputs[i]?.type === "required"
+                        ? "This field is required"
+                        : ""
+                    }
+                  />
+                );
+              })}
               <Button
                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                   event.preventDefault();
