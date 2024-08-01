@@ -121,7 +121,20 @@ export interface ITriggerNode {
   icon: React.ReactNode;
 }
 
+export interface IVariableNode {}
+
+export interface INode {
+  nodeId: string;
+  title: string;
+  description?: string;
+}
+
+export interface IThingNodes extends INode {
+  charactristic: string;
+}
+
 export type TriggerNodeType = Node<{
+  nodeId: string;
   value: string;
   name: string;
   icon: React.ReactNode;

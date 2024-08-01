@@ -1,10 +1,19 @@
-import { IApplet, IConditionNodeInputs } from "@/types/general";
+import {
+  IApplet,
+  IConditionNodeInputs,
+  IThingNodes,
+  ITriggerNode,
+  IVariableNode,
+} from "@/types/general";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface AppletState {
   applets: IApplet[];
   pinnedApplets: IApplet[];
   conditionNodes?: IConditionNodeInputs[];
+  triggerNodes?: ITriggerNode[];
+  variableNodes?: IVariableNode[];
+  thingNodes?: IThingNodes[];
   editNode?: IConditionNodeInputs;
 }
 
@@ -81,6 +90,11 @@ export const appletSlice = createSlice({
         (_item, index) => index !== action.payload.index
       );
     },
+    addThingNode: (state, action: PayloadAction<IThingNodes>) => {
+      state.thingNodes = state.thingNodes?.length
+        ? [...state.thingNodes, action.payload]
+        : [action.payload];
+    },
   },
 });
 export const {
@@ -94,5 +108,6 @@ export const {
   removeEditNode,
   editNode,
   deleteNode,
+  addThingNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;
