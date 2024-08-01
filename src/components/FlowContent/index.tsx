@@ -61,6 +61,8 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     (state: RootState) => state.appletSlice
   );
 
+  console.log("edit node", editNode);
+
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
@@ -231,10 +233,17 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={triggerOrderModalOpen}
-        open={!!triggerOrderModalOpen}
+        open={
+          !!triggerOrderModalOpen || editNode?.nodeName === "Trigger Orders"
+        }
         onClose={() => {
-          setTriggerOrderModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setTriggerOrderModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
       />
       <ConditionFormModal
         onAddNode={() => {

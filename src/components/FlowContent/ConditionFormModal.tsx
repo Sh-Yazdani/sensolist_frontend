@@ -118,6 +118,7 @@ export default function ConditionFormModal({
       reset();
       dispatch(
         editNodeReducer({
+          nodeName: "condition",
           newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );

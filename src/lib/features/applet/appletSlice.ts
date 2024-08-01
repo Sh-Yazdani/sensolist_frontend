@@ -80,13 +80,38 @@ export const appletSlice = createSlice({
     removeEditNode: (state) => {
       delete state.editNode;
     },
-    editNode: (state, action: PayloadAction<{ newNode: IConditionNode }>) => {
-      if (state.conditionNodes)
-        state.conditionNodes = state.conditionNodes.map((cdt) =>
-          cdt.nodeId === action.payload.newNode.nodeId
-            ? action.payload.newNode
-            : cdt
+    editNode: (
+      state,
+      action: PayloadAction<{ nodeName: string; newNode: IEditNode }>
+    ) => {
+      if (action.payload.nodeName === "condition") {
+        if (state.conditionNodes)
+          state.conditionNodes = state.conditionNodes.map((cdt) =>
+            cdt.nodeId === action.payload.newNode.nodeId
+              ? {
+                  nodeId: action.payload.newNode.nodeId,
+                  title: action.payload.newNode.title,
+                  description: action.payload.newNode.description,
+                  inputs: action.payload.newNode.inputs || [""],
+                  outputs: action.payload.newNode.outputs || ["else", ""],
+                  conditions: action.payload.newNode.conditions || [
+                    { value: "", condition: "" },
+                  ],
+                }
+              : cdt
+          );
+      } else if (action.payload.nodeName === "Trigger Orders") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title,
+                description: action.payload.newNode.description,
+                dashboard: action.payload.newNode.dashboard,
+              }
+            : trigger
         );
+      }
     },
     deleteNode: (
       state,
