@@ -1,6 +1,8 @@
+import { addTriggerNode } from "@/lib/features/applet/appletSlice";
 import { NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -23,6 +25,7 @@ export default function ThirdPartyFormModal({
   node,
   onAddNode,
 }: ThirdPartyFormModalProps) {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -33,6 +36,13 @@ export default function ThirdPartyFormModal({
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
+    dispatch(
+      addTriggerNode({
+        nodeId: node?.id || "",
+        title: data.title,
+        description: data.description,
+      })
+    );
     onAddNode();
     reset();
     onClose();

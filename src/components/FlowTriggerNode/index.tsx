@@ -8,10 +8,10 @@ export default function FlowTriggerNode({
   isConnectable,
 }: NodeProps<TriggerNodeType>) {
   const { name, icon, value, nodeId } = data;
-  const { thingNodes } = useSelector((state: RootState) => state.appletSlice);
-  const selectedNode = thingNodes?.filter((item) => item.nodeId === nodeId)
+  const { triggerNodes } = useSelector((state: RootState) => state.appletSlice);
+  const selectedNode = triggerNodes?.filter((item) => item.nodeId === nodeId)
     .length
-    ? [...thingNodes?.filter((item) => item.nodeId === nodeId)][0]
+    ? [...triggerNodes?.filter((item) => item.nodeId === nodeId)][0]
     : null;
   if (!selectedNode) return;
   return (

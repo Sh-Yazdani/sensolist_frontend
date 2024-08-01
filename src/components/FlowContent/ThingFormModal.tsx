@@ -1,6 +1,6 @@
 "use client";
 
-import { addThingNode } from "@/lib/features/applet/appletSlice";
+import { addTriggerNode } from "@/lib/features/applet/appletSlice";
 import { ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { useState } from "react";
@@ -60,7 +60,7 @@ export default function ThingFormModal({
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
     dispatch(
-      addThingNode({
+      addTriggerNode({
         nodeId: node?.id || "",
         title: data.title,
         description: data.description,
