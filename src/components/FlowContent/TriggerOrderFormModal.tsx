@@ -1,9 +1,10 @@
+import { addTriggerNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -47,8 +48,18 @@ export default function TriggerOrderFormModal({
     formState: { errors },
   } = useForm<ICreateNodeInputs>();
 
+  const dispatch = useDispatch();
+
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
+    dispatch(
+      addTriggerNode({
+        nodeId: node?.id || "",
+        title: data.title,
+        description: data.description,
+        dashboard: data.dashboard,
+      })
+    );
     onAddNode();
     reset();
     onClose();

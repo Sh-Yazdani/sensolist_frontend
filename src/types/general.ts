@@ -115,7 +115,7 @@ export interface IRole {
   description: string;
 }
 
-export interface ITriggerNode {
+export interface ITriggerNodeData {
   value: string;
   name: string;
   icon: React.ReactNode;
@@ -123,11 +123,12 @@ export interface ITriggerNode {
 
 export interface IVariableNode {}
 
-export interface INode {
+export interface ITriggerNode {
   nodeId: string;
   title: string;
   description?: string;
   charactristic?: string;
+  dashboard?: string;
 }
 
 export type TriggerNodeType = Node<{
