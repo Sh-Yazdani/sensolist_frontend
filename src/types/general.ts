@@ -127,10 +127,7 @@ export interface INode {
   nodeId: string;
   title: string;
   description?: string;
-}
-
-export interface IThingNodes extends INode {
-  charactristic: string;
+  charactristic?: string;
 }
 
 export type TriggerNodeType = Node<{
