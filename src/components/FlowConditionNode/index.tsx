@@ -25,7 +25,6 @@ export default function FlowConditionNode({
   const { clicked, setClicked, points, setPoints } = useContextMenu();
 
   useEffect(() => {
-    console.log("useeeffee", conditionNodes);
     setSelectedNode(conditionNodes?.length ? conditionNodes[index] : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conditionNodes]);
