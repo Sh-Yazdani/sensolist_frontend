@@ -84,6 +84,7 @@ export const appletSlice = createSlice({
       state,
       action: PayloadAction<{ nodeName: string; newNode: IEditNode }>
     ) => {
+      console.log("reduuuceeerrrr");
       if (action.payload.nodeName === "condition") {
         if (state.conditionNodes)
           state.conditionNodes = state.conditionNodes.map((cdt) =>
@@ -108,6 +109,16 @@ export const appletSlice = createSlice({
                 title: action.payload.newNode.title,
                 description: action.payload.newNode.description,
                 dashboard: action.payload.newNode.dashboard,
+              }
+            : trigger
+        );
+      } else if (action.payload.nodeName === "Refrences") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title,
+                description: action.payload.newNode.description,
               }
             : trigger
         );
