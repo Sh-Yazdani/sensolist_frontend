@@ -57,9 +57,11 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     (state: RootState) => state.appletSlice
   );
 
-  const { editNode, conditionNodes } = useSelector(
+  const { editNode, triggerNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
+
+  console.log("trigger nodes", triggerNodes);
 
   console.log("edit node", editNode);
 
@@ -221,10 +223,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={refrencesModalOpen}
-        open={!!refrencesModalOpen}
+        open={!!refrencesModalOpen || editNode?.nodeName === "Refrences"}
         onClose={() => {
-          setRefrencesModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setRefrencesModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
       />
       <TriggerOrderFormModal
         onAddNode={() => {

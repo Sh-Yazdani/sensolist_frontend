@@ -81,7 +81,7 @@ export default function TriggerOrderFormModal({
       : {
           title: "",
           description: "",
-          dashboard: selectedDashboard.value,
+          dashboard: selectedDashboard?.value || "",
         },
   });
 
