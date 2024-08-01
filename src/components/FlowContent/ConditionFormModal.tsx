@@ -4,7 +4,6 @@ import {
   addConditionNode,
   editNode as editNodeReducer,
 } from "@/lib/features/applet/appletSlice";
-import { RootState } from "@/lib/store";
 import {
   ICondition,
   IConditionNode,
@@ -16,7 +15,7 @@ import { Node } from "@xyflow/react";
 import { CloseCircle } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import FormError from "../UI/FormError";
 import Input from "../UI/Input";
@@ -52,6 +51,8 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
+  const [values, setValues] = useState(edit ? edit : undefined);
+
   const {
     register,
     handleSubmit,
@@ -59,30 +60,22 @@ export default function ConditionFormModal({
     reset,
     formState: { errors },
   } = useForm<IConditionNodeInputs>({
-    values: edit ? edit : undefined,
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+          inputs: [""],
+          outputs: ["else", ""],
+          conditions: [{ value: "", condition: "" }],
+        },
   });
 
-  const dispatch = useDispatch();
-  const { conditionNodes, editNode } = useSelector(
-    (state: RootState) => state.appletSlice
-  );
-
-  const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
-    console.log("submit", data);
-    if (edit) {
-      console.log("edit", edit);
-      dispatch(
-        editNodeReducer({
-          newNode: { ...data, nodeId: edit.nodeId },
-        })
-      );
-    } else {
-      dispatch(addConditionNode({ ...data, nodeId: node?.id || "" }));
-    }
-    if (onAddNode) onAddNode(data);
+  useEffect(() => {
     reset();
-    onClose();
-  };
+    setValues(edit ? edit : undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
 
   useEffect(() => {
     setInputs([""]);
@@ -97,6 +90,24 @@ export default function ConditionFormModal({
     reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+
+  const dispatch = useDispatch();
+
+  const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
+    if (edit) {
+      reset();
+      dispatch(
+        editNodeReducer({
+          newNode: { ...data, nodeId: edit.nodeId },
+        })
+      );
+    } else {
+      dispatch(addConditionNode({ ...data, nodeId: node?.id || "" }));
+    }
+    if (onAddNode) onAddNode(data);
+    reset();
+    onClose();
+  };
 
   return (
     <>
