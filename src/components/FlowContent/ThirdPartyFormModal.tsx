@@ -1,6 +1,10 @@
-import { addTriggerNode } from "@/lib/features/applet/appletSlice";
-import { NodeDataType } from "@/types/general";
+import {
+  addTriggerNode,
+  editNode as editNodeReducer,
+} from "@/lib/features/applet/appletSlice";
+import { IEditNode, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
@@ -12,6 +16,7 @@ interface ThirdPartyFormModalProps {
   onClose: () => void;
   node: Node<NodeDataType> | null;
   onAddNode: () => void;
+  edit?: IEditNode | null;
 }
 
 interface ICreateNodeInputs {
@@ -24,25 +29,65 @@ export default function ThirdPartyFormModal({
   onClose,
   node,
   onAddNode,
+  edit,
 }: ThirdPartyFormModalProps) {
   const dispatch = useDispatch();
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title,
+          description: edit.description,
+        }
+      : undefined
+  );
+
+  useEffect(() => {
+    reset();
+    setValues(
+      edit
+        ? {
+            title: edit.title,
+            description: edit.description,
+          }
+        : undefined
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateNodeInputs>();
+  } = useForm<ICreateNodeInputs>({
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+        },
+  });
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
-    dispatch(
-      addTriggerNode({
-        nodeId: node?.id || "",
-        title: data.title,
-        description: data.description,
-      })
-    );
+    if (edit) {
+      reset();
+      dispatch(
+        editNodeReducer({
+          nodeName: "Third Party",
+          newNode: { ...data, nodeId: edit.nodeId || "" },
+        })
+      );
+    } else {
+      dispatch(
+        addTriggerNode({
+          nodeId: node?.id || "",
+          title: data.title,
+          description: data.description,
+        })
+      );
+    }
     onAddNode();
     reset();
     onClose();
@@ -87,7 +132,7 @@ export default function ThirdPartyFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

@@ -211,10 +211,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={thirdPartyModalOpen}
-        open={!!thirdPartyModalOpen}
+        open={!!thirdPartyModalOpen || editNode?.nodeName === "Third Party"}
         onClose={() => {
-          setThirdPartyModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setThirdPartyModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
       />
       <RefrencesFormModal
         onAddNode={() => {

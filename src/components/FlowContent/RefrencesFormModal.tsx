@@ -72,7 +72,6 @@ export default function RefrencesFormModal({
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("on submit", data, edit);
     if (edit) {
-      console.log("id=f edit", edit);
       reset();
       dispatch(
         editNodeReducer({

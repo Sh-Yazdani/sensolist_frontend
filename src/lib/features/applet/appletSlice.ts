@@ -101,7 +101,11 @@ export const appletSlice = createSlice({
                 }
               : cdt
           );
-      } else if (action.payload.nodeName === "Trigger Orders") {
+      } else if (
+        action.payload.nodeName === "Trigger Orders" ||
+        action.payload.nodeName === "Refrences" ||
+        action.payload.nodeName === "Third Party"
+      ) {
         state.triggerNodes = state.triggerNodes?.map((trigger) =>
           trigger.nodeId === action.payload.newNode.nodeId
             ? {
@@ -109,16 +113,6 @@ export const appletSlice = createSlice({
                 title: action.payload.newNode.title,
                 description: action.payload.newNode.description,
                 dashboard: action.payload.newNode.dashboard,
-              }
-            : trigger
-        );
-      } else if (action.payload.nodeName === "Refrences") {
-        state.triggerNodes = state.triggerNodes?.map((trigger) =>
-          trigger.nodeId === action.payload.newNode.nodeId
-            ? {
-                nodeId: action.payload.newNode.nodeId,
-                title: action.payload.newNode.title,
-                description: action.payload.newNode.description,
               }
             : trigger
         );
