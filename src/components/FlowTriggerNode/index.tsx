@@ -13,7 +13,6 @@ export default function FlowTriggerNode({
     .length
     ? [...triggerNodes?.filter((item) => item.nodeId === nodeId)][0]
     : null;
-  if (!selectedNode) return;
   return (
     <>
       <Handle
@@ -25,7 +24,7 @@ export default function FlowTriggerNode({
       />
       <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4">
         {icon}
-        <span className="ml-2">{selectedNode.title}</span>
+        <span className="ml-2">{selectedNode ? selectedNode.title : name}</span>
       </div>
       <Handle
         type="source"

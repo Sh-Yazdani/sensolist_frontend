@@ -51,6 +51,7 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
+  console.log("edit", edit);
   const {
     register,
     handleSubmit,
@@ -58,7 +59,7 @@ export default function ConditionFormModal({
     reset,
     formState: { errors },
   } = useForm<IConditionNodeInputs>({
-    defaultValues: edit ? edit : {},
+    values: edit ? edit : undefined,
   });
 
   const dispatch = useDispatch();
