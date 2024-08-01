@@ -1,8 +1,11 @@
-import { addTriggerNode } from "@/lib/features/applet/appletSlice";
+import {
+  addTriggerNode,
+  editNode as editNodeReducer,
+} from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
-import { ISelectOption, NodeDataType } from "@/types/general";
+import { IEditNode, ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
@@ -15,6 +18,7 @@ interface TriggerOrderFormModalProps {
   onClose: () => void;
   node: Node<NodeDataType> | null;
   onAddNode: () => void;
+  edit?: IEditNode | null;
 }
 
 interface ICreateNodeInputs {
@@ -27,6 +31,7 @@ export default function TriggerOrderFormModal({
   onClose,
   node,
   onAddNode,
+  edit,
 }: TriggerOrderFormModalProps) {
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
@@ -40,26 +45,70 @@ export default function TriggerOrderFormModal({
     dashboardList[0]
   );
 
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title,
+          description: edit.description,
+          dashboard: edit.dashboard || "",
+        }
+      : undefined
+  );
+
+  useEffect(() => {
+    reset();
+    setValues(
+      edit
+        ? {
+            title: edit.title,
+            description: edit.description,
+            dashboard: edit.dashboard || "",
+          }
+        : undefined
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateNodeInputs>();
+  } = useForm<ICreateNodeInputs>({
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+          dashboard: selectedDashboard.value,
+        },
+  });
+
+  console.log("erroes", errors);
 
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
-    dispatch(
-      addTriggerNode({
-        nodeId: node?.id || "",
-        title: data.title,
-        description: data.description,
-        dashboard: data.dashboard,
-      })
-    );
+    if (edit) {
+      reset();
+      dispatch(
+        editNodeReducer({
+          nodeName: "Trigger Orders",
+          newNode: { ...data, nodeId: edit.nodeId || "" },
+        })
+      );
+    } else {
+      dispatch(
+        addTriggerNode({
+          nodeId: node?.id || "",
+          title: data.title,
+          description: data.description,
+          dashboard: data.dashboard,
+        })
+      );
+    }
     onAddNode();
     reset();
     onClose();
@@ -118,11 +167,11 @@ export default function TriggerOrderFormModal({
               Cancel
             </Button>
             <Button
-              disabled={dashboards.length ? false : true}
+              // disabled={dashboards.length ? false : true}
               className="w-[64%]"
               type="submit"
             >
-              Create
+              {edit ? "edit" : "Create"}
             </Button>
           </div>
         </form>
