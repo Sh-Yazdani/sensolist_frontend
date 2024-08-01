@@ -9,6 +9,7 @@ export default function ContextMenu({
   onEditSelect,
   onDelete,
 }: ContextMenuProps) {
+  console.log("context menu");
   return (
     <div className=" absolute bg-neutral-4 rounded-lg flex flex-col">
       <button

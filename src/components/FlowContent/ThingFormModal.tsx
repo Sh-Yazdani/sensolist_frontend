@@ -1,9 +1,11 @@
 "use client";
 
+import { addThingNode } from "@/lib/features/applet/appletSlice";
 import { ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -28,6 +30,7 @@ export default function ThingFormModal({
   node,
   onAddNode,
 }: ThingFormModalProps) {
+  const dispatch = useDispatch();
   const charactristicList: ISelectOption[] = [
     {
       title: "charactristic 1",
@@ -56,6 +59,14 @@ export default function ThingFormModal({
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     console.log("submit", data);
+    dispatch(
+      addThingNode({
+        nodeId: node?.id || "",
+        title: data.title,
+        description: data.description,
+        charactristic: data.charactristic,
+      })
+    );
     onAddNode();
     reset();
     onClose();

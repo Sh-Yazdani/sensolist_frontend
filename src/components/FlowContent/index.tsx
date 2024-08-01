@@ -1,5 +1,6 @@
 "use client";
 
+import useContextMenu from "@/hooks/useContextMenu";
 import { removeEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
 import { NodeDataType } from "@/types/general";
@@ -44,6 +45,7 @@ const nodeTypes: NodeTypes = {
 };
 
 export default function FlowContent({ appletId }: { appletId: number }) {
+  const { clicked, setClicked, points, setPoints } = useContextMenu();
   const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -107,13 +109,14 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         x: event.clientX,
         y: event.clientY,
       });
+      const newId = getId();
       const newNode = {
-        id: getId(),
+        id: newId,
         type,
         position,
         data:
           type === "triggerNode"
-            ? { ...triggeredNode }
+            ? { ...triggeredNode, nodeId: newId }
             : type === "conditionNode"
             ? {
                 index: event.dataTransfer.getData("index"),
