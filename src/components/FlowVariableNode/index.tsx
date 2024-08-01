@@ -1,12 +1,17 @@
+import useContextMenu from "@/hooks/useContextMenu";
 import { VariableNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
+import { useDispatch } from "react-redux";
 
 export default function FlowVariableNode({
   data,
   isConnectable,
 }: NodeProps<VariableNodeType>) {
   const { name, value, count } = data;
+  const dispatch = useDispatch();
   console.log("node name", name);
+
+  const { clicked, setClicked, points, setPoints } = useContextMenu();
   return (
     <>
       <Handle
@@ -16,7 +21,18 @@ export default function FlowVariableNode({
         onConnect={(params) => console.log("handle onConnect", params)}
         isConnectable={isConnectable}
       />
-      <div className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4">
+      <div
+        onContextMenu={(e) => {
+          console.log("context right click");
+          e.preventDefault();
+          setClicked(true);
+          setPoints({
+            x: e.pageX,
+            y: e.pageY,
+          });
+        }}
+        className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4"
+      >
         <span className="ml-2">
           {name} {value}
         </span>
@@ -29,6 +45,21 @@ export default function FlowVariableNode({
         style={{ background: "#555" }}
         isConnectable={isConnectable}
       />
+      {clicked && (
+        <></>
+        // <ContextMenu
+        //   onEditSelect={() => {
+        //     if (selectedNode)
+        //       dispatch(addEditNode({ nodeData: selectedNode, nodeName: name }));
+        //   }}
+        //   onDelete={() => {
+        //     if (selectedNode)
+        //       dispatch(
+        //         deleteNode({ index: triggerNodes?.indexOf(selectedNode) })
+        //       );
+        //   }}
+        // />
+      )}
     </>
   );
 }

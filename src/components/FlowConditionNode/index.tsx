@@ -7,7 +7,7 @@ import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ContextMenu from "../FlowContextMenu/ContextMenu";
+import ContextMenu from "../FlowContextMenu";
 
 export default function FlowConditionNode({
   data,

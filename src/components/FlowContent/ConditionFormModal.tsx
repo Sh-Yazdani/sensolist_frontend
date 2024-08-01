@@ -6,8 +6,8 @@ import {
 } from "@/lib/features/applet/appletSlice";
 import {
   ICondition,
-  IConditionNode,
   IConditionNodeInputs,
+  IEditNode,
   ISelectOption,
   NodeDataType,
 } from "@/types/general";
@@ -29,7 +29,7 @@ interface ConditionFormModalProps {
   onClose: () => void;
   node?: Node<NodeDataType> | null;
   onAddNode?: (data?: IConditionNodeInputs) => void;
-  edit?: IConditionNode | null;
+  edit?: IEditNode | null;
 }
 
 export default function ConditionFormModal({
@@ -39,6 +39,7 @@ export default function ConditionFormModal({
   onAddNode,
   edit,
 }: ConditionFormModalProps) {
+  console.log("node condition form", node);
   const [inputs, setInputs] = useState<string[]>([""]);
   const [outputs, setOutputs] = useState<string[]>(["else", ""]);
   const [conditions, setConditions] = useState<ICondition[]>([
@@ -51,7 +52,17 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
-  const [values, setValues] = useState(edit ? edit : undefined);
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title,
+          description: edit.description,
+          inputs: edit.inputs || [""],
+          outputs: edit.outputs || ["else", ""],
+          conditions: edit.conditions || [{ value: "", condition: "" }],
+        }
+      : undefined
+  );
 
   const {
     register,
@@ -73,7 +84,17 @@ export default function ConditionFormModal({
 
   useEffect(() => {
     reset();
-    setValues(edit ? edit : undefined);
+    setValues(
+      edit
+        ? {
+            title: edit.title,
+            description: edit.description,
+            inputs: edit.inputs || [""],
+            outputs: edit.outputs || ["else", ""],
+            conditions: edit.conditions || [{ value: "", condition: "" }],
+          }
+        : undefined
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, edit]);
 
@@ -98,7 +119,7 @@ export default function ConditionFormModal({
       reset();
       dispatch(
         editNodeReducer({
-          newNode: { ...data, nodeId: edit.nodeId },
+          newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );
     } else {
@@ -108,7 +129,9 @@ export default function ConditionFormModal({
     reset();
     onClose();
   };
-
+  if (node?.type !== "conditionNode") {
+    return;
+  }
   return (
     <>
       <Modal onClose={onClose} open={open} large>
