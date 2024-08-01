@@ -85,8 +85,6 @@ export default function TriggerOrderFormModal({
         },
   });
 
-  console.log("erroes", errors);
-
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
