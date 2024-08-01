@@ -1,6 +1,6 @@
 import {
   IApplet,
-  IConditionNodeInputs,
+  IConditionNode,
   ITriggerNode,
   IVariableNode,
 } from "@/types/general";
@@ -9,10 +9,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface AppletState {
   applets: IApplet[];
   pinnedApplets: IApplet[];
-  conditionNodes?: IConditionNodeInputs[];
+  conditionNodes?: IConditionNode[];
   triggerNodes?: ITriggerNode[];
   variableNodes?: IVariableNode[];
-  editNode?: IConditionNodeInputs;
+  editNode?: { nodeData: IConditionNode; nodeName: string };
 }
 
 const initialState: AppletState = {
@@ -62,23 +62,30 @@ export const appletSlice = createSlice({
         (app) => app.id !== action.payload.id
       );
     },
-    addConditionNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
+    addConditionNode: (state, action: PayloadAction<IConditionNode>) => {
       state.conditionNodes = state.conditionNodes?.length
         ? [...state.conditionNodes, action.payload]
         : [action.payload];
     },
-    addEditNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
+    addEditNode: (
+      state,
+      action: PayloadAction<{
+        nodeData: IConditionNode;
+        nodeName: string;
+      }>
+    ) => {
       state.editNode = action.payload;
     },
     removeEditNode: (state) => {
       delete state.editNode;
     },
-    editNode: (
-      state,
-      action: PayloadAction<{ newNode: IConditionNodeInputs; index: number }>
-    ) => {
+    editNode: (state, action: PayloadAction<{ newNode: IConditionNode }>) => {
       if (state.conditionNodes)
-        state.conditionNodes[action.payload.index] = action.payload.newNode;
+        state.conditionNodes = state.conditionNodes.map((cdt) =>
+          cdt.nodeId === action.payload.newNode.nodeId
+            ? action.payload.newNode
+            : cdt
+        );
     },
     deleteNode: (
       state,
