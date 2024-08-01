@@ -39,7 +39,6 @@ export default function ConditionFormModal({
   onAddNode,
   edit,
 }: ConditionFormModalProps) {
-  console.log("node condition form", node);
   const [inputs, setInputs] = useState<string[]>([""]);
   const [outputs, setOutputs] = useState<string[]>(["else", ""]);
   const [conditions, setConditions] = useState<ICondition[]>([
