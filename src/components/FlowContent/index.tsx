@@ -244,15 +244,13 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={conditionModalOpen}
-        open={!!conditionModalOpen}
+        open={!!conditionModalOpen || !!editNode}
         onClose={() => {
-          setConditionModalOpen(null);
-        }}
-      />
-      <ConditionFormModal
-        open={!!editNode}
-        onClose={() => {
-          dispatch(removeEditNode());
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setConditionModalOpen(null);
+          }
         }}
         edit={editNode}
       />
