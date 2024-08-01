@@ -1,15 +1,12 @@
 import useContextMenu from "@/hooks/useContextMenu";
 import { VariableNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import { useDispatch } from "react-redux";
 
 export default function FlowVariableNode({
   data,
   isConnectable,
 }: NodeProps<VariableNodeType>) {
   const { name, value, count } = data;
-  const dispatch = useDispatch();
-  console.log("node name", name);
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   return (
