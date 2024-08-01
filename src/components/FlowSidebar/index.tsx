@@ -46,10 +46,6 @@ export default function FlowSidebar() {
   ) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.setData("value", "condition");
-    event.dataTransfer.setData(
-      "index",
-      conditionNodes?.length ? conditionNodes?.length : 0
-    );
     event.dataTransfer.effectAllowed = "move";
   };
   const onDragStart = (

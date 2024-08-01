@@ -3,6 +3,7 @@
 import useContextMenu from "@/hooks/useContextMenu";
 import { removeEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
+// import { NodeDataType } from "@/types/general";
 import { NodeDataType } from "@/types/general";
 import {
   addEdge,
@@ -118,9 +119,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           type === "triggerNode"
             ? { ...triggeredNode, nodeId: newId }
             : type === "conditionNode"
-            ? {
-                index: event.dataTransfer.getData("index"),
-              }
+            ? {}
             : {
                 name: event.dataTransfer.getData("name"),
                 value: event.dataTransfer.getData("value"),
@@ -244,7 +243,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={conditionModalOpen}
-        open={!!conditionModalOpen || !!editNode}
+        open={!!conditionModalOpen || editNode?.nodeName === "condition"}
         onClose={() => {
           if (editNode) {
             dispatch(removeEditNode());
@@ -252,7 +251,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             setConditionModalOpen(null);
           }
         }}
-        edit={editNode}
+        edit={editNode?.nodeData}
       />
     </>
   );

@@ -7,6 +7,7 @@ import {
 import { RootState } from "@/lib/store";
 import {
   ICondition,
+  IConditionNode,
   IConditionNodeInputs,
   ISelectOption,
   NodeDataType,
@@ -29,7 +30,7 @@ interface ConditionFormModalProps {
   onClose: () => void;
   node?: Node<NodeDataType> | null;
   onAddNode?: (data?: IConditionNodeInputs) => void;
-  edit?: IConditionNodeInputs | null;
+  edit?: IConditionNode | null;
 }
 
 export default function ConditionFormModal({
@@ -69,14 +70,14 @@ export default function ConditionFormModal({
   const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
     console.log("submit", data);
     if (edit) {
+      console.log("edit", edit);
       dispatch(
         editNodeReducer({
-          newNode: data,
-          index: editNode ? conditionNodes?.indexOf(editNode) || 0 : 0,
+          newNode: { ...data, nodeId: edit.nodeId },
         })
       );
     } else {
-      dispatch(addConditionNode(data));
+      dispatch(addConditionNode({ ...data, nodeId: node?.id || "" }));
     }
     if (onAddNode) onAddNode(data);
     reset();
