@@ -200,7 +200,11 @@ export interface ITriggerNodeData {
   icon: React.ReactNode;
 }
 
-export interface IVariableNode {}
+export interface IVariableNode {
+  nodeId: string;
+  name: string;
+  value: number;
+}
 
 export interface ITriggerNode {
   nodeId: string;
@@ -232,11 +236,13 @@ export type VariableNodeType = Node<{
 
 export interface IEditNode {
   nodeId?: string;
-  title: string;
+  title?: string;
   description?: string;
   charactristic?: string;
   dashboard?: string;
   inputs?: string[];
   outputs?: string[];
   conditions?: { value: string; condition: string }[];
+  name?: string;
+  value?: number;
 }
