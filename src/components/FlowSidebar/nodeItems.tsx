@@ -1,4 +1,4 @@
-import { ITriggerNode } from "@/types/general";
+import { ITriggerNodeData } from "@/types/general";
 import {
   Book,
   BoxTime,
@@ -18,7 +18,7 @@ import {
   ShoppingCart,
 } from "iconsax-react";
 
-export const triggerNodes: ITriggerNode[] = [
+export const triggerNodes: ITriggerNodeData[] = [
   {
     name: "Third Party",
     value: "thirdParty",
@@ -41,7 +41,7 @@ export const triggerNodes: ITriggerNode[] = [
   },
 ];
 
-export const actionNodes: ITriggerNode[] = [
+export const actionNodes: ITriggerNodeData[] = [
   {
     name: "Action Devices",
     value: "actionDevices",
@@ -84,7 +84,7 @@ export const actionNodes: ITriggerNode[] = [
   },
 ];
 
-export const controlNodes: ITriggerNode[] = [
+export const controlNodes: ITriggerNodeData[] = [
   {
     name: "Time Filter",
     value: "timeFilter",
@@ -117,7 +117,7 @@ export const controlNodes: ITriggerNode[] = [
   },
 ];
 
-export const thingNodes: ITriggerNode[] = [
+export const thingNodes: ITriggerNodeData[] = [
   {
     name: "Thing 1",
     value: "thing1",
