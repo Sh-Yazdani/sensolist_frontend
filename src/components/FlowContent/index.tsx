@@ -33,6 +33,7 @@ import RefrencesFormModal from "./RefrencesFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
 import TriggerOrderFormModal from "./TriggerOrderFormModal";
+import VariableFormModal from "./VariableFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -74,6 +75,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [conditionModalOpen, setConditionModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [variablesModalOpen, setVariablesModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -126,6 +130,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
                 count: event.dataTransfer.getData("count"),
               },
       };
+      console.log("node value", nodeValue);
       if (nodeValue.includes("thing")) {
         setThingModalOpen(newNode);
         return;
@@ -144,6 +149,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "condition") {
         setConditionModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "variable") {
+        setVariablesModalOpen(newNode);
         return;
       }
 
@@ -255,6 +264,23 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             dispatch(removeEditNode());
           } else {
             setTriggerOrderModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <VariableFormModal
+        onAddNode={() => {
+          if (variablesModalOpen) {
+            setNodes((nds) => nds.concat(variablesModalOpen));
+          }
+        }}
+        node={variablesModalOpen}
+        open={!!variablesModalOpen || editNode?.nodeName === "Variable"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setVariablesModalOpen(null);
           }
         }}
         edit={editNode?.nodeData}

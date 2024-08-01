@@ -6,7 +6,7 @@ export default function FlowVariableNode({
   data,
   isConnectable,
 }: NodeProps<VariableNodeType>) {
-  const { name, value, count } = data;
+  const { name, value } = data;
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   return (
@@ -33,7 +33,7 @@ export default function FlowVariableNode({
         <span className="ml-2">
           {name} {value}
         </span>
-        <span className="ml-4">{count}</span>
+        {/* <span className="ml-4">{count}</span> */}
       </div>
       <Handle
         type="source"

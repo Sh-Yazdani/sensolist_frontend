@@ -90,7 +90,7 @@ export const appletSlice = createSlice({
             cdt.nodeId === action.payload.newNode.nodeId
               ? {
                   nodeId: action.payload.newNode.nodeId,
-                  title: action.payload.newNode.title,
+                  title: action.payload.newNode.title || "",
                   description: action.payload.newNode.description,
                   inputs: action.payload.newNode.inputs || [""],
                   outputs: action.payload.newNode.outputs || ["else", ""],
@@ -110,7 +110,7 @@ export const appletSlice = createSlice({
           trigger.nodeId === action.payload.newNode.nodeId
             ? {
                 nodeId: action.payload.newNode.nodeId,
-                title: action.payload.newNode.title,
+                title: action.payload.newNode.title || "",
                 description: action.payload.newNode.description,
                 dashboard: action.payload.newNode.dashboard,
               }
