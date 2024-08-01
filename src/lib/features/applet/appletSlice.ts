@@ -1,6 +1,7 @@
 import {
   IApplet,
   IConditionNode,
+  IEditNode,
   ITriggerNode,
   IVariableNode,
 } from "@/types/general";
@@ -12,7 +13,7 @@ export interface AppletState {
   conditionNodes?: IConditionNode[];
   triggerNodes?: ITriggerNode[];
   variableNodes?: IVariableNode[];
-  editNode?: { nodeData: IConditionNode; nodeName: string };
+  editNode?: { nodeData: IEditNode; nodeName: string };
 }
 
 const initialState: AppletState = {
@@ -70,7 +71,7 @@ export const appletSlice = createSlice({
     addEditNode: (
       state,
       action: PayloadAction<{
-        nodeData: IConditionNode;
+        nodeData: IEditNode;
         nodeName: string;
       }>
     ) => {
@@ -100,6 +101,11 @@ export const appletSlice = createSlice({
         ? [...state.triggerNodes, action.payload]
         : [action.payload];
     },
+    addVariableNode: (state, action: PayloadAction<IVariableNode>) => {
+      state.variableNodes = state.variableNodes?.length
+        ? [...state.variableNodes, action.payload]
+        : [action.payload];
+    },
   },
 });
 export const {
@@ -114,5 +120,6 @@ export const {
   editNode,
   deleteNode,
   addTriggerNode,
+  addVariableNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;

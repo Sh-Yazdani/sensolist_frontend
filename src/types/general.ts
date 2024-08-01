@@ -179,7 +179,7 @@ export interface ICondition {
 
 export interface IConditionNodeInputs {
   title: string;
-  description: string;
+  description?: string;
   inputs: string[];
   outputs: string[];
   conditions: { value: string; condition: string }[];
@@ -229,3 +229,14 @@ export type VariableNodeType = Node<{
   name: string;
   count: number;
 }>;
+
+export interface IEditNode {
+  nodeId?: string;
+  title: string;
+  description?: string;
+  charactristic?: string;
+  dashboard?: string;
+  inputs?: string[];
+  outputs?: string[];
+  conditions?: { value: string; condition: string }[];
+}
