@@ -61,10 +61,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     (state: RootState) => state.appletSlice
   );
 
-  console.log("trigger nodes", triggerNodes);
-
-  console.log("edit node", editNode);
-
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
@@ -199,10 +195,16 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={thingModalOpen}
-        open={!!thingModalOpen}
+        open={!!thingModalOpen || !!editNode?.nodeName.startsWith("Thing")}
         onClose={() => {
-          setThingModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setThingModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
+        nodeName={editNode?.nodeName}
       />
       <ThirdPartyFormModal
         onAddNode={() => {

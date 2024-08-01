@@ -84,7 +84,6 @@ export const appletSlice = createSlice({
       state,
       action: PayloadAction<{ nodeName: string; newNode: IEditNode }>
     ) => {
-      console.log("reduuuceeerrrr");
       if (action.payload.nodeName === "condition") {
         if (state.conditionNodes)
           state.conditionNodes = state.conditionNodes.map((cdt) =>
@@ -104,7 +103,8 @@ export const appletSlice = createSlice({
       } else if (
         action.payload.nodeName === "Trigger Orders" ||
         action.payload.nodeName === "Refrences" ||
-        action.payload.nodeName === "Third Party"
+        action.payload.nodeName === "Third Party" ||
+        action.payload.nodeName.startsWith("Thing")
       ) {
         state.triggerNodes = state.triggerNodes?.map((trigger) =>
           trigger.nodeId === action.payload.newNode.nodeId
