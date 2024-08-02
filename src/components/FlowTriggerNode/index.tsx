@@ -18,7 +18,6 @@ export default function FlowTriggerNode({
     ? [...triggerNodes?.filter((item) => item.nodeId === nodeId)][0]
     : null;
   const { clicked, setClicked, points, setPoints } = useContextMenu();
-
   return (
     <>
       <Handle

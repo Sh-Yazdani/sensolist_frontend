@@ -17,8 +17,6 @@ export default function FlowVariableNode({
     (state: RootState) => state.appletSlice
   );
 
-  console.log("variable node", variableNodes);
-
   const [selectedNode, setSelectedNode] = useState(
     variableNodes?.length
       ? variableNodes.filter((item) => item.nodeId === id)[0]

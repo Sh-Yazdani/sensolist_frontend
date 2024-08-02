@@ -160,6 +160,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "setVariables") {
         setSetVariableModalOpen(newNode);
+        return;
       }
 
       setNodes((nds) => nds.concat(newNode));
