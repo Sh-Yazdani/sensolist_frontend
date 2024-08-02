@@ -260,3 +260,11 @@ export interface ILoginResponse {
   message?: string;
   error?: string;
 }
+
+export interface IOtpResponse {
+  statusCode: number;
+  accessToken?: string;
+  expiresOn?: string;
+  message?: string;
+  error?: string;
+}
