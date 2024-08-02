@@ -1,10 +1,12 @@
 "useClient";
 
 import { getOtpToken } from "@/ApiCall/authentication";
+import { createAlert } from "@/lib/features/notification/notificatioSlice";
 import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { CustomPhoneInput } from "../../PhoneInput";
 import { PasswordInput } from "../../UI/PasswordInput";
 import SubmitButton from "../SubmitButton";
@@ -26,6 +28,8 @@ export default function DetailsForm({
     formState: { errors },
   } = useForm<LoginInputs>();
 
+  const dispatch = useDispatch();
+
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const [termsError, setTermsError] = useState<string>();
 
@@ -36,6 +40,7 @@ export default function DetailsForm({
       if (response.statusCode === 200) {
         goToVerification();
       } else if (response.message) {
+        dispatch(createAlert({ message: response.message, type: "error" }));
       }
     } else {
       setTermsError("Please agree with terms and policies.");
