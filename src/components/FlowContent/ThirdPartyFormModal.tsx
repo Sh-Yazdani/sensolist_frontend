@@ -35,7 +35,7 @@ export default function ThirdPartyFormModal({
   const [values, setValues] = useState(
     edit
       ? {
-          title: edit.title,
+          title: edit.title || "",
           description: edit.description,
         }
       : undefined
@@ -46,7 +46,7 @@ export default function ThirdPartyFormModal({
     setValues(
       edit
         ? {
-            title: edit.title,
+            title: edit.title || "",
             description: edit.description,
           }
         : undefined
