@@ -116,6 +116,16 @@ export const appletSlice = createSlice({
               }
             : trigger
         );
+      } else if (action.payload.nodeName === "variable") {
+        state.variableNodes = state.variableNodes?.map((variable) =>
+          variable.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                name: action.payload.newNode.name || "",
+                value: action.payload.newNode.value || 0,
+              }
+            : variable
+        );
       }
     },
     deleteNode: (
