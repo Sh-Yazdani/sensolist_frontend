@@ -29,6 +29,7 @@ import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
 import ConditionFormModal from "./ConditionFormModal";
+import GetVariableFormModal from "./GetVariableFormModal";
 import RefrencesFormModal from "./RefrencesFormModal";
 import SetVariableFormModal from "./SetVariableFormModal";
 import ThingFormModal from "./ThingFormModal";
@@ -82,6 +83,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [setVariableModalOpen, setSetVariableModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [getVariableModalOpen, setGetVariableModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -160,6 +164,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "setVariables") {
         setSetVariableModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "getVariables") {
+        setGetVariableModalOpen(newNode);
         return;
       }
 
@@ -288,6 +296,23 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             dispatch(removeEditNode());
           } else {
             setSetVariableModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <GetVariableFormModal
+        onAddNode={() => {
+          if (getVariableModalOpen) {
+            setNodes((nds) => nds.concat(getVariableModalOpen));
+          }
+        }}
+        node={getVariableModalOpen}
+        open={!!getVariableModalOpen || editNode?.nodeName === "getVariables"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setGetVariableModalOpen(null);
           }
         }}
         edit={editNode?.nodeData}
