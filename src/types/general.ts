@@ -212,6 +212,8 @@ export interface ITriggerNode {
   description?: string;
   charactristic?: string;
   dashboard?: string;
+  variable?: string;
+  variableValue?: string;
 }
 export interface IConditionNode extends IConditionNodeInputs {
   nodeId: string;
@@ -245,4 +247,6 @@ export interface IEditNode {
   conditions?: { value: string; condition: string }[];
   name?: string;
   value?: number;
+  variableValue?: string;
+  variable?: string;
 }

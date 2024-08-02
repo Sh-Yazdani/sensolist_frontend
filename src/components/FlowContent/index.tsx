@@ -30,6 +30,7 @@ import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
 import ConditionFormModal from "./ConditionFormModal";
 import RefrencesFormModal from "./RefrencesFormModal";
+import SetVariableFormModal from "./SetVariableFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
 import TriggerOrderFormModal from "./TriggerOrderFormModal";
@@ -78,6 +79,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [variablesModalOpen, setVariablesModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [setVariableModalOpen, setSetVariableModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -130,7 +134,6 @@ export default function FlowContent({ appletId }: { appletId: number }) {
                 count: event.dataTransfer.getData("count"),
               },
       };
-      console.log("node value", nodeValue);
       if (nodeValue.includes("thing")) {
         setThingModalOpen(newNode);
         return;
@@ -154,6 +157,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       if (nodeValue === "variable") {
         setVariablesModalOpen(newNode);
         return;
+      }
+      if (nodeValue === "setVariables") {
+        setSetVariableModalOpen(newNode);
       }
 
       setNodes((nds) => nds.concat(newNode));
@@ -264,6 +270,23 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             dispatch(removeEditNode());
           } else {
             setTriggerOrderModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <SetVariableFormModal
+        onAddNode={() => {
+          if (setVariableModalOpen) {
+            setNodes((nds) => nds.concat(setVariableModalOpen));
+          }
+        }}
+        node={setVariableModalOpen}
+        open={!!setVariableModalOpen || editNode?.nodeName === "setVariables"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setSetVariableModalOpen(null);
           }
         }}
         edit={editNode?.nodeData}
