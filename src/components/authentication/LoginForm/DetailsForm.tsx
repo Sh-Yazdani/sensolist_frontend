@@ -15,11 +15,13 @@ import TermsAgreement from "../TermsAgreement";
 interface DetailsFormProps {
   goToVerification: () => void;
   changePhoneNumber: (num: string) => void;
+  setOtpToken: (token: string) => void;
 }
 
 export default function DetailsForm({
   goToVerification,
   changePhoneNumber,
+  setOtpToken,
 }: DetailsFormProps) {
   const {
     register,
@@ -38,6 +40,7 @@ export default function DetailsForm({
       changePhoneNumber(data.phoneNumber);
       const response = await getOtpToken(data.phoneNumber, data.password);
       if (response.statusCode === 200) {
+        setOtpToken(response.otpToken || "");
         goToVerification();
       } else if (response.message) {
         dispatch(createAlert({ message: response.message, type: "error" }));

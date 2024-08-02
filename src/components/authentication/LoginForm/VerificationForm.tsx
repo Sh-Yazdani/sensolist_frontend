@@ -7,7 +7,11 @@ import VerificationInput from "react-verification-input";
 import SubmitButton from "../SubmitButton";
 import TimerCountDown from "../TimerCountdown/index.tsx";
 
-export default function VerificationForm() {
+interface VerificationFormProps {
+  otpToken: string;
+}
+
+export default function VerificationForm({ otpToken }: VerificationFormProps) {
   const dispatch = useDispatch();
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();

@@ -9,8 +9,8 @@ import VerificationForm from "./VerificationForm";
 export default function LoginForm() {
   const [formStep, setFormStep] = useState<LoginStepsType>("details");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [otpToken, setOtpToken] = useState<string>();
 
-  // const {t}=useTranslation()
   return (
     <>
       <FormHeader
@@ -23,13 +23,16 @@ export default function LoginForm() {
       />
       {formStep === "details" ? (
         <DetailsForm
+          setOtpToken={(token: string) => {
+            setOtpToken(token);
+          }}
           changePhoneNumber={(num: string) => setPhoneNumber(num)}
           goToVerification={() => {
             setFormStep("verification");
           }}
         />
       ) : (
-        <VerificationForm />
+        <VerificationForm otpToken={otpToken || ""} />
       )}
     </>
   );
