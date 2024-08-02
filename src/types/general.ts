@@ -250,3 +250,13 @@ export interface IEditNode {
   variableValue?: string;
   variable?: string;
 }
+
+// authentication
+
+export interface ILoginResponse {
+  expiresOn?: string;
+  otpToken?: string;
+  statusCode: number;
+  message?: string;
+  error?: string;
+}

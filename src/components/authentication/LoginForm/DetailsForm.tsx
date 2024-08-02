@@ -1,5 +1,6 @@
 "useClient";
 
+import { getOtpToken } from "@/ApiCall/authentication";
 import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
 import { useState } from "react";
@@ -31,23 +32,11 @@ export default function DetailsForm({
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
-      try {
-        const res = await fetch(
-          "https://sensolist-backend.vercel.app/auth/login",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              phonenumber: "+" + data.phoneNumber,
-              password: data.password,
-            }),
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        );
-        console.log("resss", res);
-      } catch (e) {}
-      goToVerification();
+      const response = await getOtpToken(data.phoneNumber, data.password);
+      if (response.statusCode === 200) {
+        goToVerification();
+      } else if (response.message) {
+      }
     } else {
       setTermsError("Please agree with terms and policies.");
     }
