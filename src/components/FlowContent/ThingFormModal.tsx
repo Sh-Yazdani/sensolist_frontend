@@ -59,7 +59,7 @@ export default function ThingFormModal({
   const [values, setValues] = useState(
     edit
       ? {
-          title: edit.title,
+          title: edit.title || "",
           description: edit.description,
           charactristic: edit.charactristic || "",
         }
@@ -71,7 +71,7 @@ export default function ThingFormModal({
     setValues(
       edit
         ? {
-            title: edit.title,
+            title: edit.title || "",
             description: edit.description,
             charactristic: edit.charactristic || "",
           }

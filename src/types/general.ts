@@ -178,7 +178,7 @@ export interface ICondition {
 // nodes
 
 export interface IConditionNodeInputs {
-  title: string;
+  title?: string;
   description?: string;
   inputs: string[];
   outputs: string[];
