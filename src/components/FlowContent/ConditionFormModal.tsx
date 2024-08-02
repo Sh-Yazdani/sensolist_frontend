@@ -4,18 +4,18 @@ import {
   addConditionNode,
   editNode as editNodeReducer,
 } from "@/lib/features/applet/appletSlice";
-import { RootState } from "@/lib/store";
 import {
   ICondition,
   IConditionNodeInputs,
+  IEditNode,
   ISelectOption,
   NodeDataType,
 } from "@/types/general";
 import { Node } from "@xyflow/react";
 import { CloseCircle } from "iconsax-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import FormError from "../UI/FormError";
 import Input from "../UI/Input";
@@ -29,7 +29,7 @@ interface ConditionFormModalProps {
   onClose: () => void;
   node?: Node<NodeDataType> | null;
   onAddNode?: (data?: IConditionNodeInputs) => void;
-  edit?: IConditionNodeInputs | null;
+  edit?: IEditNode | null;
 }
 
 export default function ConditionFormModal({
@@ -51,6 +51,18 @@ export default function ConditionFormModal({
   const [openConditionIndex, setOpenConditionIndex] = useState<number | null>(
     null
   );
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title,
+          description: edit.description,
+          inputs: edit.inputs || [""],
+          outputs: edit.outputs || ["else", ""],
+          conditions: edit.conditions || [{ value: "", condition: "" }],
+        }
+      : undefined
+  );
+
   const {
     register,
     handleSubmit,
@@ -58,31 +70,68 @@ export default function ConditionFormModal({
     reset,
     formState: { errors },
   } = useForm<IConditionNodeInputs>({
-    defaultValues: edit ? edit : {},
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+          inputs: [""],
+          outputs: ["else", ""],
+          conditions: [{ value: "", condition: "" }],
+        },
   });
 
+  useEffect(() => {
+    reset();
+    setValues(
+      edit
+        ? {
+            title: edit.title,
+            description: edit.description,
+            inputs: edit.inputs || [""],
+            outputs: edit.outputs || ["else", ""],
+            conditions: edit.conditions || [{ value: "", condition: "" }],
+          }
+        : undefined
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
+  useEffect(() => {
+    setInputs([""]);
+    setOutputs(["else", ""]);
+    setConditions([
+      {
+        condition: "",
+        value: "",
+        output: "",
+      },
+    ]);
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   const dispatch = useDispatch();
-  const { conditionNodes, editNode } = useSelector(
-    (state: RootState) => state.appletSlice
-  );
 
   const onSubmit: SubmitHandler<IConditionNodeInputs> = (data) => {
-    console.log("submit", data);
     if (edit) {
+      reset();
       dispatch(
         editNodeReducer({
-          newNode: data,
-          index: editNode ? conditionNodes?.indexOf(editNode) || 0 : 0,
+          nodeName: "condition",
+          newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );
     } else {
-      dispatch(addConditionNode(data));
+      dispatch(addConditionNode({ ...data, nodeId: node?.id || "" }));
     }
     if (onAddNode) onAddNode(data);
     reset();
     onClose();
   };
-
+  if (node?.type !== "conditionNode") {
+    return;
+  }
   return (
     <>
       <Modal onClose={onClose} open={open} large>
@@ -107,27 +156,29 @@ export default function ConditionFormModal({
           <div className="w-full flex items-start mt-6 gap-4">
             <div className="w-[calc(50%-10px)] bg-black-opacity-50 dark:bg-white-opacity-100 rounded-lg p-4 flex flex-col">
               <div className=" text-sm w-fit mx-auto">Input Labels</div>
-              {inputs.map((val, i) => (
-                <SimpleInput
-                  register={register}
-                  required
-                  name={`inputs.${i}`}
-                  key={i}
-                  value={val}
-                  onChange={(val: string) => {
-                    setInputs((prev) =>
-                      prev.map((item, index) => (index === i ? val : item))
-                    );
-                  }}
-                  className="mt-6"
-                  error={
-                    errors.inputs?.length &&
-                    errors.inputs[i]?.type === "required"
-                      ? "This field is required"
-                      : ""
-                  }
-                />
-              ))}
+              {inputs.map((val, i) => {
+                return (
+                  <SimpleInput
+                    register={register}
+                    required
+                    name={`inputs.${i}`}
+                    key={i}
+                    value={val}
+                    onChange={(val: string) => {
+                      setInputs((prev) =>
+                        prev.map((item, index) => (index === i ? val : item))
+                      );
+                    }}
+                    className="mt-6"
+                    error={
+                      errors.inputs?.length &&
+                      errors.inputs[i]?.type === "required"
+                        ? "This field is required"
+                        : ""
+                    }
+                  />
+                );
+              })}
               <Button
                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                   event.preventDefault();

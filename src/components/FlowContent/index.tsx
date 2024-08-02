@@ -1,7 +1,9 @@
 "use client";
 
+import useContextMenu from "@/hooks/useContextMenu";
 import { removeEditNode } from "@/lib/features/applet/appletSlice";
 import { RootState } from "@/lib/store";
+// import { NodeDataType } from "@/types/general";
 import { NodeDataType } from "@/types/general";
 import {
   addEdge,
@@ -27,10 +29,13 @@ import { getNodeByValue } from "../FlowSidebar/nodeItems";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
 import ConditionFormModal from "./ConditionFormModal";
+import GetVariableFormModal from "./GetVariableFormModal";
 import RefrencesFormModal from "./RefrencesFormModal";
+import SetVariableFormModal from "./SetVariableFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
 import TriggerOrderFormModal from "./TriggerOrderFormModal";
+import VariableFormModal from "./VariableFormModal";
 
 const initialNodes: Node[] = [];
 
@@ -44,6 +49,7 @@ const nodeTypes: NodeTypes = {
 };
 
 export default function FlowContent({ appletId }: { appletId: number }) {
+  const { clicked, setClicked, points, setPoints } = useContextMenu();
   const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -54,9 +60,11 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     (state: RootState) => state.appletSlice
   );
 
-  const { editNode, conditionNodes } = useSelector(
+  const { editNode, triggerNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
+
+  console.log("edit node", editNode);
 
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
@@ -71,6 +79,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     useState<Node<NodeDataType> | null>(null);
 
   const [conditionModalOpen, setConditionModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [variablesModalOpen, setVariablesModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [setVariableModalOpen, setSetVariableModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
+  const [getVariableModalOpen, setGetVariableModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
   const { applets } = useSelector((state: RootState) => state.appletSlice);
@@ -107,17 +124,16 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         x: event.clientX,
         y: event.clientY,
       });
+      const newId = getId();
       const newNode = {
-        id: getId(),
+        id: newId,
         type,
         position,
         data:
           type === "triggerNode"
-            ? { ...triggeredNode }
+            ? { ...triggeredNode, nodeId: newId }
             : type === "conditionNode"
-            ? {
-                index: event.dataTransfer.getData("index"),
-              }
+            ? {}
             : {
                 name: event.dataTransfer.getData("name"),
                 value: event.dataTransfer.getData("value"),
@@ -142,6 +158,18 @@ export default function FlowContent({ appletId }: { appletId: number }) {
       }
       if (nodeValue === "condition") {
         setConditionModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "variable") {
+        setVariablesModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "setVariables") {
+        setSetVariableModalOpen(newNode);
+        return;
+      }
+      if (nodeValue === "getVariables") {
+        setGetVariableModalOpen(newNode);
         return;
       }
 
@@ -193,10 +221,16 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={thingModalOpen}
-        open={!!thingModalOpen}
+        open={!!thingModalOpen || !!editNode?.nodeName.startsWith("Thing")}
         onClose={() => {
-          setThingModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setThingModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
+        nodeName={editNode?.nodeName}
       />
       <ThirdPartyFormModal
         onAddNode={() => {
@@ -205,10 +239,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={thirdPartyModalOpen}
-        open={!!thirdPartyModalOpen}
+        open={!!thirdPartyModalOpen || editNode?.nodeName === "Third Party"}
         onClose={() => {
-          setThirdPartyModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setThirdPartyModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
       />
       <RefrencesFormModal
         onAddNode={() => {
@@ -217,10 +256,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={refrencesModalOpen}
-        open={!!refrencesModalOpen}
+        open={!!refrencesModalOpen || editNode?.nodeName === "Refrences"}
         onClose={() => {
-          setRefrencesModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setRefrencesModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
       />
       <TriggerOrderFormModal
         onAddNode={() => {
@@ -229,10 +273,68 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={triggerOrderModalOpen}
-        open={!!triggerOrderModalOpen}
+        open={
+          !!triggerOrderModalOpen || editNode?.nodeName === "Trigger Orders"
+        }
         onClose={() => {
-          setTriggerOrderModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setTriggerOrderModalOpen(null);
+          }
         }}
+        edit={editNode?.nodeData}
+      />
+      <SetVariableFormModal
+        onAddNode={() => {
+          if (setVariableModalOpen) {
+            setNodes((nds) => nds.concat(setVariableModalOpen));
+          }
+        }}
+        node={setVariableModalOpen}
+        open={!!setVariableModalOpen || editNode?.nodeName === "Set Variables"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setSetVariableModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <GetVariableFormModal
+        onAddNode={() => {
+          if (getVariableModalOpen) {
+            setNodes((nds) => nds.concat(getVariableModalOpen));
+          }
+        }}
+        node={getVariableModalOpen}
+        open={!!getVariableModalOpen || editNode?.nodeName === "Get Variables"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setGetVariableModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <VariableFormModal
+        onAddNode={() => {
+          if (variablesModalOpen) {
+            setNodes((nds) => nds.concat(variablesModalOpen));
+          }
+        }}
+        node={variablesModalOpen}
+        open={!!variablesModalOpen || editNode?.nodeName === "Variable"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setVariablesModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
       />
       <ConditionFormModal
         onAddNode={() => {
@@ -241,17 +343,15 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={conditionModalOpen}
-        open={!!conditionModalOpen}
+        open={!!conditionModalOpen || editNode?.nodeName === "condition"}
         onClose={() => {
-          setConditionModalOpen(null);
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setConditionModalOpen(null);
+          }
         }}
-      />
-      <ConditionFormModal
-        open={!!editNode}
-        onClose={() => {
-          dispatch(removeEditNode());
-        }}
-        edit={editNode}
+        edit={editNode?.nodeData}
       />
     </>
   );

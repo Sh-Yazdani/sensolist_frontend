@@ -13,7 +13,7 @@ import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import SelectInput from "../UI/SelectInput";
 
-interface TriggerOrderFormModalProps {
+interface GetVariableFormModalProps {
   open: boolean;
   onClose: () => void;
   node: Node<NodeDataType> | null;
@@ -23,34 +23,40 @@ interface TriggerOrderFormModalProps {
 
 interface ICreateNodeInputs {
   title: string;
-  dashboard: string;
-  description?: string;
+  variable: string;
 }
-export default function TriggerOrderFormModal({
+
+export default function GetVariableFormModal({
   open,
   onClose,
   node,
   onAddNode,
   edit,
-}: TriggerOrderFormModalProps) {
-  const { dashboards } = useSelector(
-    (state: RootState) => state.dashboardSlice
+}: GetVariableFormModalProps) {
+  const { variableNodes } = useSelector(
+    (state: RootState) => state.appletSlice
   );
 
-  const dashboardList: ISelectOption[] = dashboards.map((dash) => {
-    return { title: dash.name, value: dash.name };
-  });
+  const variablesList: ISelectOption[] = variableNodes
+    ? variableNodes.map((variable) => {
+        return { title: variable.name, value: variable.name };
+      })
+    : [];
 
-  const [selectedDashboard, setSelectedDashboard] = useState<ISelectOption>(
-    dashboardList[0]
+  const [selectedVariable, setSelectedVariable] = useState<ISelectOption>(
+    variablesList[0]
   );
+
+  useEffect(() => {
+    setSelectedVariable(variablesList[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variableNodes]);
 
   const [values, setValues] = useState(
     edit
       ? {
           title: edit.title || "",
-          description: edit.description,
-          dashboard: edit.dashboard || "",
+          variable: edit.variable || "",
         }
       : undefined
   );
@@ -61,8 +67,7 @@ export default function TriggerOrderFormModal({
       edit
         ? {
             title: edit.title || "",
-            description: edit.description,
-            dashboard: edit.dashboard || "",
+            variable: edit.variable || "",
           }
         : undefined
     );
@@ -80,8 +85,7 @@ export default function TriggerOrderFormModal({
       ? values
       : {
           title: "",
-          description: "",
-          dashboard: selectedDashboard?.value || "",
+          variable: "",
         },
   });
 
@@ -92,7 +96,7 @@ export default function TriggerOrderFormModal({
       reset();
       dispatch(
         editNodeReducer({
-          nodeName: "Trigger Orders",
+          nodeName: "Get Variables",
           newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );
@@ -101,8 +105,7 @@ export default function TriggerOrderFormModal({
         addTriggerNode({
           nodeId: node?.id || "",
           title: data.title,
-          description: data.description,
-          dashboard: data.dashboard,
+          variable: data.variable || "",
         })
       );
     }
@@ -116,7 +119,7 @@ export default function TriggerOrderFormModal({
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
         <span className=" capitalize font-semibold">{node?.data.name}</span>
       </div>
-      {dashboardList.length ? (
+      {variablesList.length ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             required
@@ -128,29 +131,19 @@ export default function TriggerOrderFormModal({
             name="title"
             className="mt-6"
           />
-          <SelectInput
-            options={dashboardList}
-            selectedValue={selectedDashboard}
-            setSelectedValue={(option) => {
-              setSelectedDashboard(option);
-            }}
-            register={register}
-            name="dashboard"
-            label="Dashboard"
-            className="mt-6"
-          />
-
-          <Input
-            error={
-              errors.description?.type === "required"
-                ? "This field is required"
-                : ""
-            }
-            label="Description"
-            register={register}
-            name="description"
-            className="mt-6"
-          />
+          {selectedVariable && (
+            <SelectInput
+              options={variablesList}
+              selectedValue={selectedVariable}
+              setSelectedValue={(option) => {
+                setSelectedVariable(option);
+              }}
+              register={register}
+              name="variableValue"
+              label="Variable"
+              className="mt-6"
+            />
+          )}
           <div className="flex items-center gap-4 mt-8">
             <Button
               onClick={(event: React.MouseEvent<HTMLElement>) => {
@@ -174,9 +167,17 @@ export default function TriggerOrderFormModal({
         </form>
       ) : (
         <div className="mt-6 flex flex-col flex-1">
-          <div>You haven&apos;t created any dashboard yet!</div>
-          <Button className="mt-auto" href="/dashboard">
-            Go to dashboards
+          <div>You haven&apos;t created any variable yet!</div>
+          <Button
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              event.preventDefault();
+              reset();
+              onClose();
+            }}
+            className="w-[36%] mt-auto"
+            variant="secondary"
+          >
+            Close
           </Button>
         </div>
       )}

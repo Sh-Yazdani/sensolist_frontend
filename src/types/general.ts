@@ -115,27 +115,6 @@ export interface IRole {
   description: string;
 }
 
-export interface ITriggerNode {
-  value: string;
-  name: string;
-  icon: React.ReactNode;
-}
-
-export type TriggerNodeType = Node<{
-  value: string;
-  name: string;
-  icon: React.ReactNode;
-}>;
-export type ConditionNodeType = Node<{
-  index: number;
-}>;
-
-export type VariableNodeType = Node<{
-  value: string;
-  name: string;
-  count: number;
-}>;
-
 export interface IWidget {
   name: string;
   image: string;
@@ -147,15 +126,6 @@ export interface ISubWidget {
   name: string;
   image: string;
 }
-
-export type NodeDataType =
-  | {
-      value?: string | undefined;
-      name?: string | undefined;
-      icon?: React.ReactNode;
-      count?: undefined;
-    }
-  | { name: string; value: string; count: string };
 
 export interface IChartData {
   title: string;
@@ -205,10 +175,78 @@ export interface ICondition {
   output: string;
 }
 
+// nodes
+
 export interface IConditionNodeInputs {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   inputs: string[];
   outputs: string[];
   conditions: { value: string; condition: string }[];
+}
+
+export type NodeDataType =
+  | {
+      value?: string | undefined;
+      name?: string | undefined;
+      icon?: React.ReactNode;
+      count?: undefined;
+    }
+  | { name: string; value: string; count: string };
+
+export interface ITriggerNodeData {
+  value: string;
+  name: string;
+  icon: React.ReactNode;
+}
+
+export interface IVariableNode {
+  nodeId: string;
+  name: string;
+  value: number;
+}
+
+export interface ITriggerNode {
+  nodeId: string;
+  title: string;
+  description?: string;
+  charactristic?: string;
+  dashboard?: string;
+  variable?: string;
+  variableValue?: string;
+}
+export interface IConditionNode extends IConditionNodeInputs {
+  nodeId: string;
+}
+
+export type TriggerNodeType = Node<{
+  nodeId: string;
+  value: string;
+  name: string;
+  icon: React.ReactNode;
+}>;
+
+export type ConditionNodeType = Node<{
+  nodeId: string;
+}>;
+
+export type VariableNodeType = Node<{
+  value: string;
+  name: string;
+  count: number;
+}>;
+
+export interface IEditNode {
+  nodeId?: string;
+  title?: string;
+  description?: string;
+  charactristic?: string;
+  dashboard?: string;
+  inputs?: string[];
+  outputs?: string[];
+  conditions?: { value: string; condition: string }[];
+  name?: string;
+  value?: number;
+  variableValue?: string;
+  variable?: string;
 }

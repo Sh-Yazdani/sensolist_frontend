@@ -1,11 +1,19 @@
-import { IApplet, IConditionNodeInputs } from "@/types/general";
+import {
+  IApplet,
+  IConditionNode,
+  IEditNode,
+  ITriggerNode,
+  IVariableNode,
+} from "@/types/general";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface AppletState {
   applets: IApplet[];
   pinnedApplets: IApplet[];
-  conditionNodes?: IConditionNodeInputs[];
-  editNode?: IConditionNodeInputs;
+  conditionNodes?: IConditionNode[];
+  triggerNodes?: ITriggerNode[];
+  variableNodes?: IVariableNode[];
+  editNode?: { nodeData: IEditNode; nodeName: string };
 }
 
 const initialState: AppletState = {
@@ -55,12 +63,18 @@ export const appletSlice = createSlice({
         (app) => app.id !== action.payload.id
       );
     },
-    addConditionNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
+    addConditionNode: (state, action: PayloadAction<IConditionNode>) => {
       state.conditionNodes = state.conditionNodes?.length
         ? [...state.conditionNodes, action.payload]
         : [action.payload];
     },
-    addEditNode: (state, action: PayloadAction<IConditionNodeInputs>) => {
+    addEditNode: (
+      state,
+      action: PayloadAction<{
+        nodeData: IEditNode;
+        nodeName: string;
+      }>
+    ) => {
       state.editNode = action.payload;
     },
     removeEditNode: (state) => {
@@ -68,10 +82,72 @@ export const appletSlice = createSlice({
     },
     editNode: (
       state,
-      action: PayloadAction<{ newNode: IConditionNodeInputs; index: number }>
+      action: PayloadAction<{ nodeName: string; newNode: IEditNode }>
     ) => {
-      if (state.conditionNodes)
-        state.conditionNodes[action.payload.index] = action.payload.newNode;
+      if (action.payload.nodeName === "condition") {
+        if (state.conditionNodes)
+          state.conditionNodes = state.conditionNodes.map((cdt) =>
+            cdt.nodeId === action.payload.newNode.nodeId
+              ? {
+                  nodeId: action.payload.newNode.nodeId,
+                  title: action.payload.newNode.title || "",
+                  description: action.payload.newNode.description,
+                  inputs: action.payload.newNode.inputs || [""],
+                  outputs: action.payload.newNode.outputs || ["else", ""],
+                  conditions: action.payload.newNode.conditions || [
+                    { value: "", condition: "" },
+                  ],
+                }
+              : cdt
+          );
+      } else if (
+        action.payload.nodeName === "Trigger Orders" ||
+        action.payload.nodeName === "Refrences" ||
+        action.payload.nodeName === "Third Party" ||
+        action.payload.nodeName.startsWith("Thing")
+      ) {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title || "",
+                description: action.payload.newNode.description,
+                dashboard: action.payload.newNode.dashboard,
+              }
+            : trigger
+        );
+      } else if (action.payload.nodeName === "variable") {
+        state.variableNodes = state.variableNodes?.map((variable) =>
+          variable.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                name: action.payload.newNode.name || "",
+                value: action.payload.newNode.value || 0,
+              }
+            : variable
+        );
+      } else if (action.payload.nodeName === "Set Variables") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title || "",
+                variable: action.payload.newNode.variable || "",
+                variableValue: action.payload.newNode.variableValue,
+              }
+            : trigger
+        );
+      } else if (action.payload.nodeName === "Get Variables") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title || "",
+                variable: action.payload.newNode.variable || "",
+              }
+            : trigger
+        );
+      }
     },
     deleteNode: (
       state,
@@ -80,6 +156,16 @@ export const appletSlice = createSlice({
       state.conditionNodes = state.conditionNodes?.filter(
         (_item, index) => index !== action.payload.index
       );
+    },
+    addTriggerNode: (state, action: PayloadAction<ITriggerNode>) => {
+      state.triggerNodes = state.triggerNodes?.length
+        ? [...state.triggerNodes, action.payload]
+        : [action.payload];
+    },
+    addVariableNode: (state, action: PayloadAction<IVariableNode>) => {
+      state.variableNodes = state.variableNodes?.length
+        ? [...state.variableNodes, action.payload]
+        : [action.payload];
     },
   },
 });
@@ -94,5 +180,7 @@ export const {
   removeEditNode,
   editNode,
   deleteNode,
+  addTriggerNode,
+  addVariableNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;

@@ -1,5 +1,5 @@
 import {
-  addTriggerNode,
+  addVariableNode,
   editNode as editNodeReducer,
 } from "@/lib/features/applet/appletSlice";
 import { IEditNode, NodeDataType } from "@/types/general";
@@ -11,7 +11,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 
-interface ThirdPartyFormModalProps {
+interface VariableFormModalProps {
   open: boolean;
   onClose: () => void;
   node: Node<NodeDataType> | null;
@@ -20,34 +20,32 @@ interface ThirdPartyFormModalProps {
 }
 
 interface ICreateNodeInputs {
-  title: string;
-  description?: string;
+  name?: string;
+  value?: number;
 }
 
-export default function ThirdPartyFormModal({
+export default function VariableFormModal({
   open,
   onClose,
   node,
   onAddNode,
   edit,
-}: ThirdPartyFormModalProps) {
-  const dispatch = useDispatch();
+}: VariableFormModalProps) {
   const [values, setValues] = useState(
     edit
       ? {
-          title: edit.title || "",
-          description: edit.description,
+          name: edit.name,
+          value: edit.value,
         }
       : undefined
   );
-
   useEffect(() => {
     reset();
     setValues(
       edit
         ? {
-            title: edit.title || "",
-            description: edit.description,
+            name: edit.name,
+            value: edit.value,
           }
         : undefined
     );
@@ -64,27 +62,28 @@ export default function ThirdPartyFormModal({
     values: values
       ? values
       : {
-          title: "",
-          description: "",
+          name: "",
+          value: 0,
         },
   });
 
+  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
-    console.log("submit", data);
+    console.log("on submit", data, edit);
     if (edit) {
       reset();
       dispatch(
         editNodeReducer({
-          nodeName: "Third Party",
+          nodeName: "variable",
           newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );
     } else {
       dispatch(
-        addTriggerNode({
+        addVariableNode({
           nodeId: node?.id || "",
-          title: data.title,
-          description: data.description,
+          name: data.name || "",
+          value: data.value || 0,
         })
       );
     }
@@ -101,22 +100,21 @@ export default function ThirdPartyFormModal({
         <Input
           required
           error={
-            errors.title?.type === "required" ? "This field is required" : ""
+            errors.name?.type === "required" ? "This field is required" : ""
           }
-          label="Title"
+          label="Name"
           register={register}
-          name="title"
+          name="name"
           className="mt-6"
         />
         <Input
           error={
-            errors.description?.type === "required"
-              ? "This field is required"
-              : ""
+            errors.value?.type === "required" ? "This field is required" : ""
           }
-          label="Description"
+          type="number"
+          label="Value"
           register={register}
-          name="description"
+          name="value"
           className="mt-6"
         />
         <div className="flex items-center gap-4 mt-8">

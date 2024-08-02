@@ -1,6 +1,12 @@
-import { NodeDataType } from "@/types/general";
+import {
+  addTriggerNode,
+  editNode as editNodeReducer,
+} from "@/lib/features/applet/appletSlice";
+import { IEditNode, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -10,10 +16,11 @@ interface RefrencesFormModalProps {
   onClose: () => void;
   node: Node<NodeDataType> | null;
   onAddNode: () => void;
+  edit?: IEditNode | null;
 }
 
 interface ICreateNodeInputs {
-  title: string;
+  title?: string;
   description?: string;
 }
 
@@ -22,17 +29,65 @@ export default function RefrencesFormModal({
   onClose,
   node,
   onAddNode,
+  edit,
 }: RefrencesFormModalProps) {
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title,
+          description: edit.description,
+        }
+      : undefined
+  );
+
+  useEffect(() => {
+    reset();
+    setValues(
+      edit
+        ? {
+            title: edit.title,
+            description: edit.description,
+          }
+        : undefined
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateNodeInputs>();
+  } = useForm<ICreateNodeInputs>({
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+        },
+  });
 
+  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
-    console.log("submit", data);
+    console.log("on submit", data, edit);
+    if (edit) {
+      reset();
+      dispatch(
+        editNodeReducer({
+          nodeName: "Refrences",
+          newNode: { ...data, nodeId: edit.nodeId || "" },
+        })
+      );
+    } else {
+      dispatch(
+        addTriggerNode({
+          nodeId: node?.id || "",
+          title: data.title || "",
+          description: data.description,
+        })
+      );
+    }
     onAddNode();
     reset();
     onClose();
@@ -77,7 +132,7 @@ export default function RefrencesFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

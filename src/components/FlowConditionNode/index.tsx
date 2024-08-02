@@ -7,29 +7,36 @@ import { ConditionNodeType } from "@/types/general";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ContextMenu from "./ContextMenu";
+import ContextMenu from "../FlowContextMenu";
 
 export default function FlowConditionNode({
   data,
+  id,
   isConnectable,
 }: NodeProps<ConditionNodeType>) {
-  const { index } = data;
   const dispatch = useDispatch();
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
   const [selectedNode, setSelectedNode] = useState(
-    conditionNodes?.length ? conditionNodes[index] : null
+    conditionNodes?.length
+      ? conditionNodes.filter((item) => item.nodeId === id)[0]
+      : null
   );
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
 
   useEffect(() => {
-    console.log("useeeffee", conditionNodes);
-    setSelectedNode(conditionNodes?.length ? conditionNodes[index] : null);
+    setSelectedNode(
+      conditionNodes?.length
+        ? conditionNodes.filter((item) => item.nodeId === id)[0]
+        : null
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conditionNodes]);
-  if (!selectedNode) return;
+  if (!selectedNode) {
+    console.log("not selected");
+  }
 
   return (
     <>
@@ -65,7 +72,6 @@ export default function FlowConditionNode({
             ))}
           </div>
 
-          {/* <span className="ml-2">{index}</span> */}
           <div className="flex flex-col ml-4 items-end">
             {selectedNode?.outputs.map((output, i) => (
               <div key={i} className="relative">
@@ -85,7 +91,10 @@ export default function FlowConditionNode({
         {clicked && (
           <ContextMenu
             onEditSelect={() => {
-              if (selectedNode) dispatch(addEditNode(selectedNode));
+              if (selectedNode)
+                dispatch(
+                  addEditNode({ nodeData: selectedNode, nodeName: "condition" })
+                );
             }}
             onDelete={() => {
               if (selectedNode)

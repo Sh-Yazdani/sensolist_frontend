@@ -1,9 +1,14 @@
 "use client";
 
-import { ISelectOption, NodeDataType } from "@/types/general";
+import {
+  addTriggerNode,
+  editNode as editNodeReducer,
+} from "@/lib/features/applet/appletSlice";
+import { IEditNode, ISelectOption, NodeDataType } from "@/types/general";
 import { Node } from "@xyflow/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -14,6 +19,8 @@ interface ThingFormModalProps {
   onClose: () => void;
   node: Node<NodeDataType> | null;
   onAddNode: () => void;
+  edit?: IEditNode | null;
+  nodeName?: string;
 }
 
 interface ICreateNodeInputs {
@@ -27,7 +34,10 @@ export default function ThingFormModal({
   onClose,
   node,
   onAddNode,
+  edit,
+  nodeName,
 }: ThingFormModalProps) {
+  const dispatch = useDispatch();
   const charactristicList: ISelectOption[] = [
     {
       title: "charactristic 1",
@@ -46,16 +56,65 @@ export default function ThingFormModal({
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
 
+  const [values, setValues] = useState(
+    edit
+      ? {
+          title: edit.title || "",
+          description: edit.description,
+          charactristic: edit.charactristic || "",
+        }
+      : undefined
+  );
+
+  useEffect(() => {
+    reset();
+    setValues(
+      edit
+        ? {
+            title: edit.title || "",
+            description: edit.description,
+            charactristic: edit.charactristic || "",
+          }
+        : undefined
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateNodeInputs>();
+  } = useForm<ICreateNodeInputs>({
+    values: values
+      ? values
+      : {
+          title: "",
+          description: "",
+          charactristic: charactristicList[0].value,
+        },
+  });
 
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
-    console.log("submit", data);
+    if (edit) {
+      reset();
+      dispatch(
+        editNodeReducer({
+          nodeName: nodeName || "",
+          newNode: { ...data, nodeId: edit.nodeId || "" },
+        })
+      );
+    } else {
+      dispatch(
+        addTriggerNode({
+          nodeId: node?.id || "",
+          title: data.title,
+          description: data.description,
+          charactristic: data.charactristic,
+        })
+      );
+    }
     onAddNode();
     reset();
     onClose();
@@ -112,7 +171,7 @@ export default function ThingFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>
