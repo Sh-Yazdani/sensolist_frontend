@@ -126,6 +126,27 @@ export const appletSlice = createSlice({
               }
             : variable
         );
+      } else if (action.payload.nodeName === "Set Variables") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title || "",
+                variable: action.payload.newNode.variable || "",
+                variableValue: action.payload.newNode.variableValue,
+              }
+            : trigger
+        );
+      } else if (action.payload.nodeName === "Get Variables") {
+        state.triggerNodes = state.triggerNodes?.map((trigger) =>
+          trigger.nodeId === action.payload.newNode.nodeId
+            ? {
+                nodeId: action.payload.newNode.nodeId,
+                title: action.payload.newNode.title || "",
+                variable: action.payload.newNode.variable || "",
+              }
+            : trigger
+        );
       }
     },
     deleteNode: (

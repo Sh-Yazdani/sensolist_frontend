@@ -64,6 +64,8 @@ export default function FlowContent({ appletId }: { appletId: number }) {
     (state: RootState) => state.appletSlice
   );
 
+  console.log("edit node", editNode);
+
   const [thingModalOpen, setThingModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
@@ -290,7 +292,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={setVariableModalOpen}
-        open={!!setVariableModalOpen || editNode?.nodeName === "setVariables"}
+        open={!!setVariableModalOpen || editNode?.nodeName === "Set Variables"}
         onClose={() => {
           if (editNode) {
             dispatch(removeEditNode());
@@ -307,7 +309,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
           }
         }}
         node={getVariableModalOpen}
-        open={!!getVariableModalOpen || editNode?.nodeName === "getVariables"}
+        open={!!getVariableModalOpen || editNode?.nodeName === "Get Variables"}
         onClose={() => {
           if (editNode) {
             dispatch(removeEditNode());

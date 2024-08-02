@@ -112,9 +112,10 @@ export default function SetVariableFormModal({
   const onSubmit: SubmitHandler<ICreateNodeInputs> = (data) => {
     if (edit) {
       reset();
+      console.log("edit submit", edit, data);
       dispatch(
         editNodeReducer({
-          nodeName: "setVariables",
+          nodeName: "Set Variables",
           newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );

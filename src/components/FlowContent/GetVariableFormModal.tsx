@@ -96,7 +96,7 @@ export default function GetVariableFormModal({
       reset();
       dispatch(
         editNodeReducer({
-          nodeName: "getVariables",
+          nodeName: "Get Variables",
           newNode: { ...data, nodeId: edit.nodeId || "" },
         })
       );
