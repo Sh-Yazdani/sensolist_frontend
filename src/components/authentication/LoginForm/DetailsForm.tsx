@@ -4,19 +4,26 @@ import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { CustomPhoneInput } from "../../PhoneInput";
 import { PasswordInput } from "../../UI/PasswordInput";
 import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 
 interface DetailsFormProps {
-  goToVerification: () => void;
+  // goToVerification: () => void;
   changePhoneNumber: (num: string) => void;
+  // setOtpToken: (token: string) => void;
+  changePassword: (pass: string) => void;
+  getOtp: () => Promise<void>;
 }
 
 export default function DetailsForm({
-  goToVerification,
+  // goToVerification,
   changePhoneNumber,
+  // setOtpToken,
+  changePassword,
+  getOtp,
 }: DetailsFormProps) {
   const {
     register,
@@ -25,13 +32,23 @@ export default function DetailsForm({
     formState: { errors },
   } = useForm<LoginInputs>();
 
+  const dispatch = useDispatch();
+
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const [termsError, setTermsError] = useState<string>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
-      goToVerification();
+      changePassword(data.password);
+      await getOtp();
+      // const response = await getOtpToken(data.phoneNumber, data.password);
+      // if (response.statusCode === 200) {
+      //   setOtpToken(response.otpToken || "");
+      //   goToVerification();
+      // } else if (response.message) {
+      //   dispatch(createAlert({ message: response.message, type: "error" }));
+      // }
     } else {
       setTermsError("Please agree with terms and policies.");
     }

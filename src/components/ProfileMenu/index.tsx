@@ -8,8 +8,8 @@ import {
   LogoutCurve,
   Notification,
 } from "iconsax-react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -101,13 +101,16 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
           </button>
         ))}
       </div>
-      <Link
-        href={"/authentication/login"}
+      <button
+        onClick={() => {
+          console.log("siiign out");
+          signOut({ redirect: false });
+        }}
         className="mt-auto flex items-center md:hidden"
       >
         <LogoutCurve className=" text-error mr-2" />
         <span className=" text-neutral-7 dark:text-neutral-4 ">Log Out</span>
-      </Link>
+      </button>
     </div>
   );
 }

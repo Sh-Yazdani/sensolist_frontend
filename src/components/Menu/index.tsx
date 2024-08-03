@@ -8,7 +8,7 @@ import {
   Setting4,
   UserTick,
 } from "iconsax-react";
-import Link from "next/link";
+import { signOut } from "next-auth/react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -180,15 +180,18 @@ export default function Menu() {
           {t("applets")}
         </div>
       </button>
-      <Link
-        href={"/authentication/login"}
+      <button
+        onClick={() => {
+          console.log("siiign out");
+          signOut({ redirect: false });
+        }}
         className="hidden md:flex flex-col items-center order-6"
       >
         <LogoutCurve size={40} color="#DF2040" />
         <div className=" capitalize dark:text-neutral-4 text-neutral-7 whitespace-nowrap md:text-[10px] lg:text-xs">
           log out
         </div>
-      </Link>
+      </button>
     </div>
   );
 }
