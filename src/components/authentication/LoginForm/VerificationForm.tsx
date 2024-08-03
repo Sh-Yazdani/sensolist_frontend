@@ -1,6 +1,6 @@
-import { sendOtpToken } from "@/ApiCall/authentication";
 import FormError from "@/components/UI/FormError";
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -13,23 +13,25 @@ interface VerificationFormProps {
 }
 
 export default function VerificationForm({ otpToken }: VerificationFormProps) {
-  const dispatch = useDispatch();
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();
+
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("event", verificationValue);
-    const response = await sendOtpToken(verificationValue || "", otpToken);
-    if (response.statusCode === 200) {
-    } else if (response.message) {
-      dispatch(createAlert({ message: response.message, type: "error" }));
+    const resault = await signIn("credentials", {
+      redirect: false,
+      otpToken: otpToken,
+      code: "123456",
+    });
+    if (resault?.ok) {
+      router.push("/");
+    } else if (resault?.error) {
+      dispatch(createAlert({ message: resault.error, type: "error" }));
     }
-    // router.push("/");
-    // dispatch(createAlert({ message: "login success", type: "success" }));
-    // if (!verificationValue) {
-    //   setError("This field is required");
-    // }
   };
   return (
     <>
