@@ -1,6 +1,35 @@
 import { sendOtpToken } from "@/ApiCall/authentication";
 import NextAuth, { NextAuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+const refreshAccessToken = async (token: JWT) => {
+  try {
+    const res = await fetch(
+      "https://sensolist-backend.vercel.app/auth/refresh",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const refreshedTokens = await res.json();
+
+    if (!res.ok) throw refreshedTokens;
+
+    return {
+      ...token,
+      accessToken: refreshedTokens.accessToken,
+      expiresOn: refreshedTokens.expiresOn,
+      refreshToken: refreshedTokens.refreshToken ?? token.refreshToken,
+    };
+  } catch (e) {
+    console.error("Failed to refresh access token", e);
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+};
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -34,7 +63,11 @@ const authOptions: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.expiresOn = user.expiresOn;
       }
-      return token;
+      if (Date.now() < (token.expiresOn as number)) {
+        return token;
+      }
+
+      return refreshAccessToken(token);
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
