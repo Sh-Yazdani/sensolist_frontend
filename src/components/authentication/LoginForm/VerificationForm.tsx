@@ -10,12 +10,16 @@ import TimerCountDown from "../TimerCountdown/index.tsx";
 
 interface VerificationFormProps {
   otpToken: string;
-  getOtp: () => Promise<void>;
+  getOtp: (phone: string, pass: string) => Promise<void>;
+  phoneNumber: string;
+  password: string;
 }
 
 export default function VerificationForm({
   otpToken,
   getOtp,
+  phoneNumber,
+  password,
 }: VerificationFormProps) {
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();
@@ -59,7 +63,9 @@ export default function VerificationForm({
           />
           {error && <FormError error="error" />}
         </div>
-        <TimerCountDown getOtp={getOtp} />
+        <TimerCountDown
+          getOtp={async () => await getOtp(phoneNumber, password)}
+        />
         <SubmitButton className="mt-auto">Login</SubmitButton>
       </form>
     </>
