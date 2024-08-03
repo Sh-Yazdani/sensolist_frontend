@@ -1,7 +1,5 @@
 "useClient";
 
-import { getOtpToken } from "@/ApiCall/authentication";
-import { createAlert } from "@/lib/features/notification/notificatioSlice";
 import { LoginInputs } from "@/types/general";
 import { ArrowRight } from "iconsax-react";
 import { useState } from "react";
@@ -13,15 +11,19 @@ import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 
 interface DetailsFormProps {
-  goToVerification: () => void;
+  // goToVerification: () => void;
   changePhoneNumber: (num: string) => void;
-  setOtpToken: (token: string) => void;
+  // setOtpToken: (token: string) => void;
+  changePassword: (pass: string) => void;
+  getOtp: () => Promise<void>;
 }
 
 export default function DetailsForm({
-  goToVerification,
+  // goToVerification,
   changePhoneNumber,
-  setOtpToken,
+  // setOtpToken,
+  changePassword,
+  getOtp,
 }: DetailsFormProps) {
   const {
     register,
@@ -38,13 +40,15 @@ export default function DetailsForm({
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
-      const response = await getOtpToken(data.phoneNumber, data.password);
-      if (response.statusCode === 200) {
-        setOtpToken(response.otpToken || "");
-        goToVerification();
-      } else if (response.message) {
-        dispatch(createAlert({ message: response.message, type: "error" }));
-      }
+      changePassword(data.password);
+      await getOtp();
+      // const response = await getOtpToken(data.phoneNumber, data.password);
+      // if (response.statusCode === 200) {
+      //   setOtpToken(response.otpToken || "");
+      //   goToVerification();
+      // } else if (response.message) {
+      //   dispatch(createAlert({ message: response.message, type: "error" }));
+      // }
     } else {
       setTermsError("Please agree with terms and policies.");
     }

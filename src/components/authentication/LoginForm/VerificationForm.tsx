@@ -10,9 +10,13 @@ import TimerCountDown from "../TimerCountdown/index.tsx";
 
 interface VerificationFormProps {
   otpToken: string;
+  getOtp: () => Promise<void>;
 }
 
-export default function VerificationForm({ otpToken }: VerificationFormProps) {
+export default function VerificationForm({
+  otpToken,
+  getOtp,
+}: VerificationFormProps) {
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();
 
@@ -21,11 +25,10 @@ export default function VerificationForm({ otpToken }: VerificationFormProps) {
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("event", verificationValue);
     const resault = await signIn("credentials", {
       redirect: false,
       otpToken: otpToken,
-      code: "123456",
+      code: verificationValue,
     });
     if (resault?.ok) {
       router.push("/");
@@ -56,7 +59,7 @@ export default function VerificationForm({ otpToken }: VerificationFormProps) {
           />
           {error && <FormError error="error" />}
         </div>
-        <TimerCountDown />
+        <TimerCountDown getOtp={getOtp} />
         <SubmitButton className="mt-auto">Login</SubmitButton>
       </form>
     </>
