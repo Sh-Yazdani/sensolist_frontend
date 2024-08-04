@@ -44,6 +44,7 @@ export interface IDashboard {
   image?: string;
   pin?: boolean;
   widgets?: ISubWidget[];
+  draftWidgets?: ISubWidget[];
 }
 
 export interface ISubWidget {

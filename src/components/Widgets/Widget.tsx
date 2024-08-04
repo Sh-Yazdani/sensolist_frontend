@@ -1,5 +1,9 @@
+"use client";
+
+import { addWidgetEdit } from "@/lib/features/dashboard/dashboardSlice";
 import { ISubWidget } from "@/types/general";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
 import LineChart from "./LineChart";
@@ -9,11 +13,32 @@ import WidgetCardContainer from "./WidgetCardContainer";
 interface WidgetProps {
   widget: ISubWidget;
   editMode: boolean;
+  dashboardId: number;
+  saved: boolean;
 }
 
-export default function Widget({ widget, editMode }: WidgetProps) {
+export default function Widget({
+  widget,
+  editMode,
+  dashboardId,
+  saved,
+}: WidgetProps) {
+  const dispatch = useDispatch();
   return (
-    <WidgetCardContainer widget={widget} editMode={editMode}>
+    <WidgetCardContainer
+      onEditSelect={() => {
+        dispatch(
+          addWidgetEdit({
+            dashboardId: dashboardId,
+            widget: widget,
+            draft: !saved,
+          })
+        );
+      }}
+      widget={widget}
+      editMode={editMode}
+      dashboardId={dashboardId}
+    >
       {widget.name === "bar chart" ? (
         <>
           <BarChart
