@@ -20,6 +20,11 @@ interface IndoorEnvironmentFormModalProps {
   onWidgetsClose: () => void;
   dashboardId: number;
   onAddWidget: (widget: ISubWidget) => void;
+  edit?: {
+    dashboardId: number;
+    widget: ISubWidget;
+    draft?: boolean;
+  };
 }
 
 export default function ChartFormModal({

@@ -1,6 +1,6 @@
 "use client";
 
-import { ISelectOption } from "@/types/general";
+import { ISelectOption, ISubWidget } from "@/types/general";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../UI/Button";
@@ -14,6 +14,11 @@ interface AlarmCountFormModalProps {
   onClose: () => void;
   chart: { name: string; image: string } | null;
   onAddWidget: () => void;
+  edit?: {
+    dashboardId: number;
+    widget: ISubWidget;
+    draft?: boolean;
+  };
 }
 
 interface ICreateWidgetInputs {

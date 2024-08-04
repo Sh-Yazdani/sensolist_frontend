@@ -44,11 +44,13 @@ export interface IDashboard {
   image?: string;
   pin?: boolean;
   widgets?: ISubWidget[];
+  draftWidgets?: ISubWidget[];
 }
 
 export interface ISubWidget {
   name: string;
   image: string;
+  parent?: string;
   chartData?: IChartData;
   tableData?: IWidgetTableData;
   airQualityData?: IAirQualityData;

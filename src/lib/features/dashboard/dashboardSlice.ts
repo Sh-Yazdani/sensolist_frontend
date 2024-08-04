@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface DashboardState {
   dashboards: IDashboard[];
   pinedDashboards: IDashboard[];
-  widgetEdit?: { dashboardId: number; widget: ISubWidget };
+  widgetEdit?: { dashboardId: number; widget: ISubWidget; draft?: boolean };
 }
 
 const initialState: DashboardState = {
@@ -72,14 +72,69 @@ export const dashboardSlice = createSlice({
           : dash
       );
     },
-    addWidgetEdit: (
+    addDraftWidgets: (
       state,
       action: PayloadAction<{
         dashboardId: number;
         widget: ISubWidget;
       }>
     ) => {
+      state.dashboards = state.dashboards.map((dash) =>
+        dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: dash.draftWidgets
+                ? [...dash.draftWidgets, action.payload.widget]
+                : [action.payload.widget],
+            }
+          : dash
+      );
+    },
+    saveDraftWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) => {
+        const saveWidgets = dash.widgets ? dash.widgets : [];
+        const draftWidgets = dash.draftWidgets ? dash.draftWidgets : [];
+        return dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: [],
+              widgets: [...saveWidgets, ...draftWidgets],
+            }
+          : dash;
+      });
+    },
+    cancelDraftWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) => {
+        return dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: [],
+            }
+          : dash;
+      });
+    },
+    addWidgetEdit: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: ISubWidget;
+        draft: boolean;
+      }>
+    ) => {
       state.widgetEdit = action.payload;
+    },
+    removeWidgetEdit: (state) => {
+      delete state.widgetEdit;
     },
   },
 });
@@ -92,5 +147,9 @@ export const {
   editDashboard,
   addWidgets,
   addWidgetEdit,
+  saveDraftWidgets,
+  cancelDraftWidgets,
+  addDraftWidgets,
+  removeWidgetEdit,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

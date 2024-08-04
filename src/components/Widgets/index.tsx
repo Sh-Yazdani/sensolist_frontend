@@ -1,6 +1,10 @@
 "use client";
 
-import { addWidgets } from "@/lib/features/dashboard/dashboardSlice";
+import {
+  addDraftWidgets,
+  cancelDraftWidgets,
+  saveDraftWidgets,
+} from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
 import { ISubWidget } from "@/types/general";
 import { Add } from "iconsax-react";
@@ -21,7 +25,7 @@ export default function DashboardWidgets({
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [widgets, setWidgets] = useState<ISubWidget[]>([]);
+  // const [widgets, setWidgets] = useState<ISubWidget[]>([]);
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
@@ -35,26 +39,22 @@ export default function DashboardWidgets({
 
   const dispatch = useDispatch();
 
-  console.log("dashboards", dashboards);
-
   const onSave = () => {
-    console.log("on save widgets", widgets, selectedDashboard);
-    dispatch(
-      addWidgets({ dashboardId: selectedDashboard.id, widgets: widgets })
-    );
-    setWidgets([]);
+    dispatch(saveDraftWidgets({ dashboardId: selectedDashboard.id }));
     setEditMode(false);
   };
   const onCancel = () => {
-    setWidgets([]);
+    cancelDraftWidgets({ dashboardId: selectedDashboard.id });
     setEditMode(false);
   };
+
+  console.log("selectedDashboard", selectedDashboard);
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
       <DashboardWidgetSelect
         onAddWidget={(wdg: ISubWidget) => {
-          setWidgets((prev) => (prev?.length ? [...prev, wdg] : [wdg]));
+          dispatch(addDraftWidgets({ dashboardId: dashboardId, widget: wdg }));
         }}
         dashboardId={dashboardId}
         onClose={() => {
@@ -80,14 +80,27 @@ export default function DashboardWidgets({
         dashboardId={dashboardId}
       />
       <div className=" m-auto w-full flex-1 p-4">
-        {selectedDashboard?.widgets?.length || 0 + widgets?.length || 0 ? (
+        {(selectedDashboard?.widgets?.length || 0) +
+        (selectedDashboard?.draftWidgets?.length || 0) ? (
           <div className="w-full flex flex-wrap gap-4">
             {selectedDashboard?.widgets &&
               selectedDashboard?.widgets.map((wdg) => (
-                <Widget editMode={editMode} key={wdg.name} widget={wdg} />
+                <Widget
+                  saved={false}
+                  dashboardId={selectedDashboard.id}
+                  editMode={editMode}
+                  key={wdg.name}
+                  widget={wdg}
+                />
               ))}
-            {widgets.map((wdg) => (
-              <Widget editMode={editMode} key={wdg.name} widget={wdg} />
+            {selectedDashboard.draftWidgets?.map((wdg) => (
+              <Widget
+                saved={true}
+                dashboardId={selectedDashboard.id}
+                editMode={editMode}
+                key={wdg.name}
+                widget={wdg}
+              />
             ))}
           </div>
         ) : (
