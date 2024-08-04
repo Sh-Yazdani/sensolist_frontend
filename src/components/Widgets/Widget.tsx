@@ -8,55 +8,60 @@ import WidgetCardContainer from "./WidgetCardContainer";
 
 interface WidgetProps {
   widget: ISubWidget;
+  editMode: boolean;
 }
 
-export default function Widget({ widget }: WidgetProps) {
-  return widget.name === "bar chart" ? (
-    <WidgetCardContainer>
-      <BarChart
-        yLabel={widget.chartData?.yAxesLabel || ""}
-        xLabel={widget.chartData?.xAxesLabel || ""}
-        title={widget.chartData?.title || ""}
-        min={(widget.chartData?.yAxesMin || 0) as number}
-        max={(widget.chartData?.yAxesMax || 0) as number}
-      />
-    </WidgetCardContainer>
-  ) : widget.name === "line chart" ? (
-    <WidgetCardContainer key={widget.name}>
-      <LineChart
-        // key={widget.name}
-        xLabel={widget.chartData?.xAxesLabel || ""}
-        yLabel={widget.chartData?.yAxesLabel || ""}
-        title={widget.chartData?.title || ""}
-        min={
-          (widget.chartData?.yAxesMin || 0) < 0
-            ? 0
-            : widget.chartData?.yAxesMin || 0
-        }
-        max={widget.chartData?.yAxesMax || 0}
-      />
-    </WidgetCardContainer>
-  ) : widget.name === "time series" ? (
-    <WidgetCardContainer key={widget.name}>
-      <TimeSeriesChart
-        xLabel={widget.chartData?.xAxesLabel || ""}
-        title={widget.chartData?.title || ""}
-        min={(widget.chartData?.yAxesMin || 0) as number}
-        max={(widget.chartData?.yAxesMax || 0) as number}
-      />
-    </WidgetCardContainer>
-  ) : widget.name === "entity table" ? (
-    <WidgetCardContainer key={widget.name}>
-      <EntityTable data={widget.tableData} />
-    </WidgetCardContainer>
-  ) : (
-    <WidgetCardContainer key={widget.name}>
-      <div className=" capitalize text-sm mb-2 dark:text-white">
-        {widget.name}
-      </div>
-      <div className="relative w-full aspect-square">
-        <Image fill src={widget.image} alt="widget name" />
-      </div>
+export default function Widget({ widget, editMode }: WidgetProps) {
+  return (
+    <WidgetCardContainer editMode={editMode}>
+      {widget.name === "bar chart" ? (
+        <>
+          <BarChart
+            yLabel={widget.chartData?.yAxesLabel || ""}
+            xLabel={widget.chartData?.xAxesLabel || ""}
+            title={widget.chartData?.title || ""}
+            min={(widget.chartData?.yAxesMin || 0) as number}
+            max={(widget.chartData?.yAxesMax || 0) as number}
+          />
+        </>
+      ) : widget.name === "line chart" ? (
+        <>
+          <LineChart
+            // key={widget.name}
+            xLabel={widget.chartData?.xAxesLabel || ""}
+            yLabel={widget.chartData?.yAxesLabel || ""}
+            title={widget.chartData?.title || ""}
+            min={
+              (widget.chartData?.yAxesMin || 0) < 0
+                ? 0
+                : widget.chartData?.yAxesMin || 0
+            }
+            max={widget.chartData?.yAxesMax || 0}
+          />
+        </>
+      ) : widget.name === "time series" ? (
+        <>
+          <TimeSeriesChart
+            xLabel={widget.chartData?.xAxesLabel || ""}
+            title={widget.chartData?.title || ""}
+            min={(widget.chartData?.yAxesMin || 0) as number}
+            max={(widget.chartData?.yAxesMax || 0) as number}
+          />
+        </>
+      ) : widget.name === "entity table" ? (
+        <>
+          <EntityTable data={widget.tableData} />
+        </>
+      ) : (
+        <>
+          <div className=" capitalize text-sm mb-2 dark:text-white">
+            {widget.name}
+          </div>
+          <div className="relative w-full aspect-square">
+            <Image fill src={widget.image} alt="widget name" />
+          </div>
+        </>
+      )}
     </WidgetCardContainer>
   );
 }

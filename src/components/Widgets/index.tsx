@@ -84,10 +84,10 @@ export default function DashboardWidgets({
           <div className="w-full flex flex-wrap gap-4">
             {selectedDashboard?.widgets &&
               selectedDashboard?.widgets.map((wdg) => (
-                <Widget key={wdg.name} widget={wdg} />
+                <Widget editMode={editMode} key={wdg.name} widget={wdg} />
               ))}
             {widgets.map((wdg) => (
-              <Widget key={wdg.name} widget={wdg} />
+              <Widget editMode={editMode} key={wdg.name} widget={wdg} />
             ))}
           </div>
         ) : (
