@@ -16,6 +16,11 @@ interface TableFormModalProps {
   dashboardId: number;
   onWidgetsClose: () => void;
   onAddWidget: (widget: ISubWidget) => void;
+  edit?: {
+    dashboardId: number;
+    widget: ISubWidget;
+    draft?: boolean;
+  };
 }
 
 interface ICreateWidgetInputs {

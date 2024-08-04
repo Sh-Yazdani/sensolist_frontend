@@ -50,6 +50,7 @@ export interface IDashboard {
 export interface ISubWidget {
   name: string;
   image: string;
+  parent?: string;
   chartData?: IChartData;
   tableData?: IWidgetTableData;
   airQualityData?: IAirQualityData;

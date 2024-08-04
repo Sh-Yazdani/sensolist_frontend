@@ -133,6 +133,9 @@ export const dashboardSlice = createSlice({
     ) => {
       state.widgetEdit = action.payload;
     },
+    removeWidgetEdit: (state) => {
+      delete state.widgetEdit;
+    },
   },
 });
 
@@ -147,5 +150,6 @@ export const {
   saveDraftWidgets,
   cancelDraftWidgets,
   addDraftWidgets,
+  removeWidgetEdit,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
