@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface DashboardState {
   dashboards: IDashboard[];
   pinedDashboards: IDashboard[];
+  widgetEdit?: { dashboardId: number; widget: ISubWidget };
 }
 
 const initialState: DashboardState = {
@@ -71,6 +72,15 @@ export const dashboardSlice = createSlice({
           : dash
       );
     },
+    addWidgetEdit: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: ISubWidget;
+      }>
+    ) => {
+      state.widgetEdit = action.payload;
+    },
   },
 });
 
@@ -81,5 +91,6 @@ export const {
   unPinDashboard,
   editDashboard,
   addWidgets,
+  addWidgetEdit,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

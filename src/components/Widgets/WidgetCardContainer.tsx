@@ -1,8 +1,10 @@
+import { ISubWidget } from "@/types/general";
 import { Edit, Trash } from "iconsax-react";
 
 interface WidgetCardContainerProps {
   children: React.ReactNode;
   editMode: boolean;
+  widget: ISubWidget;
 }
 
 export default function WidgetCardContainer({

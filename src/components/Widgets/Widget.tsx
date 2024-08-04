@@ -13,7 +13,7 @@ interface WidgetProps {
 
 export default function Widget({ widget, editMode }: WidgetProps) {
   return (
-    <WidgetCardContainer editMode={editMode}>
+    <WidgetCardContainer widget={widget} editMode={editMode}>
       {widget.name === "bar chart" ? (
         <>
           <BarChart
