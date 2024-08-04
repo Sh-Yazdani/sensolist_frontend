@@ -17,8 +17,8 @@ export default function LoginForm() {
 
   const dispatch = useDispatch();
 
-  const getOtp = async () => {
-    const response = await getOtpToken(phoneNumber, password);
+  const getOtp = async (phone: string, pass: string) => {
+    const response = await getOtpToken(phone, pass);
     if (response.statusCode === 200) {
       setOtpToken(response.otpToken || "");
       setFormStep("verification");
@@ -39,18 +39,21 @@ export default function LoginForm() {
       />
       {formStep === "details" ? (
         <DetailsForm
-          // setOtpToken={(token: string) => {
-          //   setOtpToken(token);
-          // }}
           changePhoneNumber={(num: string) => setPhoneNumber(num)}
           changePassword={(num: string) => setPassword(num)}
-          getOtp={getOtp}
-          // goToVerification={() => {
-          //   setFormStep("verification");
-          // }}
+          getOtp={async (phone: string, pass: string) =>
+            await getOtp(phone, pass)
+          }
         />
       ) : (
-        <VerificationForm getOtp={getOtp} otpToken={otpToken || ""} />
+        <VerificationForm
+          phoneNumber={phoneNumber}
+          password={password}
+          getOtp={async (phone: string, pass: string) =>
+            await getOtp(phone, pass)
+          }
+          otpToken={otpToken || ""}
+        />
       )}
     </>
   );
