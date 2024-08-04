@@ -4,6 +4,7 @@ import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
 import LineChart from "./LineChart";
 import TimeSeriesChart from "./TimeSeriesChart";
+import WidgetCardContainer from "./WidgetCardContainer";
 
 interface WidgetProps {
   widget: ISubWidget;
@@ -11,7 +12,7 @@ interface WidgetProps {
 
 export default function Widget({ widget }: WidgetProps) {
   return widget.name === "bar chart" ? (
-    <div className="overflow-auto w-[400px]">
+    <WidgetCardContainer>
       <BarChart
         yLabel={widget.chartData?.yAxesLabel || ""}
         xLabel={widget.chartData?.xAxesLabel || ""}
@@ -19,9 +20,9 @@ export default function Widget({ widget }: WidgetProps) {
         min={(widget.chartData?.yAxesMin || 0) as number}
         max={(widget.chartData?.yAxesMax || 0) as number}
       />
-    </div>
+    </WidgetCardContainer>
   ) : widget.name === "line chart" ? (
-    <div className="overflow-auto w-[400px]" key={widget.name}>
+    <WidgetCardContainer key={widget.name}>
       <LineChart
         // key={widget.name}
         xLabel={widget.chartData?.xAxesLabel || ""}
@@ -34,28 +35,28 @@ export default function Widget({ widget }: WidgetProps) {
         }
         max={widget.chartData?.yAxesMax || 0}
       />
-    </div>
+    </WidgetCardContainer>
   ) : widget.name === "time series" ? (
-    <div className="overflow-auto w-[400px]" key={widget.name}>
+    <WidgetCardContainer key={widget.name}>
       <TimeSeriesChart
         xLabel={widget.chartData?.xAxesLabel || ""}
         title={widget.chartData?.title || ""}
         min={(widget.chartData?.yAxesMin || 0) as number}
         max={(widget.chartData?.yAxesMax || 0) as number}
       />
-    </div>
+    </WidgetCardContainer>
   ) : widget.name === "entity table" ? (
-    <div className="overflow-auto w-[400px]" key={widget.name}>
+    <WidgetCardContainer key={widget.name}>
       <EntityTable data={widget.tableData} />
-    </div>
+    </WidgetCardContainer>
   ) : (
-    <div key={widget.name} className="overflow-auto w-[400px]">
+    <WidgetCardContainer key={widget.name}>
       <div className=" capitalize text-sm mb-2 dark:text-white">
         {widget.name}
       </div>
       <div className="relative w-full aspect-square">
         <Image fill src={widget.image} alt="widget name" />
       </div>
-    </div>
+    </WidgetCardContainer>
   );
 }
