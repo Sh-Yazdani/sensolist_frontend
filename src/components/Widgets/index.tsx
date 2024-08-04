@@ -50,6 +50,8 @@ export default function DashboardWidgets({
     setEditMode(false);
   };
 
+  console.log("selected widgets", widgets);
+
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
       <DashboardWidgetSelect

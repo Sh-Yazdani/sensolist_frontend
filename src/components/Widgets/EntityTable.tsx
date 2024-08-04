@@ -11,31 +11,29 @@ export default function EntityTable({ data }: EntityTableProps) {
   }
 
   return (
-    <div className="w-[400px]">
-      <Table>
-        <Table.Head>
+    <Table className=" w-full">
+      <Table.Head>
+        {data.columns.map((col) => (
+          <Table.HeadCell key={col.key}>{col.name}</Table.HeadCell>
+        ))}
+      </Table.Head>
+      <Table.Body className="divide-y">
+        <Table.Row>
           {data.columns.map((col) => (
-            <Table.HeadCell key={col.key}>{col.name}</Table.HeadCell>
+            <Table.Cell key={col.key}>test {col.name}</Table.Cell>
           ))}
-        </Table.Head>
-        <Table.Body className="divide-y">
-          <Table.Row>
-            {data.columns.map((col) => (
-              <Table.Cell key={col.key}>test {col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-          <Table.Row>
-            {data.columns.map((col) => (
-              <Table.Cell key={col.key}>test {col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-          <Table.Row>
-            {data.columns.map((col) => (
-              <Table.Cell key={col.key}>test {col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-        </Table.Body>
-      </Table>
-    </div>
+        </Table.Row>
+        <Table.Row>
+          {data.columns.map((col) => (
+            <Table.Cell key={col.key}>test {col.name}</Table.Cell>
+          ))}
+        </Table.Row>
+        <Table.Row>
+          {data.columns.map((col) => (
+            <Table.Cell key={col.key}>test {col.name}</Table.Cell>
+          ))}
+        </Table.Row>
+      </Table.Body>
+    </Table>
   );
 }

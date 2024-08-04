@@ -11,7 +11,7 @@ interface WidgetProps {
 
 export default function Widget({ widget }: WidgetProps) {
   return widget.name === "bar chart" ? (
-    <div className="overflow-auto">
+    <div className="overflow-auto w-[400px]">
       <BarChart
         yLabel={widget.chartData?.yAxesLabel || ""}
         xLabel={widget.chartData?.xAxesLabel || ""}
@@ -21,7 +21,7 @@ export default function Widget({ widget }: WidgetProps) {
       />
     </div>
   ) : widget.name === "line chart" ? (
-    <div className="overflow-auto" key={widget.name}>
+    <div className="overflow-auto w-[400px]" key={widget.name}>
       <LineChart
         // key={widget.name}
         xLabel={widget.chartData?.xAxesLabel || ""}
@@ -36,7 +36,7 @@ export default function Widget({ widget }: WidgetProps) {
       />
     </div>
   ) : widget.name === "time series" ? (
-    <div className="overflow-auto" key={widget.name}>
+    <div className="overflow-auto w-[400px]" key={widget.name}>
       <TimeSeriesChart
         xLabel={widget.chartData?.xAxesLabel || ""}
         title={widget.chartData?.title || ""}
@@ -45,16 +45,11 @@ export default function Widget({ widget }: WidgetProps) {
       />
     </div>
   ) : widget.name === "entity table" ? (
-    <div className="overflow-auto" key={widget.name}>
+    <div className="overflow-auto w-[400px]" key={widget.name}>
       <EntityTable data={widget.tableData} />
     </div>
   ) : (
-    <div
-      key={widget.name}
-      className=" bg-white dark:bg-primary-Shade-2 shadow flex flex-col 
-        w-[calc(100%-8px)] md:w-[calc(33%-8px)] lg:w-[calc(25%-8px)] p-4 
-        hover:shadow-neutral-6 cursor-pointer"
-    >
+    <div key={widget.name} className="overflow-auto w-[400px]">
       <div className=" capitalize text-sm mb-2 dark:text-white">
         {widget.name}
       </div>
