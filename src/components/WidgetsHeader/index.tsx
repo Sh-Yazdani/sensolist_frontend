@@ -9,8 +9,9 @@ interface DashboardHeaderProps {
   dashboardId: number;
   onWidgetAdd: () => void;
   isSelectOpen: boolean;
-  toggleEditMode: (a: boolean) => void;
+  onSave: () => void;
   editMode: boolean;
+  goToEditMode: () => void;
 }
 
 export default function WidgetsHeader({
@@ -18,7 +19,8 @@ export default function WidgetsHeader({
   onWidgetAdd,
   isSelectOpen,
   editMode,
-  toggleEditMode,
+  onSave,
+  goToEditMode,
 }: DashboardHeaderProps) {
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
@@ -51,7 +53,7 @@ export default function WidgetsHeader({
           </Button>
           <Button
             onClick={() => {
-              toggleEditMode(false);
+              onSave();
             }}
             className="px-2 py-1 h-[40px]"
             variant="secondary"
@@ -62,7 +64,7 @@ export default function WidgetsHeader({
       ) : (
         <Button
           onClick={() => {
-            toggleEditMode(true);
+            goToEditMode();
           }}
           className="px-2 py-1 h-[40px] ml-auto"
           variant="secondary"

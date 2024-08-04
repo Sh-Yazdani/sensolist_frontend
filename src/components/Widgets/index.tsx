@@ -1,11 +1,12 @@
 "use client";
 
+import { addWidgets } from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
 import { ISubWidget } from "@/types/general";
 import { Add } from "iconsax-react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import DashboardWidgetSelect from "../WidgetSelect";
 import WidgetsHeader from "../WidgetsHeader";
@@ -34,7 +35,12 @@ export default function DashboardWidgets({
     redirect("/dashboard");
   }
 
+  const dispatch = useDispatch();
+
   const onSave = () => {
+    dispatch(addWidgets(widgets));
+    setWidgets([]);
+    setEditMode(false);
     console.log("on save");
   };
   const onCancel = () => {
@@ -59,7 +65,11 @@ export default function DashboardWidgets({
       />
       <WidgetsHeader
         editMode={editMode}
-        toggleEditMode={(a: boolean) => setEditMode(a)}
+        goToEditMode={() => {
+          setEditMode(true);
+        }}
+        // toggleEditMode={(a: boolean) => setEditMode(a)}
+        onSave={onSave}
         isSelectOpen={isSelectOpen}
         onWidgetAdd={() => {
           setIsSelectOpen(true);

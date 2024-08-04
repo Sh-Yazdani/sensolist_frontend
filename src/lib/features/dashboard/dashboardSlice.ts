@@ -53,30 +53,43 @@ export const dashboardSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
-    addWidget: (
+    addWidgets: (
       state,
-      action: PayloadAction<{
-        dashboardId: number;
-        widget: ISubWidget;
-      }>
-    ) => {
-      let dashboard: IDashboard = state.dashboards.filter(
-        (item) => item.id === action.payload.dashboardId
-      )[0];
-      const widgets = dashboard.widgets
-        ? [...dashboard.widgets, action.payload.widget]
-        : [action.payload.widget];
-      state.dashboards = [
-        ...state.dashboards.filter((item) => item.id !== dashboard.id),
+      action: PayloadAction<
         {
-          id: dashboard.id,
-          name: dashboard.name,
-          description: dashboard.description,
-          image: dashboard.image,
-          pin: dashboard.pin,
-          widgets: widgets,
-        },
-      ];
+          dashboardId: number;
+          widget: ISubWidget;
+        }[]
+      >
+    ) => {
+      const dashboardId = action.payload[0].dashboardId;
+      state.dashboards.map((dash) =>
+        dash.id === dashboardId
+          ? {
+              ...dash,
+              widgets: dash.widgets?.length
+                ? [...dash.widgets, action.payload.map((wdgs) => wdgs.widget)]
+                : [action.payload.map((wdgs) => wdgs.widget)],
+            }
+          : dash
+      );
+      // let dashboard: IDashboard = state.dashboards.filter(
+      //   (item) => item.id === action.payload.dashboardId
+      // )[0];
+      // const widgets = dashboard.widgets
+      //   ? [...dashboard.widgets, action.payload.widget]
+      //   : [action.payload.widget];
+      // state.dashboards = [
+      //   ...state.dashboards.filter((item) => item.id !== dashboard.id),
+      //   {
+      //     id: dashboard.id,
+      //     name: dashboard.name,
+      //     description: dashboard.description,
+      //     image: dashboard.image,
+      //     pin: dashboard.pin,
+      //     widgets: widgets,
+      //   },
+      // ];
     },
   },
 });
@@ -87,6 +100,6 @@ export const {
   pinDashboard,
   unPinDashboard,
   editDashboard,
-  addWidget,
+  addWidgets,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
