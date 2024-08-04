@@ -1,7 +1,10 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IIndoorEnvironmentData, ISelectOption } from "@/types/general";
+import {
+  IIndoorEnvironmentData,
+  ISelectOption,
+  ISubWidget,
+} from "@/types/general";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -16,6 +19,7 @@ interface IndoorEnvironmentFormModalProps {
   card: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function ChartFormModal({
@@ -24,6 +28,7 @@ export default function ChartFormModal({
   card,
   onWidgetsClose,
   dashboardId,
+  onAddWidget,
 }: IndoorEnvironmentFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -74,13 +79,8 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<IIndoorEnvironmentData> = (data) => {
     console.log("submit", data);
-    if (card)
-      dispatch(
-        addWidget({
-          dashboardId: dashboardId,
-          widget: { ...card, indoorEnvironmentData: data },
-        })
-      );
+    if (card) onAddWidget({ ...card, indoorEnvironmentData: data });
+
     console.log("widget", card);
     reset();
     onClose();

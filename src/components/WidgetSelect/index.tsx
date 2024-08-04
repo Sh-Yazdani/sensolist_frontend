@@ -1,7 +1,6 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IWidget } from "@/types/general";
+import { ISubWidget, IWidget } from "@/types/general";
 import { Close } from "@mui/icons-material";
 import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
@@ -20,12 +19,14 @@ interface DashboardWidgetSelectProps {
   isOpen: boolean;
   onClose: () => void;
   dashboardId: number;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function DashboardWidgetSelect({
   isOpen,
   onClose,
   dashboardId,
+  onAddWidget,
 }: DashboardWidgetSelectProps) {
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
   const [chartModalOpen, setChartModalOpen] = useState<{
@@ -328,6 +329,9 @@ export default function DashboardWidgetSelect({
         </div>
       </div>
       <ChartFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         chart={chartModalOpen}
@@ -337,6 +341,9 @@ export default function DashboardWidgetSelect({
         }}
       />
       <AirQualityFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={airQualityModalOpen}
@@ -346,6 +353,9 @@ export default function DashboardWidgetSelect({
         }}
       />
       <IndoorEnvironmentFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={indoorEnvironmentModalOpen}
@@ -355,6 +365,9 @@ export default function DashboardWidgetSelect({
         }}
       />
       <OutdoorEnvironmentFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={outdoorEnvironmentModalOpen}
@@ -364,6 +377,9 @@ export default function DashboardWidgetSelect({
         }}
       />
       <TableFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         table={tableModalOpen}
@@ -375,12 +391,7 @@ export default function DashboardWidgetSelect({
       <GuageFormModal
         onAddWidget={() => {
           if (guageModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: guageModalOpen,
-              })
-            );
+            onAddWidget(guageModalOpen);
           }
           onClose();
         }}
@@ -393,12 +404,7 @@ export default function DashboardWidgetSelect({
       <CardFormModal
         onAddWidget={() => {
           if (cardModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: cardModalOpen,
-              })
-            );
+            onAddWidget(cardModalOpen);
           }
           onClose();
         }}
@@ -411,12 +417,7 @@ export default function DashboardWidgetSelect({
       <AlarmCountFormModal
         onAddWidget={() => {
           if (alarmCountModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: alarmCountModalOpen,
-              })
-            );
+            onAddWidget(alarmCountModalOpen);
           }
           onClose();
         }}

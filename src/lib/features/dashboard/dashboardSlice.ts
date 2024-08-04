@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface DashboardState {
   dashboards: IDashboard[];
   pinedDashboards: IDashboard[];
+  widgetEdit?: { dashboardId: number; widget: ISubWidget };
 }
 
 const initialState: DashboardState = {
@@ -53,30 +54,32 @@ export const dashboardSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
-    addWidget: (
+    addWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widgets: ISubWidget[];
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) =>
+        dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              widgets: dash.widgets
+                ? [...dash.widgets, ...action.payload.widgets]
+                : [...action.payload.widgets],
+            }
+          : dash
+      );
+    },
+    addWidgetEdit: (
       state,
       action: PayloadAction<{
         dashboardId: number;
         widget: ISubWidget;
       }>
     ) => {
-      let dashboard: IDashboard = state.dashboards.filter(
-        (item) => item.id === action.payload.dashboardId
-      )[0];
-      const widgets = dashboard.widgets
-        ? [...dashboard.widgets, action.payload.widget]
-        : [action.payload.widget];
-      state.dashboards = [
-        ...state.dashboards.filter((item) => item.id !== dashboard.id),
-        {
-          id: dashboard.id,
-          name: dashboard.name,
-          description: dashboard.description,
-          image: dashboard.image,
-          pin: dashboard.pin,
-          widgets: widgets,
-        },
-      ];
+      state.widgetEdit = action.payload;
     },
   },
 });
@@ -87,6 +90,7 @@ export const {
   pinDashboard,
   unPinDashboard,
   editDashboard,
-  addWidget,
+  addWidgets,
+  addWidgetEdit,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

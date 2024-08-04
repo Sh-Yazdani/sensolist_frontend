@@ -1,4 +1,4 @@
-import DashboardWidgets from "@/components/DashboardWidgets";
+import DashboardWidgets from "@/components/Widgets";
 
 export default function Page({ params }: { params: { slug: string } }) {
   return (

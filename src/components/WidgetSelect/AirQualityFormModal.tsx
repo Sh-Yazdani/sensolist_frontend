@@ -1,7 +1,6 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IAirQualityData, ISelectOption } from "@/types/general";
+import { IAirQualityData, ISelectOption, ISubWidget } from "@/types/general";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -16,6 +15,7 @@ interface AirQualityFormModalProps {
   card: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function ChartFormModal({
@@ -24,6 +24,7 @@ export default function ChartFormModal({
   card,
   onWidgetsClose,
   dashboardId,
+  onAddWidget,
 }: AirQualityFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -95,13 +96,8 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<IAirQualityData> = (data) => {
     console.log("submit", data);
-    if (card)
-      dispatch(
-        addWidget({
-          dashboardId: dashboardId,
-          widget: { ...card, airQualityData: data },
-        })
-      );
+    if (card) onAddWidget({ ...card, airQualityData: data });
+
     console.log("widget", card);
     reset();
     onClose();
