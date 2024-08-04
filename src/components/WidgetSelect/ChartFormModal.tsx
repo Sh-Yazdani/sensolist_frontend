@@ -15,7 +15,7 @@ interface ChartFormModalProps {
   chart: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
-  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function ChartFormModal({
@@ -94,7 +94,7 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<IChartData> = (data) => {
     console.log("submit", data);
-    if (chart) onAddWidget(dashboardId, { ...chart, chartData: data });
+    if (chart) onAddWidget({ ...chart, chartData: data });
 
     console.log("widget", chart);
     reset();

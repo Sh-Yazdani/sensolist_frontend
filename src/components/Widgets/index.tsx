@@ -21,9 +21,7 @@ export default function DashboardWidgets({
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [widgets, setWidgets] = useState<
-    { dashboardId: number; widget: ISubWidget }[]
-  >([]);
+  const [widgets, setWidgets] = useState<ISubWidget[]>([]);
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
@@ -37,25 +35,26 @@ export default function DashboardWidgets({
 
   const dispatch = useDispatch();
 
+  console.log("dashboards", dashboards);
+
   const onSave = () => {
-    dispatch(addWidgets(widgets));
+    console.log("on save widgets", widgets, selectedDashboard);
+    dispatch(
+      addWidgets({ dashboardId: selectedDashboard.id, widgets: widgets })
+    );
     setWidgets([]);
     setEditMode(false);
-    console.log("on save");
   };
   const onCancel = () => {
-    console.log("on cancel");
+    setWidgets([]);
+    setEditMode(false);
   };
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
       <DashboardWidgetSelect
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          setWidgets((prev) =>
-            prev?.length
-              ? [...prev, { dashboardId: dId, widget: wdg }]
-              : [{ dashboardId: dId, widget: wdg }]
-          );
+        onAddWidget={(wdg: ISubWidget) => {
+          setWidgets((prev) => (prev?.length ? [...prev, wdg] : [wdg]));
         }}
         dashboardId={dashboardId}
         onClose={() => {
@@ -68,8 +67,12 @@ export default function DashboardWidgets({
         goToEditMode={() => {
           setEditMode(true);
         }}
-        // toggleEditMode={(a: boolean) => setEditMode(a)}
-        onSave={onSave}
+        onSave={() => {
+          onSave();
+        }}
+        onCancel={() => {
+          onCancel();
+        }}
         isSelectOpen={isSelectOpen}
         onWidgetAdd={() => {
           setIsSelectOpen(true);
@@ -84,7 +87,7 @@ export default function DashboardWidgets({
                 <Widget key={wdg.name} widget={wdg} />
               ))}
             {widgets.map((wdg) => (
-              <Widget key={wdg.widget.name} widget={wdg.widget} />
+              <Widget key={wdg.name} widget={wdg} />
             ))}
           </div>
         ) : (

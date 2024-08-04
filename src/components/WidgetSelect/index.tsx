@@ -19,7 +19,7 @@ interface DashboardWidgetSelectProps {
   isOpen: boolean;
   onClose: () => void;
   dashboardId: number;
-  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function DashboardWidgetSelect({
@@ -329,8 +329,8 @@ export default function DashboardWidgetSelect({
         </div>
       </div>
       <ChartFormModal
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          onAddWidget(dId, wdg);
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
@@ -341,8 +341,8 @@ export default function DashboardWidgetSelect({
         }}
       />
       <AirQualityFormModal
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          onAddWidget(dId, wdg);
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
@@ -353,8 +353,8 @@ export default function DashboardWidgetSelect({
         }}
       />
       <IndoorEnvironmentFormModal
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          onAddWidget(dId, wdg);
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
@@ -365,8 +365,8 @@ export default function DashboardWidgetSelect({
         }}
       />
       <OutdoorEnvironmentFormModal
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          onAddWidget(dId, wdg);
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
@@ -377,8 +377,8 @@ export default function DashboardWidgetSelect({
         }}
       />
       <TableFormModal
-        onAddWidget={(dId: number, wdg: ISubWidget) => {
-          onAddWidget(dId, wdg);
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
@@ -391,7 +391,7 @@ export default function DashboardWidgetSelect({
       <GuageFormModal
         onAddWidget={() => {
           if (guageModalOpen) {
-            onAddWidget(dashboardId, guageModalOpen);
+            onAddWidget(guageModalOpen);
           }
           onClose();
         }}
@@ -404,7 +404,7 @@ export default function DashboardWidgetSelect({
       <CardFormModal
         onAddWidget={() => {
           if (cardModalOpen) {
-            onAddWidget(dashboardId, cardModalOpen);
+            onAddWidget(cardModalOpen);
           }
           onClose();
         }}
@@ -417,7 +417,7 @@ export default function DashboardWidgetSelect({
       <AlarmCountFormModal
         onAddWidget={() => {
           if (alarmCountModalOpen) {
-            onAddWidget(dashboardId, alarmCountModalOpen);
+            onAddWidget(alarmCountModalOpen);
           }
           onClose();
         }}

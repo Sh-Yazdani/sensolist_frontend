@@ -15,7 +15,7 @@ interface AirQualityFormModalProps {
   card: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
-  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function ChartFormModal({
@@ -96,7 +96,7 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<IAirQualityData> = (data) => {
     console.log("submit", data);
-    if (card) onAddWidget(dashboardId, { ...card, airQualityData: data });
+    if (card) onAddWidget({ ...card, airQualityData: data });
 
     console.log("widget", card);
     reset();

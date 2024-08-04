@@ -12,6 +12,7 @@ interface DashboardHeaderProps {
   onSave: () => void;
   editMode: boolean;
   goToEditMode: () => void;
+  onCancel: () => void;
 }
 
 export default function WidgetsHeader({
@@ -21,6 +22,7 @@ export default function WidgetsHeader({
   editMode,
   onSave,
   goToEditMode,
+  onCancel,
 }: DashboardHeaderProps) {
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
@@ -48,7 +50,13 @@ export default function WidgetsHeader({
             <Add className="md:mr-1" />
             <span className="hidden md:flex">Add widget</span>
           </Button>
-          <Button className="mx-4 text-neutral-6" variant="text">
+          <Button
+            onClick={() => {
+              onCancel();
+            }}
+            className="mx-4 text-neutral-6"
+            variant="text"
+          >
             <CloseCircle className="mr-1" /> cancel
           </Button>
           <Button

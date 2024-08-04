@@ -15,7 +15,7 @@ interface TableFormModalProps {
   table: { name: string; image: string } | null;
   dashboardId: number;
   onWidgetsClose: () => void;
-  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 interface ICreateWidgetInputs {
@@ -82,7 +82,7 @@ export default function TableFormModal({
   const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
     console.log("submit", data);
     if (table) {
-      onAddWidget(dashboardId, {
+      onAddWidget({
         ...table,
         tableData: {
           title: data.title,
