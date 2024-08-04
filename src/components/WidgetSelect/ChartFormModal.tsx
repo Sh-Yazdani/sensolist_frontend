@@ -1,7 +1,6 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IChartData, ISelectOption } from "@/types/general";
+import { IChartData, ISelectOption, ISubWidget } from "@/types/general";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -16,6 +15,7 @@ interface ChartFormModalProps {
   chart: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
+  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
 }
 
 export default function ChartFormModal({
@@ -24,6 +24,7 @@ export default function ChartFormModal({
   chart,
   onWidgetsClose,
   dashboardId,
+  onAddWidget,
 }: ChartFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -93,13 +94,8 @@ export default function ChartFormModal({
 
   const onSubmit: SubmitHandler<IChartData> = (data) => {
     console.log("submit", data);
-    if (chart)
-      dispatch(
-        addWidget({
-          dashboardId: dashboardId,
-          widget: { ...chart, chartData: data },
-        })
-      );
+    if (chart) onAddWidget(dashboardId, { ...chart, chartData: data });
+
     console.log("widget", chart);
     reset();
     onClose();

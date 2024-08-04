@@ -1,11 +1,9 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { ISelectOption } from "@/types/general";
+import { ISelectOption, ISubWidget } from "@/types/general";
 import { Add, Trash } from "iconsax-react";
 import { useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -17,6 +15,7 @@ interface TableFormModalProps {
   table: { name: string; image: string } | null;
   dashboardId: number;
   onWidgetsClose: () => void;
+  onAddWidget: (dashboardId: number, widget: ISubWidget) => void;
 }
 
 interface ICreateWidgetInputs {
@@ -33,6 +32,7 @@ export default function TableFormModal({
   table,
   dashboardId,
   onWidgetsClose,
+  onAddWidget,
 }: TableFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -71,7 +71,6 @@ export default function TableFormModal({
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
 
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -83,21 +82,16 @@ export default function TableFormModal({
   const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
     console.log("submit", data);
     if (table) {
-      dispatch(
-        addWidget({
-          dashboardId: dashboardId,
-          widget: {
-            ...table,
-            tableData: {
-              title: data.title,
-              thing: data.thing,
-              charactristic: data.charactristic,
-              description: data.description,
-              columns: data.columns,
-            },
-          },
-        })
-      );
+      onAddWidget(dashboardId, {
+        ...table,
+        tableData: {
+          title: data.title,
+          thing: data.thing,
+          charactristic: data.charactristic,
+          description: data.description,
+          columns: data.columns,
+        },
+      });
     }
     reset();
     onClose();

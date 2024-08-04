@@ -1,7 +1,7 @@
 "use client";
 
 import { RootState } from "@/lib/store";
-import { Add, CloseCircle, TickCircle } from "iconsax-react";
+import { Add, CloseCircle, Edit2, TickCircle } from "iconsax-react";
 import { useSelector } from "react-redux";
 import Button from "../UI/Button";
 
@@ -13,7 +13,7 @@ interface DashboardHeaderProps {
   editMode: boolean;
 }
 
-export default function DashboardHeader({
+export default function WidgetsHeader({
   dashboardId,
   onWidgetAdd,
   isSelectOpen,
@@ -67,7 +67,7 @@ export default function DashboardHeader({
           className="px-2 py-1 h-[40px] ml-auto"
           variant="secondary"
         >
-          <TickCircle className="mr-1" /> edit
+          <Edit2 className="mr-1" /> edit
         </Button>
       )}
     </div>

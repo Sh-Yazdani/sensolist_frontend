@@ -1,14 +1,15 @@
 "use client";
 
 import { RootState } from "@/lib/store";
+import { ISubWidget } from "@/types/general";
 import { Add } from "iconsax-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import DashboardHeader from "../DashboardHeader";
 import Button from "../UI/Button";
 import DashboardWidgetSelect from "../WidgetSelect";
+import WidgetsHeader from "../WidgetsHeader";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
 import LineChart from "./LineChart";
@@ -22,7 +23,9 @@ export default function DashboardWidgets({
   dashboardId,
 }: DashboardWidgetsProps) {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
-  const [editMode, setEditMode] = useState<boolean>(true);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [widgets, setWidgets] =
+    useState<{ dashboardId: number; widget: ISubWidget }[]>();
   const { dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
@@ -34,18 +37,30 @@ export default function DashboardWidgets({
     redirect("/dashboard");
   }
 
-  console.log("selected dashboards", selectedDashboard);
+  const onSave = () => {
+    console.log("on save");
+  };
+  const onCancel = () => {
+    console.log("on cancel");
+  };
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
       <DashboardWidgetSelect
+        onAddWidget={(dId: number, wdg: ISubWidget) => {
+          setWidgets((prev) =>
+            prev?.length
+              ? [...prev, { dashboardId: dId, widget: wdg }]
+              : [{ dashboardId: dId, widget: wdg }]
+          );
+        }}
         dashboardId={dashboardId}
         onClose={() => {
           setIsSelectOpen(false);
         }}
         isOpen={isSelectOpen}
       />
-      <DashboardHeader
+      <WidgetsHeader
         editMode={editMode}
         toggleEditMode={(a: boolean) => setEditMode(a)}
         isSelectOpen={isSelectOpen}
