@@ -9,6 +9,7 @@ interface ProtectRouteProps {
 
 export default function ProtectRoute({ children }: ProtectRouteProps) {
   const { data: session, status } = useSession();
+  console.log("session", session);
   const router = useRouter();
   if (!session) {
     router.push("authentication/login");

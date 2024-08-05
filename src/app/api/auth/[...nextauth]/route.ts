@@ -32,6 +32,7 @@ const refreshAccessToken = async (token: JWT) => {
 };
 
 const authOptions: NextAuthOptions = {
+  secret: process.env.JWT_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
