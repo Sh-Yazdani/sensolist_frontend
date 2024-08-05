@@ -392,6 +392,7 @@ export default function DashboardWidgetSelect({
             setAirQualityModalOpen(null);
           }
         }}
+        edit={widgetEdit}
       />
       <IndoorEnvironmentFormModal
         onAddWidget={(wdg: ISubWidget) => {

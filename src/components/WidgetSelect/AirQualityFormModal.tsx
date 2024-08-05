@@ -1,7 +1,7 @@
 "use client";
 
 import { IAirQualityData, ISelectOption, ISubWidget } from "@/types/general";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
@@ -16,15 +16,22 @@ interface AirQualityFormModalProps {
   onWidgetsClose: () => void;
   dashboardId: number;
   onAddWidget: (widget: ISubWidget) => void;
+  edit?: {
+    dashboardId: number;
+    widget: ISubWidget;
+    draft: boolean;
+    index: number;
+  };
 }
 
-export default function ChartFormModal({
+export default function AirQualityFormModal({
   open,
   onClose,
   card,
   onWidgetsClose,
   dashboardId,
   onAddWidget,
+  edit,
 }: AirQualityFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -77,6 +84,13 @@ export default function ChartFormModal({
 
   const dispatch = useDispatch();
 
+  const [values, setValues] = useState(edit?.widget.airQualityData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.airQualityData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -92,7 +106,16 @@ export default function ChartFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IAirQualityData>();
+  } = useForm<IAirQualityData>({
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: "",
+          charactristic: "",
+          unit: "",
+        },
+  });
 
   const onSubmit: SubmitHandler<IAirQualityData> = (data) => {
     console.log("submit", data);
@@ -176,7 +199,7 @@ export default function ChartFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>
