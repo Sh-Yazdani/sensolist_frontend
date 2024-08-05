@@ -9,7 +9,7 @@ import { RootState } from "@/lib/store";
 import { ISubWidget } from "@/types/general";
 import { Add } from "iconsax-react";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import DashboardWidgetSelect from "../WidgetSelect";
@@ -23,20 +23,22 @@ interface DashboardWidgetsProps {
 export default function DashboardWidgets({
   dashboardId,
 }: DashboardWidgetsProps) {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const headers = {
-  //       Authorization:
-  //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcklkIjoiNjZhZjVmZjdmODk1Yzk3NTc5YzdlZTcyIiwicGhvbmVudW1iZXIiOiIrMTkxMzk2MzM1ODkiLCJzeXN0ZW1Sb2xlIjoiQWRtaW4ifSwiaWF0IjoxNzIyNzg3MDEzLCJleHAiOjE3MjI3ODc5MTN9.RLKAV6D7Nw51z139mg9tOagHOwGsUjyPbga8JCvgtqA",
-  //     };
-  //     const res = await fetch(
-  //       "http://185.110.189.232:3123/api/data?sender=sns0000001",
-  //       { headers }
-  //     );
-  //     console.log("get data", res.json());
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const headers = {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcklkIjoiNjZhZjVmZjdmODk1Yzk3NTc5YzdlZTcyIiwicGhvbmVudW1iZXIiOiIrMTkxMzk2MzM1ODkiLCJzeXN0ZW1Sb2xlIjoiQWRtaW4ifSwiaWF0IjoxNzIyNzg3MDEzLCJleHAiOjE3MjI3ODc5MTN9.RLKAV6D7Nw51z139mg9tOagHOwGsUjyPbga8JCvgtqA",
+        "Content-type": "application/json",
+      };
+      const res = await fetch(
+        "http://185.110.189.232:3123/api/data?sender=sns0000001",
+        { headers }
+      );
+      console.log("get data", res.json());
+    };
+    fetchData();
+  }, []);
+
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   // const [widgets, setWidgets] = useState<ISubWidget[]>([]);
