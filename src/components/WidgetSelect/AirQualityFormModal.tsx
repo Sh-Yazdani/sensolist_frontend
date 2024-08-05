@@ -1,5 +1,6 @@
 "use client";
 
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { IAirQualityData, ISelectOption, ISubWidget } from "@/types/general";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -111,17 +112,26 @@ export default function AirQualityFormModal({
       ? values
       : {
           title: "",
-          thing: "",
-          charactristic: "",
-          unit: "",
+          thing: thingsList[0].value,
+          charactristic: charactristicList[0].value,
+          unit: units[0].value,
         },
   });
 
   const onSubmit: SubmitHandler<IAirQualityData> = (data) => {
-    console.log("submit", data);
-    if (card) onAddWidget({ ...card, airQualityData: data });
+    if (edit) {
+      dispatch(
+        editWidget({
+          dashboardId: edit.dashboardId,
+          widget: { ...edit.widget, airQualityData: data },
+          draft: edit.draft,
+          index: edit.index,
+        })
+      );
+    } else {
+      if (card) onAddWidget({ ...card, airQualityData: data });
+    }
 
-    console.log("widget", card);
     reset();
     onClose();
     onWidgetsClose();

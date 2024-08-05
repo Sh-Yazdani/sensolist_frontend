@@ -123,13 +123,6 @@ export default function ChartFormModal({
   const onSubmit: SubmitHandler<IChartData> = (data) => {
     // if (chart) {
     if (edit) {
-      console.log("edittt", {
-        dashboardId: edit.dashboardId,
-        widget: { ...edit.widget, chartData: data },
-        draft: edit.draft,
-        index: edit.index,
-      });
-
       dispatch(
         editWidget({
           dashboardId: edit.dashboardId,
