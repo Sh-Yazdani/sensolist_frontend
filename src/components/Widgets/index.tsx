@@ -58,12 +58,9 @@ export default function DashboardWidgets({
     setEditMode(false);
   };
   const onCancel = () => {
-    console.log("on cancel", selectedDashboard.id);
     dispatch(cancelDraftWidgets({ dashboardId: selectedDashboard.id }));
     setEditMode(false);
   };
-
-  console.log("selectedDashboard", selectedDashboard);
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
@@ -99,22 +96,24 @@ export default function DashboardWidgets({
         (selectedDashboard?.draftWidgets?.length || 0) ? (
           <div className="w-full flex flex-wrap gap-4">
             {selectedDashboard?.widgets &&
-              selectedDashboard?.widgets.map((wdg) => (
+              selectedDashboard?.widgets.map((wdg, i) => (
                 <Widget
-                  saved={false}
+                  saved={true}
                   dashboardId={selectedDashboard.id}
                   editMode={editMode}
                   key={wdg.name}
                   widget={wdg}
+                  index={i}
                 />
               ))}
-            {selectedDashboard.draftWidgets?.map((wdg) => (
+            {selectedDashboard.draftWidgets?.map((wdg, i) => (
               <Widget
-                saved={true}
+                saved={false}
                 dashboardId={selectedDashboard.id}
                 editMode={editMode}
                 key={wdg.name}
                 widget={wdg}
+                index={i}
               />
             ))}
           </div>

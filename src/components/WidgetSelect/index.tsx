@@ -72,12 +72,13 @@ export default function DashboardWidgetSelect({
       image: string;
     } | null>(null);
 
-  const { widgetEdit } = useSelector(
+  const { widgetEdit, dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
 
   const dispatch = useDispatch();
-  console.log("select sidebar edit widget:", widgetEdit);
+  console.log("dashboards", dashboards);
+  console.log("widgetEdit", widgetEdit);
 
   const widgets: IWidget[] = [
     {

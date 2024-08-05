@@ -4,7 +4,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface DashboardState {
   dashboards: IDashboard[];
   pinedDashboards: IDashboard[];
-  widgetEdit?: { dashboardId: number; widget: ISubWidget; draft?: boolean };
+  widgetEdit?: {
+    index: number;
+    dashboardId: number;
+    widget: ISubWidget;
+    draft: boolean;
+  };
 }
 
 const initialState: DashboardState = {
@@ -129,12 +134,47 @@ export const dashboardSlice = createSlice({
         dashboardId: number;
         widget: ISubWidget;
         draft: boolean;
+        index: number;
       }>
     ) => {
       state.widgetEdit = action.payload;
     },
     removeWidgetEdit: (state) => {
       delete state.widgetEdit;
+    },
+    editWidget: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: ISubWidget;
+        draft: boolean;
+        index: number;
+      }>
+    ) => {
+      // state.dashboards = [];
+      if (action.payload.draft) {
+        state.dashboards = state.dashboards.map((dash) =>
+          dash.id === action.payload.dashboardId
+            ? {
+                ...dash,
+                draftWidgets: dash.draftWidgets?.map((wdg, i) =>
+                  i === action.payload.index ? action.payload.widget : wdg
+                ),
+              }
+            : dash
+        );
+      } else {
+        state.dashboards = state.dashboards.map((dash) =>
+          dash.id === action.payload.dashboardId
+            ? {
+                ...dash,
+                widgets: dash.widgets?.map((wdg, i) =>
+                  i === action.payload.index ? action.payload.widget : wdg
+                ),
+              }
+            : dash
+        );
+      }
     },
   },
 });
@@ -151,5 +191,6 @@ export const {
   cancelDraftWidgets,
   addDraftWidgets,
   removeWidgetEdit,
+  editWidget,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
