@@ -1,9 +1,11 @@
 "use client";
 
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { ISelectOption, ISubWidget } from "@/types/general";
 import { Add, Trash } from "iconsax-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -19,7 +21,8 @@ interface TableFormModalProps {
   edit?: {
     dashboardId: number;
     widget: ISubWidget;
-    draft?: boolean;
+    draft: boolean;
+    index: number;
   };
 }
 
@@ -38,6 +41,7 @@ export default function TableFormModal({
   dashboardId,
   onWidgetsClose,
   onAddWidget,
+  edit,
 }: TableFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -69,6 +73,15 @@ export default function TableFormModal({
     },
   ];
 
+  const dispatch = useDispatch();
+
+  const [values, setValues] = useState(edit?.widget.tableData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.tableData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -82,21 +95,41 @@ export default function TableFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateWidgetInputs>();
+  } = useForm<ICreateWidgetInputs>({
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: "",
+          charactristic: "",
+          columns: [],
+        },
+  });
 
   const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
     console.log("submit", data);
-    if (table) {
-      onAddWidget({
-        ...table,
-        tableData: {
-          title: data.title,
-          thing: data.thing,
-          charactristic: data.charactristic,
-          description: data.description,
-          columns: data.columns,
-        },
-      });
+    if (edit) {
+      dispatch(
+        editWidget({
+          dashboardId: edit.dashboardId,
+          widget: { ...edit.widget, tableData: data },
+          draft: edit.draft,
+          index: edit.index,
+        })
+      );
+    } else {
+      if (table) {
+        onAddWidget({
+          ...table,
+          tableData: {
+            title: data.title,
+            thing: data.thing,
+            charactristic: data.charactristic,
+            description: data.description,
+            columns: data.columns,
+          },
+        });
+      }
     }
     reset();
     onClose();
@@ -232,7 +265,7 @@ export default function TableFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

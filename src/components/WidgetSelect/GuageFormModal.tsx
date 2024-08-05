@@ -1,8 +1,10 @@
 "use client";
 
-import { ISelectOption, ISubWidget } from "@/types/general";
-import { useState } from "react";
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
+import { IGuageData, ISelectOption, ISubWidget } from "@/types/general";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -12,22 +14,14 @@ interface GuageFormModalProps {
   open: boolean;
   onClose: () => void;
   chart: { name: string; image: string } | null;
-  onAddWidget: () => void;
+  onAddWidget: (widget: ISubWidget) => void;
+  onWidgetsClose: () => void;
   edit?: {
     dashboardId: number;
     widget: ISubWidget;
-    draft?: boolean;
+    draft: boolean;
+    index: number;
   };
-}
-
-interface ICreateWidgetInputs {
-  title: string;
-  thing: string;
-  charactristic: string;
-  min: number;
-  max: number;
-  unit: string;
-  description?: string;
 }
 
 export default function GuageFormModal({
@@ -35,6 +29,8 @@ export default function GuageFormModal({
   onClose,
   chart,
   onAddWidget,
+  edit,
+  onWidgetsClose,
 }: GuageFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -81,6 +77,15 @@ export default function GuageFormModal({
     },
   ];
 
+  const dispatch = useDispatch();
+
+  const [values, setValues] = useState(edit?.widget.guageData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.guageData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -96,13 +101,35 @@ export default function GuageFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<ICreateWidgetInputs>();
+  } = useForm<IGuageData>({
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: thingsList[0].value,
+          charactristic: charactristicList[0].value,
+          min: 0,
+          max: 0,
+          unit: unitList[0].value,
+        },
+  });
 
-  const onSubmit: SubmitHandler<ICreateWidgetInputs> = (data) => {
-    console.log("submit", data);
+  const onSubmit: SubmitHandler<IGuageData> = (data) => {
+    if (edit) {
+      dispatch(
+        editWidget({
+          dashboardId: edit.dashboardId,
+          widget: { ...edit.widget, guageData: data },
+          draft: edit.draft,
+          index: edit.index,
+        })
+      );
+    } else {
+      if (chart) onAddWidget({ ...chart, guageData: data });
+    }
     reset();
-    onAddWidget();
     onClose();
+    onWidgetsClose();
   };
 
   return (
@@ -192,7 +219,7 @@ export default function GuageFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

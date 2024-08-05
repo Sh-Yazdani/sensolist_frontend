@@ -56,6 +56,9 @@ export interface ISubWidget {
   airQualityData?: IAirQualityData;
   indoorEnvironmentData?: IIndoorEnvironmentData;
   outdoorEnvironmentData?: IOutdoorEnvironmentData;
+  guageData?: IGuageData;
+  cardData?: ICardData;
+  alarmData?: IAlarmData;
 }
 
 export interface ICreateDashboardInputs {
@@ -124,11 +127,6 @@ export interface IWidget {
   subWidget?: ISubWidget[];
 }
 
-export interface ISubWidget {
-  name: string;
-  image: string;
-}
-
 export interface IChartData {
   title: string;
   thing: string;
@@ -138,6 +136,31 @@ export interface IChartData {
   yAxesMin: number;
   yAxesMax: number;
   yAxesUnit: string;
+  description?: string;
+}
+
+export interface IAlarmData {
+  title: string;
+  thing: string;
+  charactristic: string;
+}
+
+export interface IGuageData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  min: number;
+  max: number;
+  unit: string;
+  description?: string;
+}
+
+export interface ICardData {
+  title: string;
+  thing: string;
+  value: string;
+  unit: string;
+  charactristic: string;
   description?: string;
 }
 
