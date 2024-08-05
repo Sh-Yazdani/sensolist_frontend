@@ -15,6 +15,7 @@ interface WidgetProps {
   editMode: boolean;
   dashboardId: number;
   saved: boolean;
+  index: number;
 }
 
 export default function Widget({
@@ -22,8 +23,10 @@ export default function Widget({
   editMode,
   dashboardId,
   saved,
+  index,
 }: WidgetProps) {
   const dispatch = useDispatch();
+  console.log("eidget", widget.name, saved);
   return (
     <WidgetCardContainer
       onEditSelect={() => {
@@ -32,6 +35,7 @@ export default function Widget({
             dashboardId: dashboardId,
             widget: widget,
             draft: !saved,
+            index: index,
           })
         );
       }}

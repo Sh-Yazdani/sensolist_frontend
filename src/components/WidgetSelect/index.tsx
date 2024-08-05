@@ -72,12 +72,13 @@ export default function DashboardWidgetSelect({
       image: string;
     } | null>(null);
 
-  const { widgetEdit } = useSelector(
+  const { widgetEdit, dashboards } = useSelector(
     (state: RootState) => state.dashboardSlice
   );
 
   const dispatch = useDispatch();
-  console.log("select sidebar edit widget:", widgetEdit);
+  console.log("dashboards", dashboards);
+  console.log("widgetEdit", widgetEdit);
 
   const widgets: IWidget[] = [
     {
@@ -391,6 +392,7 @@ export default function DashboardWidgetSelect({
             setAirQualityModalOpen(null);
           }
         }}
+        edit={widgetEdit}
       />
       <IndoorEnvironmentFormModal
         onAddWidget={(wdg: ISubWidget) => {
@@ -446,12 +448,10 @@ export default function DashboardWidgetSelect({
         edit={widgetEdit}
       />
       <GuageFormModal
-        onAddWidget={() => {
-          if (guageModalOpen) {
-            onAddWidget(guageModalOpen);
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
+        onWidgetsClose={onClose}
         chart={guageModalOpen}
         open={!!guageModalOpen || widgetEdit?.widget.parent === ""}
         onClose={() => {
@@ -464,11 +464,8 @@ export default function DashboardWidgetSelect({
         edit={widgetEdit}
       />
       <CardFormModal
-        onAddWidget={() => {
-          if (cardModalOpen) {
-            onAddWidget(cardModalOpen);
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         chart={cardModalOpen}
         open={!!cardModalOpen || widgetEdit?.widget.parent === ""}
@@ -479,14 +476,12 @@ export default function DashboardWidgetSelect({
             setCardModalOpen(null);
           }
         }}
+        onWidgetsClose={onClose}
         edit={widgetEdit}
       />
       <AlarmCountFormModal
-        onAddWidget={() => {
-          if (alarmCountModalOpen) {
-            onAddWidget(alarmCountModalOpen);
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         chart={alarmCountModalOpen}
         open={!!alarmCountModalOpen || widgetEdit?.widget.parent === ""}
@@ -497,6 +492,7 @@ export default function DashboardWidgetSelect({
             setAlarmCountModalOpen(null);
           }
         }}
+        onWidgetsClose={onClose}
         edit={widgetEdit}
       />
     </>

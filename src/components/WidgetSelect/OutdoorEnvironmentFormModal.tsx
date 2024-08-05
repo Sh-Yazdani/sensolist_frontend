@@ -1,11 +1,12 @@
 "use client";
 
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import {
   IOutdoorEnvironmentData,
   ISelectOption,
   ISubWidget,
 } from "@/types/general";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
@@ -23,7 +24,8 @@ interface OutdoorEnvironmentFormModalProps {
   edit?: {
     dashboardId: number;
     widget: ISubWidget;
-    draft?: boolean;
+    draft: boolean;
+    index: number;
   };
 }
 
@@ -34,6 +36,7 @@ export default function ChartFormModal({
   onWidgetsClose,
   dashboardId,
   onAddWidget,
+  edit,
 }: OutdoorEnvironmentFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -67,6 +70,13 @@ export default function ChartFormModal({
 
   const dispatch = useDispatch();
 
+  const [values, setValues] = useState(edit?.widget.outdoorEnvironmentData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.outdoorEnvironmentData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -80,11 +90,23 @@ export default function ChartFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IOutdoorEnvironmentData>();
+  } = useForm<IOutdoorEnvironmentData>({
+    values: values ? values : { title: "", thing: "", charactristic: "" },
+  });
 
   const onSubmit: SubmitHandler<IOutdoorEnvironmentData> = (data) => {
-    console.log("submit", data);
-    if (card) onAddWidget({ ...card, outdoorEnvironmentData: data });
+    if (edit) {
+      dispatch(
+        editWidget({
+          dashboardId: edit.dashboardId,
+          widget: { ...edit.widget, outdoorEnvironmentData: data },
+          draft: edit.draft,
+          index: edit.index,
+        })
+      );
+    } else {
+      if (card) onAddWidget({ ...card, outdoorEnvironmentData: data });
+    }
 
     console.log("widget", card);
     reset();
@@ -153,7 +175,7 @@ export default function ChartFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

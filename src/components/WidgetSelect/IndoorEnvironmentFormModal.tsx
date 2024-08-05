@@ -1,11 +1,12 @@
 "use client";
 
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import {
   IIndoorEnvironmentData,
   ISelectOption,
   ISubWidget,
 } from "@/types/general";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Button from "../UI/Button";
@@ -23,17 +24,19 @@ interface IndoorEnvironmentFormModalProps {
   edit?: {
     dashboardId: number;
     widget: ISubWidget;
-    draft?: boolean;
+    draft: boolean;
+    index: number;
   };
 }
 
-export default function ChartFormModal({
+export default function IndoorEnvironmentFormModal({
   open,
   onClose,
   card,
   onWidgetsClose,
   dashboardId,
   onAddWidget,
+  edit,
 }: IndoorEnvironmentFormModalProps) {
   const thingsList: ISelectOption[] = [
     {
@@ -67,6 +70,13 @@ export default function ChartFormModal({
 
   const dispatch = useDispatch();
 
+  const [values, setValues] = useState(edit?.widget.indoorEnvironmentData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.indoorEnvironmentData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
   const [selectedThing, setSelectedThing] = useState<ISelectOption>(
     thingsList[0]
   );
@@ -80,11 +90,29 @@ export default function ChartFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IIndoorEnvironmentData>();
+  } = useForm<IIndoorEnvironmentData>({
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: thingsList[0].value,
+          charactristic: charactristicList[0].value,
+        },
+  });
 
   const onSubmit: SubmitHandler<IIndoorEnvironmentData> = (data) => {
-    console.log("submit", data);
-    if (card) onAddWidget({ ...card, indoorEnvironmentData: data });
+    if (edit) {
+      dispatch(
+        editWidget({
+          dashboardId: edit.dashboardId,
+          widget: { ...edit.widget, indoorEnvironmentData: data },
+          draft: edit.draft,
+          index: edit.index,
+        })
+      );
+    } else {
+      if (card) onAddWidget({ ...card, indoorEnvironmentData: data });
+    }
 
     console.log("widget", card);
     reset();
@@ -153,7 +181,7 @@ export default function ChartFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

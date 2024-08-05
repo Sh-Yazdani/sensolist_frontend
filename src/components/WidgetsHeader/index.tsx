@@ -52,6 +52,7 @@ export default function WidgetsHeader({
           </Button>
           <Button
             onClick={() => {
+              console.log("cancelll");
               onCancel();
             }}
             className="mx-4 text-neutral-6"

@@ -23,6 +23,20 @@ interface DashboardWidgetsProps {
 export default function DashboardWidgets({
   dashboardId,
 }: DashboardWidgetsProps) {
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const headers = {
+  //       Authorization:
+  //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcklkIjoiNjZhZjVmZjdmODk1Yzk3NTc5YzdlZTcyIiwicGhvbmVudW1iZXIiOiIrMTkxMzk2MzM1ODkiLCJzeXN0ZW1Sb2xlIjoiQWRtaW4ifSwiaWF0IjoxNzIyNzg3MDEzLCJleHAiOjE3MjI3ODc5MTN9.RLKAV6D7Nw51z139mg9tOagHOwGsUjyPbga8JCvgtqA",
+  //     };
+  //     const res = await fetch(
+  //       "http://185.110.189.232:3123/api/data?sender=sns0000001",
+  //       { headers }
+  //     );
+  //     console.log("get data", res.json());
+  //   };
+  //   fetchData();
+  // }, []);
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   // const [widgets, setWidgets] = useState<ISubWidget[]>([]);
@@ -44,11 +58,9 @@ export default function DashboardWidgets({
     setEditMode(false);
   };
   const onCancel = () => {
-    cancelDraftWidgets({ dashboardId: selectedDashboard.id });
+    dispatch(cancelDraftWidgets({ dashboardId: selectedDashboard.id }));
     setEditMode(false);
   };
-
-  console.log("selectedDashboard", selectedDashboard);
 
   return (
     <div className="flex flex-col h-full flex-1 relative md:pl-5 overflow-hidden">
@@ -84,22 +96,24 @@ export default function DashboardWidgets({
         (selectedDashboard?.draftWidgets?.length || 0) ? (
           <div className="w-full flex flex-wrap gap-4">
             {selectedDashboard?.widgets &&
-              selectedDashboard?.widgets.map((wdg) => (
+              selectedDashboard?.widgets.map((wdg, i) => (
                 <Widget
-                  saved={false}
+                  saved={true}
                   dashboardId={selectedDashboard.id}
                   editMode={editMode}
                   key={wdg.name}
                   widget={wdg}
+                  index={i}
                 />
               ))}
-            {selectedDashboard.draftWidgets?.map((wdg) => (
+            {selectedDashboard.draftWidgets?.map((wdg, i) => (
               <Widget
-                saved={true}
+                saved={false}
                 dashboardId={selectedDashboard.id}
                 editMode={editMode}
                 key={wdg.name}
                 widget={wdg}
+                index={i}
               />
             ))}
           </div>
