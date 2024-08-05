@@ -58,7 +58,8 @@ export default function DashboardWidgets({
     setEditMode(false);
   };
   const onCancel = () => {
-    cancelDraftWidgets({ dashboardId: selectedDashboard.id });
+    console.log("on cancel", selectedDashboard.id);
+    dispatch(cancelDraftWidgets({ dashboardId: selectedDashboard.id }));
     setEditMode(false);
   };
 
