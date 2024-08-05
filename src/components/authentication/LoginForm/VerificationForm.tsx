@@ -1,6 +1,5 @@
 import FormError from "@/components/UI/FormError";
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -29,15 +28,20 @@ export default function VerificationForm({
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const resault = await signIn("credentials", {
-      redirect: false,
-      otpToken: otpToken,
-      code: verificationValue,
-    });
-    if (resault?.ok) {
+    // const resault = await signIn("credentials", {
+    //   redirect: false,
+    //   otpToken: otpToken,
+    //   code: verificationValue,
+    // });
+    // if (resault?.ok) {
+    //   router.push("/");
+    // } else if (resault?.error) {
+    //   dispatch(createAlert({ message: resault.error, type: "error" }));
+    // }
+    if (verificationValue === "12345") {
       router.push("/");
-    } else if (resault?.error) {
-      dispatch(createAlert({ message: resault.error, type: "error" }));
+    } else {
+      dispatch(createAlert({ message: "invelid code", type: "error" }));
     }
   };
   return (
