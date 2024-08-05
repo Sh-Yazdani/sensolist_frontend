@@ -106,7 +106,18 @@ export default function ChartFormModal({
     reset,
     formState: { errors },
   } = useForm<IChartData>({
-    values: values,
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: "",
+          charactristic: "",
+          xAxesLabel: "",
+          yAxesLabel: "",
+          yAxesMin: 0,
+          yAxesMax: 0,
+          yAxesUnit: "",
+        },
   });
 
   const onSubmit: SubmitHandler<IChartData> = (data) => {
