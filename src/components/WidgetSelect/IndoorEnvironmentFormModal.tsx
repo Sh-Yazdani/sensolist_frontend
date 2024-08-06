@@ -114,7 +114,6 @@ export default function IndoorEnvironmentFormModal({
       if (card) onAddWidget({ ...card, indoorEnvironmentData: data });
     }
 
-    console.log("widget", card);
     reset();
     onClose();
     onWidgetsClose();

@@ -1,12 +1,13 @@
 "use client";
 
 import { removeWidgetEdit } from "@/lib/features/dashboard/dashboardSlice";
-import { RootState } from "@/lib/store";
+import { fetchThings } from "@/lib/features/things/thingsSlice";
+import { AppDispatch, RootState } from "@/lib/store";
 import { ISubWidget, IWidget } from "@/types/general";
 import { Close } from "@mui/icons-material";
 import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AirQualityFormModal from "./AirQualityFormModal";
 import AlarmCountFormModal from "./AlarmCountFormModal";
@@ -76,9 +77,11 @@ export default function DashboardWidgetSelect({
     (state: RootState) => state.dashboardSlice
   );
 
-  const dispatch = useDispatch();
-  console.log("dashboards", dashboards);
-  console.log("widgetEdit", widgetEdit);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchThings());
+  }, [dispatch]);
 
   const widgets: IWidget[] = [
     {

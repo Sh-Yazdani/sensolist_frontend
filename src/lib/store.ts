@@ -3,10 +3,17 @@ import appletSlice from "./features/applet/appletSlice";
 import dashboardSlice from "./features/dashboard/dashboardSlice";
 import notificationReducer from "./features/notification/notificatioSlice";
 import profileSlice from "./features/profile/profileSlice";
+import thingsSlice from "./features/things/thingsSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { notificationReducer, profileSlice, appletSlice, dashboardSlice },
+    reducer: {
+      notificationReducer,
+      profileSlice,
+      appletSlice,
+      dashboardSlice,
+      thingsSlice,
+    },
   });
 };
 

@@ -12,7 +12,7 @@ export default function ProtectRoute({ children }: ProtectRouteProps) {
   console.log("session", session);
   const router = useRouter();
   if (!session) {
-    router.push("authentication/login");
+    router.push("/authentication/login");
   }
   return <>{children}</>;
 }
