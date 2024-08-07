@@ -127,16 +127,20 @@ export interface IWidget {
   subWidget?: ISubWidget[];
 }
 
-export interface IChartData {
+export interface IChartFormData {
   title: string;
   thing: string;
-  charactristic: string;
   xAxesLabel: string;
   yAxesLabel: string;
   yAxesMin: number;
   yAxesMax: number;
   yAxesUnit: string;
   description?: string;
+}
+
+export interface IChartData extends IChartFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IAlarmData {
@@ -309,6 +313,7 @@ export interface IThing {
   model: string;
   name: string;
   type: string;
+  senderId: string;
 }
 
 export interface ICharactristic {

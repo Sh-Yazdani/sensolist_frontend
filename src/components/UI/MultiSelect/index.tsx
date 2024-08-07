@@ -5,6 +5,7 @@ import { Checkbox } from "flowbite-react";
 import { ArrowDown2 } from "iconsax-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import DropDownModal from "../DropDownModal";
+import FormError from "../FormError";
 
 interface MultiSelectProps {
   options: ISelectOption[];
@@ -12,6 +13,7 @@ interface MultiSelectProps {
   selectedValues: ISelectOption[];
   setSelectedValues: Dispatch<SetStateAction<ISelectOption[]>>;
   label: string;
+  error?: string;
 }
 
 export default function MultiSelect({
@@ -20,6 +22,7 @@ export default function MultiSelect({
   selectedValues,
   setSelectedValues,
   label,
+  error,
 }: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
@@ -47,6 +50,8 @@ export default function MultiSelect({
           }`}
         />
       </button>
+
+      {error && <FormError error={error} />}
       {isOpen && (
         <>
           <div className=" absolute w-full bg-neutral-2 dark:bg-neutral-8 z-50 top-20 rounded-xl border border-neutral-4 dark:text-white">
