@@ -123,8 +123,8 @@ export default function ChartFormModal({
       ? values
       : {
           title: "",
-          thing: thingsList[0].value,
-          charactristic: charactristicList[0].value,
+          thing: thingsList[0] ? thingsList[0].value : "",
+          charactristic: charactristicList[0] ? charactristicList[0].value : "",
         },
   });
 

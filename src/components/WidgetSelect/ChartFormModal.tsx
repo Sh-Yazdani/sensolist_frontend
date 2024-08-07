@@ -122,15 +122,16 @@ export default function ChartFormModal({
       ? values
       : {
           title: "",
-          thing: "",
-          charactristic: "",
+          thing: thingsList[0] ? thingsList[0].value : "",
+          charactristic: charactristicList[0] ? charactristicList[0].value : "",
           xAxesLabel: "",
           yAxesLabel: "",
           yAxesMin: 0,
           yAxesMax: 0,
-          yAxesUnit: "",
+          yAxesUnit: yAxeUnitList[0].value,
         },
   });
+  console.log("chart form", errors);
 
   const onSubmit: SubmitHandler<IChartData> = (data) => {
     // if (chart) {
