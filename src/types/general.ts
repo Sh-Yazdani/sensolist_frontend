@@ -191,11 +191,15 @@ export interface IIndoorEnvironmentData extends IIndoorEnvironmentFormData {
   senderId: string;
 }
 
-export interface IOutdoorEnvironmentData {
+export interface IOutdoorEnvironmentFormData {
   title: string;
   thing: string;
-  charactristic: string;
   description?: string;
+}
+
+export interface IOutdoorEnvironmentData extends IOutdoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IWidgetTableData {
