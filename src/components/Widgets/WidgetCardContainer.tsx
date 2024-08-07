@@ -20,6 +20,7 @@ export default function WidgetCardContainer({
   onEditSelect,
 }: WidgetCardContainerProps) {
   const dispatch = useDispatch();
+  console.log("widget container widget", widget);
   return (
     <div className="overflow-auto w-[400px] bg-black-opacity-100 dark:bg-white-opacity-50 rounded-lg p-4 flex flex-col">
       {editMode && (

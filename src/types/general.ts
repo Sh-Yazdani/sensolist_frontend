@@ -24,7 +24,7 @@ export interface INotificationAlert {
   type: "success" | "warning" | "error";
 }
 
-export interface IThings {
+export interface _IThings {
   id: string;
   name: string;
   model: string;
@@ -276,20 +276,46 @@ export interface IEditNode {
   variable?: string;
 }
 
-// authentication
+// Response
 
-export interface ILoginResponse {
-  expiresOn?: string;
-  otpToken?: string;
+export interface IResponse {
   statusCode: number;
   message?: string;
   error?: string;
 }
 
-export interface IOtpResponse {
-  statusCode: number;
+// authentication
+
+export interface ILoginResponse extends IResponse {
+  expiresOn?: string;
+  otpToken?: string;
+}
+
+export interface IOtpResponse extends IResponse {
   accessToken?: string;
   expiresOn?: string;
-  message?: string;
-  error?: string;
+}
+
+//things
+
+export interface IThing {
+  actions: string[];
+  activition: string;
+  brand: string;
+  characteristics: string[];
+  description: string;
+  id: string;
+  images: { fieldId: string; isCover: boolean }[];
+  model: string;
+  name: string;
+  type: string;
+}
+
+export interface ICharactristic {
+  name: string;
+  sender_id: string;
+}
+
+export interface IThingsResponse extends IResponse {
+  list?: IThing[];
 }

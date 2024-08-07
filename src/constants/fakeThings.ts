@@ -1,6 +1,6 @@
-import { IThings } from "@/types/general";
+import { _IThings } from "@/types/general";
 
-export const fakeThings: IThings[] = [
+export const fakeThings: _IThings[] = [
   {
     id: "1",
     name: "product’s name",

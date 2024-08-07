@@ -1,10 +1,11 @@
 "use client";
 
 import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { ICardData, ISelectOption, ISubWidget } from "@/types/general";
+import { RootState } from "@/lib/store";
+import { ICardData, ISelectOption, ISubWidget, IThing } from "@/types/general";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -32,34 +33,6 @@ export default function ChartFormModal({
   edit,
   onWidgetsClose,
 }: CardFormModalProps) {
-  const thingsList: ISelectOption[] = [
-    {
-      title: "thing 1",
-      value: "thing1",
-    },
-    {
-      title: "thing 2",
-      value: "thing2",
-    },
-    {
-      title: "thing 3",
-      value: "thing3",
-    },
-  ];
-  const charactristicList: ISelectOption[] = [
-    {
-      title: "charactristic 1",
-      value: "charactristic1",
-    },
-    {
-      title: "charactristic 2",
-      value: "charactristic2",
-    },
-    {
-      title: "charactristic 3",
-      value: "charactristic3",
-    },
-  ];
   const unitList: ISelectOption[] = [
     {
       title: "kelvin",
@@ -80,12 +53,53 @@ export default function ChartFormModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, edit]);
 
-  const [selectedThing, setSelectedThing] = useState<ISelectOption>(
-    thingsList[0]
+  const { things, loading, error } = useSelector(
+    (state: RootState) => state.thingsSlice
   );
+  console.log("things", things);
+  const thingsList: ISelectOption[] = things.length
+    ? things.map((thing) => {
+        return {
+          title: thing.name,
+          value: thing.id,
+        };
+      })
+    : [];
+
+  const [selectedThingOption, setSelectedThingOption] =
+    useState<ISelectOption | null>(thingsList.length ? thingsList[0] : null);
+
+  useEffect(() => {
+    setSelectedThingOption(thingsList.length ? thingsList[0] : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [things]);
+
+  const [selectedThing, setSelectedThing] = useState<IThing>(
+    [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+  );
+  useEffect(() => {
+    setSelectedThing(
+      [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+    );
+  }, [selectedThingOption, things]);
+
+  const charactristicList: ISelectOption[] = selectedThing?.characteristics
+    .length
+    ? selectedThing.characteristics.map((char) => {
+        return {
+          title: char,
+          value: char,
+        };
+      })
+    : [];
 
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
+
+  useEffect(() => {
+    setSelectedCharactristic(charactristicList[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedThingOption, things]);
 
   const [selectedUnit, setSelectedUnit] = useState<ISelectOption>(unitList[0]);
 
@@ -100,8 +114,8 @@ export default function ChartFormModal({
       ? values
       : {
           title: "",
-          thing: thingsList[0].value,
-          charactristic: charactristicList[0].value,
+          thing: thingsList[0] ? thingsList[0].value : "",
+          charactristic: charactristicList[0] ? charactristicList[0].value : "",
           unit: unitList[0].value,
           value: "",
         },
@@ -141,28 +155,32 @@ export default function ChartFormModal({
           name="title"
           className="mt-6"
         />
-        <SelectInput
-          options={thingsList}
-          selectedValue={selectedThing}
-          setSelectedValue={(option) => {
-            setSelectedThing(option);
-          }}
-          register={register}
-          name="thing"
-          label="Thing"
-          className="mt-6"
-        />
-        <SelectInput
-          options={charactristicList}
-          selectedValue={selectedCharactristic}
-          setSelectedValue={(option) => {
-            setSelectedCharactristic(option);
-          }}
-          register={register}
-          name="charactristic"
-          label="Charactristic"
-          className="mt-6"
-        />
+        {selectedThingOption && (
+          <SelectInput
+            options={thingsList}
+            selectedValue={selectedThingOption}
+            setSelectedValue={(option) => {
+              setSelectedThingOption(option);
+            }}
+            register={register}
+            name="thing"
+            label="Thing"
+            className="mt-6"
+          />
+        )}
+        {selectedCharactristic && (
+          <SelectInput
+            options={charactristicList}
+            selectedValue={selectedCharactristic}
+            setSelectedValue={(option) => {
+              setSelectedCharactristic(option);
+            }}
+            register={register}
+            name="charactristic"
+            label="Charactristic"
+            className="mt-6"
+          />
+        )}
         <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4 flex gap-4 items-center">
           <div className="w-3/5">
             <Input

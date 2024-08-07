@@ -1,10 +1,11 @@
 "use client";
 
 import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IChartData, ISelectOption, ISubWidget } from "@/types/general";
+import { RootState } from "@/lib/store";
+import { IChartData, ISelectOption, ISubWidget, IThing } from "@/types/general";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
@@ -34,21 +35,6 @@ export default function ChartFormModal({
   onAddWidget,
   edit,
 }: ChartFormModalProps) {
-  const thingsList: ISelectOption[] = [
-    {
-      title: "thing 1",
-      value: "thing1",
-    },
-    {
-      title: "thing 2",
-      value: "thing2",
-    },
-    {
-      title: "thing 3",
-      value: "thing3",
-    },
-  ];
-
   const yAxeUnitList: ISelectOption[] = [
     {
       title: "unit 1",
@@ -64,21 +50,6 @@ export default function ChartFormModal({
     },
   ];
 
-  const charactristicList: ISelectOption[] = [
-    {
-      title: "charactristic 1",
-      value: "charactristic1",
-    },
-    {
-      title: "charactristic 2",
-      value: "charactristic2",
-    },
-    {
-      title: "charactristic 3",
-      value: "charactristic3",
-    },
-  ];
-
   const dispatch = useDispatch();
 
   const [values, setValues] = useState(edit?.widget.chartData);
@@ -88,12 +59,53 @@ export default function ChartFormModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, edit]);
 
-  const [selectedThing, setSelectedThing] = useState<ISelectOption>(
-    thingsList[0]
+  const { things, loading, error } = useSelector(
+    (state: RootState) => state.thingsSlice
   );
+  console.log("things", things);
+  const thingsList: ISelectOption[] = things.length
+    ? things.map((thing) => {
+        return {
+          title: thing.name,
+          value: thing.id,
+        };
+      })
+    : [];
+
+  const [selectedThingOption, setSelectedThingOption] =
+    useState<ISelectOption | null>(thingsList.length ? thingsList[0] : null);
+
+  useEffect(() => {
+    setSelectedThingOption(thingsList.length ? thingsList[0] : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [things]);
+
+  const [selectedThing, setSelectedThing] = useState<IThing>(
+    [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+  );
+  useEffect(() => {
+    setSelectedThing(
+      [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+    );
+  }, [selectedThingOption, things]);
+
+  const charactristicList: ISelectOption[] = selectedThing?.characteristics
+    .length
+    ? selectedThing.characteristics.map((char) => {
+        return {
+          title: char,
+          value: char,
+        };
+      })
+    : [];
 
   const [selectedCharactristic, setSelectedCharactristic] =
     useState<ISelectOption>(charactristicList[0]);
+
+  useEffect(() => {
+    setSelectedCharactristic(charactristicList[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedThingOption, things]);
 
   const [selectedYUnit, setSelectedYUnit] = useState<ISelectOption>(
     yAxeUnitList[0]
@@ -110,15 +122,16 @@ export default function ChartFormModal({
       ? values
       : {
           title: "",
-          thing: "",
-          charactristic: "",
+          thing: thingsList[0] ? thingsList[0].value : "",
+          charactristic: charactristicList[0] ? charactristicList[0].value : "",
           xAxesLabel: "",
           yAxesLabel: "",
           yAxesMin: 0,
           yAxesMax: 0,
-          yAxesUnit: "",
+          yAxesUnit: yAxeUnitList[0].value,
         },
   });
+  console.log("chart form", errors);
 
   const onSubmit: SubmitHandler<IChartData> = (data) => {
     // if (chart) {
@@ -141,6 +154,12 @@ export default function ChartFormModal({
     onWidgetsClose();
   };
 
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  if (!things.length) {
+    return <div>things nadarim</div>;
+  }
   return (
     <Modal onClose={onClose} open={open}>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
@@ -157,28 +176,33 @@ export default function ChartFormModal({
           name="title"
           className="mt-6"
         />
-        <SelectInput
-          options={thingsList}
-          selectedValue={selectedThing}
-          setSelectedValue={(option) => {
-            setSelectedThing(option);
-          }}
-          register={register}
-          name="thing"
-          label="Thing"
-          className="mt-6"
-        />
-        <SelectInput
-          options={charactristicList}
-          selectedValue={selectedCharactristic}
-          setSelectedValue={(option) => {
-            setSelectedCharactristic(option);
-          }}
-          register={register}
-          name="charactristic"
-          label="Charactristic"
-          className="mt-6"
-        />
+        {selectedThingOption && (
+          <SelectInput
+            options={thingsList}
+            selectedValue={selectedThingOption}
+            setSelectedValue={(option) => {
+              setSelectedThingOption(option);
+            }}
+            register={register}
+            name="thing"
+            label="Thing"
+            className="mt-6"
+          />
+        )}
+        {selectedCharactristic && (
+          <SelectInput
+            options={charactristicList}
+            selectedValue={selectedCharactristic}
+            setSelectedValue={(option) => {
+              setSelectedCharactristic(option);
+            }}
+            register={register}
+            name="charactristic"
+            label="Charactristic"
+            className="mt-6"
+          />
+        )}
+
         <div className="mt-6">X Axes</div>
         <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
           <div className="w-full md:w-1/2">
