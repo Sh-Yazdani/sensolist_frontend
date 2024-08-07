@@ -168,12 +168,16 @@ export interface ICardData {
   description?: string;
 }
 
-export interface IAirQualityData {
+export interface IAirQualityFormData {
   title: string;
   thing: string;
-  charactristic: string;
   unit: string;
   description?: string;
+}
+
+export interface IAirQualityData extends IAirQualityFormData {
+  senderId: string;
+  charactristic: string[];
 }
 
 export interface IIndoorEnvironmentFormData {
