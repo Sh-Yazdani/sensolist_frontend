@@ -176,11 +176,15 @@ export interface IAirQualityData {
   description?: string;
 }
 
-export interface IIndoorEnvironmentData {
+export interface IIndoorEnvironmentFormData {
   title: string;
   thing: string;
-  charactristic: string;
   description?: string;
+}
+
+export interface IIndoorEnvironmentData extends IIndoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IOutdoorEnvironmentData {

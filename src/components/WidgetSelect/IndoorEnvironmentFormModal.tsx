@@ -3,7 +3,7 @@
 import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
 import {
-  IIndoorEnvironmentData,
+  IIndoorEnvironmentFormData,
   ISelectOption,
   ISubWidget,
   IThing,
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import MultiSelect from "../UI/MultiSelect";
 import SelectInput from "../UI/SelectInput";
 
 interface IndoorEnvironmentFormModalProps {
@@ -88,11 +89,21 @@ export default function IndoorEnvironmentFormModal({
       })
     : [];
 
-  const [selectedCharactristic, setSelectedCharactristic] =
-    useState<ISelectOption>(charactristicList[0]);
+  const [selectedCharactristics, setSelectedCharactristics] = useState<
+    ISelectOption[]
+  >([]);
+
+  const [charactristicsError, setCharactristicsError] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
-    setSelectedCharactristic(charactristicList[0]);
+    setSelectedCharactristics([]);
+    setCharactristicsError(null);
+  }, [open]);
+
+  useEffect(() => {
+    setSelectedCharactristics([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedThingOption, things]);
 
@@ -102,33 +113,51 @@ export default function IndoorEnvironmentFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IIndoorEnvironmentData>({
+  } = useForm<IIndoorEnvironmentFormData>({
     values: values
       ? values
       : {
           title: "",
           thing: thingsList[0] ? thingsList[0].value : "",
-          charactristic: charactristicList[0] ? charactristicList[0].value : "",
         },
   });
 
-  const onSubmit: SubmitHandler<IIndoorEnvironmentData> = (data) => {
-    if (edit) {
-      dispatch(
-        editWidget({
-          dashboardId: edit.dashboardId,
-          widget: { ...edit.widget, indoorEnvironmentData: data },
-          draft: edit.draft,
-          index: edit.index,
-        })
-      );
+  const onSubmit: SubmitHandler<IIndoorEnvironmentFormData> = (data) => {
+    if (!selectedCharactristics.length) {
+      setCharactristicsError("Select at least one charactristic");
     } else {
-      if (card) onAddWidget({ ...card, indoorEnvironmentData: data });
-    }
+      if (edit) {
+        dispatch(
+          editWidget({
+            dashboardId: edit.dashboardId,
+            widget: {
+              ...edit.widget,
+              indoorEnvironmentData: {
+                ...data,
+                charactristic: selectedCharactristics.map((char) => char.value),
+                senderId: selectedThing.senderId,
+              },
+            },
+            draft: edit.draft,
+            index: edit.index,
+          })
+        );
+      } else {
+        if (card)
+          onAddWidget({
+            ...card,
+            indoorEnvironmentData: {
+              ...data,
+              charactristic: selectedCharactristics.map((char) => char.value),
+              senderId: selectedThing.senderId,
+            },
+          });
+      }
 
-    reset();
-    onClose();
-    onWidgetsClose();
+      reset();
+      onClose();
+      onWidgetsClose();
+    }
   };
   return (
     <Modal onClose={onClose} open={open}>
@@ -159,17 +188,14 @@ export default function IndoorEnvironmentFormModal({
             className="mt-6"
           />
         )}
-        {selectedCharactristic && (
-          <SelectInput
+        {charactristicList && (
+          <MultiSelect
             options={charactristicList}
-            selectedValue={selectedCharactristic}
-            setSelectedValue={(option) => {
-              setSelectedCharactristic(option);
-            }}
-            register={register}
-            name="charactristic"
-            label="Charactristic"
+            selectedValues={selectedCharactristics}
+            setSelectedValues={setSelectedCharactristics}
+            label="Charactristics"
             className="mt-6"
+            error={charactristicsError || undefined}
           />
         )}
         <Input
