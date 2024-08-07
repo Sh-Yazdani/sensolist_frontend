@@ -27,7 +27,6 @@ export default function DashboardContent({
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [dashboardEdit, setDashboardEdit] = useState<IDashboard | null>(null);
-  console.log("tessst", dashboards);
   return (
     <>
       {dashboards.length ? (

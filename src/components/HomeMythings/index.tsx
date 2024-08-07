@@ -1,4 +1,4 @@
-import { fakeThings } from "@/app/[locale]/(home)/myThings/page";
+import { fakeThings } from "@/constants/fakeThings";
 import { ArrowCircleRight2, Cpu } from "iconsax-react";
 import Link from "next/link";
 import MyThings from "./MyThingsCard";

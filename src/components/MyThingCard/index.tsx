@@ -1,9 +1,9 @@
-import { IThings } from "@/types/general";
+import { _IThings } from "@/types/general";
 import Image from "next/image";
 import Link from "next/link";
 
 interface MyThingCardProps {
-  thing: IThings;
+  thing: _IThings;
 }
 
 export default function MyThingCard({ thing }: MyThingCardProps) {

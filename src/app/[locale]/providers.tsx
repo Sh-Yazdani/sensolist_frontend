@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Provider } from "react-redux";
 import { AppStore, makeStore } from "../../lib/store";
 
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -12,10 +13,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     storeRef.current = makeStore();
   }
   return (
-    <Provider store={storeRef.current}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        {children}
-      </ThemeProvider>
-    </Provider>
+    <SessionProvider>
+      <Provider store={storeRef.current}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+        </ThemeProvider>
+      </Provider>
+    </SessionProvider>
   );
 }

@@ -4,6 +4,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface DashboardState {
   dashboards: IDashboard[];
   pinedDashboards: IDashboard[];
+  widgetEdit?: {
+    index: number;
+    dashboardId: number;
+    widget: ISubWidget;
+    draft: boolean;
+  };
 }
 
 const initialState: DashboardState = {
@@ -53,30 +59,122 @@ export const dashboardSlice = createSlice({
         (dash) => dash.id !== action.payload.id
       );
     },
-    addWidget: (
+    addWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widgets: ISubWidget[];
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) =>
+        dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              widgets: dash.widgets
+                ? [...dash.widgets, ...action.payload.widgets]
+                : [...action.payload.widgets],
+            }
+          : dash
+      );
+    },
+    addDraftWidgets: (
       state,
       action: PayloadAction<{
         dashboardId: number;
         widget: ISubWidget;
       }>
     ) => {
-      let dashboard: IDashboard = state.dashboards.filter(
-        (item) => item.id === action.payload.dashboardId
-      )[0];
-      const widgets = dashboard.widgets
-        ? [...dashboard.widgets, action.payload.widget]
-        : [action.payload.widget];
-      state.dashboards = [
-        ...state.dashboards.filter((item) => item.id !== dashboard.id),
-        {
-          id: dashboard.id,
-          name: dashboard.name,
-          description: dashboard.description,
-          image: dashboard.image,
-          pin: dashboard.pin,
-          widgets: widgets,
-        },
-      ];
+      state.dashboards = state.dashboards.map((dash) =>
+        dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: dash.draftWidgets
+                ? [...dash.draftWidgets, action.payload.widget]
+                : [action.payload.widget],
+            }
+          : dash
+      );
+    },
+    saveDraftWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) => {
+        const saveWidgets = dash.widgets ? dash.widgets : [];
+        const draftWidgets = dash.draftWidgets ? dash.draftWidgets : [];
+        return dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: [],
+              widgets: [...saveWidgets, ...draftWidgets],
+            }
+          : dash;
+      });
+    },
+    cancelDraftWidgets: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+      }>
+    ) => {
+      state.dashboards = state.dashboards.map((dash) => {
+        return dash.id === action.payload.dashboardId
+          ? {
+              ...dash,
+              draftWidgets: [],
+            }
+          : dash;
+      });
+    },
+    addWidgetEdit: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: ISubWidget;
+        draft: boolean;
+        index: number;
+      }>
+    ) => {
+      state.widgetEdit = action.payload;
+    },
+    removeWidgetEdit: (state) => {
+      delete state.widgetEdit;
+    },
+    editWidget: (
+      state,
+      action: PayloadAction<{
+        dashboardId: number;
+        widget: ISubWidget;
+        draft: boolean;
+        index: number;
+      }>
+    ) => {
+      // state.dashboards = [];
+      if (action.payload.draft) {
+        state.dashboards = state.dashboards.map((dash) =>
+          dash.id === action.payload.dashboardId
+            ? {
+                ...dash,
+                draftWidgets: dash.draftWidgets?.map((wdg, i) =>
+                  i === action.payload.index ? action.payload.widget : wdg
+                ),
+              }
+            : dash
+        );
+      } else {
+        state.dashboards = state.dashboards.map((dash) =>
+          dash.id === action.payload.dashboardId
+            ? {
+                ...dash,
+                widgets: dash.widgets?.map((wdg, i) =>
+                  i === action.payload.index ? action.payload.widget : wdg
+                ),
+              }
+            : dash
+        );
+      }
     },
   },
 });
@@ -87,6 +185,12 @@ export const {
   pinDashboard,
   unPinDashboard,
   editDashboard,
-  addWidget,
+  addWidgets,
+  addWidgetEdit,
+  saveDraftWidgets,
+  cancelDraftWidgets,
+  addDraftWidgets,
+  removeWidgetEdit,
+  editWidget,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

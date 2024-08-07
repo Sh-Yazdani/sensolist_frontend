@@ -1,13 +1,20 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IChartData, ISelectOption } from "@/types/general";
-import { useState } from "react";
+import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
+import { RootState } from "@/lib/store";
+import {
+  IChartFormData,
+  ISelectOption,
+  ISubWidget,
+  IThing,
+} from "@/types/general";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import MultiSelect from "../UI/MultiSelect";
 import SelectInput from "../UI/SelectInput";
 
 interface ChartFormModalProps {
@@ -16,6 +23,13 @@ interface ChartFormModalProps {
   chart: { name: string; image: string } | null;
   onWidgetsClose: () => void;
   dashboardId: number;
+  onAddWidget: (widget: ISubWidget) => void;
+  edit?: {
+    dashboardId: number;
+    widget: ISubWidget;
+    draft: boolean;
+    index: number;
+  };
 }
 
 export default function ChartFormModal({
@@ -24,22 +38,9 @@ export default function ChartFormModal({
   chart,
   onWidgetsClose,
   dashboardId,
+  onAddWidget,
+  edit,
 }: ChartFormModalProps) {
-  const thingsList: ISelectOption[] = [
-    {
-      title: "thing 1",
-      value: "thing1",
-    },
-    {
-      title: "thing 2",
-      value: "thing2",
-    },
-    {
-      title: "thing 3",
-      value: "thing3",
-    },
-  ];
-
   const yAxeUnitList: ISelectOption[] = [
     {
       title: "unit 1",
@@ -55,33 +56,77 @@ export default function ChartFormModal({
     },
   ];
 
-  const charactristicList: ISelectOption[] = [
-    {
-      title: "charactristic 1",
-      value: "charactristic1",
-    },
-    {
-      title: "charactristic 2",
-      value: "charactristic2",
-    },
-    {
-      title: "charactristic 3",
-      value: "charactristic3",
-    },
-  ];
-
   const dispatch = useDispatch();
 
-  const [selectedThing, setSelectedThing] = useState<ISelectOption>(
-    thingsList[0]
+  const [values, setValues] = useState(edit?.widget.chartData);
+  useEffect(() => {
+    reset();
+    setValues(edit?.widget.chartData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, edit]);
+
+  const { things, loading, error } = useSelector(
+    (state: RootState) => state.thingsSlice
+  );
+  const thingsList: ISelectOption[] = things.length
+    ? things.map((thing) => {
+        return {
+          title: thing.name,
+          value: thing.id,
+        };
+      })
+    : [];
+
+  const [selectedThingOption, setSelectedThingOption] =
+    useState<ISelectOption | null>(thingsList.length ? thingsList[0] : null);
+
+  useEffect(() => {
+    setSelectedThingOption(thingsList.length ? thingsList[0] : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [things]);
+
+  const [selectedThing, setSelectedThing] = useState<IThing>(
+    [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+  );
+  useEffect(() => {
+    setSelectedThing(
+      [...things.filter((thing) => thing.id === selectedThingOption?.value)][0]
+    );
+  }, [selectedThingOption, things]);
+
+  const charactristicList: ISelectOption[] = selectedThing?.characteristics
+    .length
+    ? selectedThing.characteristics.map((char) => {
+        return {
+          title: char,
+          value: char,
+        };
+      })
+    : [];
+
+  const [selectedCharactristics, setSelectedCharactristics] = useState<
+    ISelectOption[]
+  >([]);
+
+  const [charactristicsError, setCharactristicsError] = useState<string | null>(
+    null
   );
 
-  const [selectedCharactristic, setSelectedCharactristic] =
-    useState<ISelectOption>(charactristicList[0]);
+  useEffect(() => {
+    setSelectedCharactristics([]);
+    setCharactristicsError(null);
+  }, [open]);
+
+  useEffect(() => {
+    setSelectedCharactristics([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedThingOption, things]);
 
   const [selectedYUnit, setSelectedYUnit] = useState<ISelectOption>(
     yAxeUnitList[0]
   );
+
+  console.log("things", things);
 
   const {
     register,
@@ -89,22 +134,61 @@ export default function ChartFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IChartData>();
+  } = useForm<IChartFormData>({
+    values: values
+      ? values
+      : {
+          title: "",
+          thing: thingsList[0] ? thingsList[0].value : "",
+          xAxesLabel: "",
+          yAxesLabel: "",
+          yAxesMin: 0,
+          yAxesMax: 0,
+          yAxesUnit: yAxeUnitList[0].value,
+        },
+  });
+  console.log("chart form", errors);
 
-  const onSubmit: SubmitHandler<IChartData> = (data) => {
-    console.log("submit", data);
-    if (chart)
-      dispatch(
-        addWidget({
-          dashboardId: dashboardId,
-          widget: { ...chart, chartData: data },
-        })
-      );
-    console.log("widget", chart);
-    reset();
-    onClose();
-    onWidgetsClose();
+  const onSubmit: SubmitHandler<IChartFormData> = (data) => {
+    if (!selectedCharactristics.length) {
+      setCharactristicsError("Select at least one charactristic");
+    } else {
+      if (edit) {
+        dispatch(
+          editWidget({
+            dashboardId: edit.dashboardId,
+            widget: {
+              ...edit.widget,
+              chartData: {
+                ...data,
+                charactristic: selectedCharactristics.map((char) => char.value),
+                senderId: selectedThing.senderId,
+              },
+            },
+            draft: edit.draft,
+            index: edit.index,
+          })
+        );
+      } else {
+        if (chart)
+          onAddWidget({
+            ...chart,
+            chartData: {
+              ...data,
+              charactristic: selectedCharactristics.map((char) => char.value),
+              senderId: selectedThing.senderId,
+            },
+          });
+      }
+      reset();
+      onClose();
+      onWidgetsClose();
+    }
   };
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <Modal onClose={onClose} open={open}>
@@ -122,28 +206,30 @@ export default function ChartFormModal({
           name="title"
           className="mt-6"
         />
-        <SelectInput
-          options={thingsList}
-          selectedValue={selectedThing}
-          setSelectedValue={(option) => {
-            setSelectedThing(option);
-          }}
-          register={register}
-          name="thing"
-          label="Thing"
-          className="mt-6"
-        />
-        <SelectInput
-          options={charactristicList}
-          selectedValue={selectedCharactristic}
-          setSelectedValue={(option) => {
-            setSelectedCharactristic(option);
-          }}
-          register={register}
-          name="charactristic"
-          label="Charactristic"
-          className="mt-6"
-        />
+        {selectedThingOption && (
+          <SelectInput
+            options={thingsList}
+            selectedValue={selectedThingOption}
+            setSelectedValue={(option) => {
+              setSelectedThingOption(option);
+            }}
+            register={register}
+            name="thing"
+            label="Thing"
+            className="mt-6"
+          />
+        )}
+        {charactristicList && (
+          <MultiSelect
+            options={charactristicList}
+            selectedValues={selectedCharactristics}
+            setSelectedValues={setSelectedCharactristics}
+            label="Charactristics"
+            className="mt-6"
+            error={charactristicsError || undefined}
+          />
+        )}
+
         <div className="mt-6">X Axes</div>
         <div className="px-4 pt-4 py-6 rounded-lg bg-black-opacity-50 dark:bg-white-opacity-100 mt-4">
           <div className="w-full md:w-1/2">
@@ -233,7 +319,7 @@ export default function ChartFormModal({
             Cancel
           </Button>
           <Button className="w-[64%]" type="submit">
-            Create
+            {edit ? "edit" : "Create"}
           </Button>
         </div>
       </form>

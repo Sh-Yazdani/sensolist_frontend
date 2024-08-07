@@ -24,7 +24,7 @@ export interface INotificationAlert {
   type: "success" | "warning" | "error";
 }
 
-export interface IThings {
+export interface _IThings {
   id: string;
   name: string;
   model: string;
@@ -44,16 +44,21 @@ export interface IDashboard {
   image?: string;
   pin?: boolean;
   widgets?: ISubWidget[];
+  draftWidgets?: ISubWidget[];
 }
 
 export interface ISubWidget {
   name: string;
   image: string;
+  parent?: string;
   chartData?: IChartData;
   tableData?: IWidgetTableData;
   airQualityData?: IAirQualityData;
   indoorEnvironmentData?: IIndoorEnvironmentData;
   outdoorEnvironmentData?: IOutdoorEnvironmentData;
+  guageData?: IGuageData;
+  cardData?: ICardData;
+  alarmData?: IAlarmData;
 }
 
 export interface ICreateDashboardInputs {
@@ -122,15 +127,9 @@ export interface IWidget {
   subWidget?: ISubWidget[];
 }
 
-export interface ISubWidget {
-  name: string;
-  image: string;
-}
-
-export interface IChartData {
+export interface IChartFormData {
   title: string;
   thing: string;
-  charactristic: string;
   xAxesLabel: string;
   yAxesLabel: string;
   yAxesMin: number;
@@ -139,26 +138,68 @@ export interface IChartData {
   description?: string;
 }
 
-export interface IAirQualityData {
+export interface IChartData extends IChartFormData {
+  charactristic: string[];
+  senderId: string;
+}
+
+export interface IAlarmData {
   title: string;
   thing: string;
   charactristic: string;
+}
+
+export interface IGuageData {
+  title: string;
+  thing: string;
+  charactristic: string;
+  min: number;
+  max: number;
   unit: string;
   description?: string;
 }
 
-export interface IIndoorEnvironmentData {
+export interface ICardData {
   title: string;
   thing: string;
+  value: string;
+  unit: string;
   charactristic: string;
   description?: string;
 }
 
-export interface IOutdoorEnvironmentData {
+export interface IAirQualityFormData {
   title: string;
   thing: string;
-  charactristic: string;
+  unit: string;
   description?: string;
+}
+
+export interface IAirQualityData extends IAirQualityFormData {
+  senderId: string;
+  charactristic: string[];
+}
+
+export interface IIndoorEnvironmentFormData {
+  title: string;
+  thing: string;
+  description?: string;
+}
+
+export interface IIndoorEnvironmentData extends IIndoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
+}
+
+export interface IOutdoorEnvironmentFormData {
+  title: string;
+  thing: string;
+  description?: string;
+}
+
+export interface IOutdoorEnvironmentData extends IOutdoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IWidgetTableData {
@@ -250,3 +291,52 @@ export interface IEditNode {
   variableValue?: string;
   variable?: string;
 }
+
+// Response
+
+export interface IResponse {
+  statusCode: number;
+  message?: string;
+  error?: string;
+}
+
+// authentication
+
+export interface ILoginResponse extends IResponse {
+  expiresOn?: string;
+  otpToken?: string;
+}
+
+export interface IOtpResponse extends IResponse {
+  accessToken?: string;
+  expiresOn?: string;
+}
+
+//things
+
+export interface IThing {
+  actions: string[];
+  activition: string;
+  brand: string;
+  characteristics: string[];
+  description: string;
+  id: string;
+  images: { fieldId: string; isCover: boolean }[];
+  model: string;
+  name: string;
+  type: string;
+  senderId: string;
+}
+
+export interface ICharactristic {
+  name: string;
+  sender_id: string;
+}
+
+export interface IThingsResponse extends IResponse {
+  list?: IThing[];
+}
+
+//  widgets
+
+export interface IWidgetData {}

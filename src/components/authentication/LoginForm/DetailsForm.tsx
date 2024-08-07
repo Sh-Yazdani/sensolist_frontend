@@ -10,13 +10,17 @@ import SubmitButton from "../SubmitButton";
 import TermsAgreement from "../TermsAgreement";
 
 interface DetailsFormProps {
-  goToVerification: () => void;
   changePhoneNumber: (num: string) => void;
+  changePassword: (pass: string) => void;
+  getOtp: (phone: string, pass: string) => Promise<void>;
 }
 
 export default function DetailsForm({
-  goToVerification,
+  // goToVerification,
   changePhoneNumber,
+  // setOtpToken,
+  changePassword,
+  getOtp,
 }: DetailsFormProps) {
   const {
     register,
@@ -28,10 +32,11 @@ export default function DetailsForm({
   const [termsChecked, setTermsChecked] = useState<boolean>(false);
   const [termsError, setTermsError] = useState<string>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     if (termsChecked) {
       changePhoneNumber(data.phoneNumber);
-      goToVerification();
+      changePassword(data.password);
+      await getOtp(data.phoneNumber, data.password);
     } else {
       setTermsError("Please agree with terms and policies.");
     }

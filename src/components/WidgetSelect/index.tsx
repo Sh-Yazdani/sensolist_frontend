@@ -1,12 +1,14 @@
 "use client";
 
-import { addWidget } from "@/lib/features/dashboard/dashboardSlice";
-import { IWidget } from "@/types/general";
+import { removeWidgetEdit } from "@/lib/features/dashboard/dashboardSlice";
+import { fetchThings } from "@/lib/features/things/thingsSlice";
+import { AppDispatch, RootState } from "@/lib/store";
+import { ISubWidget, IWidget } from "@/types/general";
 import { Close } from "@mui/icons-material";
 import { ArrowLeft } from "iconsax-react";
 import Image from "next/image";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AirQualityFormModal from "./AirQualityFormModal";
 import AlarmCountFormModal from "./AlarmCountFormModal";
 import CardFormModal from "./CardFormModal";
@@ -20,12 +22,14 @@ interface DashboardWidgetSelectProps {
   isOpen: boolean;
   onClose: () => void;
   dashboardId: number;
+  onAddWidget: (widget: ISubWidget) => void;
 }
 
 export default function DashboardWidgetSelect({
   isOpen,
   onClose,
   dashboardId,
+  onAddWidget,
 }: DashboardWidgetSelectProps) {
   const [selectedWidget, setSelectedWidget] = useState<IWidget | null>(null);
   const [chartModalOpen, setChartModalOpen] = useState<{
@@ -69,7 +73,15 @@ export default function DashboardWidgetSelect({
       image: string;
     } | null>(null);
 
-  const dispatch = useDispatch();
+  const { widgetEdit, dashboards } = useSelector(
+    (state: RootState) => state.dashboardSlice
+  );
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchThings());
+  }, [dispatch]);
 
   const widgets: IWidget[] = [
     {
@@ -82,14 +94,17 @@ export default function DashboardWidgetSelect({
         {
           name: "time series",
           image: "/assets/widgets/time-series.svg",
+          parent: "chart",
         },
         {
           name: "line chart",
           image: "/assets/widgets/line-chart.svg",
+          parent: "chart",
         },
         {
           name: "bar chart",
           image: "/assets/widgets/bar-chart.svg",
+          parent: "chart",
         },
       ],
     },
@@ -100,14 +115,17 @@ export default function DashboardWidgetSelect({
         {
           name: "action button",
           image: "/assets/widgets/action-button.svg",
+          parent: "buttons",
         },
         {
           name: "power button",
           image: "/assets/widgets/power-button.svg",
+          parent: "buttons",
         },
         {
           name: "toggle button",
           image: "/assets/widgets/toggle-button.svg",
+          parent: "buttons",
         },
       ],
     },
@@ -121,10 +139,12 @@ export default function DashboardWidgetSelect({
         {
           name: "alarm count",
           image: "/assets/widgets/alarm-count.png",
+          parent: "count",
         },
         {
           name: "entity count",
           image: "/assets/widgets/entity-count.png",
+          parent: "count",
         },
       ],
     },
@@ -138,10 +158,12 @@ export default function DashboardWidgetSelect({
         {
           name: "simple guage",
           image: "/assets/widgets/simple-guage.png",
+          parent: "guage",
         },
         {
           name: "vertical bar",
           image: "/assets/widgets/vertical-bar.png",
+          parent: "guage",
         },
       ],
     },
@@ -152,10 +174,12 @@ export default function DashboardWidgetSelect({
         {
           name: "google map",
           image: "/assets/widgets/google-map.png",
+          parent: "map",
         },
         {
           name: "open map",
           image: "/assets/widgets/open-map.png",
+          parent: "map",
         },
       ],
     },
@@ -170,6 +194,7 @@ export default function DashboardWidgetSelect({
         {
           name: "entity table",
           image: "/assets/widgets/entity-table.png",
+          parent: "table",
         },
         // {
         //   name: "alarm table",
@@ -187,10 +212,12 @@ export default function DashboardWidgetSelect({
         {
           name: "value card",
           image: "/assets/widgets/value-card.png",
+          parent: "card",
         },
         {
           name: "progress bar",
           image: "/assets/widgets/progress-bar.svg",
+          parent: "card",
         },
       ],
     },
@@ -204,10 +231,12 @@ export default function DashboardWidgetSelect({
         {
           name: "indoor temprature card",
           image: "/assets/widgets/indoor-temprature.png",
+          parent: "indoor environment",
         },
         {
           name: "indoor temprature chart",
           image: "/assets/widgets/temprature-chart.png",
+          parent: "indoor environment",
         },
       ],
     },
@@ -221,10 +250,12 @@ export default function DashboardWidgetSelect({
         {
           name: "outdoor temprature card",
           image: "/assets/widgets/indoor-temprature.png",
+          parent: "outdoor environment",
         },
         {
           name: "outdoor temprature chart",
           image: "/assets/widgets/temprature-chart.png",
+          parent: "outdoor environment",
         },
       ],
     },
@@ -238,10 +269,12 @@ export default function DashboardWidgetSelect({
         {
           name: "air quality card",
           image: "/assets/widgets/air-quality-index.png",
+          parent: "air quality",
         },
         {
           name: "air quality chart card",
           image: "/assets/widgets/air-quality-chart.png",
+          parent: "air quality",
         },
       ],
     },
@@ -252,6 +285,7 @@ export default function DashboardWidgetSelect({
         {
           name: "video",
           image: "/assets/widgets/video.png",
+          parent: "video streaming",
         },
       ],
     },
@@ -328,103 +362,141 @@ export default function DashboardWidgetSelect({
         </div>
       </div>
       <ChartFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         chart={chartModalOpen}
-        open={!!chartModalOpen}
+        open={!!chartModalOpen || widgetEdit?.widget.parent === "chart"}
         onClose={() => {
-          setChartModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setChartModalOpen(null);
+          }
         }}
+        edit={widgetEdit}
       />
       <AirQualityFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={airQualityModalOpen}
-        open={!!airQualityModalOpen}
+        open={
+          !!airQualityModalOpen || widgetEdit?.widget.parent === "air quality"
+        }
         onClose={() => {
-          setAirQualityModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setAirQualityModalOpen(null);
+          }
         }}
+        edit={widgetEdit}
       />
       <IndoorEnvironmentFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={indoorEnvironmentModalOpen}
-        open={!!indoorEnvironmentModalOpen}
+        open={
+          !!indoorEnvironmentModalOpen ||
+          widgetEdit?.widget.parent === "indoor environment"
+        }
         onClose={() => {
-          setIndoorEnvironmentModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setIndoorEnvironmentModalOpen(null);
+          }
         }}
+        edit={widgetEdit}
       />
       <OutdoorEnvironmentFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         card={outdoorEnvironmentModalOpen}
-        open={!!outdoorEnvironmentModalOpen}
+        open={
+          !!outdoorEnvironmentModalOpen ||
+          widgetEdit?.widget.parent === "outdoor environment"
+        }
         onClose={() => {
           setOutdoorEnvironmentModalOpen(null);
         }}
+        edit={widgetEdit}
       />
       <TableFormModal
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
+        }}
         dashboardId={dashboardId}
         onWidgetsClose={onClose}
         table={tableModalOpen}
-        open={!!tableModalOpen}
+        open={!!tableModalOpen || widgetEdit?.widget.parent === "table"}
         onClose={() => {
-          setTableModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setTableModalOpen(null);
+          }
         }}
+        edit={widgetEdit}
       />
       <GuageFormModal
-        onAddWidget={() => {
-          if (guageModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: guageModalOpen,
-              })
-            );
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
+        onWidgetsClose={onClose}
         chart={guageModalOpen}
-        open={!!guageModalOpen}
+        open={!!guageModalOpen || widgetEdit?.widget.parent === ""}
         onClose={() => {
-          setGuageModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setGuageModalOpen(null);
+          }
         }}
+        edit={widgetEdit}
       />
       <CardFormModal
-        onAddWidget={() => {
-          if (cardModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: cardModalOpen,
-              })
-            );
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         chart={cardModalOpen}
-        open={!!cardModalOpen}
+        open={!!cardModalOpen || widgetEdit?.widget.parent === ""}
         onClose={() => {
-          setCardModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setCardModalOpen(null);
+          }
         }}
+        onWidgetsClose={onClose}
+        edit={widgetEdit}
       />
       <AlarmCountFormModal
-        onAddWidget={() => {
-          if (alarmCountModalOpen) {
-            dispatch(
-              addWidget({
-                dashboardId: dashboardId,
-                widget: alarmCountModalOpen,
-              })
-            );
-          }
-          onClose();
+        onAddWidget={(wdg: ISubWidget) => {
+          onAddWidget(wdg);
         }}
         chart={alarmCountModalOpen}
-        open={!!alarmCountModalOpen}
+        open={!!alarmCountModalOpen || widgetEdit?.widget.parent === ""}
         onClose={() => {
-          setAlarmCountModalOpen(null);
+          if (widgetEdit) {
+            dispatch(removeWidgetEdit());
+          } else {
+            setAlarmCountModalOpen(null);
+          }
         }}
+        onWidgetsClose={onClose}
+        edit={widgetEdit}
       />
     </>
   );

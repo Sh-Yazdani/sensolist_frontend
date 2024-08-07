@@ -1,5 +1,6 @@
 import FormError from "@/components/UI/FormError";
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,18 +8,42 @@ import VerificationInput from "react-verification-input";
 import SubmitButton from "../SubmitButton";
 import TimerCountDown from "../TimerCountdown/index.tsx";
 
-export default function VerificationForm() {
-  const dispatch = useDispatch();
+interface VerificationFormProps {
+  otpToken: string;
+  getOtp: (phone: string, pass: string) => Promise<void>;
+  phoneNumber: string;
+  password: string;
+}
+
+export default function VerificationForm({
+  otpToken,
+  getOtp,
+  phoneNumber,
+  password,
+}: VerificationFormProps) {
   const [error, setError] = useState<string>();
   const [verificationValue, setVerificationValue] = useState<string>();
+
   const router = useRouter();
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch();
+
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push("/");
-    dispatch(createAlert({ message: "login success", type: "success" }));
-    if (!verificationValue) {
-      setError("This field is required");
+    const resault = await signIn("credentials", {
+      redirect: false,
+      otpToken: otpToken,
+      code: verificationValue,
+    });
+    if (resault?.ok) {
+      router.push("/");
+    } else if (resault?.error) {
+      dispatch(createAlert({ message: resault.error, type: "error" }));
     }
+    // if (verificationValue === "12345") {
+    //   router.push("/");
+    // } else {
+    //   dispatch(createAlert({ message: "invelid code", type: "error" }));
+    // }
   };
   return (
     <>
@@ -43,7 +68,9 @@ export default function VerificationForm() {
           />
           {error && <FormError error="error" />}
         </div>
-        <TimerCountDown />
+        <TimerCountDown
+          getOtp={async () => await getOtp(phoneNumber, password)}
+        />
         <SubmitButton className="mt-auto">Login</SubmitButton>
       </form>
     </>
