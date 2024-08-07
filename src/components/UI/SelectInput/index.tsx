@@ -25,7 +25,6 @@ export default function SelectInput({
   name,
   label,
 }: SelectProps) {
-  console.log("select input", selectedValue);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className={`relative ${className}`}>
