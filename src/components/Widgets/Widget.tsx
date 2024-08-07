@@ -1,8 +1,10 @@
 "use client";
 
+import { getWidgetData } from "@/ApiCall/widgets";
 import { addWidgetEdit } from "@/lib/features/dashboard/dashboardSlice";
-import { ISubWidget } from "@/types/general";
+import { ISubWidget, IWidgetData } from "@/types/general";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
@@ -26,7 +28,22 @@ export default function Widget({
   index,
 }: WidgetProps) {
   const dispatch = useDispatch();
-  console.log("eidget", widget.name, saved);
+  console.log("eidget", widget);
+
+  const [airQualityData, setAirQualityData] = useState<IWidgetData>();
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await getWidgetData(
+        widget.airQualityData?.senderId || "",
+        widget.airQualityData?.charactristic || []
+      );
+      setAirQualityData(response);
+    };
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <WidgetCardContainer
       onEditSelect={() => {

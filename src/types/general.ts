@@ -336,3 +336,7 @@ export interface ICharactristic {
 export interface IThingsResponse extends IResponse {
   list?: IThing[];
 }
+
+//  widgets
+
+export interface IWidgetData {}
