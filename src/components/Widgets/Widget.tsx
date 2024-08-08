@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
+import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
 import TimeSeriesChart from "./TimeSeriesChart";
 import WidgetCardContainer from "./WidgetCardContainer";
@@ -28,6 +29,7 @@ export default function Widget({
   index,
 }: WidgetProps) {
   const dispatch = useDispatch();
+  console.log("eidget", widget);
 
   const [airQualityData, setAirQualityData] = useState<IWidgetData>();
 
@@ -97,10 +99,9 @@ export default function Widget({
         <>
           <EntityTable data={widget.tableData} />
         </>
-      ) : widget.name === "indoor environment" ? (
-        <></>
+      ) : widget.name === "indoor temprature card" ? (
+        <IndoorTemprature data={widget.indoorEnvironmentData} />
       ) : (
-        // <IndoorEnvironment data={widget.indoorEnvironmentData} />
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">
             {widget.name}

@@ -25,10 +25,10 @@ export default function WidgetCardContainer({
       {editMode && (
         <div className="w-full flex items-center justify-end">
           <button onClick={onEditSelect} className="mr-2">
-            <Edit className=" size-5" />
+            <Edit className=" size-5 dark:text-white" />
           </button>
           <button>
-            <Trash className=" size-5" />
+            <Trash className=" size-5 dark:text-white" />
           </button>
         </div>
       )}
