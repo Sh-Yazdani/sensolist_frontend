@@ -14,18 +14,16 @@ export default function IndoorTemprature({
   data,
   name,
 }: IndoorTempratureProps) {
-  const [widgetData, setWidgetData] = useState();
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
   useEffect(() => {
     const getData = async () => {
-      const response = await getWidgetData(
-        data?.senderId || "",
-        data?.charactristic || []
-      );
-      console.log("indoor response", response);
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["temperature"]);
+        setWidgetData(response.temperature || []);
+      }
     };
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -54,7 +52,9 @@ export default function IndoorTemprature({
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        17 °C
+        {widgetData?.length
+          ? widgetData[0].payload + " °C"
+          : "There is no data."}
       </div>
     </div>
   );

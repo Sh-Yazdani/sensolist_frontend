@@ -11,17 +11,16 @@ interface OutdoorPm25Props {
 }
 
 export default function OutdoorPm25({ data, name }: OutdoorPm25Props) {
-  const [widgetData, setWidgetData] = useState();
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
   useEffect(() => {
     const getData = async () => {
-      const response = await getWidgetData(
-        data?.senderId || "",
-        data?.charactristic || []
-      );
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["pm2.5"]);
+        setWidgetData(response.pm25 || []);
+      }
     };
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -41,7 +40,9 @@ export default function OutdoorPm25({ data, name }: OutdoorPm25Props) {
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        24 µg/m³
+        {widgetData?.length
+          ? widgetData[0].payload + " µg/m³"
+          : "There is no data."}
       </div>
     </div>
   );

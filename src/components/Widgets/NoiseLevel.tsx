@@ -11,18 +11,16 @@ interface NoiseLevelProps {
 }
 
 export default function NoiseLevel({ data, name }: NoiseLevelProps) {
-  const [widgetData, setWidgetData] = useState();
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
   useEffect(() => {
     const getData = async () => {
-      const response = await getWidgetData(
-        data?.senderId || "",
-        data?.charactristic || []
-      );
-      console.log("indoor response", response);
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["noise"]);
+        setWidgetData(response.noise || []);
+      }
     };
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -44,7 +42,9 @@ export default function NoiseLevel({ data, name }: NoiseLevelProps) {
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        30 dB
+        {widgetData?.length
+          ? widgetData[0].payload + " dB"
+          : "There is no data."}
       </div>
     </div>
   );

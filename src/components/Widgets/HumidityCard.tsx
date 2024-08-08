@@ -11,18 +11,16 @@ interface HumidityCardProps {
 }
 
 export default function HumidityCard({ data, name }: HumidityCardProps) {
-  const [widgetData, setWidgetData] = useState();
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
   useEffect(() => {
     const getData = async () => {
-      const response = await getWidgetData(
-        data?.senderId || "",
-        data?.charactristic || []
-      );
-      console.log("outdoor response", response);
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["humidity"]);
+        setWidgetData(response.humidity || []);
+      }
     };
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -42,7 +40,9 @@ export default function HumidityCard({ data, name }: HumidityCardProps) {
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        82 %
+        {widgetData?.length
+          ? widgetData[0].payload + " %"
+          : "There is no data."}
       </div>
     </div>
   );

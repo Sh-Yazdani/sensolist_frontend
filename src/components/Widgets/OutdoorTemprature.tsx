@@ -1,5 +1,9 @@
+"use client";
+
+import { getWidgetData } from "@/ApiCall/widgets";
 import { IOutdoorEnvironmentData } from "@/types/general";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface OutdoorTempratureProps {
   data?: IOutdoorEnvironmentData;
@@ -10,6 +14,16 @@ export default function OutdoorTemprature({
   data,
   name,
 }: OutdoorTempratureProps) {
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
+  useEffect(() => {
+    const getData = async () => {
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["temperature"]);
+        setWidgetData(response.temperature || []);
+      }
+    };
+    getData();
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -38,7 +52,9 @@ export default function OutdoorTemprature({
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        17 °C
+        {widgetData?.length
+          ? widgetData[0].payload + " °C"
+          : "There is no data."}
       </div>
     </div>
   );

@@ -11,17 +11,16 @@ interface OutdoorCo2Props {
 }
 
 export default function OutdoorCo2({ data, name }: OutdoorCo2Props) {
-  const [widgetData, setWidgetData] = useState();
+  const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
   useEffect(() => {
     const getData = async () => {
-      const response = await getWidgetData(
-        data?.senderId || "",
-        data?.charactristic || []
-      );
+      if (data?.senderId) {
+        const response = await getWidgetData(data?.senderId, ["co2"]);
+        setWidgetData(response.co2 || []);
+      }
     };
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -41,7 +40,9 @@ export default function OutdoorCo2({ data, name }: OutdoorCo2Props) {
         </div>
       </div>
       <div className="text-4xl mt-20 mx-auto text-primary-tint-1 dark:text-primary-tint-3">
-        450 ppm
+        {widgetData?.length
+          ? widgetData[0].payload + " ppm"
+          : "There is no data."}
       </div>
     </div>
   );
