@@ -8,10 +8,14 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
+import HumidityCard from "./HumidityCard";
 import IndoorCo2 from "./IndoorCo2";
+import IndoorPm25 from "./IndoorPm25";
 import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
+import NoiseLevel from "./NoiseLevel";
 import OutdoorTemprature from "./OutdoorTemprature";
+import PressureCard from "./PressureCard";
 import TimeSeriesChart from "./TimeSeriesChart";
 import WidgetCardContainer from "./WidgetCardContainer";
 
@@ -110,8 +114,16 @@ export default function Widget({
           name={widget.name}
           data={widget.indoorEnvironmentData}
         />
+      ) : widget.name === "Noise level card" ? (
+        <NoiseLevel name={widget.name} data={widget.indoorEnvironmentData} />
       ) : widget.name === "Indoor CO2 card" ? (
         <IndoorCo2 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Indoor PM2.5 card" ? (
+        <IndoorPm25 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Humidity card" ? (
+        <HumidityCard name={widget.name} data={widget.outdoorEnvironmentData} />
+      ) : widget.name === "Pressure card" ? (
+        <PressureCard name={widget.name} data={widget.outdoorEnvironmentData} />
       ) : (
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">
