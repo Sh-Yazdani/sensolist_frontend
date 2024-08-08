@@ -3,12 +3,17 @@ import Image from "next/image";
 
 interface IndoorTempratureProps {
   data?: IIndoorEnvironmentData;
+  name: string;
 }
 
-export default function IndoorTemprature({ data }: IndoorTempratureProps) {
+export default function IndoorTemprature({
+  data,
+  name,
+}: IndoorTempratureProps) {
   return (
     <div className=" aspect-square flex flex-col">
-      <div className="flex w-fit mx-auto mt-6">
+      <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
+      <div className="flex w-fit mx-auto mt-10">
         <Image
           className="dark:hidden"
           alt="temp"

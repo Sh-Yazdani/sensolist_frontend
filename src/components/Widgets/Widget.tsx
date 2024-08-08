@@ -100,7 +100,10 @@ export default function Widget({
           <EntityTable data={widget.tableData} />
         </>
       ) : widget.name === "indoor temprature card" ? (
-        <IndoorTemprature data={widget.indoorEnvironmentData} />
+        <IndoorTemprature
+          name={widget.name}
+          data={widget.indoorEnvironmentData}
+        />
       ) : (
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">
