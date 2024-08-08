@@ -10,6 +10,7 @@ import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
 import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
+import OutdoorTemprature from "./OutdoorTemprature";
 import TimeSeriesChart from "./TimeSeriesChart";
 import WidgetCardContainer from "./WidgetCardContainer";
 
@@ -101,6 +102,11 @@ export default function Widget({
         </>
       ) : widget.name === "indoor temprature card" ? (
         <IndoorTemprature
+          name={widget.name}
+          data={widget.indoorEnvironmentData}
+        />
+      ) : widget.name === "outdoor temprature card" ? (
+        <OutdoorTemprature
           name={widget.name}
           data={widget.indoorEnvironmentData}
         />
