@@ -28,7 +28,6 @@ export default function Widget({
   index,
 }: WidgetProps) {
   const dispatch = useDispatch();
-  console.log("eidget", widget);
 
   const [airQualityData, setAirQualityData] = useState<IWidgetData>();
 
@@ -98,7 +97,10 @@ export default function Widget({
         <>
           <EntityTable data={widget.tableData} />
         </>
+      ) : widget.name === "indoor environment" ? (
+        <></>
       ) : (
+        // <IndoorEnvironment data={widget.indoorEnvironmentData} />
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">
             {widget.name}
