@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const refreshAccessToken = async (token: JWT) => {
   try {
     const res = await fetch(
-      "https://sensolist-backend.vercel.app/auth/refresh",
+      "https://sensolist-backend.vercel.app/api/v2/auth/refresh",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

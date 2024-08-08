@@ -3,7 +3,7 @@
 import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
 import {
-  IAirQualityData,
+  IAirQualityFormData,
   ISelectOption,
   ISubWidget,
   IThing,
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import MultiSelect from "../UI/MultiSelect";
 import SelectInput from "../UI/SelectInput";
 
 interface AirQualityFormModalProps {
@@ -71,7 +72,6 @@ export default function AirQualityFormModal({
   const { things, loading, error } = useSelector(
     (state: RootState) => state.thingsSlice
   );
-  console.log("things", things);
   const thingsList: ISelectOption[] = things.length
     ? things.map((thing) => {
         return {
@@ -108,11 +108,21 @@ export default function AirQualityFormModal({
       })
     : [];
 
-  const [selectedCharactristic, setSelectedCharactristic] =
-    useState<ISelectOption>(charactristicList[0]);
+  const [selectedCharactristics, setSelectedCharactristics] = useState<
+    ISelectOption[]
+  >([]);
+
+  const [charactristicsError, setCharactristicsError] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
-    setSelectedCharactristic(charactristicList[0]);
+    setSelectedCharactristics([]);
+    setCharactristicsError(null);
+  }, [open]);
+
+  useEffect(() => {
+    setSelectedCharactristics([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedThingOption, things]);
 
@@ -124,29 +134,43 @@ export default function AirQualityFormModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IAirQualityData>({
+  } = useForm<IAirQualityFormData>({
     values: values
       ? values
       : {
           title: "",
           thing: thingsList[0] ? thingsList[0].value : "",
-          charactristic: charactristicList[0] ? charactristicList[0].value : "",
           unit: units[0].value,
         },
   });
 
-  const onSubmit: SubmitHandler<IAirQualityData> = (data) => {
+  const onSubmit: SubmitHandler<IAirQualityFormData> = (data) => {
     if (edit) {
       dispatch(
         editWidget({
           dashboardId: edit.dashboardId,
-          widget: { ...edit.widget, airQualityData: data },
+          widget: {
+            ...edit.widget,
+            airQualityData: {
+              ...data,
+              charactristic: selectedCharactristics.map((char) => char.value),
+              senderId: selectedThing.senderId,
+            },
+          },
           draft: edit.draft,
           index: edit.index,
         })
       );
     } else {
-      if (card) onAddWidget({ ...card, airQualityData: data });
+      if (card)
+        onAddWidget({
+          ...card,
+          airQualityData: {
+            ...data,
+            charactristic: selectedCharactristics.map((char) => char.value),
+            senderId: selectedThing.senderId,
+          },
+        });
     }
 
     reset();
@@ -182,17 +206,14 @@ export default function AirQualityFormModal({
             className="mt-6"
           />
         )}
-        {selectedCharactristic && (
-          <SelectInput
+        {charactristicList && (
+          <MultiSelect
             options={charactristicList}
-            selectedValue={selectedCharactristic}
-            setSelectedValue={(option) => {
-              setSelectedCharactristic(option);
-            }}
-            register={register}
-            name="charactristic"
-            label="Charactristic"
+            selectedValues={selectedCharactristics}
+            setSelectedValues={setSelectedCharactristics}
+            label="Charactristics"
             className="mt-6"
+            error={charactristicsError || undefined}
           />
         )}
         <SelectInput

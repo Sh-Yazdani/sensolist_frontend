@@ -2,13 +2,19 @@
 
 import { editWidget } from "@/lib/features/dashboard/dashboardSlice";
 import { RootState } from "@/lib/store";
-import { IChartData, ISelectOption, ISubWidget, IThing } from "@/types/general";
+import {
+  IChartFormData,
+  ISelectOption,
+  ISubWidget,
+  IThing,
+} from "@/types/general";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
+import MultiSelect from "../UI/MultiSelect";
 import SelectInput from "../UI/SelectInput";
 
 interface ChartFormModalProps {
@@ -62,7 +68,6 @@ export default function ChartFormModal({
   const { things, loading, error } = useSelector(
     (state: RootState) => state.thingsSlice
   );
-  console.log("things", things);
   const thingsList: ISelectOption[] = things.length
     ? things.map((thing) => {
         return {
@@ -99,11 +104,21 @@ export default function ChartFormModal({
       })
     : [];
 
-  const [selectedCharactristic, setSelectedCharactristic] =
-    useState<ISelectOption>(charactristicList[0]);
+  const [selectedCharactristics, setSelectedCharactristics] = useState<
+    ISelectOption[]
+  >([]);
+
+  const [charactristicsError, setCharactristicsError] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
-    setSelectedCharactristic(charactristicList[0]);
+    setSelectedCharactristics([]);
+    setCharactristicsError(null);
+  }, [open]);
+
+  useEffect(() => {
+    setSelectedCharactristics([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedThingOption, things]);
 
@@ -111,19 +126,20 @@ export default function ChartFormModal({
     yAxeUnitList[0]
   );
 
+  console.log("things", things);
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<IChartData>({
+  } = useForm<IChartFormData>({
     values: values
       ? values
       : {
           title: "",
           thing: thingsList[0] ? thingsList[0].value : "",
-          charactristic: charactristicList[0] ? charactristicList[0].value : "",
           xAxesLabel: "",
           yAxesLabel: "",
           yAxesMin: 0,
@@ -133,33 +149,47 @@ export default function ChartFormModal({
   });
   console.log("chart form", errors);
 
-  const onSubmit: SubmitHandler<IChartData> = (data) => {
-    // if (chart) {
-    if (edit) {
-      dispatch(
-        editWidget({
-          dashboardId: edit.dashboardId,
-          widget: { ...edit.widget, chartData: data },
-          draft: edit.draft,
-          index: edit.index,
-        })
-      );
+  const onSubmit: SubmitHandler<IChartFormData> = (data) => {
+    if (!selectedCharactristics.length) {
+      setCharactristicsError("Select at least one charactristic");
     } else {
-      if (chart) onAddWidget({ ...chart, chartData: data });
+      if (edit) {
+        dispatch(
+          editWidget({
+            dashboardId: edit.dashboardId,
+            widget: {
+              ...edit.widget,
+              chartData: {
+                ...data,
+                charactristic: selectedCharactristics.map((char) => char.value),
+                senderId: selectedThing.senderId,
+              },
+            },
+            draft: edit.draft,
+            index: edit.index,
+          })
+        );
+      } else {
+        if (chart)
+          onAddWidget({
+            ...chart,
+            chartData: {
+              ...data,
+              charactristic: selectedCharactristics.map((char) => char.value),
+              senderId: selectedThing.senderId,
+            },
+          });
+      }
+      reset();
+      onClose();
+      onWidgetsClose();
     }
-    // }
-
-    reset();
-    onClose();
-    onWidgetsClose();
   };
 
   if (loading) {
     return <div>loading...</div>;
   }
-  if (!things.length) {
-    return <div>things nadarim</div>;
-  }
+
   return (
     <Modal onClose={onClose} open={open}>
       <div className=" border-b border-neutral-4 pb-3 text-neutral-7 dark:text-neutral-2">
@@ -189,17 +219,14 @@ export default function ChartFormModal({
             className="mt-6"
           />
         )}
-        {selectedCharactristic && (
-          <SelectInput
+        {charactristicList && (
+          <MultiSelect
             options={charactristicList}
-            selectedValue={selectedCharactristic}
-            setSelectedValue={(option) => {
-              setSelectedCharactristic(option);
-            }}
-            register={register}
-            name="charactristic"
-            label="Charactristic"
+            selectedValues={selectedCharactristics}
+            setSelectedValues={setSelectedCharactristics}
+            label="Charactristics"
             className="mt-6"
+            error={charactristicsError || undefined}
           />
         )}
 

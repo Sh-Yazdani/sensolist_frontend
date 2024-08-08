@@ -60,7 +60,6 @@ export default function GuageFormModal({
   const { things, loading, error } = useSelector(
     (state: RootState) => state.thingsSlice
   );
-  console.log("things", things);
   const thingsList: ISelectOption[] = things.length
     ? things.map((thing) => {
         return {

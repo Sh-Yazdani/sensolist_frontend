@@ -127,16 +127,20 @@ export interface IWidget {
   subWidget?: ISubWidget[];
 }
 
-export interface IChartData {
+export interface IChartFormData {
   title: string;
   thing: string;
-  charactristic: string;
   xAxesLabel: string;
   yAxesLabel: string;
   yAxesMin: number;
   yAxesMax: number;
   yAxesUnit: string;
   description?: string;
+}
+
+export interface IChartData extends IChartFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IAlarmData {
@@ -164,26 +168,38 @@ export interface ICardData {
   description?: string;
 }
 
-export interface IAirQualityData {
+export interface IAirQualityFormData {
   title: string;
   thing: string;
-  charactristic: string;
   unit: string;
   description?: string;
 }
 
-export interface IIndoorEnvironmentData {
+export interface IAirQualityData extends IAirQualityFormData {
+  senderId: string;
+  charactristic: string[];
+}
+
+export interface IIndoorEnvironmentFormData {
   title: string;
   thing: string;
-  charactristic: string;
   description?: string;
 }
 
-export interface IOutdoorEnvironmentData {
+export interface IIndoorEnvironmentData extends IIndoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
+}
+
+export interface IOutdoorEnvironmentFormData {
   title: string;
   thing: string;
-  charactristic: string;
   description?: string;
+}
+
+export interface IOutdoorEnvironmentData extends IOutdoorEnvironmentFormData {
+  charactristic: string[];
+  senderId: string;
 }
 
 export interface IWidgetTableData {
@@ -309,6 +325,7 @@ export interface IThing {
   model: string;
   name: string;
   type: string;
+  senderId: string;
 }
 
 export interface ICharactristic {
@@ -319,3 +336,7 @@ export interface ICharactristic {
 export interface IThingsResponse extends IResponse {
   list?: IThing[];
 }
+
+//  widgets
+
+export interface IWidgetData {}
