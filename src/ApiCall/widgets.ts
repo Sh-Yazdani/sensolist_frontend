@@ -17,11 +17,11 @@ export const getWidgetData = async (
           characteristics: ["pm1"],
         }),
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${session.accessToken}`,
         },
       });
       const data = await res.json();
-      console.log("get widgets dataaaa", data, session.accessToken);
       return data;
     } else {
       return {};

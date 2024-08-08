@@ -20,16 +20,15 @@ export default function WidgetCardContainer({
   onEditSelect,
 }: WidgetCardContainerProps) {
   const dispatch = useDispatch();
-  console.log("widget container widget", widget);
   return (
     <div className="overflow-auto w-[400px] bg-black-opacity-100 dark:bg-white-opacity-50 rounded-lg p-4 flex flex-col">
       {editMode && (
         <div className="w-full flex items-center justify-end">
           <button onClick={onEditSelect} className="mr-2">
-            <Edit className=" size-5" />
+            <Edit className=" size-5 dark:text-white" />
           </button>
           <button>
-            <Trash className=" size-5" />
+            <Trash className=" size-5 dark:text-white" />
           </button>
         </div>
       )}
