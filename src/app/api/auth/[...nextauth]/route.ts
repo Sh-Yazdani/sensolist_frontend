@@ -23,7 +23,6 @@ const refreshAccessToken = async (token: JWT) => {
       refreshToken: refreshedTokens.refreshToken ?? token.refreshToken,
     };
   } catch (e) {
-    console.error("Failed to refresh access token", e);
     return {
       ...token,
       error: "RefreshAccessTokenError",
@@ -58,13 +57,13 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      // Store the access token in the JWT token
+    async jwt({ token, user, account }) {
       if (user) {
         token.accessToken = user.accessToken;
         token.expiresOn = user.expiresOn;
       }
-      if (Date.now() < (token.expiresOn as number)) {
+      const expireDate = new Date(token.expiresOn as string);
+      if (Date.now() < expireDate.getTime()) {
         return token;
       }
 

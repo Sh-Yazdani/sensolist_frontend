@@ -339,4 +339,11 @@ export interface IThingsResponse extends IResponse {
 
 //  widgets
 
-export interface IWidgetData {}
+export interface IWidgetData {
+  co2?: { payload: string }[];
+  humidity?: { payload: string }[];
+  pm25?: { payload: string }[];
+  pressure?: { payload: string }[];
+  temperature?: { payload: string }[];
+  noise?: { payload: string }[];
+}

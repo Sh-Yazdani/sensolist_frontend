@@ -1,16 +1,24 @@
 "use client";
 
-import { getWidgetData } from "@/ApiCall/widgets";
 import { addWidgetEdit } from "@/lib/features/dashboard/dashboardSlice";
 import { ISubWidget, IWidgetData } from "@/types/general";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
+import HumidityCard from "./HumidityCard";
+import IndoorCo2 from "./IndoorCo2";
+import IndoorHumidityCard from "./IndoorHumidityCard";
+import IndoorPm25 from "./IndoorPm25";
+import IndoorPressureCard from "./IndoorPressureCard";
 import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
+import NoiseLevel from "./NoiseLevel";
+import OutdoorCo2 from "./OutdoorCo2";
+import OutdoorPm25 from "./OutdoorPm25";
 import OutdoorTemprature from "./OutdoorTemprature";
+import PressureCard from "./PressureCard";
 import TimeSeriesChart from "./TimeSeriesChart";
 import WidgetCardContainer from "./WidgetCardContainer";
 
@@ -30,21 +38,20 @@ export default function Widget({
   index,
 }: WidgetProps) {
   const dispatch = useDispatch();
-  console.log("eidget", widget);
 
   const [airQualityData, setAirQualityData] = useState<IWidgetData>();
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await getWidgetData(
-        widget.airQualityData?.senderId || "",
-        widget.airQualityData?.charactristic || []
-      );
-      setAirQualityData(response);
-    };
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const response = await getWidgetData(
+  //       widget.airQualityData?.senderId || "",
+  //       widget.airQualityData?.charactristic || []
+  //     );
+  //     setAirQualityData(response);
+  //   };
+  //   getData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <WidgetCardContainer
@@ -109,6 +116,30 @@ export default function Widget({
         <OutdoorTemprature
           name={widget.name}
           data={widget.indoorEnvironmentData}
+        />
+      ) : widget.name === "Noise level card" ? (
+        <NoiseLevel name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Indoor CO2 card" ? (
+        <IndoorCo2 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Indoor PM2.5 card" ? (
+        <IndoorPm25 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Humidity card" ? (
+        <HumidityCard name={widget.name} data={widget.outdoorEnvironmentData} />
+      ) : widget.name === "Pressure card" ? (
+        <PressureCard name={widget.name} data={widget.outdoorEnvironmentData} />
+      ) : widget.name === "Outdoor CO2 card" ? (
+        <OutdoorCo2 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Outdoor PM2.5 card" ? (
+        <OutdoorPm25 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Indoor Humidity card" ? (
+        <IndoorHumidityCard
+          name={widget.name}
+          data={widget.outdoorEnvironmentData}
+        />
+      ) : widget.name === "Indoor Pressure card" ? (
+        <IndoorPressureCard
+          name={widget.name}
+          data={widget.outdoorEnvironmentData}
         />
       ) : (
         <>
