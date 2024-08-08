@@ -10,7 +10,7 @@ export const getAllThings = async (): Promise<IThingsResponse> => {
         "Content-type": "application/json",
       };
       const res = await fetch(
-        "https://sensolist-backend.vercel.app/things/all",
+        "https://sensolist-backend.vercel.app/api/v2/things/all",
         { headers }
       );
       const data = await res.json();
