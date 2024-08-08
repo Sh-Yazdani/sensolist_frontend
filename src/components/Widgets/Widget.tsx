@@ -10,10 +10,14 @@ import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
 import HumidityCard from "./HumidityCard";
 import IndoorCo2 from "./IndoorCo2";
+import IndoorHumidityCard from "./IndoorHumidityCard";
 import IndoorPm25 from "./IndoorPm25";
+import IndoorPressureCard from "./IndoorPressureCard";
 import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
 import NoiseLevel from "./NoiseLevel";
+import OutdoorCo2 from "./OutdoorCo2";
+import OutdoorPm25 from "./OutdoorPm25";
 import OutdoorTemprature from "./OutdoorTemprature";
 import PressureCard from "./PressureCard";
 import TimeSeriesChart from "./TimeSeriesChart";
@@ -124,6 +128,20 @@ export default function Widget({
         <HumidityCard name={widget.name} data={widget.outdoorEnvironmentData} />
       ) : widget.name === "Pressure card" ? (
         <PressureCard name={widget.name} data={widget.outdoorEnvironmentData} />
+      ) : widget.name === "Outdoor CO2 card" ? (
+        <OutdoorCo2 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Outdoor PM2.5 card" ? (
+        <OutdoorPm25 name={widget.name} data={widget.indoorEnvironmentData} />
+      ) : widget.name === "Indoor Humidity card" ? (
+        <IndoorHumidityCard
+          name={widget.name}
+          data={widget.outdoorEnvironmentData}
+        />
+      ) : widget.name === "Indoor Pressure card" ? (
+        <IndoorPressureCard
+          name={widget.name}
+          data={widget.outdoorEnvironmentData}
+        />
       ) : (
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">

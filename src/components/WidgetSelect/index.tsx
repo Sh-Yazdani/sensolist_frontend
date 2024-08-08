@@ -248,6 +248,16 @@ export default function DashboardWidgetSelect({
           image: "/assets/widgets/noise-level.png",
           parent: "indoor environment",
         },
+        {
+          name: "Indoor Humidity card",
+          image: "/assets/widgets/humidity.png",
+          parent: "outdoor environment",
+        },
+        {
+          name: "Indoor Pressure card",
+          image: "/assets/widgets/pressure.png",
+          parent: "outdoor environment",
+        },
       ],
     },
     {
@@ -271,6 +281,16 @@ export default function DashboardWidgetSelect({
           name: "Pressure card",
           image: "/assets/widgets/pressure.png",
           parent: "outdoor environment",
+        },
+        {
+          name: "Outdoor CO2 card",
+          image: "/assets/widgets/co2-level.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Outdoor PM2.5 card",
+          image: "/assets/widgets/pm25.png",
+          parent: "indoor environment",
         },
       ],
     },

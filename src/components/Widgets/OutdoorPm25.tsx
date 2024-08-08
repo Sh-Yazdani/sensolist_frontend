@@ -1,16 +1,16 @@
 "use client";
 
 import { getWidgetData } from "@/ApiCall/widgets";
-import { IIndoorEnvironmentData } from "@/types/general";
+import { IOutdoorEnvironmentData } from "@/types/general";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-interface IndoorPm25Props {
-  data?: IIndoorEnvironmentData;
+interface OutdoorPm25Props {
+  data?: IOutdoorEnvironmentData;
   name: string;
 }
 
-export default function IndoorPm25({ data, name }: IndoorPm25Props) {
+export default function OutdoorPm25({ data, name }: OutdoorPm25Props) {
   const [widgetData, setWidgetData] = useState();
   useEffect(() => {
     const getData = async () => {
