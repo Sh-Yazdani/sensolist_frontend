@@ -30,7 +30,6 @@ export default function Widget({
   index,
 }: WidgetProps) {
   const dispatch = useDispatch();
-  console.log("eidget", widget);
 
   const [airQualityData, setAirQualityData] = useState<IWidgetData>();
 

@@ -1,5 +1,9 @@
+"use client";
+
+import { getWidgetData } from "@/ApiCall/widgets";
 import { IIndoorEnvironmentData } from "@/types/general";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface IndoorTempratureProps {
   data?: IIndoorEnvironmentData;
@@ -10,6 +14,18 @@ export default function IndoorTemprature({
   data,
   name,
 }: IndoorTempratureProps) {
+  const [widgetData, setWidgetData] = useState();
+  useEffect(() => {
+    const getData = async () => {
+      const response = await getWidgetData(
+        data?.senderId || "",
+        data?.charactristic || []
+      );
+      console.log("indoor response", response);
+    };
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
