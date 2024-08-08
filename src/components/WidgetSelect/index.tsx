@@ -234,17 +234,17 @@ export default function DashboardWidgetSelect({
           parent: "indoor environment",
         },
         {
-          name: "Indoor CO2 card ",
+          name: "Indoor CO2 card",
           image: "/assets/widgets/co2-level.png",
           parent: "indoor environment",
         },
         {
-          name: "Indoor PM2.5 card ",
+          name: "Indoor PM2.5 card",
           image: "/assets/widgets/pm25.png",
           parent: "indoor environment",
         },
         {
-          name: "Noise level card ",
+          name: "Noise level card",
           image: "/assets/widgets/noise-level.png",
           parent: "indoor environment",
         },
@@ -263,12 +263,12 @@ export default function DashboardWidgetSelect({
           parent: "outdoor environment",
         },
         {
-          name: "Humidity card ",
+          name: "Humidity card",
           image: "/assets/widgets/humidity.png",
           parent: "outdoor environment",
         },
         {
-          name: "Pressure card ",
+          name: "Pressure card",
           image: "/assets/widgets/pressure.png",
           parent: "outdoor environment",
         },

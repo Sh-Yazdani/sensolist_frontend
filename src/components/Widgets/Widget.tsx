@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BarChart from "./BarChart";
 import EntityTable from "./EntityTable";
+import IndoorCo2 from "./IndoorCo2";
 import IndoorTemprature from "./IndoorTemprature";
 import LineChart from "./LineChart";
 import OutdoorTemprature from "./OutdoorTemprature";
@@ -109,6 +110,8 @@ export default function Widget({
           name={widget.name}
           data={widget.indoorEnvironmentData}
         />
+      ) : widget.name === "Indoor CO2 card" ? (
+        <IndoorCo2 name={widget.name} data={widget.indoorEnvironmentData} />
       ) : (
         <>
           <div className=" capitalize text-sm mb-2 dark:text-white">
