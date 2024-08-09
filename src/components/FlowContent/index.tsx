@@ -53,7 +53,7 @@ const nodeTypes: NodeTypes = {
   testNode: FlowTestNode,
 };
 
-export default function FlowContent({ appletId }: { appletId: number }) {
+export default function FlowContent({ appletId }: { appletId: string }) {
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);

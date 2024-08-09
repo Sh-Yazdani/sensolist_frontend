@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
 
-export default function FlowSidebar({ appletId }: { appletId: number }) {
+export default function FlowSidebar({ appletId }: { appletId: string }) {
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
