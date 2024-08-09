@@ -8,7 +8,7 @@ export const getWidgetData = async (
   console.log("sender id", senderId, "temperature", charactristics);
   try {
     const session = await getSession();
-    const res = await fetch("http://185.110.189.232:3123/api/data", {
+    const res = await fetch("https://www.sensolisttech.com:3123/api/data", {
       method: "POST",
       body: JSON.stringify({
         sender_id: senderId,

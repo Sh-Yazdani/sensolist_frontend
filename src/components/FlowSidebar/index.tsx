@@ -1,16 +1,18 @@
 "use client";
 
-import { RootState } from "@/lib/store";
+import { AppDispatch, RootState } from "@/lib/store";
 import { Accordion } from "flowbite-react";
-import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { ArrowLeft2, ArrowRight2, Devices } from "iconsax-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   actionNodes,
   controlNodes,
   thingNodes,
   triggerNodes,
 } from "./nodeItems";
+import { ISelectOption, ITriggerNodeData } from "@/types/general";
+import { fetchThings } from "@/lib/features/things/thingsSlice";
 export default function FlowSidebar() {
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
@@ -60,6 +62,25 @@ export default function FlowSidebar() {
     event.dataTransfer.setData("value", item);
     event.dataTransfer.effectAllowed = "move";
   };
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchThings());
+  }, [dispatch]);
+  
+  const { things, loading, error } = useSelector(
+    (state: RootState) => state.thingsSlice
+  );
+
+  const thingNodes: ITriggerNodeData[] = things.length
+    ? things.map((thing) => {
+        return {
+          name: thing.name,
+          value: thing.id,
+          icon: <Devices />,
+        };
+      })
+    : [];
   return (
     <div
       className={` relative transition-all ${

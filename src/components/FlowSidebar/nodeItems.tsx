@@ -117,6 +117,11 @@ export const controlNodes: ITriggerNodeData[] = [
   },
 ];
 
+const thingNode = {
+  name: "Thing 1",
+  value: "thing1",
+  icon: <Devices />,
+};
 export const thingNodes: ITriggerNodeData[] = [
   {
     name: "Thing 1",
@@ -134,6 +139,7 @@ export const thingNodes: ITriggerNodeData[] = [
     icon: <Devices />,
   },
 ];
+
 
 //after seperating nodes this must be change
 export const getNodeByValue = (val: string) => {

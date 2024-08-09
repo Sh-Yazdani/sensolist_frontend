@@ -15,8 +15,8 @@ export default function Home() {
     <main className="flex flex-1">
       <div className="flex flex-col px-4 gap-4 flex-1 max-w-[1000px] mx-auto w-full">
         <HomeMyThings />
-        <HomePinnedAppletes />
         <HomePinnedDashboardes />
+        <HomePinnedAppletes />
       </div>
     </main>
   );

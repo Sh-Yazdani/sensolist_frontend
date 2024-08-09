@@ -108,6 +108,99 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
+
+    {
+      name: "indoor environment",
+      image: "/assets/widgets/indoor.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setIndoorEnvironmentModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "indoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Indoor CO2 card",
+          image: "/assets/widgets/co2-level.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Indoor PM2.5 card",
+          image: "/assets/widgets/pm25.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Noise level card",
+          image: "/assets/widgets/noise-level.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Indoor Humidity card",
+          image: "/assets/widgets/humidity.png",
+          parent: "outdoor environment",
+        },
+        {
+          name: "Indoor Pressure card",
+          image: "/assets/widgets/pressure.png",
+          parent: "outdoor environment",
+        },
+      ],
+    },
+    {
+      name: "outdoor environment",
+      image: "/assets/widgets/outdoor.png",
+      onSelect: (sub: { name: string; image: string }) => {
+        setOutdoorEnvironmentModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "outdoor temprature card",
+          image: "/assets/widgets/indoor-temprature.png",
+          parent: "outdoor environment",
+        },
+        {
+          name: "Humidity card",
+          image: "/assets/widgets/humidity.png",
+          parent: "outdoor environment",
+        },
+        {
+          name: "Pressure card",
+          image: "/assets/widgets/pressure.png",
+          parent: "outdoor environment",
+        },
+        {
+          name: "Outdoor CO2 card",
+          image: "/assets/widgets/co2-level.png",
+          parent: "indoor environment",
+        },
+        {
+          name: "Outdoor PM2.5 card",
+          image: "/assets/widgets/pm25.png",
+          parent: "indoor environment",
+        },
+      ],
+    },
+    {
+      name: "air quality",
+      image: "/assets/widgets/air-quality.svg",
+      onSelect: (sub: { name: string; image: string }) => {
+        setAirQualityModalOpen(sub);
+      },
+      subWidget: [
+        {
+          name: "air quality card",
+          image: "/assets/widgets/air-quality-index.png",
+          parent: "air quality",
+        },
+        {
+          name: "air quality chart card",
+          image: "/assets/widgets/air-quality-chart.png",
+          parent: "air quality",
+        },
+      ],
+    },
     {
       name: "buttons",
       image: "/assets/widgets/buttons.svg",
@@ -221,98 +314,7 @@ export default function DashboardWidgetSelect({
         },
       ],
     },
-    {
-      name: "indoor environment",
-      image: "/assets/widgets/indoor.png",
-      onSelect: (sub: { name: string; image: string }) => {
-        setIndoorEnvironmentModalOpen(sub);
-      },
-      subWidget: [
-        {
-          name: "indoor temprature card",
-          image: "/assets/widgets/indoor-temprature.png",
-          parent: "indoor environment",
-        },
-        {
-          name: "Indoor CO2 card",
-          image: "/assets/widgets/co2-level.png",
-          parent: "indoor environment",
-        },
-        {
-          name: "Indoor PM2.5 card",
-          image: "/assets/widgets/pm25.png",
-          parent: "indoor environment",
-        },
-        {
-          name: "Noise level card",
-          image: "/assets/widgets/noise-level.png",
-          parent: "indoor environment",
-        },
-        {
-          name: "Indoor Humidity card",
-          image: "/assets/widgets/humidity.png",
-          parent: "outdoor environment",
-        },
-        {
-          name: "Indoor Pressure card",
-          image: "/assets/widgets/pressure.png",
-          parent: "outdoor environment",
-        },
-      ],
-    },
-    {
-      name: "outdoor environment",
-      image: "/assets/widgets/outdoor.png",
-      onSelect: (sub: { name: string; image: string }) => {
-        setOutdoorEnvironmentModalOpen(sub);
-      },
-      subWidget: [
-        {
-          name: "outdoor temprature card",
-          image: "/assets/widgets/indoor-temprature.png",
-          parent: "outdoor environment",
-        },
-        {
-          name: "Humidity card",
-          image: "/assets/widgets/humidity.png",
-          parent: "outdoor environment",
-        },
-        {
-          name: "Pressure card",
-          image: "/assets/widgets/pressure.png",
-          parent: "outdoor environment",
-        },
-        {
-          name: "Outdoor CO2 card",
-          image: "/assets/widgets/co2-level.png",
-          parent: "indoor environment",
-        },
-        {
-          name: "Outdoor PM2.5 card",
-          image: "/assets/widgets/pm25.png",
-          parent: "indoor environment",
-        },
-      ],
-    },
-    {
-      name: "air quality",
-      image: "/assets/widgets/air-quality.svg",
-      onSelect: (sub: { name: string; image: string }) => {
-        setAirQualityModalOpen(sub);
-      },
-      subWidget: [
-        {
-          name: "air quality card",
-          image: "/assets/widgets/air-quality-index.png",
-          parent: "air quality",
-        },
-        {
-          name: "air quality chart card",
-          image: "/assets/widgets/air-quality-chart.png",
-          parent: "air quality",
-        },
-      ],
-    },
+
     {
       name: "video streaming",
       image: "/assets/widgets/video.png",
