@@ -59,7 +59,7 @@ export default function TableFormModal({
   const thingsList: ISelectOption[] = things.length
     ? things.map((thing) => {
         return {
-          title: thing.name,
+          title: thing.name.charAt(0).toUpperCase() + thing.name.slice(1),
           value: thing.id,
         };
       })
