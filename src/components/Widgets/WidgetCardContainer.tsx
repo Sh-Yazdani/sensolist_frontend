@@ -8,7 +8,7 @@ interface WidgetCardContainerProps {
   children: React.ReactNode;
   editMode: boolean;
   widget: ISubWidget;
-  dashboardId: number;
+  dashboardId: string;
   onEditSelect: () => void;
 }
 

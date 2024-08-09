@@ -8,7 +8,8 @@ import { ArrowLeft2, ArrowRight2, Devices } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
-export default function FlowSidebar() {
+
+export default function FlowSidebar({ appletId }: { appletId: string }) {
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
   );
@@ -55,6 +56,7 @@ export default function FlowSidebar() {
   ) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.setData("value", item);
+    event.dataTransfer.setData("appletId", appletId);
     event.dataTransfer.effectAllowed = "move";
   };
 
@@ -160,7 +162,11 @@ export default function FlowSidebar() {
                     i !== 0 && "mt-4"
                   } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                   onDragStart={(event) =>
-                    onDragStart(event, "triggerNode", item.value)
+                    onDragStart(
+                      event,
+                      item.value === "test" ? "testNode" : "triggerNode",
+                      item.value
+                    )
                   }
                   draggable
                 >

@@ -16,11 +16,11 @@ interface TableFormModalProps {
   open: boolean;
   onClose: () => void;
   table: { name: string; image: string } | null;
-  dashboardId: number;
+  dashboardId: string;
   onWidgetsClose: () => void;
   onAddWidget: (widget: ISubWidget) => void;
   edit?: {
-    dashboardId: number;
+    dashboardId: string;
     widget: ISubWidget;
     draft: boolean;
     index: number;

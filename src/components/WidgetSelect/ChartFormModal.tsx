@@ -22,10 +22,10 @@ interface ChartFormModalProps {
   onClose: () => void;
   chart: { name: string; image: string } | null;
   onWidgetsClose: () => void;
-  dashboardId: number;
+  dashboardId: string;
   onAddWidget: (widget: ISubWidget) => void;
   edit?: {
-    dashboardId: number;
+    dashboardId: string;
     widget: ISubWidget;
     draft: boolean;
     index: number;

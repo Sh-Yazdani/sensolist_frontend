@@ -76,10 +76,10 @@ export default function AppletCreateForm({
     console.log("submit", data, selectedImage);
     appletAdd({
       id: edit
-        ? edit.id
+        ? (edit.id as string)
         : applets?.length
-        ? applets[applets.length - 1].id + 1
-        : 0,
+        ? ((applets[applets.length - 1].id + 1) as string)
+        : "0",
       name: data.name,
       description: data.description,
       image: selectedImage,

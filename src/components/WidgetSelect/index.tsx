@@ -21,7 +21,7 @@ import TableFormModal from "./TableFormModal";
 interface DashboardWidgetSelectProps {
   isOpen: boolean;
   onClose: () => void;
-  dashboardId: number;
+  dashboardId: string;
   onAddWidget: (widget: ISubWidget) => void;
 }
 

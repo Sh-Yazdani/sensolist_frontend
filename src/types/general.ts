@@ -37,16 +37,6 @@ export interface _IThings {
   description: string;
 }
 
-export interface IDashboard {
-  id: number;
-  name: string;
-  description: string;
-  image?: string;
-  pin?: boolean;
-  widgets?: ISubWidget[];
-  draftWidgets?: ISubWidget[];
-}
-
 export interface ISubWidget {
   name: string;
   image: string;
@@ -68,7 +58,7 @@ export interface ICreateDashboardInputs {
 }
 
 export interface IApplet {
-  id: number;
+  id: string;
   name: string;
   description: string;
   image?: string;
@@ -251,6 +241,15 @@ export interface IVariableNode {
   value: number;
 }
 
+export interface ITestNode {
+  nodeId: string;
+  email: string;
+  thing: IThing;
+  charactristic: string;
+  value: number;
+  condition: string;
+}
+
 export interface ITriggerNode {
   nodeId: string;
   title: string;
@@ -284,7 +283,14 @@ export type VariableNodeType = Node<{
 export type ThingNodeType = Node<{
   name: string;
 }>;
+
+export type TestNodeType = Node<{
+  name: string;
+  appletId: number;
+}>;
+
 export interface IEditNode {
+  thing?: string;
   nodeId?: string;
   title?: string;
   description?: string;
@@ -297,6 +303,8 @@ export interface IEditNode {
   value?: number;
   variableValue?: string;
   variable?: string;
+  condition?: string;
+  firstVariable?: string;
 }
 
 // Response
@@ -344,6 +352,33 @@ export interface IThingsResponse extends IResponse {
   list?: IThing[];
 }
 
+export interface IThingResponse extends IResponse {
+  thing?: IThing;
+}
+// dashboards
+
+export interface IOldDashboard {
+  id: string;
+  name: string;
+  description: string;
+  image?: string;
+  pin?: boolean;
+  widgets?: ISubWidget[];
+  draftWidgets?: ISubWidget[];
+}
+
+export interface IDashboard {
+  id: string;
+  name: string;
+  description: string;
+  imageId: string;
+  pinned: boolean;
+}
+
+export interface IDashboardResponse extends IResponse {
+  list?: IDashboard[];
+}
+
 //  widgets
 
 export interface IWidgetData {
@@ -354,3 +389,5 @@ export interface IWidgetData {
   temperature?: { payload: string }[];
   noise?: { payload: string }[];
 }
+
+export interface IRuleResponse {}

@@ -26,6 +26,7 @@ import AppletHeader from "../AppletHeader";
 import FlowConditionNode from "../FlowConditionNode";
 import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
+import FlowTestNode from "../FlowTestNode";
 import FlowThingNode from "../FlowThingNode";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
@@ -33,6 +34,7 @@ import ConditionFormModal from "./ConditionFormModal";
 import GetVariableFormModal from "./GetVariableFormModal";
 import RefrencesFormModal from "./RefrencesFormModal";
 import SetVariableFormModal from "./SetVariableFormModal";
+import TestFormModal from "./TestFormModal";
 import ThingFormModal from "./ThingFormModal";
 import ThirdPartyFormModal from "./ThirdPartyFormModal";
 import TriggerOrderFormModal from "./TriggerOrderFormModal";
@@ -48,9 +50,10 @@ const nodeTypes: NodeTypes = {
   variableNode: FlowVariableNode,
   conditionNode: FlowConditionNode,
   thingNode: FlowThingNode,
+  testNode: FlowTestNode,
 };
 
-export default function FlowContent({ appletId }: { appletId: number }) {
+export default function FlowContent({ appletId }: { appletId: string }) {
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   const [editMode, setEditMode] = useState<boolean>(true);
   const reactFlowWrapper = useRef(null);
@@ -92,6 +95,9 @@ export default function FlowContent({ appletId }: { appletId: number }) {
   const [getVariableModalOpen, setGetVariableModalOpen] =
     useState<Node<NodeDataType> | null>(null);
 
+  const [testModalOpen, setTesteModalOpen] =
+    useState<Node<NodeDataType> | null>(null);
+
   const { applets } = useSelector((state: RootState) => state.appletSlice);
   const selectedApplet = [...applets.filter((app) => app.id === appletId)][0];
 
@@ -121,6 +127,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
       const nodeValue = event.dataTransfer.getData("value");
+      const appletId = event.dataTransfer.getData("appletId");
       const triggeredNode = getNodeByValue(nodeValue);
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -139,6 +146,11 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             : type === "thingNode"
             ? {
                 name: event.dataTransfer.getData("name"),
+              }
+            : type === "testNode"
+            ? {
+                name: event.dataTransfer.getData("name"),
+                appletId: appletId,
               }
             : {
                 name: event.dataTransfer.getData("name"),
@@ -179,6 +191,11 @@ export default function FlowContent({ appletId }: { appletId: number }) {
         return;
       }
 
+      if (nodeValue === "test") {
+        setTesteModalOpen(newNode);
+        return;
+      }
+
       setNodes((nds) => nds.concat(newNode));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -187,7 +204,7 @@ export default function FlowContent({ appletId }: { appletId: number }) {
 
   return (
     <>
-      {editMode && <FlowSidebar />}
+      {editMode && <FlowSidebar appletId={appletId} />}
       <div className="flex flex-grow flex-col h-auto">
         <AppletHeader
           appletName={selectedApplet?.name}
@@ -355,6 +372,23 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             dispatch(removeEditNode());
           } else {
             setConditionModalOpen(null);
+          }
+        }}
+        edit={editNode?.nodeData}
+      />
+      <TestFormModal
+        onAddNode={() => {
+          if (testModalOpen) {
+            setNodes((nds) => nds.concat(testModalOpen));
+          }
+        }}
+        node={testModalOpen}
+        open={!!testModalOpen || editNode?.nodeName === "test"}
+        onClose={() => {
+          if (editNode) {
+            dispatch(removeEditNode());
+          } else {
+            setTesteModalOpen(null);
           }
         }}
         edit={editNode?.nodeData}

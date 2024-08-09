@@ -2,6 +2,7 @@ import {
   IApplet,
   IConditionNode,
   IEditNode,
+  ITestNode,
   ITriggerNode,
   IVariableNode,
 } from "@/types/general";
@@ -13,12 +14,57 @@ export interface AppletState {
   conditionNodes?: IConditionNode[];
   triggerNodes?: ITriggerNode[];
   variableNodes?: IVariableNode[];
+  testNodes?: ITestNode[];
   editNode?: { nodeData: IEditNode; nodeName: string };
 }
 
 const initialState: AppletState = {
-  applets: [],
-  pinnedApplets: [],
+  applets: [
+    {
+      id: "66b602db33c99f2150bcdb05",
+      name: "Indoor air quality",
+      description: "Substantia approbo thesis vinco",
+      image: "/assets/applet/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb04",
+      name: "Outdoor air quality",
+      description: "Aestas ademptio audentia.",
+      image: "/assets/applet/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb06",
+      name: "Industrial indoor AQ",
+      description: "Thema utpote creptio temporibus.",
+      image: "/assets/applet/img-3.png",
+      pin: true,
+    },
+  ],
+  pinnedApplets: [
+    {
+      id: "66b602db33c99f2150bcdb05",
+      name: "Indoor air quality",
+      description: "Substantia approbo thesis vinco",
+      image: "/assets/applet/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb04",
+      name: "Outdoor air quality",
+      description: "Aestas ademptio audentia.",
+      image: "/assets/applet/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb06",
+      name: "Industrial indoor AQ",
+      description: "Thema utpote creptio temporibus.",
+      image: "/assets/applet/img-3.png",
+      pin: true,
+    },
+  ],
 };
 
 export const appletSlice = createSlice({
@@ -167,6 +213,11 @@ export const appletSlice = createSlice({
         ? [...state.variableNodes, action.payload]
         : [action.payload];
     },
+    addTestNode: (state, action: PayloadAction<ITestNode>) => {
+      state.testNodes = state.testNodes?.length
+        ? [...state.testNodes, action.payload]
+        : [action.payload];
+    },
   },
 });
 export const {
@@ -182,5 +233,6 @@ export const {
   deleteNode,
   addTriggerNode,
   addVariableNode,
+  addTestNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;

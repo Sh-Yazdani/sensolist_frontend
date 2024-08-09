@@ -40,12 +40,17 @@ export default function HomeMyThings() {
             ))} */}
             {things.map((thing) => (
               <MyThings
+                id={thing.id}
                 key={thing.id}
                 name={thing.name}
                 image={"/assets/thing.jpeg"}
               />
             ))}
-            <MyThings name={"Product's name"} image={"/assets/thing.jpeg"} />
+            <MyThings
+              id={"0"}
+              name={"Product's name"}
+              image={"/assets/thing.jpeg"}
+            />
             <Link
               href="/myThings"
               className=" flex flex-col justify-center items-center ml-auto"

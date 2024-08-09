@@ -7,7 +7,7 @@ export default function page({ params }: { params: { slug: string } }) {
   return (
     <div className=" flex flex-row flex-1">
       <ReactFlowProvider>
-        <FlowContent appletId={Number(params.slug)} />
+        <FlowContent appletId={params.slug} />
       </ReactFlowProvider>
     </div>
   );

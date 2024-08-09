@@ -1,7 +1,7 @@
 "use client";
 
 import { addDashboard } from "@/lib/features/dashboard/dashboardSlice";
-import { IDashboard } from "@/types/general";
+import { IOldDashboard } from "@/types/general";
 import { Add, AddSquare } from "iconsax-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -9,12 +9,13 @@ import DashboardCreateModal from "../DashboardCreateModal";
 import Button from "../UI/Button";
 
 interface DashboardCreateButtonProps {
-  dashboards: IDashboard[];
+  dashboards: IOldDashboard[];
 }
 
 export default function DashboardCreateButton({
   dashboards,
 }: DashboardCreateButtonProps) {
+  console.log("dashboards create button", dashboards);
   const dispatch = useDispatch();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   if (!dashboards.length) return;
@@ -38,7 +39,7 @@ export default function DashboardCreateButton({
         dashboards={dashboards}
         isCreateModalOpen={isCreateModalOpen}
         setIsCreateModalOpen={(a: boolean) => setIsCreateModalOpen(a)}
-        addDashboard={(d: IDashboard) => {
+        addDashboard={(d: IOldDashboard) => {
           dispatch(addDashboard(d));
         }}
         closeEditModal={() => {}}
