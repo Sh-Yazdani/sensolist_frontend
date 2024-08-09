@@ -26,6 +26,7 @@ import AppletHeader from "../AppletHeader";
 import FlowConditionNode from "../FlowConditionNode";
 import FlowSidebar from "../FlowSidebar";
 import { getNodeByValue } from "../FlowSidebar/nodeItems";
+import FlowThingNode from "../FlowThingNode";
 import FlowTriggerNode from "../FlowTriggerNode";
 import FlowVariableNode from "../FlowVariableNode";
 import ConditionFormModal from "./ConditionFormModal";
@@ -46,6 +47,7 @@ const nodeTypes: NodeTypes = {
   triggerNode: FlowTriggerNode,
   variableNode: FlowVariableNode,
   conditionNode: FlowConditionNode,
+  thingNode: FlowThingNode,
 };
 
 export default function FlowContent({ appletId }: { appletId: number }) {
@@ -134,6 +136,10 @@ export default function FlowContent({ appletId }: { appletId: number }) {
             ? { ...triggeredNode, nodeId: newId }
             : type === "conditionNode"
             ? {}
+            : type === "thingNode"
+            ? {
+                name: event.dataTransfer.getData("name"),
+              }
             : {
                 name: event.dataTransfer.getData("name"),
                 value: event.dataTransfer.getData("value"),
