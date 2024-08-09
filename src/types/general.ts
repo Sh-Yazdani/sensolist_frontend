@@ -352,6 +352,9 @@ export interface IThingsResponse extends IResponse {
   list?: IThing[];
 }
 
+export interface IThingResponse extends IResponse {
+  thing?: IThing;
+}
 // dashboards
 
 export interface IOldDashboard {

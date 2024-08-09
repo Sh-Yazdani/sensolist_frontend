@@ -1,11 +1,15 @@
+import Link from "next/link";
+
 interface MyThingsProps {
   image?: string;
   name: string;
+  id: string;
 }
 
-export default function MyThings({ image, name }: MyThingsProps) {
+export default function MyThings({ image, name, id }: MyThingsProps) {
   return (
-    <div
+    <Link
+      href={`/myThings/${id}`}
       className="w-[130px] rounded-xl h-full my-auto
  overflow-hidden bg-neutral-2 dark:bg-white-opacity-100 bg-black-opacity-100"
     >
@@ -21,6 +25,6 @@ export default function MyThings({ image, name }: MyThingsProps) {
       <div className=" px-2 pt-2 capitalize dark:text-neutral-3 text-sm font-medium text-center truncate">
         {name}
       </div>
-    </div>
+    </Link>
   );
 }

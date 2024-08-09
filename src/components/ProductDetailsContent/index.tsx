@@ -5,7 +5,7 @@ interface ProductDetailsContentProps {
   type: string;
   actions: string;
   charactristics: string;
-  activitionDate: string;
+  // activitionDate: string;
   description: string;
 }
 
@@ -16,7 +16,7 @@ export default function ProductDetailsContent({
   type,
   actions,
   charactristics,
-  activitionDate,
+  // activitionDate,
   description,
 }: ProductDetailsContentProps) {
   return (
@@ -64,7 +64,7 @@ export default function ProductDetailsContent({
         <div className="w-1/2 whitespace-nowrap pr-2 font-bold text-black capitalize dark:text-neutral-3">
           characteristics:
         </div>
-        <div className="w-1/2 capitalize text-neutral-8 dark:text-neutral-3">
+        <div className="w-1/2 capitalize text-neutral-8 dark:text-neutral-3 truncate">
           {charactristics}
         </div>
       </div>
@@ -73,9 +73,9 @@ export default function ProductDetailsContent({
         <div className="w-1/2 whitespace-nowrap pr-2 font-bold text-black capitalize dark:text-neutral-3">
           activation date:
         </div>
-        <div className="w-1/2 capitalize text-neutral-8 dark:text-neutral-3">
+        {/* <div className="w-1/2 capitalize text-neutral-8 dark:text-neutral-3">
           {activitionDate}
-        </div>
+        </div> */}
       </div>
 
       <div className="flex items-baseline w-full flex-col">
