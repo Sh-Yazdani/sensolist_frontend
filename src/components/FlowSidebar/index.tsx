@@ -125,7 +125,7 @@ export default function FlowSidebar() {
                   draggable
                 >
                   {item.icon}
-                  <span className="ml-2">{item.name}</span>
+                  <span className="ml-2 capitalize">{item.name}</span>
                 </div>
               ))}
             </Accordion.Content>

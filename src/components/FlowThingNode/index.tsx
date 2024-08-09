@@ -52,7 +52,7 @@ export default function FlowVariableNode({
         className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4"
       >
         <Devices />
-        <span className="ml-2">{name}</span>
+        <span className="ml-2 capitalize">{name}</span>
       </div>
       <Handle
         type="source"

@@ -8,19 +8,22 @@ export const getWidgetData = async (
   console.log("sender id", senderId, "temperature", charactristics);
   try {
     const session = await getSession();
-    const res = await fetch("https://www.sensolisttech.com:3123/api/data", {
-      method: "POST",
-      body: JSON.stringify({
-        sender_id: senderId,
-        characteristics: charactristics,
-        page: 1,
-        limit: 10,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.accessToken}`,
-      },
-    });
+    const res = await fetch(
+      "https://sensolist-backend.vercel.app/api/v2/proxy",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          sender_id: senderId,
+          characteristics: charactristics,
+          page: 1,
+          limit: 10,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      }
+    );
     const data = await res.json();
     return data;
     // } else {
