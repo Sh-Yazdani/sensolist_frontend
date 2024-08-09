@@ -1,5 +1,4 @@
 import { Node } from "@xyflow/react";
-import { ReactNode } from "react";
 
 export type LoginStepsType = "details" | "verification";
 
@@ -242,6 +241,10 @@ export interface ITriggerNodeData {
   icon: React.ReactNode;
 }
 
+export interface IThingNodeData {
+  name: string;
+}
+
 export interface IVariableNode {
   nodeId: string;
   name: string;
@@ -278,6 +281,9 @@ export type VariableNodeType = Node<{
   count: number;
 }>;
 
+export type ThingNodeType = Node<{
+  name: string;
+}>;
 export interface IEditNode {
   nodeId?: string;
   title?: string;

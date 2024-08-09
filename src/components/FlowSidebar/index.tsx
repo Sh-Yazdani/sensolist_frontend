@@ -1,18 +1,13 @@
 "use client";
 
+import { fetchThings } from "@/lib/features/things/thingsSlice";
 import { AppDispatch, RootState } from "@/lib/store";
+import { ITriggerNodeData } from "@/types/general";
 import { Accordion } from "flowbite-react";
 import { ArrowLeft2, ArrowRight2, Devices } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionNodes,
-  controlNodes,
-  thingNodes,
-  triggerNodes,
-} from "./nodeItems";
-import { ISelectOption, ITriggerNodeData } from "@/types/general";
-import { fetchThings } from "@/lib/features/things/thingsSlice";
+import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
 export default function FlowSidebar() {
   const { conditionNodes } = useSelector(
     (state: RootState) => state.appletSlice
@@ -62,12 +57,27 @@ export default function FlowSidebar() {
     event.dataTransfer.setData("value", item);
     event.dataTransfer.effectAllowed = "move";
   };
+
+  const onThingDragStart = (
+    event: {
+      dataTransfer: {
+        setData: (arg0: string, arg1: any) => void;
+        effectAllowed: string;
+      };
+    },
+    nodeType: any,
+    name: string
+  ) => {
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.setData("name", name);
+    event.dataTransfer.effectAllowed = "move";
+  };
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchThings());
   }, [dispatch]);
-  
+
   const { things, loading, error } = useSelector(
     (state: RootState) => state.thingsSlice
   );
@@ -110,7 +120,7 @@ export default function FlowSidebar() {
                     i !== 0 && "mt-4"
                   } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
                   onDragStart={(event) =>
-                    onDragStart(event, "triggerNode", item.value)
+                    onThingDragStart(event, "thingNode", item.name)
                   }
                   draggable
                 >

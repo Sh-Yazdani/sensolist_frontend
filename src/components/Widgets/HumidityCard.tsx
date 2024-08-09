@@ -12,15 +12,26 @@ interface HumidityCardProps {
 
 export default function HumidityCard({ data, name }: HumidityCardProps) {
   const [widgetData, setWidgetData] = useState<{ payload: string }[]>();
+  const [seconds, setSeconds] = useState<number>(10);
+
   useEffect(() => {
-    const getData = async () => {
-      if (data?.senderId) {
-        const response = await getWidgetData(data?.senderId, ["humidity"]);
-        setWidgetData(response.humidity || []);
-      }
-    };
-    getData();
-  }, [data]);
+    if (seconds === 10) {
+      const getData = async () => {
+        if (data?.senderId) {
+          const response = await getWidgetData(data?.senderId, ["humidity"]);
+          setWidgetData(response.humidity || []);
+        }
+      };
+      getData();
+    } else if (seconds <= 0) {
+      setSeconds(10);
+      return;
+    }
+
+    const interval = setInterval(() => setSeconds(seconds - 1), 1000);
+
+    return () => clearInterval(interval);
+  }, [data, seconds]);
   return (
     <div className=" aspect-square flex flex-col">
       <div className=" text-lg capitalize mx-auto dark:text-white">{name}</div>
@@ -35,7 +46,7 @@ export default function HumidityCard({ data, name }: HumidityCardProps) {
         <div className="flex flex-col">
           <div className="text-lg font-bold dark:text-neutral-2">Humidity</div>
           <div className=" text-neutral-7 dark:text-neutral-6">
-            Last Update 1d ago
+            Last Update {seconds} seconds ago
           </div>
         </div>
       </div>
