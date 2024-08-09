@@ -1,9 +1,22 @@
-import { fakeThings } from "@/constants/fakeThings";
+import { fetchThings } from "@/lib/features/things/thingsSlice";
+import { AppDispatch, RootState } from "@/lib/store";
 import { ArrowCircleRight2, Cpu } from "iconsax-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MyThings from "./MyThingsCard";
 
 export default function HomeMyThings() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchThings());
+  }, [dispatch]);
+
+  const { things, loading, error } = useSelector(
+    (state: RootState) => state.thingsSlice
+  );
+  console.log("things", things);
   return (
     <div
       className="flex flex-col w-full rounded-2xl bg-black-opacity-50 dark:bg-white-opacity-50
@@ -16,16 +29,23 @@ export default function HomeMyThings() {
         </span>
       </div>
       <div className="flex mt-4 gap-4 w-fit m-auto h-3/4 min-w-full text-neutral-7 dark:text-neutral-4">
-        {fakeThings.length ? (
+        {things.length ? (
           <>
-            {fakeThings.map((thing, i) => (
+            {/* {fakeThings.map((thing, i) => (
               <MyThings
                 key={thing.id}
                 name={thing.name}
                 image={thing.images[0]}
               />
+            ))} */}
+            {things.map((thing) => (
+              <MyThings
+                key={thing.id}
+                name={thing.name}
+                image={"/assets/thing.jpeg"}
+              />
             ))}
-
+            <MyThings name={"Product's name"} image={"/assets/thing.jpeg"} />
             <Link
               href="/myThings"
               className=" flex flex-col justify-center items-center ml-auto"
