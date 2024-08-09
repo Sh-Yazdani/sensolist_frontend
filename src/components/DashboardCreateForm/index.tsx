@@ -80,7 +80,7 @@ export default function DashboardCreateForm({
         ? edit.id
         : dashboards?.length
         ? dashboards[dashboards.length - 1].id + 1
-        : 0,
+        : "0",
       name: data.name,
       description: data.description,
       image: selectedImage,

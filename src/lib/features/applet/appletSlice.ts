@@ -19,8 +19,52 @@ export interface AppletState {
 }
 
 const initialState: AppletState = {
-  applets: [],
-  pinnedApplets: [],
+  applets: [
+    {
+      id: "66b602db33c99f2150bcdb05",
+      name: "Indoor air quality",
+      description: "Substantia approbo thesis vinco",
+      image: "/assets/applet/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb04",
+      name: "Outdoor air quality",
+      description: "Aestas ademptio audentia.",
+      image: "/assets/applet/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb06",
+      name: "Industrial indoor AQ",
+      description: "Thema utpote creptio temporibus.",
+      image: "/assets/applet/img-3.png",
+      pin: true,
+    },
+  ],
+  pinnedApplets: [
+    {
+      id: "66b602db33c99f2150bcdb05",
+      name: "Indoor air quality",
+      description: "Substantia approbo thesis vinco",
+      image: "/assets/applet/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb04",
+      name: "Outdoor air quality",
+      description: "Aestas ademptio audentia.",
+      image: "/assets/applet/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb06",
+      name: "Industrial indoor AQ",
+      description: "Thema utpote creptio temporibus.",
+      image: "/assets/applet/img-3.png",
+      pin: true,
+    },
+  ],
 };
 
 export const appletSlice = createSlice({

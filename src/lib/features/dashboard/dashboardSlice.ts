@@ -13,8 +13,52 @@ export interface DashboardState {
 }
 
 const initialState: DashboardState = {
-  dashboards: [],
-  pinedDashboards: [],
+  dashboards: [
+    {
+      id: "66b602db33c99f2150bcdb01",
+      name: "Industrial indoor AQ",
+      description: "Paens succedo curriculum ",
+      image: "/assets/dashboard/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb00",
+      name: "Indoor air quality",
+      description: "Virtus illo volaticus vinculum ",
+      image: "/assets/dashboard/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdaff",
+      name: "Outdoor air quality",
+      description: "Clibanus autem quo. Laborum acer ",
+      image: "/assets/dashboard/img-3.png",
+      pin: true,
+    },
+  ],
+  pinedDashboards: [
+    {
+      id: "66b602db33c99f2150bcdb01",
+      name: "Industrial indoor AQ",
+      description: "Paens succedo curriculum ",
+      image: "/assets/dashboard/img-1.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdb00",
+      name: "Indoor air quality",
+      description: "Virtus illo volaticus vinculum ",
+      image: "/assets/dashboard/img-2.png",
+      pin: true,
+    },
+    {
+      id: "66b602db33c99f2150bcdaff",
+      name: "Outdoor air quality",
+      description: "Clibanus autem quo. Laborum acer ",
+      image: "/assets/dashboard/img-3.png",
+      pin: true,
+    },
+  ],
 };
 
 export const dashboardSlice = createSlice({

@@ -17,29 +17,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Page() {
   const [dashboardData, setDashboardData] = useState<IDashboardResponse>();
-  useEffect(() => {
-    const getData = async () => {
-      const res = await getAllDashboard();
-      setDashboardData(res);
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const res = await getAllDashboard();
+  //     setDashboardData(res);
+  //   };
+  //   getData();
+  // }, []);
 
-  console.log("fetched dashboards", dashboardData);
+  // console.log("fetched dashboards", dashboardData);
 
-  const fixedData: IOldDashboard[] = dashboardData?.list
-    ? dashboardData?.list.map((dash) => {
-        return {
-          id: dash.id || "",
-          name: dash.name,
-          description: dash.description,
-          image: dash.imageId || "",
-          pin: dash.pinned || false,
-          widgets: [],
-          draftWidgets: [],
-        };
-      })
-    : [];
+  // const fixedData: IOldDashboard[] = dashboardData?.list
+  //   ? dashboardData?.list.map((dash) => {
+  //       return {
+  //         id: dash.id || "",
+  //         name: dash.name,
+  //         description: dash.description,
+  //         image: dash.imageId || "",
+  //         pin: dash.pinned || false,
+  //         widgets: [],
+  //         draftWidgets: [],
+  //       };
+  //     })
+  //   : [];
 
   // console.log("all dashboards", data);
   const { dashboards } = useSelector(
@@ -48,10 +48,12 @@ export default function Page() {
 
   const [displayDashboards, setDisplayDashboards] = useState<IOldDashboard[]>([
     ...dashboards,
-    ...fixedData,
+    // ...fixedData,
   ]);
   useEffect(() => {
-    setDisplayDashboards([...dashboards, ...fixedData]);
+    setDisplayDashboards([...dashboards, 
+      //...fixedData
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboards, dashboardData]);
   const dispatch = useDispatch();
