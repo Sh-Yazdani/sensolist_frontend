@@ -251,6 +251,15 @@ export interface IVariableNode {
   value: number;
 }
 
+export interface ITestNode {
+  nodeId: string;
+  email: string;
+  thing: IThing;
+  charactristic: string;
+  value: number;
+  condition: string;
+}
+
 export interface ITriggerNode {
   nodeId: string;
   title: string;
@@ -284,7 +293,14 @@ export type VariableNodeType = Node<{
 export type ThingNodeType = Node<{
   name: string;
 }>;
+
+export type TestNodeType = Node<{
+  name: string;
+  appletId: number;
+}>;
+
 export interface IEditNode {
+  thing?: string;
   nodeId?: string;
   title?: string;
   description?: string;
@@ -297,6 +313,8 @@ export interface IEditNode {
   value?: number;
   variableValue?: string;
   variable?: string;
+  condition?: string;
+  firstVariable?: string;
 }
 
 // Response
@@ -354,3 +372,5 @@ export interface IWidgetData {
   temperature?: { payload: string }[];
   noise?: { payload: string }[];
 }
+
+export interface IRuleResponse {}

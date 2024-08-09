@@ -2,6 +2,7 @@ import {
   IApplet,
   IConditionNode,
   IEditNode,
+  ITestNode,
   ITriggerNode,
   IVariableNode,
 } from "@/types/general";
@@ -13,6 +14,7 @@ export interface AppletState {
   conditionNodes?: IConditionNode[];
   triggerNodes?: ITriggerNode[];
   variableNodes?: IVariableNode[];
+  testNodes?: ITestNode[];
   editNode?: { nodeData: IEditNode; nodeName: string };
 }
 
@@ -167,6 +169,11 @@ export const appletSlice = createSlice({
         ? [...state.variableNodes, action.payload]
         : [action.payload];
     },
+    addTestNode: (state, action: PayloadAction<ITestNode>) => {
+      state.testNodes = state.testNodes?.length
+        ? [...state.testNodes, action.payload]
+        : [action.payload];
+    },
   },
 });
 export const {
@@ -182,5 +189,6 @@ export const {
   deleteNode,
   addTriggerNode,
   addVariableNode,
+  addTestNode,
 } = appletSlice.actions;
 export default appletSlice.reducer;
