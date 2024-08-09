@@ -18,7 +18,7 @@ interface GuageFormModalProps {
   onAddWidget: (widget: ISubWidget) => void;
   onWidgetsClose: () => void;
   edit?: {
-    dashboardId: number;
+    dashboardId: string;
     widget: ISubWidget;
     draft: boolean;
     index: number;

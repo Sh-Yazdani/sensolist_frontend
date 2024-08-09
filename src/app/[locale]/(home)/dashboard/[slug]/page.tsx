@@ -20,10 +20,10 @@ import DashboardWidgets from "@/components/Widgets";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   // const data = await getData();
-  // console.log("page data", data);
+  console.log("page data", params);
   return (
     <div className=" flex flex-col flex-1 md:px-4">
-      <DashboardWidgets dashboardId={Number(params.slug)} />
+      <DashboardWidgets dashboardId={params.slug} />
     </div>
   );
 }

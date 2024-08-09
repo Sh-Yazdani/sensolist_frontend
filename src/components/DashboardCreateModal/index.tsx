@@ -1,15 +1,15 @@
-import { IDashboard } from "@/types/general";
+import { IOldDashboard } from "@/types/general";
 import DashboardCreateForm from "../DashboardCreateForm";
 import Modal from "../UI/Modal";
 
 interface DashboardCreateModalProps {
   isCreateModalOpen: boolean;
   setIsCreateModalOpen: (a: boolean) => void;
-  addDashboard: (d: IDashboard) => void;
-  dashboards: IDashboard[];
+  addDashboard: (d: IOldDashboard) => void;
+  dashboards: IOldDashboard[];
   closeEditModal: () => void;
-  editDashboard: (d: IDashboard) => void;
-  dashboardEdit: IDashboard | null;
+  editDashboard: (d: IOldDashboard) => void;
+  dashboardEdit: IOldDashboard | null;
 }
 
 export default function DashboardCreateModal({
@@ -37,7 +37,7 @@ export default function DashboardCreateModal({
           closeEditModal();
         }}
         edit={dashboardEdit}
-        dashboardAdd={(dashboard: IDashboard) => {
+        dashboardAdd={(dashboard: IOldDashboard) => {
           if (dashboardEdit) {
             console.log("edit dash", dashboard);
             editDashboard(dashboard);

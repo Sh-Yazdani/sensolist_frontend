@@ -37,16 +37,6 @@ export interface _IThings {
   description: string;
 }
 
-export interface IDashboard {
-  id: number;
-  name: string;
-  description: string;
-  image?: string;
-  pin?: boolean;
-  widgets?: ISubWidget[];
-  draftWidgets?: ISubWidget[];
-}
-
 export interface ISubWidget {
   name: string;
   image: string;
@@ -360,6 +350,30 @@ export interface ICharactristic {
 
 export interface IThingsResponse extends IResponse {
   list?: IThing[];
+}
+
+// dashboards
+
+export interface IOldDashboard {
+  id: string;
+  name: string;
+  description: string;
+  image?: string;
+  pin?: boolean;
+  widgets?: ISubWidget[];
+  draftWidgets?: ISubWidget[];
+}
+
+export interface IDashboard {
+  id: string;
+  name: string;
+  description: string;
+  imageId: string;
+  pinned: boolean;
+}
+
+export interface IDashboardResponse extends IResponse {
+  list?: IDashboard[];
 }
 
 //  widgets

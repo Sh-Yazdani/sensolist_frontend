@@ -1,7 +1,7 @@
 "use client";
 
 import { RootState } from "@/lib/store";
-import { IDashboard } from "@/types/general";
+import { IOldDashboard } from "@/types/general";
 import { ArrowCircleRight2, Element3 } from "iconsax-react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -26,7 +26,7 @@ export default function HomePinnedDashboardes() {
       <div className="flex mt-4 gap-4 w-fit m-auto h-3/4 min-w-full">
         {pinedDashboards.length ? (
           <>
-            {pinedDashboards.map((dashboard: IDashboard, i) => (
+            {pinedDashboards.map((dashboard: IOldDashboard, i) => (
               <PinnedDashboardCard
                 image={dashboard.image}
                 name={dashboard.name}

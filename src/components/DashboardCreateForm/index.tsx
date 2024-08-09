@@ -3,7 +3,7 @@
 import { createAlert } from "@/lib/features/notification/notificatioSlice";
 import {
   ICreateDashboardInputs,
-  IDashboard,
+  IOldDashboard,
   ISelectOption,
 } from "@/types/general";
 import Image from "next/image";
@@ -22,11 +22,11 @@ export default function DashboardCreateForm({
   initialValues,
   edit,
 }: {
-  dashboardAdd: (d: IDashboard) => void;
+  dashboardAdd: (d: IOldDashboard) => void;
   onCancel: () => void;
-  dashboards: IDashboard[];
-  initialValues?: IDashboard | null;
-  edit: IDashboard | null;
+  dashboards: IOldDashboard[];
+  initialValues?: IOldDashboard | null;
+  edit: IOldDashboard | null;
 }) {
   const imagesForSelect = [
     "/assets/dashboard/img-1.png",

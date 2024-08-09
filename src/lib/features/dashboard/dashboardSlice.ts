@@ -1,12 +1,12 @@
-import { IDashboard, ISubWidget } from "@/types/general";
+import { IOldDashboard, ISubWidget } from "@/types/general";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DashboardState {
-  dashboards: IDashboard[];
-  pinedDashboards: IDashboard[];
+  dashboards: IOldDashboard[];
+  pinedDashboards: IOldDashboard[];
   widgetEdit?: {
     index: number;
-    dashboardId: number;
+    dashboardId: string;
     widget: ISubWidget;
     draft: boolean;
   };
@@ -21,21 +21,21 @@ export const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    addDashboard: (state, action: PayloadAction<IDashboard>) => {
+    addDashboard: (state, action: PayloadAction<IOldDashboard>) => {
       state.dashboards.push(action.payload);
     },
-    removeDashboard: (state, action: PayloadAction<IDashboard>) => {
+    removeDashboard: (state, action: PayloadAction<IOldDashboard>) => {
       state.dashboards = state.dashboards.filter(
         (dash) => dash.id !== action.payload.id
       );
     },
-    editDashboard: (state, action: PayloadAction<IDashboard>) => {
+    editDashboard: (state, action: PayloadAction<IOldDashboard>) => {
       state.dashboards = [
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
         action.payload,
       ];
     },
-    pinDashboard: (state, action: PayloadAction<IDashboard>) => {
+    pinDashboard: (state, action: PayloadAction<IOldDashboard>) => {
       state.dashboards = [
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
         { ...action.payload, pin: true },
@@ -45,7 +45,7 @@ export const dashboardSlice = createSlice({
         { ...action.payload, pin: true },
       ];
     },
-    unPinDashboard: (state, action: PayloadAction<IDashboard>) => {
+    unPinDashboard: (state, action: PayloadAction<IOldDashboard>) => {
       state.dashboards = [
         ...state.dashboards.filter((dash) => dash.id !== action.payload.id),
         {
@@ -62,7 +62,7 @@ export const dashboardSlice = createSlice({
     addWidgets: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
         widgets: ISubWidget[];
       }>
     ) => {
@@ -80,7 +80,7 @@ export const dashboardSlice = createSlice({
     addDraftWidgets: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
         widget: ISubWidget;
       }>
     ) => {
@@ -98,7 +98,7 @@ export const dashboardSlice = createSlice({
     saveDraftWidgets: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
       }>
     ) => {
       state.dashboards = state.dashboards.map((dash) => {
@@ -116,7 +116,7 @@ export const dashboardSlice = createSlice({
     cancelDraftWidgets: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
       }>
     ) => {
       state.dashboards = state.dashboards.map((dash) => {
@@ -131,7 +131,7 @@ export const dashboardSlice = createSlice({
     addWidgetEdit: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
         widget: ISubWidget;
         draft: boolean;
         index: number;
@@ -145,7 +145,7 @@ export const dashboardSlice = createSlice({
     editWidget: (
       state,
       action: PayloadAction<{
-        dashboardId: number;
+        dashboardId: string;
         widget: ISubWidget;
         draft: boolean;
         index: number;

@@ -1,6 +1,6 @@
 "use client";
 
-import { IDashboard } from "@/types/general";
+import { IOldDashboard } from "@/types/general";
 import { Edit2, Trash } from "iconsax-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,11 +8,11 @@ import { useState } from "react";
 import { PinIcon, PinnedIcon } from "../UI/Icons";
 
 interface DashboardCardProps {
-  dashboard: IDashboard;
-  removeDashboard: (d: IDashboard) => void;
-  pinDashboard: (d: IDashboard) => void;
-  unPinDashboard: (d: IDashboard) => void;
-  editDashboard: (d: IDashboard) => void;
+  dashboard: IOldDashboard;
+  removeDashboard: (d: IOldDashboard) => void;
+  pinDashboard: (d: IOldDashboard) => void;
+  unPinDashboard: (d: IOldDashboard) => void;
+  editDashboard: (d: IOldDashboard) => void;
 }
 
 export default function DashboardCard({
@@ -41,6 +41,7 @@ export default function DashboardCard({
   const editHandler = () => {
     editDashboard(dashboard);
   };
+  console.log("dash card id", dashboard.id);
 
   return (
     <div

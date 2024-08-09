@@ -25,7 +25,7 @@ import WidgetCardContainer from "./WidgetCardContainer";
 interface WidgetProps {
   widget: ISubWidget;
   editMode: boolean;
-  dashboardId: number;
+  dashboardId: string;
   saved: boolean;
   index: number;
 }

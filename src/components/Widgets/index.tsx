@@ -18,7 +18,7 @@ import WidgetsHeader from "../WidgetsHeader";
 import Widget from "./Widget";
 
 interface DashboardWidgetsProps {
-  dashboardId: number;
+  dashboardId: string;
 }
 
 export default function DashboardWidgets({

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Button from "../UI/Button";
 
 interface DashboardHeaderProps {
-  dashboardId: number;
+  dashboardId: string;
   onWidgetAdd: () => void;
   isSelectOpen: boolean;
   onSave: () => void;
