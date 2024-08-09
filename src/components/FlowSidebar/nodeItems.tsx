@@ -83,7 +83,7 @@ export const actionNodes: ITriggerNodeData[] = [
     icon: <Message2 />,
   },
   {
-    name: "Test",
+    name: "Condition Temperature",
     value: "test",
     icon: <></>,
   },
@@ -145,6 +145,14 @@ export const thingNodes: ITriggerNodeData[] = [
   },
 ];
 
+export const exampleNodes: ITriggerNodeData[] = [
+  {
+    name: "Condition Temperature",
+    value: "test",
+    icon: <></>,
+  },
+];
+
 //after seperating nodes this must be change
 export const getNodeByValue = (val: string) => {
   const array = [
@@ -152,6 +160,7 @@ export const getNodeByValue = (val: string) => {
     ...actionNodes,
     ...controlNodes,
     ...thingNodes,
+    ...exampleNodes,
   ];
   const filtered = array.filter((item) => item.value === val);
   return filtered.length ? filtered[0] : null;
