@@ -2,6 +2,7 @@ import {
   addTestNode,
   editNode as editNodeReducer,
 } from "@/lib/features/applet/appletSlice";
+import { createAlert } from "@/lib/features/notification/notificatioSlice";
 import { RootState } from "@/lib/store";
 import {
   IEditNode,
@@ -51,22 +52,6 @@ export default function TestFormModal({
       value: "less_than",
       title: "<",
     },
-    // {
-    //   value: "more than",
-    //   title: ">",
-    // },
-    // {
-    //   value: "equal of less than",
-    //   title: "=<",
-    // },
-    // {
-    //   value: "equal of more than",
-    //   title: "=>",
-    // },
-    // {
-    //   value: "contains",
-    //   title: "contains",
-    // },
   ];
   const [value, setvalue] = useState(0);
   const [secondVariable, setSecondVariable] = useState("");
@@ -188,14 +173,21 @@ export default function TestFormModal({
         })
       );
     } else {
+      console.log("characteristics", data);
       dispatch(
         addTestNode({
           nodeId: node?.id || "",
           email: data.email || "",
           thing: [...things.filter((item) => item.id === data.thing)][0],
-          charactristic: data.charactristic || "",
+          charactristic: "temperature",
           value: data.value || 0,
           condition: data.condition || "",
+        })
+      );
+      dispatch(
+        createAlert({
+          message: "Rule created successfully. Please check your email.",
+          type: "success",
         })
       );
     }
@@ -232,7 +224,7 @@ export default function TestFormModal({
             className="mt-6"
           />
         )}
-        {selectedThingOption && (
+        {/* {selectedThingOption && (
           <SelectInput
             options={charactristicList}
             selectedValue={selectedCharactristics}
@@ -244,7 +236,7 @@ export default function TestFormModal({
             label="Charactristic"
             className="mt-6"
           />
-        )}
+        )} */}
         {/* {charactristicList && (
           <MultiSelect
             options={charactristicList}
@@ -281,6 +273,17 @@ export default function TestFormModal({
             name="value"
             type="number"
           />
+          {/* <SelectInput
+            options={conditions}
+            selectedValue={selectedCondition}
+            setSelectedValue={(option) => {
+              setSelectedCondition(option);
+            }}
+            register={register}
+            name="condition"
+            label=""
+            className=" w-[40%]"
+          /> */}
           <Select
             options={conditions}
             value={selectedCondition}

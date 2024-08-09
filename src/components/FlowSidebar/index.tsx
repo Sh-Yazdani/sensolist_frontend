@@ -7,7 +7,12 @@ import { Accordion } from "flowbite-react";
 import { ArrowLeft2, ArrowRight2, Devices } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionNodes, controlNodes, triggerNodes } from "./nodeItems";
+import {
+  actionNodes,
+  controlNodes,
+  exampleNodes,
+  triggerNodes,
+} from "./nodeItems";
 
 export default function FlowSidebar({ appletId }: { appletId: string }) {
   const { conditionNodes } = useSelector(
@@ -112,6 +117,30 @@ export default function FlowSidebar({ appletId }: { appletId: string }) {
         `}
       >
         <Accordion className=" h-full">
+          <Accordion.Panel>
+            <Accordion.Title>Examples</Accordion.Title>
+            <Accordion.Content>
+              {exampleNodes.map((item, i) => (
+                <div
+                  key={item.value}
+                  className={`${
+                    i !== 0 && "mt-4"
+                  } border border-neutral-6 px-4 py-2 rounded-lg flex items-center dark:text-neutral-4`}
+                  onDragStart={(event) =>
+                    onDragStart(
+                      event,
+                      item.value === "test" ? "testNode" : "triggerNode",
+                      item.value
+                    )
+                  }
+                  draggable
+                >
+                  {item.icon}
+                  <span className="ml-2">{item.name}</span>
+                </div>
+              ))}
+            </Accordion.Content>
+          </Accordion.Panel>
           <Accordion.Panel>
             <Accordion.Title>Things</Accordion.Title>
             <Accordion.Content>

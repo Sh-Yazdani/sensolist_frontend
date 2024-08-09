@@ -69,7 +69,7 @@ export default function FlowTestNode({
         className=" border border-neutral-6 px-4 py-2 rounded-lg flex items-center text-base dark:text-neutral-4"
       >
         <Devices />
-        <span className="ml-2 capitalize">{name}</span>
+        <span className="ml-2 capitalize">Condition Temperature</span>
       </div>
       <Handle
         type="source"
